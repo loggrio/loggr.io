@@ -34,7 +34,7 @@ Must be one of the following:
 
 ### Scope
 The scope could be anything specifying place of the commit change. For example `client`,
-`server`, `h5vzr`, `h5vzr:view`, `h5vzr:service`, `h5vzr:route`, etc...
+`api`, `h5vzr`, `h5vzr:view`, `h5vzr:service`, `h5vzr:route`, etc...
 
 ### Subject
 The subject contains succinct description of the change:
