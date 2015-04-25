@@ -33,7 +33,7 @@ Must be one of the following:
   generation
 
 ### Scope
-The scope could be anything specifying place of the commit change. For example `client`,
+The scope could be anything specifying place of the commit change. For example `raspi`,
 `api`, `h5vzr`, `h5vzr:view`, `h5vzr:service`, `h5vzr:route`, etc...
 
 ### Subject
