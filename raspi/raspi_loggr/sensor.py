@@ -3,7 +3,7 @@
 
 import subprocess
 
-PATH = '../sensors/'
+PATH = 'sensors/'
 SUFFIX = '.out'
 
 class Sensor:
