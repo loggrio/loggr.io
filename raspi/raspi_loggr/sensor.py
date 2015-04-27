@@ -12,6 +12,8 @@ class Sensor:
   def __init__(self, name):
     self.name = name
 
-  def get_measure(self):
-    sensor = subprocess.Popen(PATH + self.name + SUFFIX, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  def get_metering(self):
+    sensor = subprocess.Popen(PATH + self.name + SUFFIX,
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
     return sensor.stdout.read()
