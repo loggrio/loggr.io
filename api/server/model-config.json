@@ -25,5 +25,9 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Metering": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }
