@@ -4,8 +4,10 @@
 import requests
 import json
 
-FIREBASE = 'https://loggrio.firebaseio.com'
+API = 'http://localhost:3000/api'
+DB = 'meterings'
 
-def sendData(data):
-  r = requests.post(FIREBASE + "/" + payload.get('type') + ".json", data=json.dumps(data))
-  return r.status_code
+def sendData(payload):
+  headers = {'Content-Type': 'application/json'}
+  r = requests.post(API + "/" + DB, data=json.dumps(payload), headers=headers)
+  return r.text

@@ -19,7 +19,7 @@
       "type": "number",
       "required": true
     },
-    "date": {
+    "time": {
       "type": "date",
       "required": true
     }
