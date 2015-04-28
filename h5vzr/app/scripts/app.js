@@ -10,7 +10,12 @@
  */
 angular
   .module('loggrioApp', [
-    'ngRoute'
+    'ngRoute',
+    'ngAnimate',
+    'ngAria',
+    'ngMaterial',
+    'lbServices',
+    'highcharts-ng'
   ])
   .config(function ($routeProvider) {
     $routeProvider

@@ -4,17 +4,22 @@
 from .sensor import Sensor
 from .util import sendData
 
-import time
+from datetime import datetime
 
 emu_sensor = Sensor('emu_sensor')
 
+
 def main():
-  curTime = str(time.time())
+  curTime = str(datetime.now())
   value = emu_sensor.get_metering()
   sensor_type = 'emu_temp'
-  data = {'type' : sensor_type, 'time' : curTime, 'value' : value}
 
-  print sendData(data)
+  payload = {'userId': '1',
+          'sensorType' : sensor_type,
+          'time' : curTime,
+          'value' : value}
+
+  print sendData(payload)
 
 
 if __name__ == "__main__":
