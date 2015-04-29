@@ -17,17 +17,16 @@ angular
     'lbServices',
     'highcharts-ng'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, LoopBackResourceProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+        controller: 'MainCtrl',
+        controllerAs: 'main'
       })
       .otherwise({
         redirectTo: '/'
       });
+
+    LoopBackResourceProvider.setUrlBase('http://localhost:3000/api/');
   });
