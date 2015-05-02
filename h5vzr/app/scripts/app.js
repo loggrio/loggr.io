@@ -28,5 +28,6 @@ angular
         redirectTo: '/'
       });
 
+    // TODO: seperate cfg file
     LoopBackResourceProvider.setUrlBase('http://localhost:3000/api/');
   });
