@@ -2,9 +2,18 @@
 
 ## Developing
 
+Requirements
+
+```json
+{
+  "node": ">=0.12",
+  "python": ">=2.6"
+}
+```
+
 First install required npm tools:
 
-```
+```bash
 # Update npm
 npm install -g npm
 
@@ -19,7 +28,7 @@ npm install -g strongloop
 
 Install npm and bower deps:
 
-```
+```bash
 # cd into h5vzr
 cd h5vr
 
@@ -35,7 +44,7 @@ bower install
 
 Install npm deps:
 
-```
+```bash
 # cd into api
 cd api
 
@@ -45,9 +54,9 @@ npm install
 
 ### raspi
 
-Install `requests`
+Install python deps:
 
-```
+```bash
 # cd into raspi
 cd raspi
 
@@ -56,6 +65,6 @@ pip install --upgrade virtualenv
 virtualenv .env
 source .env/bin/activate
 
-# requests
+# python deps
 pip install --upgrade requests
 ```
