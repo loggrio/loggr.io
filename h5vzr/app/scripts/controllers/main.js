@@ -8,7 +8,7 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('MainCtrl', function (Metering, util) {
+  .controller('MainCtrl', function ($scope, Metering, util) {
 
     this.chartConfig = {
       options: {
@@ -29,4 +29,11 @@ angular.module('loggrioApp')
       self.chartConfig.series.push(serie);
     });
 
+    $scope.buttons = [{
+        label: 'Configure view',
+        icon: 'ion-edit'
+      },{
+        label: 'Add chart',
+        icon: 'ion-plus-round'
+      }];
   });

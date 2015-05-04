@@ -1,1 +1,25 @@
+<link rel="stylesheet" type="text/css" media="screen" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" />
+<div ng-app="loggrioApp">
+  <md-toolbar md-scroll-shrink>
+    <div class="md-toolbar-tools">
+      <!--<img src="img/graphics/logo.png" width="48px" height="auto"/>-->
+      <video src="img/graphics/logo.mp4" autoplay loop width="48px"></video>
+      <span flex></span><span flex></span><span flex></span><span flex></span><span flex></span><span flex></span>
+
+      <md-button class="md-icon-button" aria-label="Account">
+        <md-icon md-svg-src="img/icons/account-circle.svg"></md-icon>
+        <md-tooltip>Licenced to: {UserName}</md-tooltip>
+      </md-button>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="More">
+        <md-icon md-svg-src="img/icons/dots-vertical.svg"></md-icon>
+        <md-tooltip>Settings</md-tooltip>
+      </md-button>
+    </div>
+  </md-toolbar>
+</div>
+<div ng-controller="MainCtrl" id="bottom-menu" mfb-menu position="br" toggling-method="hover" effect="zoomin" label="Options"
+     active-icon="ion-wrench" resting-icon="ion-settings">
+    <mfb-button icon="{{button.icon}}" label="{{button.label}}" ng-repeat="button in buttons"></mfb-button>
+</div>
 <highchart id="chart1" config="main.chartConfig"></highchart>

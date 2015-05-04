@@ -15,7 +15,8 @@ angular
     'ngAria',
     'ngMaterial',
     'lbServices',
-    'highcharts-ng'
+    'highcharts-ng',
+    'ng-mfb'
   ])
   .config(function ($routeProvider, LoopBackResourceProvider) {
     $routeProvider
