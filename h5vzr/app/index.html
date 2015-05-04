@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="loggrioApp">
   <head>
     <meta charset="utf-8">
     <title>loggr.io</title>
@@ -15,13 +15,33 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="loggrioApp">
+  <body layout="row">
     <!--[if lt IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div ng-view=""></div>
+    <div layout="column" flex>
+
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <span flex></span>
+          <p>Max Mustermann</p>
+          <md-button class="md-icon-button" aria-label="Account">
+            <md-icon md-svg-icon="account-circle" alt="account-circle"></md-icon>
+            <md-tooltip>Licenced to: UserName</md-tooltip>
+          </md-button>
+          <md-button class="md-icon-button" aria-label="More">
+            <md-icon md-svg-icon="more-vert" alt="more-vert"></md-icon>
+            <md-tooltip>Settings</md-tooltip>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <!-- Add your site or application content here -->
+      <md-content ng-view md-scroll-y flex layout-padding></md-content>
+
+    </div>
+
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
