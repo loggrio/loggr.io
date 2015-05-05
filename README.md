@@ -38,6 +38,9 @@ npm install
 # bower deps
 bower install
 
+# loopback services
+lb-ng ../api/server/server.js app/scripts/services/lb-services.js
+
 ```
 
 ### API
