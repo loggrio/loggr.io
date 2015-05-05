@@ -43,7 +43,18 @@ lb-ng ../api/server/server.js app/scripts/services/lb-services.js
 
 ```
 
+Serve H5VR:
+
+```bash
+# serve
+grunt serve
+```
+
 ### API
+
+Install MongoDB:
+
+[Offical Installation Guide](http://docs.mongodb.org/manual/installation/)
 
 Install npm deps:
 
@@ -53,6 +64,16 @@ cd api
 
 # npm deps
 npm install
+```
+
+Run API:
+
+```bash
+# start mongodb daemon (in separate window/tab)
+mongod
+
+# run
+node .
 ```
 
 ### raspi
@@ -70,4 +91,17 @@ source .env/bin/activate
 
 # python deps
 pip install --upgrade requests
+```
+
+Compile sensor scripts:
+
+```bash
+# compile scripts in raspi/sensors
+gcc -o sensor_name.out sensor_name.c
+```
+
+Run raspi loggr:
+```
+# run
+python run.py
 ```
