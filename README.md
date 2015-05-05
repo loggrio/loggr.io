@@ -101,7 +101,7 @@ gcc -o sensor_name.out sensor_name.c
 ```
 
 Run raspi loggr:
-```
+```bash
 # run
 python run.py
 ```
