@@ -14,6 +14,7 @@ angular
     'ngAnimate',
     'ngAria',
     'ngMaterial',
+    'ng-mfb',
     'highcharts-ng',
     'lbServices'
   ])
