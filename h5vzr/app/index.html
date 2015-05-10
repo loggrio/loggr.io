@@ -9,6 +9,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/ng-mfb/mfb/dist/mfb.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -37,11 +38,18 @@
         </div>
       </md-toolbar>
 
+      <nav mfb-menu position="br" effect="zoomin" label="hover here"
+          active-icon="more-vert" resting-icon="more-vert"
+          toggling-method="click"
+          template-url="ng-mfb-menu-md.tpl.html">
+        <button mfb-button icon="more-vert" label="menu item"
+            template-url="ng-mfb-button-md.tpl.html"></button>
+      </nav>
+
       <!-- Add your site or application content here -->
       <md-content ng-view md-scroll-y flex layout-padding></md-content>
 
     </div>
-
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -52,6 +60,7 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/ng-mfb/src/mfb-directive.js"></script>
     <script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
     <script src="bower_components/highcharts/highcharts.js"></script>
     <script src="bower_components/highcharts/highcharts-more.js"></script>
