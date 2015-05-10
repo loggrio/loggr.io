@@ -1,7 +1,6 @@
 /*
- *   dht11.c:
- *   Simple test program to test the wiringPi functions
- *   DHT11 test
+ *   temperature.c:
+ *   DHT11 sensor
  */
 
 #include <wiringPi.h>
@@ -71,8 +70,8 @@ void read_dht11_dat()
     if ((dht11_dat[0] == 0) && (dht11_dat[2] == 0)) return;
 
     f = dht11_dat[2] * 9. / 5. + 32;
-    printf("Humidity = %d.%d %% Temperature = %d.%d *C (%.1f *F)\n",
-        dht11_dat[0], dht11_dat[1], dht11_dat[2], dht11_dat[3], f);
+    printf("Temperature = %d.%d *C (%.1f *F)\n",
+        dht11_dat[2], dht11_dat[3], f);
         dataState = DATA_GOOD;
   }
   else
