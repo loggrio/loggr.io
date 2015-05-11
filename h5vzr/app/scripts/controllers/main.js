@@ -8,7 +8,7 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('MainCtrl', function ($mdDialog, Metering, util) {
+  .controller('MainCtrl', function (Metering, util) {
 
     this.chartConfig = {
       options: {
