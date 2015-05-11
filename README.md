@@ -50,11 +50,11 @@ Serve H5VR:
 grunt serve
 ```
 
+Help: [Yeoman Guide](https://github.com/yeoman/generator-angular#usage)
+
 ### API
 
-Install MongoDB:
-
-[Offical Installation Guide](http://docs.mongodb.org/manual/installation/)
+MongoDB: [Installation Guide](http://docs.mongodb.org/manual/installation/)
 
 Install npm deps:
 
@@ -76,6 +76,8 @@ mongod
 node .
 ```
 
+Help: [Strongloop Guide](http://docs.strongloop.com/display/public/LB/LoopBack)
+
 ### raspi
 
 Install python deps:
@@ -84,7 +86,7 @@ Install python deps:
 # cd into raspi
 cd raspi
 
-# optionally in a virtualenv
+# optionally use a virtualenv
 pip install --upgrade virtualenv
 virtualenv .env
 source .env/bin/activate
@@ -105,3 +107,17 @@ Run raspi loggr:
 # run
 python run.py
 ```
+
+### Docs
+
+Install python deps:
+
+```bash
+# cd into project
+cd loggri.io
+
+# python deps
+pip install --upgrade mkdocs
+```
+
+Help: [Mkdocs Guide](http://www.mkdocs.org/)
