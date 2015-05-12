@@ -79,20 +79,21 @@ int main(void)
   pinMode(ADC_CLK, OUTPUT);
 
 
-    pinMode(ADC_DIO, OUTPUT);
+  pinMode(ADC_DIO, OUTPUT);
 
-    analogVal = get_ADC_Result();
+  analogVal = get_ADC_Result();
 
-    if(analogVal <= 210)
-    {
-      illum = 210 - analogVal;
-      printf("%d\n", illum);
-    }
-    else
-    {
-      illum = 0;
-      dataState = DATA_NOT_GOOD;
-    }
+  if(analogVal <= 210 && dataState == DATA_GOOD)
+  {
+    illum = 210 - analogVal;
+    printf("%d\n", illum);
+  }
+  if (analogVal > 210 && dataState == DATA_GOOD)
+  {
+    illum = 0;
+    printf("%d\n", illum);
+  }
+
 
   return 0;
 }
