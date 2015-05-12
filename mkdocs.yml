@@ -1,1 +1,7 @@
 site_name: loggr.io
+pages:
+- ['index.md', 'Home']
+- ['user-guide.md', 'User Guide']
+- ['developer-guide/api.md', 'Developer Guide', 'API']
+- ['developer-guide/h5vzr.md', 'Developer Guide', 'H5VZR']
+- ['developer-guide/raspi.md', 'Developer Guide', 'raspi']
