@@ -1,7 +1,7 @@
 /*
- *   humidity.c:
- *   DHT11 sensor
- */
+*   humidity.c:
+*   DHT11 sensor
+*/
 
 #include <wiringPi.h>
 #include <stdio.h>
@@ -13,7 +13,7 @@
 #define DATA_GOOD 1
 #define DATA_NOT_GOOD 0
 
-#define DHTPIN 1
+#define DHTPIN 3
 
 int dht11_dat[5] = {0,0,0,0,0};
 
@@ -38,7 +38,7 @@ void read_dht11_dat()
   pinMode(DHTPIN, INPUT);
 
   // detect change and read data
-  for ( i=0; i< MAXTIMINGS; i++) {
+  for (i = 0; i < MAXTIMINGS; i++) {
     counter = 0;
     while (digitalRead(DHTPIN) == laststate) {
       counter++;
@@ -52,11 +52,11 @@ void read_dht11_dat()
     if (counter == 255) break;
 
     // ignore first 3 transitions
-    if ((i >= 4) && (i%2 == 0)) {
+    if ((i >= 4) && (i % 2 == 0)) {
       // shove each bit into the storage bytes
       dht11_dat[j/8] <<= 1;
       if (counter > 16)
-        dht11_dat[j/8] |= 1;
+      dht11_dat[j/8] |= 1;
       j++;
     }
   }
@@ -64,13 +64,13 @@ void read_dht11_dat()
   // check we read 40 bits (8bit x 5 ) + verify checksum in the last byte
   // print it out if data is good
   if ((j >= 40) &&
-      (dht11_dat[4] == ((dht11_dat[0] + dht11_dat[1] + dht11_dat[2] + dht11_dat[3]) & 0xFF)) ) {
+  (dht11_dat[4] == ((dht11_dat[0] + dht11_dat[1] + dht11_dat[2] + dht11_dat[3]) & 0xFF)) ) {
 
     if ((dht11_dat[0] == 0) && (dht11_dat[2] == 0)) return;
 
-    printf("Humidity = %d.%d %%\n",
-        dht11_dat[0], dht11_dat[1]);
-        dataState = DATA_GOOD;
+    printf("%d.%d\n",
+    dht11_dat[0], dht11_dat[1]);
+    dataState = DATA_GOOD;
   }
   else
   {
@@ -81,7 +81,7 @@ void read_dht11_dat()
 int main (void)
 {
   if (wiringPiSetup () == -1)
-    exit (1) ;
+  exit (1) ;
 
   while (dataState == DATA_NOT_GOOD)
   {

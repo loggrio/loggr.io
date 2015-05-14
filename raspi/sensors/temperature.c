@@ -1,95 +1,65 @@
 /*
- *   temperature.c:
- *   DHT11 sensor
- */
+*   temperature.c:
+*   DS18B20 one-wire-temp-sensor
+*/
 
-#include <wiringPi.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
 #include <stdlib.h>
-#include <stdint.h>
+#include <stdio.h>
+#include <wiringPi.h>
 
-#define MAXTIMINGS 85
+#define  BUFSIZE  128
 
-#define DATA_GOOD 1
-#define DATA_NOT_GOOD 0
-
-#define DHTPIN 1
-
-int dht11_dat[5] = {0,0,0,0,0};
-
-int dataState = DATA_NOT_GOOD;
-
-void read_dht11_dat()
+int main(void)
 {
-  uint8_t laststate = HIGH;
-  uint8_t counter = 0;
-  uint8_t j = 0, i;
-  float f; // fahrenheit
+  float temp;
+  int i, j;
+  int fd;
+  int ret;
 
-  dht11_dat[0] = dht11_dat[1] = dht11_dat[2] = dht11_dat[3] = dht11_dat[4] = 0;
+  char buf[BUFSIZE];
+  char tempBuf[5];
 
-  // pull pin down for 18 milliseconds
-  pinMode(DHTPIN, OUTPUT);
-  digitalWrite(DHTPIN, LOW);
-  delay(18);
-  // then pull it up for 40 microseconds
-  digitalWrite(DHTPIN, HIGH);
-  delayMicroseconds(40);
-  // prepare to read the pin
-  pinMode(DHTPIN, INPUT);
+  fd = open("/sys/bus/w1/devices/28-03146584b5ff/w1_slave", O_RDONLY);
 
-  // detect change and read data
-  for ( i=0; i< MAXTIMINGS; i++) {
-    counter = 0;
-    while (digitalRead(DHTPIN) == laststate) {
-      counter++;
-      delayMicroseconds(1);
-      if (counter == 255) {
-        break;
+  if(-1 == fd){
+    perror("open device file error");
+    return 1;
+  }
+
+  while(1){
+    ret = read(fd, buf, BUFSIZE);
+    if(0 == ret){
+      break;
+    }
+    if(-1 == ret){
+      if(errno == EINTR){
+        continue;
+      }
+      perror("read()");
+      close(fd);
+      return 1;
+    }
+  }
+
+  for(i = 0; i < sizeof(buf); i++){
+    if(buf[i] == 't'){
+      for(j = 0; j < sizeof(tempBuf); j++){
+        tempBuf[j] = buf[i+2+j];
       }
     }
-    laststate = digitalRead(DHTPIN);
-
-    if (counter == 255) break;
-
-    // ignore first 3 transitions
-    if ((i >= 4) && (i%2 == 0)) {
-      // shove each bit into the storage bytes
-      dht11_dat[j/8] <<= 1;
-      if (counter > 16)
-        dht11_dat[j/8] |= 1;
-      j++;
-    }
   }
 
-  // check we read 40 bits (8bit x 5 ) + verify checksum in the last byte
-  // print it out if data is good
-  if ((j >= 40) &&
-      (dht11_dat[4] == ((dht11_dat[0] + dht11_dat[1] + dht11_dat[2] + dht11_dat[3]) & 0xFF)) ) {
+  temp = (float)atoi(tempBuf) / 1000;
 
-    if ((dht11_dat[0] == 0) && (dht11_dat[2] == 0)) return;
+  printf("%.3f\n",temp);
 
-    f = dht11_dat[2] * 9. / 5. + 32;
-    printf("Temperature = %d.%d *C (%.1f *F)\n",
-        dht11_dat[2], dht11_dat[3], f);
-        dataState = DATA_GOOD;
-  }
-  else
-  {
-    dataState = DATA_NOT_GOOD;
-  }
-}
+  close(fd);
 
-int main (void)
-{
-  if (wiringPiSetup () == -1)
-    exit (1) ;
-
-  while (dataState == DATA_NOT_GOOD)
-  {
-    read_dht11_dat();
-    delay(10); // wait 10ms to refresh
-  }
-
-  return 0 ;
+  return 0;
 }

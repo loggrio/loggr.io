@@ -1,3 +1,8 @@
+/*
+*   brightness.c:
+*   brightness sensor
+*/
+
 #include <wiringPi.h>
 #include <stdio.h>
 
@@ -15,43 +20,43 @@ int dataState = DATA_NOT_GOOD;
 uchar get_ADC_Result()
 {
   uchar i;
-  uchar dat1=0, dat2=0;
+  uchar dat1 = 0, dat2 = 0;
 
   digitalWrite(ADC_CS, 0);
-  digitalWrite(ADC_CLK,0);
-  digitalWrite(ADC_DIO,1);  delayMicroseconds(2);
-  digitalWrite(ADC_CLK,1);  delayMicroseconds(2);
+  digitalWrite(ADC_CLK, 0);
+  digitalWrite(ADC_DIO, 1); delayMicroseconds(2);
+  digitalWrite(ADC_CLK, 1); delayMicroseconds(2);
 
-  digitalWrite(ADC_CLK,0);
-  digitalWrite(ADC_DIO,1);  delayMicroseconds(2);
-  digitalWrite(ADC_CLK,1);  delayMicroseconds(2);
+  digitalWrite(ADC_CLK, 0);
+  digitalWrite(ADC_DIO, 1); delayMicroseconds(2);
+  digitalWrite(ADC_CLK, 1); delayMicroseconds(2);
 
-  digitalWrite(ADC_CLK,0);
-  digitalWrite(ADC_DIO,0);  delayMicroseconds(2);
-  digitalWrite(ADC_CLK,1);
-  digitalWrite(ADC_DIO,1);  delayMicroseconds(2);
-  digitalWrite(ADC_CLK,0);
-  digitalWrite(ADC_DIO,1);  delayMicroseconds(2);
+  digitalWrite(ADC_CLK, 0);
+  digitalWrite(ADC_DIO, 0); delayMicroseconds(2);
+  digitalWrite(ADC_CLK, 1);
+  digitalWrite(ADC_DIO, 1); delayMicroseconds(2);
+  digitalWrite(ADC_CLK, 0);
+  digitalWrite(ADC_DIO, 1); delayMicroseconds(2);
 
-  for(i=0;i<8;i++)
+  for(i = 0; i < 8; i++)
   {
-    digitalWrite(ADC_CLK,1);  delayMicroseconds(2);
-    digitalWrite(ADC_CLK,0);  delayMicroseconds(2);
+    digitalWrite(ADC_CLK, 1); delayMicroseconds(2);
+    digitalWrite(ADC_CLK, 0); delayMicroseconds(2);
 
     pinMode(ADC_DIO, INPUT);
-    dat1=dat1<<1 | digitalRead(ADC_DIO);
+    dat1 = dat1 << 1 | digitalRead(ADC_DIO);
   }
 
-  for(i=0;i<8;i++)
+  for(i = 0; i < 8; i++)
   {
     dat2 = dat2 | ((uchar)(digitalRead(ADC_DIO))<<i);
-    digitalWrite(ADC_CLK,1);   delayMicroseconds(2);
-    digitalWrite(ADC_CLK,0);    delayMicroseconds(2);
+    digitalWrite(ADC_CLK, 1); delayMicroseconds(2);
+    digitalWrite(ADC_CLK, 0); delayMicroseconds(2);
   }
 
-  digitalWrite(ADC_CS,1);
+  digitalWrite(ADC_CS, 1);
 
-  if(dat1==dat2)
+  if(dat1 == dat2)
   {
     dataState = DATA_GOOD;
     return dat1;
@@ -69,7 +74,6 @@ int main(void)
   uchar analogVal;
   uchar illum;
 
-
   if(wiringPiSetup() == -1){ //when initialize wiring failed,print messageto screen
     printf("setup wiringPi failed !");
     return 1;
@@ -77,8 +81,7 @@ int main(void)
 
   pinMode(ADC_CS,  OUTPUT);
   pinMode(ADC_CLK, OUTPUT);
-
-
+  
   pinMode(ADC_DIO, OUTPUT);
 
   analogVal = get_ADC_Result();
@@ -93,7 +96,6 @@ int main(void)
     illum = 0;
     printf("%d\n", illum);
   }
-
 
   return 0;
 }
