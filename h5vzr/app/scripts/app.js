@@ -29,8 +29,7 @@ angular
       });
 
     $mdThemingProvider.theme('default')
-      .primaryPalette('teal')
-      .accentPalette('orange');
+      .primaryPalette('teal');
 
     $mdIconProvider
       .icon('account-circle', 'bower_components/material-design-icons/action/svg/production/ic_account_circle_24px.svg')
