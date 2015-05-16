@@ -10,14 +10,14 @@
 angular.module('loggrioApp')
   .service('util', function () {
 
-    this.meteringToChartSerie = function (meterings) {
-      var serie = {data: []};
+    this.meteringToChartData = function (meterings) {
+      var data = [];
 
       angular.forEach(meterings, function(metering) {
-        this.data.push([Date.parse(metering.time), metering.value]);
-      }, serie);
+        this.push([Date.parse(metering.time), metering.value]);
+      }, data);
 
-      return serie;
+      return data;
     };
 
   });
