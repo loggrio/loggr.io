@@ -41,7 +41,8 @@ angular
       .icon('more-vert', 'bower_components/material-design-icons/navigation/svg/production/ic_more_vert_24px.svg', 24)
       .icon('email', 'bower_components/material-design-icons/communication/svg/production/ic_email_24px.svg', 24)
       .icon('location', 'bower_components/material-design-icons/communication/svg/production/ic_location_on_24px.svg', 24)
-      .icon('password', 'bower_components/material-design-icons/communication/svg/production/ic_security_24px.svg', 24);
+      .icon('password', 'bower_components/material-design-icons/communication/svg/production/ic_security_24px.svg', 24)
+      .icon('loggr-icon', 'images/loggr_icon_white.svg', 48);
 
     // TODO: seperate cfg file
     LoopBackResourceProvider.setUrlBase('http://localhost:3000/api/');

@@ -23,21 +23,26 @@
 
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <span flex></span>
-        <p>Max Mustermann</p>
+        <div flex="15"></div>
+        <md-button class="md-icon-button">
+          <md-icon md-svg-icon="loggr-icon" alt="loggr.io" class="s48"></md-icon>
+        </md-button>
+        <div flex></div>
+        <p class="md-subhead user-name toolbar-item">Max Mustermann</p>
         <md-button class="md-icon-button" aria-label="Account">
-          <md-icon md-svg-icon="account-circle" alt="account-circle"></md-icon>
+          <md-icon md-svg-icon="account-circle" alt="account-circle" class="toolbar-item"></md-icon>
           <md-tooltip>Licenced to: UserName</md-tooltip>
         </md-button>
         <md-button class="md-icon-button" aria-label="More">
-          <md-icon md-svg-icon="more-vert" alt="more-vert"></md-icon>
+          <md-icon md-svg-icon="more-vert" alt="more-vert" class="toolbar-item"></md-icon>
           <md-tooltip>Settings</md-tooltip>
         </md-button>
+        <div flex="15"></div>
       </div>
     </md-toolbar>
 
     <md-content layout-padding layout="row" layout-align="center start">
-      <div ng-view flex="75"></div>
+      <div ng-view flex="70"></div>
     </md-content>
 
     <mfb-menu position="br" toggling-method="hover"
