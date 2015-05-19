@@ -92,14 +92,14 @@ virtualenv .env
 source .env/bin/activate
 
 # python deps
-pip install --upgrade requests
+pip install --upgrade -r requirements.txt
 ```
 
 Compile sensor scripts:
 
 ```bash
 # compile scripts in raspi/sensors
-gcc -o sensor_name.out sensor_name.c
+gcc -o sensor_name.out sensor_name.c -lwiringPi
 ```
 
 Run raspi loggr:
