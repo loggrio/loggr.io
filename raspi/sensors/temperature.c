@@ -57,7 +57,8 @@ int main(void)
 
   temp = (float)atoi(tempBuf) / 1000;
 
-  printf("%.3f\n",temp);
+  printf("%.3f",temp);
+  fflush(stdout);
 
   close(fd);
 

@@ -38,21 +38,21 @@ def main():
     # get metering from temperature sensor
     value_temp = temperature.get_metering()
     now = str(datetime.now())
-    temp_dump = generate_json_dump(userId, temperature.sensorType, now, value_temp, ValueUnits.grad_celsius)
+    temp_dump = generate_json_dump(userId, temperature.sensorType, now, value_temp, ValueUnits.grad_celsius.name)
 
     # get metering from brightness sensor
     value_bright = brightness.get_metering()
     now = str(datetime.now())
-    bright_dump = generate_json_dump(userId, brightness.sensorType, now, value_bright, ValueUnits.lumen)
+    bright_dump = generate_json_dump(userId, brightness.sensorType, now, value_bright, ValueUnits.lumen.name)
 
     # get metering from humidity sensor
     value_humid = humidity.get_metering()
     now = str(datetime.now())
-    humid_dump = generate_json_dump(userId, humidity.sensorType, now, value_humid, ValueUnits.percent)
+    humid_dump = generate_json_dump(userId, humidity.sensorType, now, value_humid, ValueUnits.percent.name)
 
     # get metering from volume sensor
     # value_vol = volume.get_metering()
-    # vol_dump = generate_json_dump(userId, volume.sensorType, now, value_vol, ValueUnits.decibel)
+    # vol_dump = generate_json_dump(userId, volume.sensorType, now, value_vol, ValueUnits.decibel.name)
 
     print send_data(temp_dump)
     print send_data(bright_dump)
