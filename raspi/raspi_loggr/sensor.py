@@ -8,11 +8,15 @@ SUFFIX = '.out'
 class Sensor:
   """docstring for Sensor"""
 
-  def __init__(self, name):
+  def __init__(self, sensorId, name, location, sensorType):
+    self.sensorId = sensorId
     self.name = name
+    self.location = location
+    self.sensorType = sensorType
 
   def get_metering(self):
-    sensor = subprocess.Popen(PATH + self.name + SUFFIX,
+    command = ["sudo", PATH + self.sensorType + SUFFIX]
+    subproc = subprocess.Popen(command,
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE)
-    return sensor.stdout.read()
+    return subproc.stdout.read()
