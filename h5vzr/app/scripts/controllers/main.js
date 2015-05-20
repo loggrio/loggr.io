@@ -8,7 +8,7 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('MainCtrl', function (Metering, notify, util) {
+  .controller('MainCtrl', function ($interval, Metering, notify, util) {
 
     this.chartConfig = {
       options: {
@@ -19,14 +19,36 @@ angular.module('loggrioApp')
           type: 'datetime'
         }
       },
-      series: []
+      series: [{data: []}]
     };
 
     var self = this;
 
     var chartPromise = Metering.find().$promise.then(function (meterings) {
-      var serie = util.meteringToChartSerie(meterings);
-      self.chartConfig.series.push(serie);
+      var chart = self.chartConfig.getHighcharts();
+      var data = util.meteringToChartData(meterings);
+
+      chart.series[0].setData(data,true);
+
+      var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
+      var shift;
+
+      $interval(function () {
+        // shift on more than 5 dots
+        shift = chart.series[0].data.length > 5;
+
+        Metering.find({filter: {where: {time: {gt: lastTime}}}}).$promise.then(function (meterings) {
+          if (meterings.length) {
+            lastTime = meterings[meterings.length - 1].time;
+
+            var data = util.meteringToChartData(meterings);
+
+            angular.forEach(data, function (value) {
+              chart.series[0].addPoint(value, true, shift);
+            });
+          }
+        });
+      }, 10000);
     });
 
     chartPromise.then(function() {
