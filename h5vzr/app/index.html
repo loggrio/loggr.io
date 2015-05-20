@@ -40,6 +40,12 @@
       <div ng-view flex="75"></div>
     </md-content>
 
+    <mfb-menu ng-controller="MainCtrl as main" position="br" toggling-method="hover"
+        effect="slidein" label="Optionen" active-icon="options" resting-icon="options">
+      <mfb-button icon="edit" label="Ansicht konfigurieren"></mfb-button>
+      <mfb-button icon="add" label="Graph hinzufügen"></mfb-button>
+    </mfb-menu>
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -62,6 +68,7 @@
     <script src="scripts/services/lb-services.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/util.js"></script>
+    <script src="scripts/services/notify.js"></script>
     <!-- endbuild -->
 </body>
 </html>
