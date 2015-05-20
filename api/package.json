@@ -12,7 +12,7 @@
     "loopback": "^2.18.0",
     "loopback-boot": "^2.7.1",
     "loopback-connector-mongodb": "^1.8.0",
-    "loopback-datasource-juggler": "^2.27.0",
+    "loopback-datasource-juggler": "^2.28.1",
     "serve-favicon": "^2.2.1"
   },
   "optionalDependencies": {
