@@ -68,8 +68,8 @@ void read_dht11_dat()
 
     if ((dht11_dat[0] == 0) && (dht11_dat[2] == 0)) return;
 
-    printf("%d.%d\n",
-    dht11_dat[0], dht11_dat[1]);
+    printf("%d.%d", dht11_dat[0], dht11_dat[1]);
+    fflush(stdout);
     dataState = DATA_GOOD;
   }
   else
