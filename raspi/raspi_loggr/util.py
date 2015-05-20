@@ -3,7 +3,7 @@
 import requests
 import json
 
-API = 'http://stkn.org:3001/api'
+API = 'http://0.0.0.0:3000/api'
 DB = 'meterings'
 
 
