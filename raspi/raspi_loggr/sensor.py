@@ -8,9 +8,9 @@ SUFFIX = '.out'
 class Sensor:
   """docstring for Sensor"""
 
-  def __init__(self, sensorId, name, location, sensorType):
+  def __init__(self, sensorId, sensorName, location, sensorType):
     self.sensorId = sensorId
-    self.name = name
+    self.sensorName = sensorName
     self.location = location
     self.sensorType = sensorType
 
