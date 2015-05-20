@@ -30,7 +30,7 @@ angular.module('loggrioApp')
     });
 
     chartPromise.then(function() {
-        notify.check(self.chartConfig.series[0]);
-      });
+      notify.checkConnection(self.chartConfig.series[0]);
+    });
 
   });
