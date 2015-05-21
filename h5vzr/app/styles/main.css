@@ -17,3 +17,7 @@
 .toolbar-item {
   opacity: 0.77;
 }
+
+.dialog {
+  height: 500px;
+}

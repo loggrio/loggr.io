@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="loggrioApp">
+<html ng-app="loggrioApp" ng-controller="MainCtrl">
   <head>
     <meta charset="utf-8">
     <title>loggr.io</title>
@@ -47,7 +47,7 @@
 
     <mfb-menu position="br" toggling-method="hover"
         effect="slidein" label="Optionen" active-icon="options" resting-icon="options">
-      <mfb-button icon="edit" label="Ansicht konfigurieren"></mfb-button>
+      <mfb-button ng-controller="ConfigureViewCtrl" icon="edit" label="Ansicht konfigurieren" ng-click="showConfigureView($event)"></mfb-button>
       <mfb-button icon="add" label="Graph hinzufügen"></mfb-button>
     </mfb-menu>
 
@@ -74,6 +74,7 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/util.js"></script>
     <script src="scripts/services/notify.js"></script>
+    <script src="scripts/controllers/dialogs/configureView.js"></script>
     <!-- endbuild -->
 </body>
 </html>
