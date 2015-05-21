@@ -7,7 +7,7 @@ from datetime import datetime
 from .sensor import Sensor
 from .util import send_data
 from .util import gen_payload
-
+from .util import set_status_led
 
 class SensorTypes(Enum):
     temperature = 1
@@ -62,9 +62,15 @@ def main():
         # payload_vol = gen_payload(userId, volume.sensor_type, volume.sensor_name, now, value_vol,
         #                           ValueUnits.decibel.name)
 
-        print send_data(payload_temp)
-        print send_data(payload_bright)
-        print send_data(payload_humid)
-        # print send_data(payload_vol)
+        ret1 = send_data(payload_temp)
+        ret2 = send_data(payload_bright)
+        ret3 = send_data(payload_humid)
+        # ret4 = send_data(payload_vol)
+
+        if ret1 == 200 and ret2 == 200 and ret3 == 200:
+            set_status_led(200)
+        else:
+            set_status_led(400)
+
 
         time.sleep(TIME_BETWEEN_METERINGS)
