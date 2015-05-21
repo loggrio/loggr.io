@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 import requests
 import json
+import subprocess
 
-API = 'http://0.0.0.0:3000/api'
+API = 'http://stkn.org:3001/api'
 DB = 'meterings'
 
 
@@ -21,3 +22,10 @@ def gen_payload(user_id, sensor_type, sensor_name, time, value, unit):
                'value': value,
                'unit': unit}
     return payload
+
+
+def set_status_led(status_code):
+    command = ['sensors/rgb.out', str(status_code)]
+    subproc = subprocess.Popen(command,
+                               stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE)
