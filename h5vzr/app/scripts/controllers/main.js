@@ -24,7 +24,8 @@ angular.module('loggrioApp')
 
     var self = this;
 
-    var chartPromise = Metering.find().$promise.then(function (meterings) {
+    Metering.find().$promise
+    .then(function (meterings) {
       var chart = self.chartConfig.getHighcharts();
       var data = util.meteringToChartData(meterings);
 
@@ -49,10 +50,9 @@ angular.module('loggrioApp')
           }
         });
       }, 10000);
-    });
 
-    chartPromise.then(function() {
-      notify.checkConnection(self.chartConfig.series[0]);
+      // TODO: combine with live data
+      notify.checkConnection(self.chartConfig.getHighcharts().series[0]);
     });
 
   });

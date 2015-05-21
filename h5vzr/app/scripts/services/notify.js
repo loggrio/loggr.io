@@ -37,10 +37,10 @@ angular.module('loggrioApp')
       toggled = !toggled;
     };
 
-    this.checkConnection = function(chartSeries) {
+    this.checkConnection = function(serie) {
       // check if last metering point is older than delay
       var isDisconnected = function () {
-        lastTime = chartSeries.data[chartSeries.data.length - 1][0];
+        lastTime = serie.data[serie.data.length - 1].x;
         nowTime = Date.now();
 
         return (nowTime - lastTime) > delay;
