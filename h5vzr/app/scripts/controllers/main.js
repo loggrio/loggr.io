@@ -12,15 +12,32 @@ angular.module('loggrioApp')
 
     this.chartConfig = {
       options: {
+        title: {
+          text: 'Living Room Temperature'
+        },
         chart: {
           type: 'line'
         },
         xAxis: {
           type: 'datetime'
+        },
+        yAxis: {
+          title: {
+            text: 'Temperature (°C)'
+          }
+        },
+        tooltip: {
+          valueSuffix: '°C'
         }
       },
-      series: [{data: []}]
+      series: [{
+        data: [],
+        color: '#009688',
+        name: 'Temperature'
+      }]
     };
+
+    this.flipChart = {};
 
     var self = this;
 
@@ -32,6 +49,16 @@ angular.module('loggrioApp')
 
       var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
       var shift;
+
+      var avg = 0;
+      angular.forEach(chart.series[0].data, function (point) {
+        avg += point.y;
+      });
+      avg = avg / chart.series[0].data.length;
+
+      self.flipChart.dataMax = chart.series[0].dataMax;
+      self.flipChart.dataMin = chart.series[0].dataMin;
+      self.flipChart.dataAvg = avg;
 
       $interval(function () {
         // shift on more than 5 dots

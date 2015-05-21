@@ -17,10 +17,6 @@
     <!-- endbuild -->
   </head>
   <body layout="column">
-    <!--[if lt IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
     <md-toolbar>
       <div class="md-toolbar-tools">
         <div flex="15"></div>
@@ -29,29 +25,42 @@
         </md-button>
         <div flex></div>
         <p class="md-subhead toolbar-item">Max Mustermann</p>
-        <md-button class="md-icon-button" aria-label="Account">
-          <md-icon md-svg-icon="account-circle" alt="account-circle" class="toolbar-item"></md-icon>
-          <md-tooltip>Licenced to: UserName</md-tooltip>
-        </md-button>
-        <md-button class="md-icon-button" aria-label="More">
-          <md-icon md-svg-icon="more-vert" alt="more-vert" class="toolbar-item"></md-icon>
-          <md-tooltip>Settings</md-tooltip>
-        </md-button>
+        <md-select ng-controller="UserCtrl as user" aria-label="account" ng-model="someModel">
+          <md-select-label>
+            <md-button class="md-icon-button" aria-label="Account">
+              <md-icon md-svg-icon="account-circle" alt="account-circle" class="toolbar-item"></md-icon>
+              <md-tooltip>Licenced to: UserName</md-tooltip>
+            </md-button>
+          </md-select-label>
+          <md-option>Benutzerverwaltung</md-option>
+          <md-option>Token generieren</md-option>
+          <md-option ng-click="user.logOut($event)">Abmelden</md-option>
+        </md-select>
+        <md-select ng-controller="ShowFurtherCtrl as showfurther" aria-label="settings" ng-model="someModel">
+          <md-select-label>
+            <md-button class="md-icon-button" aria-label="More">
+              <md-icon md-svg-icon="more-vert" alt="more-vert" class="toolbar-item"></md-icon>
+              <md-tooltip>Settings</md-tooltip>
+            </md-button>
+          </md-select-label>
+          <md-option ng-click="showfurther.showDialog($event, 'about')">&Uuml;ber loggr.io</md-option>
+          <md-option ng-click="showfurther.showDialog($event, 'imprint')">Impressum</md-option>
+        </md-select>
         <div flex="15"></div>
       </div>
     </md-toolbar>
 
-    <md-content layout-padding layout="row" layout-align="center start">
+    <md-content flex layout-padding layout="row" layout-align="center start">
       <div ng-view flex="70"></div>
     </md-content>
 
     <div ng-controller="ButtonMenuCtrl as menu">
       <mfb-menu position="br" toggling-method="hover" effect="slidein"
-          label="Optionen" active-icon="options" resting-icon="options">
+                label="Optionen" active-icon="options" resting-icon="options">
         <mfb-button icon="edit" label="Ansicht konfigurieren" ng-click="menu.showDialog($event)"></mfb-button>
         <mfb-button icon="add" label="Graph hinzufügen"></mfb-button>
       </mfb-menu>
-    <div>
+    </div>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -78,6 +87,10 @@
     <script src="scripts/services/notify.js"></script>
     <script src="scripts/controllers/dialogs/configure-view.js"></script>
     <script src="scripts/controllers/button-menu.js"></script>
+    <script src="scripts/directives/flip.js"></script>
+    <script src="scripts/directives/flippanel.js"></script>
+    <script src="scripts/controllers/dialogs/showfurther.js"></script>
+    <script src="scripts/controllers/user.js"></script>
     <!-- endbuild -->
-</body>
+  </body>
 </html>
