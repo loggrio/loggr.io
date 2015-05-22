@@ -11,9 +11,9 @@ angular.module('loggrioApp')
   .controller('ButtonMenuCtrl', function ($mdDialog) {
 
     this.showDialog = function (ev) {
-      console.log('clicked!')
       $mdDialog.show({
         controller: 'ConfigureViewCtrl',
+        controllerAs: 'config',
         templateUrl: 'views/dialogs/configure-view.html',
         targetEvent: ev
       });

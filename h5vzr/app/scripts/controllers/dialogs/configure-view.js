@@ -8,17 +8,17 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('ConfigureViewCtrl', function ($scope, $mdDialog) {
+  .controller('ConfigureViewCtrl', function ($mdDialog) {
 
-    $scope.hide = function () {
+    this.hide = function () {
       $mdDialog.hide();
     };
 
-    $scope.cancel = function () {
+    this.cancel = function () {
       $mdDialog.cancel();
     };
 
-    $scope.answer = function (answer) {
+    this.answer = function (answer) {
       $mdDialog.hide(answer);
     };
 

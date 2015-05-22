@@ -1,5 +1,5 @@
-<md-dialog aria-label="Ansicht konfigurieren" flex="50" class="dialog">
-  <form class="dialog" layout="column">
+<md-dialog aria-label="Ansicht konfigurieren" flex="50">
+  <form layout="column">
     <div>
       <md-dialog-content>
         <md-subheader>Ansicht konfigurieren</md-subheader>
@@ -10,10 +10,10 @@
     </div>
     <div flex></div>
     <div class="md-actions" layout="row">
-      <md-button ng-click="answer('save')" class="md-primary">
+      <md-button ng-click="config.answer('save')" class="md-primary">
         Speichern
       </md-button>
-      <md-button ng-click="answer('cancel')" class="md-primary">
+      <md-button ng-click="config.cancel()" class="md-primary">
         Abbrechen
       </md-button>
     </div>
