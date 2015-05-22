@@ -5,13 +5,9 @@
   padding: 0.2em 0;
 }
 
-.s48 {
+.menu-logo {
   width: 48px;
   height: 48px;
-}
-
-.user-name {
-  margin-right: 24px;
 }
 
 .toolbar-item {
@@ -19,5 +15,5 @@
 }
 
 .dialog {
-  height: 500px;
+  min-height: 500px;
 }

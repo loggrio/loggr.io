@@ -28,7 +28,7 @@ angular.module('loggrioApp')
       var chart = self.chartConfig.getHighcharts();
       var data = util.meteringToChartData(meterings);
 
-      chart.series[0].setData(data,true);
+      chart.series[0].setData(data, true);
 
       var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
       var shift;
