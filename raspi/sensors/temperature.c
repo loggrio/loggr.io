@@ -28,7 +28,7 @@ int main(void)
   fd = open("/sys/bus/w1/devices/28-03146584b5ff/w1_slave", O_RDONLY);
 
   if(-1 == fd){
-    perror("open device file error");
+    fprintf(stderr, "open device file error");
     return 1;
   }
 
@@ -41,7 +41,7 @@ int main(void)
       if(errno == EINTR){
         continue;
       }
-      perror("read()");
+      fprintf(stderr, "read()");
       close(fd);
       return 1;
     }
@@ -57,7 +57,7 @@ int main(void)
 
   temp = (float)atoi(tempBuf) / 1000;
 
-  printf("%.3f",temp);
+  fprintf(stdout, "%.3f",temp);
   fflush(stdout);
 
   close(fd);

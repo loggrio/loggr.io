@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import subprocess
+import logging
 
 PATH = 'sensors/'
 SUFFIX = '.out'
@@ -20,4 +21,11 @@ class Sensor:
         subproc = subprocess.Popen(command,
                                    stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE)
-        return subproc.stdout.read()
+
+        sout = subproc.stdout.read()
+        serr = subproc.stderr.read()
+
+        subproc.wait()
+        logging.info('metering of ' + self.sensor_type + ' sensor, returncode: ' + str(subproc.returncode))
+
+        return sout if len(sout) else serr

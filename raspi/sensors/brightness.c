@@ -75,7 +75,7 @@ int main(void)
   uchar illum;
 
   if(wiringPiSetup() == -1){ //when initialize wiring failed,print messageto screen
-    printf("setup wiringPi failed !");
+    fprintf(stderr, "setup wiringPi failed!");
     return 1;
   }
 
@@ -89,12 +89,12 @@ int main(void)
   if(analogVal <= 210 && dataState == DATA_GOOD)
   {
     illum = 210 - analogVal;
-    printf("%d", illum);
+    fprintf(stdout, "%d", illum);
   }
   if (analogVal > 210 && dataState == DATA_GOOD)
   {
     illum = 0;
-    printf("%d", illum);
+    fprintf(stdout, "%d", illum);
   }
   fflush(stdout);
 
