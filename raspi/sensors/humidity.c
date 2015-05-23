@@ -68,7 +68,7 @@ void read_dht11_dat()
 
     if ((dht11_dat[0] == 0) && (dht11_dat[2] == 0)) return;
 
-    printf("%d.%d", dht11_dat[0], dht11_dat[1]);
+    fprintf(stdout, "%d.%d", dht11_dat[0], dht11_dat[1]);
     fflush(stdout);
     dataState = DATA_GOOD;
   }
@@ -80,8 +80,10 @@ void read_dht11_dat()
 
 int main (void)
 {
-  if (wiringPiSetup () == -1)
-  exit (1) ;
+  if (wiringPiSetup () == -1) {
+    fprintf(stderr, "setup wiringPi failed!");
+    return 1;
+  }
 
   while (dataState == DATA_NOT_GOOD)
   {

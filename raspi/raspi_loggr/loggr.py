@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import time
+import logging
 from enum import Enum
 from datetime import datetime
 
@@ -8,6 +9,7 @@ from .sensor import Sensor
 from .util import send_data
 from .util import gen_payload
 from .util import set_status_led
+
 
 class SensorTypes(Enum):
     temperature = 1
@@ -34,6 +36,8 @@ TIME_BETWEEN_METERINGS = 60
 
 
 def main():
+    logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s', filename='loggr.log', level=logging.INFO)
+    logging.info('Logging (re)started')
 
     # TODO: uniqe userId management
     userId = '1'
@@ -71,6 +75,5 @@ def main():
             set_status_led(200)
         else:
             set_status_led(400)
-
 
         time.sleep(TIME_BETWEEN_METERINGS)

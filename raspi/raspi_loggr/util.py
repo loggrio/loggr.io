@@ -3,7 +3,9 @@
 import requests
 import json
 import subprocess
+import logging
 
+LOG_FILE = 'log.txt'
 API = 'http://stkn.org:3001/api'
 DB = 'meterings'
 
