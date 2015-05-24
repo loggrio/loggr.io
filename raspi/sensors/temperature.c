@@ -43,7 +43,7 @@ int main(void)
       }
       fprintf(stderr, "read()");
       close(fd);
-      return 1;
+      return 2;
     }
   }
 

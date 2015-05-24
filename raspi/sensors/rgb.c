@@ -48,7 +48,7 @@ void flashRed() {
 int main(int argc, const char *argv[])
 {
   if (argc != 2) {
-    printf("Usage: ./rgb.out <error-code>\n");
+    printf("invalid arguments! Usage: ./rgb.out <error-code>\n");
     return 1;
   }
 

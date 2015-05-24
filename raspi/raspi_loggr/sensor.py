@@ -42,11 +42,12 @@ class Sensor:
         headers = {'Content-Type': 'application/json'}
         try:
             r = requests.post(API + "/" + DB, data=json.dumps(payload), headers=headers)
-            return r.status_code
         except requests.exceptions.RequestException, e:
             logging.error('requests failure: ' + str(e))
             print 'requests failure: ' + str(e)
             set_status_led(LedStatusTypes.client_error.name)
+        else:
+            return r.status_code
 
     def meter_and_send(self):
         value = self.__meter()

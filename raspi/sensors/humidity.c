@@ -91,5 +91,5 @@ int main (void)
     delay(10); // wait 10ms to refresh
   }
 
-  return 0 ;
+  return 0;
 }
