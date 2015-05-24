@@ -26,17 +26,27 @@ class Sensor:
 
     def __meter(self):
         command = PATH + self.sensor_type + SUFFIX
-        subproc = subprocess.Popen(command,
-                                   stdout=subprocess.PIPE,
-                                   stderr=subprocess.PIPE)
+        try:
+            subproc_output = subprocess.check_output(command,
+                                                     stderr=subprocess.STDOUT)
 
-        sout = subproc.stdout.read()
-        serr = subproc.stderr.read()
-
-        subproc.wait()
-        logging.info('metering of ' + self.sensor_type + ' sensor, returncode: ' + str(subproc.returncode))
-
-        return sout if len(sout) else serr
+        except subprocess.CalledProcessError, cpe:
+            if cpe.returncode == 1:
+                logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output)
+                print 'called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output
+            elif cpe.returncode == 2:
+                logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output)
+                print 'called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output
+            elif cpe.returncode == 3:
+                logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output)
+                print 'called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output
+        except OSError, ose:
+            logging.error('oserror: ' + str(ose.strerror))
+            print 'oserror: ' + str(ose.strerror)
+        else:
+            logging.info('metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output))
+            print 'metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output)
+            return subproc_output
 
     def __send(self, payload):
         headers = {'Content-Type': 'application/json'}

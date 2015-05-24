@@ -29,7 +29,7 @@ int main(void)
 
   if(-1 == fd){
     fprintf(stderr, "open device file error");
-    return 1;
+    return 2;
   }
 
   while(1){
@@ -43,7 +43,7 @@ int main(void)
       }
       fprintf(stderr, "read()");
       close(fd);
-      return 2;
+      return 3;
     }
   }
 

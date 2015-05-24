@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import subprocess
 import logging
+import netifaces
 from enum import Enum
 
 
@@ -27,3 +28,7 @@ def set_status_led(status):
     except OSError, ose:
         logging.error('oserror: ' + str(ose.strerror))
         print 'oserror: ' + str(ose.strerror)
+
+
+def get_ip_address():
+    return netifaces.ifaddresses('eth0')[2][0]['addr']
