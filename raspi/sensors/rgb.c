@@ -24,27 +24,27 @@ void ledColorSet(uchar r_val, uchar g_val, uchar b_val)
 }
 
 void flashGreen() {
-  ledColorSet(0x00,0xff,0x00);
-  delay(150);
-  ledColorSet(0x00,0x00,0x00);
-  delay(100);
-  ledColorSet(0x00,0xff,0x00);
-  delay(150);
-  ledColorSet(0x00,0x00,0x00);
-  delay(10);
+  flashLED(0x00,0xff,0x00);
+}
+
+void flashOrange() {
+  flashLED(0xff,0x66,0x00);
 }
 
 void flashRed() {
-  ledColorSet(0xff,0x00,0x00);
+  flashLED(0xff,0x00,0x00);
+}
+
+void flashLED(uchar r, uchar g, uchar b){
+  ledColorSet(r, g, b);
   delay(150);
   ledColorSet(0x00,0x00,0x00);
   delay(100);
-  ledColorSet(0xff,0x00,0x00);
+  ledColorSet(r, g, b);
   delay(150);
   ledColorSet(0x00,0x00,0x00);
   delay(10);
 }
-
 int main(int argc, const char *argv[])
 {
   if (argc != 2) {
@@ -62,8 +62,11 @@ int main(int argc, const char *argv[])
   if (strcmp(argv[1], "ok") == 0) {
     flashGreen();
   }
-  else if ((strcmp(argv[1], "client_error") == 0) || (strcmp(argv[1], "server_error") == 0)) {
-    flashRed(argv[1]);
+  else if (strcmp(argv[1], "request_error") == 0) {
+    flashOrange();
+  }
+  else if (strcmp(argv[1], "sensor_broken") == 0) {
+    flashRed();
   }
 
   return 0;

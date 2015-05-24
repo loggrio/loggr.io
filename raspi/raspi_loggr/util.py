@@ -7,9 +7,9 @@ from enum import Enum
 
 
 class LedStatusTypes(Enum):
-    ok = 1
-    client_error = 2
-    server_error = 3
+    ok = 1 # green
+    sensor_broken = 2 # red
+    request_error = 3 # orange
 
 
 def set_status_led(status):

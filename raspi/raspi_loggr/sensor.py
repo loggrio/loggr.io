@@ -17,12 +17,49 @@ API = 'http://0.0.0.0:3000/api'
 
 class Sensor:
     """docstring for Sensor"""
+    last_metering_humidity = 0
+    last_metering_temperature = 0
 
     def __init__(self, sensor_name, location, sensor_type, unit):
         self.sensor_name = sensor_name
         self.location = location
         self.sensor_type = sensor_type
         self.unit = unit
+
+    def __check(self, metering):
+        if self.sensor_type == SensorTypes.temperature:
+            if self.last_metering_temperature < metering - 10 or self.last_metering_temperature > metering + 10:
+                return 0
+            elif metering < -270:
+                return 0
+            elif metering > 200:
+                return 0
+            else:
+                self.last_metering = metering
+                return 1
+        if self.sensor_type == SensorTypes.humidity:
+            if self.last_meterng_humidity < metering - 10 or self.last_metering_humidity > metering + 10:
+                return 0
+            elif metering < 0:
+                return 0
+            elif metering > 100:
+                return 0
+            else:
+                self.last_metering = metering
+                return 1
+        if self.sensor_type == SensorTypes.brightness:
+            if metering > 210:
+                return 0
+            elif metering < 0:
+                return 0
+            else:
+                return 1
+        if self.sensor_type == SensorTypes.volume:
+            if metering < 0:
+                return 0
+            else:
+                return 1
+
 
     def __meter(self):
         command = PATH + self.sensor_type + SUFFIX
@@ -55,12 +92,26 @@ class Sensor:
         except requests.exceptions.RequestException, e:
             logging.error('requests failure: ' + str(e))
             print 'requests failure: ' + str(e)
-            set_status_led(LedStatusTypes.client_error.name)
+            set_status_led(LedStatusTypes.request_error.name)
         else:
             return r.status_code
 
     def meter_and_send(self):
+        counter = 0
         value = self.__meter()
+        good_data = self.__check(value)
+
+        while good_data == 0 or counter < 5:
+            value= self.__meter()
+            good_data = self.__check(value)
+            counter = counter + 1
+
+        if counter = 5:
+            logging.error(self.sensor_type + 'sensor broken')
+            print self.sensor_type + 'sensor broken'
+            set_status_led(LedStatusTypes.sensor_broken.name)
+            return
+
         payload = {'sensorName': self.sensor_name,
                    'location': self.location,
                    'sensorType': self.sensor_type,
