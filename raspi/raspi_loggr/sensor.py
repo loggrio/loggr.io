@@ -5,9 +5,10 @@ import json
 import subprocess
 import logging
 from datetime import datetime
+from .util import set_status_led
+from .util import LedStatusTypes
 
 # TODO: CONFIG FILE
-LOG_FILE = 'log.txt'
 DB = 'meterings'
 PATH = 'sensors/'
 SUFFIX = '.out'
@@ -39,11 +40,13 @@ class Sensor:
 
     def __send(self, payload):
         headers = {'Content-Type': 'application/json'}
-        r = requests.post(API + "/" + DB, data=json.dumps(payload), headers=headers)
-
-        # print r.text
-
-        return r.status_code
+        try:
+            r = requests.post(API + "/" + DB, data=json.dumps(payload), headers=headers)
+            return r.status_code
+        except requests.exceptions.RequestException, e:
+            logging.error('requests failure: ' + str(e))
+            print 'requests failure: ' + str(e)
+            set_status_led(LedStatusTypes.client_error.name)
 
     def meter_and_send(self):
         value = self.__meter()

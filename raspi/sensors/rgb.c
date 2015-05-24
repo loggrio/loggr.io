@@ -24,7 +24,6 @@ void ledColorSet(uchar r_val, uchar g_val, uchar b_val)
 }
 
 void flashGreen() {
-  printf("status 200\n");
   ledColorSet(0x00,0xff,0x00);
   delay(150);
   ledColorSet(0x00,0x00,0x00);
@@ -35,8 +34,7 @@ void flashGreen() {
   delay(10);
 }
 
-void flashRed(const char *code) {
-  printf("status %s\n", code);
+void flashRed() {
   ledColorSet(0xff,0x00,0x00);
   delay(150);
   ledColorSet(0x00,0x00,0x00);
@@ -61,10 +59,10 @@ int main(int argc, const char *argv[])
 
   ledInit();
 
-  if (strcmp(argv[1], "200") == 0) {
+  if (strcmp(argv[1], "ok") == 0) {
     flashGreen();
   }
-  else if ((strcmp(argv[1], "400") == 0) || (strcmp(argv[1], "500") == 0)) {
+  else if ((strcmp(argv[1], "client_error") == 0) || (strcmp(argv[1], "server_error") == 0)) {
     flashRed(argv[1]);
   }
 

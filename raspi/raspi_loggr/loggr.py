@@ -6,6 +6,7 @@ from enum import Enum
 
 from .sensor import Sensor
 from .util import set_status_led
+from .util import LedStatusTypes
 
 
 class SensorTypes(Enum):
@@ -43,8 +44,6 @@ def main():
         # ret4 = send_data(payload_vol)
 
         if ret1 == 200 and ret2 == 200 and ret3 == 200:
-            set_status_led(200)
-        else:
-            set_status_led(400)
+            set_status_led(LedStatusTypes.ok.name)
 
         time.sleep(TIME_BETWEEN_METERINGS)
