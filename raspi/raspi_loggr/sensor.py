@@ -60,7 +60,6 @@ class Sensor:
             else:
                 return 1
 
-
     def __meter(self):
         command = PATH + self.sensor_type + SUFFIX
         try:
@@ -69,15 +68,19 @@ class Sensor:
 
         except subprocess.CalledProcessError, cpe:
             if cpe.returncode == 1:
+                # catch wiringPi errors
                 logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output)
                 print 'called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output
             elif cpe.returncode == 2:
+                # catch open device file errors of mounted devices
                 logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output)
                 print 'called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output
             elif cpe.returncode == 3:
+                # catch read errors on devices
                 logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output)
                 print 'called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output
         except OSError, ose:
+            # catch os errors, e.g. file-not-found
             logging.error('oserror: ' + str(ose.strerror))
             print 'oserror: ' + str(ose.strerror)
         else:
@@ -90,6 +93,7 @@ class Sensor:
         try:
             r = requests.post(API + "/" + DB, data=json.dumps(payload), headers=headers)
         except requests.exceptions.RequestException, e:
+            # catch requests errors
             logging.error('requests failure: ' + str(e))
             print 'requests failure: ' + str(e)
             set_status_led(LedStatusTypes.request_error.name)
@@ -102,7 +106,7 @@ class Sensor:
         good_data = self.__check(value)
 
         while good_data == 0 or counter < 5:
-            value= self.__meter()
+            value = self.__meter()
             good_data = self.__check(value)
             counter = counter + 1
 
