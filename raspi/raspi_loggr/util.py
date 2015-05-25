@@ -12,6 +12,21 @@ class LedStatusTypes(Enum):
     request_error = 3  # orange
 
 
+class SensorTypes(Enum):
+    temperature = 1
+    brightness = 2
+    humidity = 3
+    volume = 4
+
+
+class ValueUnits(Enum):
+    grad_celsius = 1
+    grad_fahrenheit = 2
+    percent = 3
+    lumen = 4
+    decibel = 5
+
+
 def set_status_led(status):
     command = ['sensors/rgb.out', str(status)]
     try:

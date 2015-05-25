@@ -23,19 +23,7 @@ void ledColorSet(uchar r_val, uchar g_val, uchar b_val)
   softPwmWrite(LedPinBlue,  b_val);
 }
 
-void flashGreen() {
-  flashLED(0x00,0xff,0x00);
-}
-
-void flashOrange() {
-  flashLED(0xff,0x66,0x00);
-}
-
-void flashRed() {
-  flashLED(0xff,0x00,0x00);
-}
-
-void flashLED(uchar r, uchar g, uchar b){
+void flashLed(uchar r, uchar g, uchar b){
   ledColorSet(r, g, b);
   delay(150);
   ledColorSet(0x00,0x00,0x00);
@@ -45,6 +33,19 @@ void flashLED(uchar r, uchar g, uchar b){
   ledColorSet(0x00,0x00,0x00);
   delay(10);
 }
+
+void flashGreen() {
+  flashLed(0x00,0xff,0x00);
+}
+
+void flashOrange() {
+  flashLed(0xff,0x66,0x00);
+}
+
+void flashRed() {
+  flashLed(0xff,0x00,0x00);
+}
+
 int main(int argc, const char *argv[])
 {
   if (argc != 2) {
