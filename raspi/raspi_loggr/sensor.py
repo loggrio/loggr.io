@@ -31,34 +31,34 @@ class Sensor:
     # TODO: fix compares!
     def __check(self, metering):
         if self.sensor_type == SensorTypes.temperature.name:
-            if self.last_metering_temperature < metering - 10 or self.last_metering_temperature > metering + 10:
+            if float(self.last_metering_temperature) < float(metering) - 10 or float(self.last_metering_temperature) > float(metering) + 10:
                 return 0
-            elif metering < -270:
+            elif float(metering) < -270:
                 return 0
-            elif metering > 200:
+            elif float(metering) > 200:
                 return 0
             else:
                 self.last_metering = metering
                 return 1
         if self.sensor_type == SensorTypes.humidity.name:
-            if self.last_meterng_humidity < metering - 10 or self.last_metering_humidity > metering + 10:
+            if float(self.last_meterng_humidity) < float(metering) - 10 or float(self.last_metering_humidity) > float(metering) + 10:
                 return 0
-            elif metering < 0:
+            elif float(metering) < 0:
                 return 0
-            elif metering > 100:
+            elif float(metering) > 100:
                 return 0
             else:
                 self.last_metering = metering
                 return 1
         if self.sensor_type == SensorTypes.brightness.name:
-            if metering > 210:
+            if float(metering) > 210:
                 return 0
-            elif metering < 0:
+            elif float(metering) < 0:
                 return 0
             else:
                 return 1
         if self.sensor_type == SensorTypes.volume.name:
-            if metering < 0:
+            if float(metering) < 0:
                 return 0
             else:
                 return 1
@@ -111,18 +111,18 @@ class Sensor:
     def meter_and_send(self):
         counter = 0
         value = self.__meter()
-        # good_data = self.__check(value)
+        good_data = self.__check(value)
 
-        # while good_data == 0 or counter < 5:
-        #     value = self.__meter()
-        #     good_data = self.__check(value)
-        #     counter = counter + 1
+        while good_data == 0 or counter < 5:
+             value = self.__meter()
+             good_data = self.__check(value)
+             counter = counter + 1
 
-        # if counter == 5:
-        #     logging.error(self.sensor_type + 'sensor broken')
-        #     print self.sensor_type + 'sensor broken'
-        #     set_status_led(LedStatusTypes.sensor_broken.name)
-        #     return
+        if counter == 5:
+             # logging.error(self.sensor_type + 'sensor broken')
+             # print self.sensor_type + 'sensor broken'
+             # set_status_led(LedStatusTypes.sensor_broken.name)
+             return
 
         payload = {'sensorName': self.sensor_name,
                    'location': self.location,
