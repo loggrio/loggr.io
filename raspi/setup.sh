@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 echo "Shell script to set up a new Raspberry Pi"
 
 echo "Update and upgrade apt-get..."
@@ -15,23 +15,12 @@ sh ~/.vim_runtime/install_basic_vimrc.sh
 
 echo "Set up directory structure..."
 cd
-mkdir Coding
-cd Coding
-mkdir loggr.io
-cd loggr.io
-mkdir raspi
-cd raspi
-mkdir raspi_loggr
-mkdir sensors
+mkdir -p Coding/loggr.io/raspi && mkdir $_/raspi_loggr $_/sensors
 
 echo "Install libraries..."
 sudo pip install --upgrade enum34
 sudo pip install --upgrade requests
-cd
-wget https://pypi.python.org/packages/source/n/netifaces/netifaces-0.10.4.tar.gz#md5=36da76e2cfadd24cc7510c2c0012eb1e
-tar xvzf netifaces-0.10.4.tar.gz
-cd netifaces-0.10.4
-sudo python setup.py install
+sudo pip install --upgrade netifaces
 
 cd
 cd Coding/loggr.io/raspi/
