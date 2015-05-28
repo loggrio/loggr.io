@@ -21,11 +21,12 @@ class Sensor:
     last_metering_humidity = 0
     last_metering_temperature = 0
 
-    def __init__(self, sensor_name, location, sensor_type, unit):
+    def __init__(self, sensor_name, location, sensor_type, unit, func=None):
         self.sensor_name = sensor_name
         self.location = location
         self.sensor_type = sensor_type
         self.unit = unit
+        self.func = func
 
     # TODO: fix compares!
     def __check(self, metering):
@@ -63,35 +64,39 @@ class Sensor:
                 return 1
 
     def __meter(self):
-        if (self.sensor_type != 'pressure'):
+        if self.func is not None:
+            value = str(self.func())
+            logging.info('metering of ' + self.sensor_type + ' sensor: ' + value)
+            print 'metering of ' + self.sensor_type + ' sensor: ' + value
+            return value
+        else:
             command = PATH + self.sensor_type + SUFFIX
-        else:
-            command = PATH + self.sensor_type + '.py'
-        try:
-            subproc_output = subprocess.check_output(command,
-                                                     stderr=subprocess.STDOUT)
 
-        except subprocess.CalledProcessError, cpe:
-            if cpe.returncode == 1:
-                # catch wiringPi errors
-                logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output)
-                print 'called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output
-            elif cpe.returncode == 2:
-                # catch open device file errors of mounted devices
-                logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output)
-                print 'called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output
-            elif cpe.returncode == 3:
-                # catch read errors on devices
-                logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output)
-                print 'called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output
-        except OSError, ose:
-            # catch os errors, e.g. file-not-found
-            logging.error('oserror: ' + str(ose.strerror))
-            print 'oserror: ' + str(ose.strerror)
-        else:
-            logging.info('metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output))
-            print 'metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output)
-            return subproc_output
+            try:
+                subproc_output = subprocess.check_output(command,
+                                                         stderr=subprocess.STDOUT)
+
+            except subprocess.CalledProcessError, cpe:
+                if cpe.returncode == 1:
+                    # catch wiringPi errors
+                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output)
+                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output
+                elif cpe.returncode == 2:
+                    # catch open device file errors of mounted devices
+                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output)
+                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output
+                elif cpe.returncode == 3:
+                    # catch read errors on devices
+                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output)
+                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output
+            except OSError, ose:
+                # catch os errors, e.g. file-not-found
+                logging.error('oserror: ' + str(ose.strerror))
+                print 'oserror: ' + str(ose.strerror)
+            else:
+                logging.info('metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output))
+                print 'metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output)
+                return subproc_output
 
     def __send(self, payload):
         headers = {'Content-Type': 'application/json'}
