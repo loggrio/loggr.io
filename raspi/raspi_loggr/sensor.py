@@ -108,6 +108,7 @@ class Sensor:
             print 'requests failure: ' + str(e)
             set_status_led(LedStatusTypes.request_error.name)
         else:
+            logging.info('requests status code: ' + str(r.status_code))
             return r.status_code
 
     def meter_and_send(self):
