@@ -25,7 +25,7 @@ npm install -g strongloop
 
 
 # Alternative: Install deps via curl
-curl -sL https://raw.githubusercontent.com/cebor/loggr.io/master/tools/npm.sh?token=ABgMuDqwwHwQemDlTTBoISIV_mvQQak4ks5VcDvXwA%3D%3D | sh
+curl -sL https://raw.githubusercontent.com/cebor/loggr.io/master/tools/npm.sh?token=ABgMuDqwwHwQemDlTTBoISIV_mvQQak4ks5VcDvXwA%3D%3D | bash
 ```
 
 ### H5VZR
