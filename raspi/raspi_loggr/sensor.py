@@ -18,8 +18,8 @@ API = 'http://0.0.0.0:3000/api'
 
 class Sensor:
     """docstring for Sensor"""
-    last_metering_humidity = 0
-    last_metering_temperature = 0
+    last_metering_humidity = 0.0
+    last_metering_temperature = 0.0
 
     def __init__(self, sensor_name, location, sensor_type, unit, func=None):
         self.sensor_name = sensor_name
@@ -30,38 +30,40 @@ class Sensor:
 
     # TODO: fix compares!
     def __check(self, metering):
+        metering = float(metering);
+
         if self.sensor_type == SensorTypes.temperature.name:
-            if float(self.last_metering_temperature) < float(metering) - 10 or float(self.last_metering_temperature) > float(metering) + 10:
-                return 0
-            elif float(metering) < -270:
-                return 0
-            elif float(metering) > 200:
-                return 0
+            if last_metering_temperature < metering - 10 or last_metering_temperature > metering + 10:
+                return False
+            elif metering < -270:
+                return False
+            elif metering > 200:
+                return False
             else:
                 self.last_metering = metering
-                return 1
+                return True
         if self.sensor_type == SensorTypes.humidity.name:
-            if float(self.last_meterng_humidity) < float(metering) - 10 or float(self.last_metering_humidity) > float(metering) + 10:
-                return 0
-            elif float(metering) < 0:
-                return 0
-            elif float(metering) > 100:
-                return 0
+            if last_meterng_humidity < metering - 10 or last_metering_humidity > metering + 10:
+                return False
+            elif metering < 0:
+                return False
+            elif metering > 100:
+                return False
             else:
                 self.last_metering = metering
-                return 1
+                return True
         if self.sensor_type == SensorTypes.brightness.name:
-            if float(metering) > 210:
-                return 0
-            elif float(metering) < 0:
-                return 0
+            if metering > 210:
+                return False
+            elif metering < 0:
+                return False
             else:
-                return 1
+                return True
         if self.sensor_type == SensorTypes.volume.name:
-            if float(metering) < 0:
-                return 0
+            if metering < 0:
+                return False
             else:
-                return 1
+                return True
 
     def __meter(self):
         if self.func is not None:
@@ -113,7 +115,7 @@ class Sensor:
         value = self.__meter()
         good_data = self.__check(value)
 
-        while good_data == 0 or counter < 5:
+        while good_data == False or counter < 5:
              value = self.__meter()
              good_data = self.__check(value)
              counter = counter + 1
