@@ -19,4 +19,6 @@ angular.module('loggrioApp')
       });
     };
 
+
+    // TODO: add add-view.html
   });

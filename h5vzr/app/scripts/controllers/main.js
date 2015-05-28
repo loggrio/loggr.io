@@ -12,8 +12,20 @@ angular.module('loggrioApp')
 
     this.chartConfig = {
       options: {
+        lang: {
+          downloadJPEG: 'Graph als JPEG exportieren',
+          downloadPDF: 'Graph als PDF exportieren',
+          downloadPNG: 'Graph als PNG exportieren',
+          downloadSVG: 'Graph als SVG exportieren',
+          loading: 'Daten werden geladen...',
+          months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+          noData: 'Keine Daten zum Anzeigen vorhanden',
+          printChart: 'Graph drucken',
+          shortMonths: ['Jan', 'Feb', 'Mrz', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+          weekdays: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag']
+        },
         title: {
-          text: 'Living Room Temperature'
+          text: 'Temperatur Wohnzimmer'
         },
         chart: {
           type: 'line'
@@ -23,7 +35,7 @@ angular.module('loggrioApp')
         },
         yAxis: {
           title: {
-            text: 'Temperature (°C)'
+            text: 'Temperatur (°C)'
           }
         },
         tooltip: {
@@ -33,7 +45,7 @@ angular.module('loggrioApp')
       series: [{
         data: [],
         color: '#009688',
-        name: 'Temperature'
+        name: 'Temperatur'
       }]
     };
 

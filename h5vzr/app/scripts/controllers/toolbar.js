@@ -4,11 +4,11 @@
  * @ngdoc function
  * @name loggrioApp.controller:ShowFurtherCtrl
  * @description
- * # ShowfurtherCtrl
+ * # ToolbarCtrl
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('ShowFurtherCtrl', function ($mdDialog) {
+  .controller('ToolbarCtrl', function ($mdDialog) {
 
     this.cancel = function () {
       $mdDialog.cancel();
@@ -16,8 +16,8 @@ angular.module('loggrioApp')
 
     this.showDialog = function (ev, dialog) {
       $mdDialog.show({
-        controller: 'ShowFurtherCtrl',
-        controllerAs: 'showFurther',
+        controller: 'ToolbarCtrl',
+        controllerAs: 'toolbar',
         templateUrl: 'views/dialogs/' + dialog + '.html',
         targetEvent: ev
       });

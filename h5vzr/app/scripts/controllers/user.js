@@ -10,6 +10,17 @@
 angular.module('loggrioApp')
   .controller('UserCtrl', function ($mdDialog) {
 
+    this.saveData = function () {
+      /*
+       * add logic
+       */
+      console.log('new userdata saved!');
+    };
+
+    this.cancel = function () {
+      $mdDialog.cancel();
+    };
+
     this.logOut = function (ev) {
       $mdDialog.show({
         targetEvent: ev,
@@ -22,6 +33,7 @@ angular.module('loggrioApp')
       });
       /*
        * add auth-stuff here
+       * auth.logOut();
        */
       setTimeout(function () {
         location.reload();

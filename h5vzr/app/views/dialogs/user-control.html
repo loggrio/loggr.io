@@ -1,0 +1,21 @@
+<md-dialog ng-controller="UserCtrl as user" aria-label="user" flex="50">
+  <form layout="column">
+    <div>
+      <md-dialog-content>
+        <md-subheader>Benutzerverwaltung</md-subheader>
+        <div>
+          <!-- content -->
+        </div>
+      </md-dialog-content>
+    </div>
+    <div flex></div>
+    <div class="md-actions" layout="row">
+      <md-button ng-click="user.saveData()" class="md-primary">
+        Speichern
+      </md-button>
+      <md-button ng-click="user.cancel()" class="md-primary">
+        Abbrechen
+      </md-button>
+    </div>
+  </form>
+</md-dialog>
