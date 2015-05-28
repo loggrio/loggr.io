@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import subprocess
 import logging
-import netifaces
 from enum import Enum
 
 
@@ -17,6 +16,7 @@ class SensorTypes(Enum):
     brightness = 2
     humidity = 3
     volume = 4
+    pressure = 5
 
 
 class ValueUnits(Enum):
@@ -25,6 +25,7 @@ class ValueUnits(Enum):
     percent = 3
     lumen = 4
     decibel = 5
+    pascal = 6
 
 
 def set_status_led(status):
@@ -46,7 +47,3 @@ def set_status_led(status):
         # catch os errors, e.g. file-not-found
         logging.error('oserror: ' + str(ose.strerror))
         print 'oserror: ' + str(ose.strerror)
-
-
-def get_ip_address():
-    return netifaces.ifaddresses('eth0')[2][0]['addr']

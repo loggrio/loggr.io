@@ -16,9 +16,10 @@ fi
 IP=$1
 TARGET=pi@$IP:/home/pi/Coding/loggr.io/raspi
 
-SENSORS="sensors/*.c sensors/Makefile"
-PYTHON_UTILS="raspi_loggr/*.py"
-GENERAL="requirements.txt run.py"
+RASPI_DIR="../raspi"
+SENSORS="$RASPI_DIR/sensors/*.c $RASPI_DIR/sensors/Makefile"
+PYTHON_UTILS="$RASPI_DIR/raspi_loggr/*.py"
+GENERAL="$RASPI_DIR/requirements.txt $RASPI_DIR/run.py"
 
 echo "Shell script to copy raspi files to raspberry pi"
 echo "Continue? [y/n]"
