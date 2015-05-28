@@ -16,7 +16,7 @@ fi
 IP=$1
 TARGET=pi@$IP:/home/pi/Coding/loggr.io/raspi
 
-SENSORS="sensors/*.c sensors/Makefile"
+SENSORS="sensors/*.c sensors/Makefile sensors/pressure.py"
 PYTHON_UTILS="raspi_loggr/*.py"
 GENERAL="requirements.txt run.py"
 

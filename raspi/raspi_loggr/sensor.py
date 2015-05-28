@@ -63,7 +63,10 @@ class Sensor:
                 return 1
 
     def __meter(self):
-        command = PATH + self.sensor_type + SUFFIX
+        if (self.sensor_type != 'pressure'):
+            command = PATH + self.sensor_type + SUFFIX
+        else:
+            command = PATH + self.sensor_type + '.py'
         try:
             subproc_output = subprocess.check_output(command,
                                                      stderr=subprocess.STDOUT)
