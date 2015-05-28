@@ -115,7 +115,7 @@ class Sensor:
         value = self.__meter()
         good_data = self.__check(value)
 
-        while good_data == False or counter < 5:
+        while good_data == False and counter < 5:
              value = self.__meter()
              good_data = self.__check(value)
              counter = counter + 1
