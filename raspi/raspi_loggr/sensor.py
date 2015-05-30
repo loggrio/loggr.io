@@ -71,11 +71,8 @@ class Sensor:
             return value
         else:
             command = PATH + self.sensor_type + SUFFIX
-
             try:
-                subproc_output = subprocess.check_output(command,
-                                                         stderr=subprocess.STDOUT)
-
+                subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
             except subprocess.CalledProcessError, cpe:
                 if cpe.returncode == 1:
                     # catch wiringPi errors
