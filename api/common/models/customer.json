@@ -1,0 +1,19 @@
+{
+  "name": "Customer",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "sensors": {
+      "type": "hasMany",
+      "model": "Sensor",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}
