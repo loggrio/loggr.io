@@ -8,7 +8,8 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "db",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
@@ -25,6 +26,14 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Customer": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Sensor": {
+    "dataSource": "mongodb",
+    "public": true
   },
   "Metering": {
     "dataSource": "mongodb",
