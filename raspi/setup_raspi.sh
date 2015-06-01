@@ -20,7 +20,6 @@ mkdir -p Coding/loggr.io/raspi && mkdir $_/raspi_loggr $_/sensors
 echo "Install libraries..."
 sudo pip install --upgrade enum34
 sudo pip install --upgrade requests
-sudo pip install --upgrade netifaces
 
 cd
 cd Coding/loggr.io/raspi/
