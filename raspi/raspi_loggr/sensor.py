@@ -75,43 +75,17 @@ class Sensor:
             return value
         else:
             command = PATH + self.sensor_type + SUFFIX
-            try:
-                subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
-            except subprocess.CalledProcessError, cpe:
-                if cpe.returncode == 1:
-                    # catch wiringPi errors
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output
-                elif cpe.returncode == 2:
-                    # catch open device file errors of mounted devices
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output
-                elif cpe.returncode == 3:
-                    # catch read errors on devices
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output
-            except OSError, ose:
-                # catch os errors, e.g. file-not-found
-                logging.error('oserror: ' + str(ose.strerror))
-                print 'oserror: ' + str(ose.strerror)
-            else:
-                logging.info('metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output))
-                print 'metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output)
-                return subproc_output
+            subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
+            logging.info('metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output))
+            print 'metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output)
+            return subproc_output
 
     def __send(self, payload):
         headers = {'Content-Type': 'application/json'}
         API = API_DOMAIN_CUSTOMERS + USER_ID + API_CHILD_SENSORS + self.sensor_id + API_CHILD_METERINGS
-        try:
-            r = requests.post(API, data=json.dumps(payload), headers=headers)
-        except requests.exceptions.RequestException, e:
-            # catch requests errors
-            logging.error('requests failure: ' + str(e))
-            print 'requests failure: ' + str(e)
-            set_status_led(LedStatusTypes.request_error.name)
-        else:
-            logging.info('requests status code: ' + str(r.status_code))
-            return r.status_code
+        r = requests.post(API, data=json.dumps(payload), headers=headers)
+        logging.info('requests status code: ' + str(r.status_code))
+        return r.status_code
 
     def meter_and_send(self):
         counter = 0
