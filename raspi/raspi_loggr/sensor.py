@@ -10,19 +10,23 @@ from .util import LedStatusTypes
 from .util import SensorTypes
 
 # TODO: CONFIG FILE
-DB = 'meterings'
 PATH = 'sensors/'
 SUFFIX = '.out'
-API = 'http://0.0.0.0:3000/api'
+# 'http://0.0.0.0:3000/customers/{user_id}/sensors/{sensor_id}/meterings data={data}'
+API_DOMAIN_CUSTOMERS = 'http://0.0.0.0:3000/customers/'
+API_CHILD_SENSORS = '/sensors/'
+API_CHILD_METERINGS = '/meterings'
 
+# TODO: get real user_id from auth system
+USER_ID = '1'
 
 class Sensor:
     """docstring for Sensor"""
     last_metering_humidity = 0
     last_metering_temperature = 0
 
-    def __init__(self, sensor_name, location, sensor_type, unit, func=None):
-        self.sensor_name = sensor_name
+    def __init__(self, sensor_id, location, sensor_type, unit, func=None):
+        self.sensor_id = sensor_id
         self.location = location
         self.sensor_type = sensor_type
         self.unit = unit
@@ -97,8 +101,9 @@ class Sensor:
 
     def __send(self, payload):
         headers = {'Content-Type': 'application/json'}
+        API = API_DOMAIN_CUSTOMERS + USER_ID + API_CHILD_SENSORS + self.sensor_id + API_CHILD_METERINGS
         try:
-            r = requests.post(API + "/" + DB, data=json.dumps(payload), headers=headers)
+            r = requests.post(API, data=json.dumps(payload), headers=headers)
         except requests.exceptions.RequestException, e:
             # catch requests errors
             logging.error('requests failure: ' + str(e))
@@ -124,12 +129,12 @@ class Sensor:
         #     set_status_led(LedStatusTypes.sensor_broken.name)
         #     return
 
-        payload = {'sensorName': self.sensor_name,
+        payload = {'sensorId': self.sensor_id,
                    'location': self.location,
                    'sensorType': self.sensor_type,
                    'time': str(datetime.now()),
                    'value': value,
                    'unit': self.unit,
-                   'userId': '1'}
+                   'userId': USER_ID}
 
         return self.__send(payload)
