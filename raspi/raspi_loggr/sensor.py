@@ -10,19 +10,23 @@ from .util import LedStatusTypes
 from .util import SensorTypes
 
 # TODO: CONFIG FILE
-DB = 'meterings'
 PATH = 'sensors/'
 SUFFIX = '.out'
-API = 'http://0.0.0.0:3000/api'
+# 'http://0.0.0.0:3000/customers/{user_id}/sensors/{sensor_id}/meterings data={data}'
+API_DOMAIN_CUSTOMERS = 'http://0.0.0.0:3000/customers/'
+API_CHILD_SENSORS = '/sensors/'
+API_CHILD_METERINGS = '/meterings'
 
+# TODO: get real user_id from auth system
+USER_ID = '1'
 
 class Sensor:
     """docstring for Sensor"""
     last_metering_humidity = 0
     last_metering_temperature = 0
 
-    def __init__(self, sensor_name, location, sensor_type, unit, func=None):
-        self.sensor_name = sensor_name
+    def __init__(self, sensor_id, location, sensor_type, unit, func=None):
+        self.sensor_id = sensor_id
         self.location = location
         self.sensor_type = sensor_type
         self.unit = unit
@@ -71,42 +75,17 @@ class Sensor:
             return value
         else:
             command = PATH + self.sensor_type + SUFFIX
-            try:
-                subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
-            except subprocess.CalledProcessError, cpe:
-                if cpe.returncode == 1:
-                    # catch wiringPi errors
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output
-                elif cpe.returncode == 2:
-                    # catch open device file errors of mounted devices
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output
-                elif cpe.returncode == 3:
-                    # catch read errors on devices
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output
-            except OSError, ose:
-                # catch os errors, e.g. file-not-found
-                logging.error('oserror: ' + str(ose.strerror))
-                print 'oserror: ' + str(ose.strerror)
-            else:
-                logging.info('metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output))
-                print 'metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output)
-                return subproc_output
+            subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
+            logging.info('metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output))
+            print 'metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output)
+            return subproc_output
 
     def __send(self, payload):
         headers = {'Content-Type': 'application/json'}
-        try:
-            r = requests.post(API + "/" + DB, data=json.dumps(payload), headers=headers)
-        except requests.exceptions.RequestException, e:
-            # catch requests errors
-            logging.error('requests failure: ' + str(e))
-            print 'requests failure: ' + str(e)
-            set_status_led(LedStatusTypes.request_error.name)
-        else:
-            logging.info('requests status code: ' + str(r.status_code))
-            return r.status_code
+        API = API_DOMAIN_CUSTOMERS + USER_ID + API_CHILD_SENSORS + self.sensor_id + API_CHILD_METERINGS
+        r = requests.post(API, data=json.dumps(payload), headers=headers)
+        logging.info('requests status code: ' + str(r.status_code))
+        return r.status_code
 
     def meter_and_send(self):
         counter = 0
@@ -124,12 +103,12 @@ class Sensor:
         #     set_status_led(LedStatusTypes.sensor_broken.name)
         #     return
 
-        payload = {'sensorName': self.sensor_name,
+        payload = {'sensorId': self.sensor_id,
                    'location': self.location,
                    'sensorType': self.sensor_type,
                    'time': str(datetime.now()),
                    'value': value,
                    'unit': self.unit,
-                   'userId': '1'}
+                   'userId': USER_ID}
 
         return self.__send(payload)

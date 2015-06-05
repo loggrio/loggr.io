@@ -1,25 +1,29 @@
 {
-  "name": "Metering",
+  "name": "Sensor",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "value": {
-      "type": "number",
+    "type": {
+      "type": "string",
       "required": true
     },
-    "time": {
-      "type": "date",
-      "required": true
+    "location": {
+      "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "sensor": {
+    "customer": {
       "type": "belongsTo",
-      "model": "Sensor",
+      "model": "Customer",
+      "foreignKey": ""
+    },
+    "meterings": {
+      "type": "hasMany",
+      "model": "Metering",
       "foreignKey": ""
     }
   },
