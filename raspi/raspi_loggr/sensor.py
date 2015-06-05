@@ -8,6 +8,7 @@ from datetime import datetime
 from .util import set_status_led
 from .util import LedStatusTypes
 from .util import SensorTypes
+from .exception_handler import SensorScriptException
 
 # TODO: CONFIG FILE
 DB = 'meterings'
@@ -73,23 +74,11 @@ class Sensor:
             command = PATH + self.sensor_type + SUFFIX
             try:
                 subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
-            except subprocess.CalledProcessError, cpe:
-                if cpe.returncode == 1:
-                    # catch wiringPi errors
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output
-                elif cpe.returncode == 2:
-                    # catch open device file errors of mounted devices
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output
-                elif cpe.returncode == 3:
-                    # catch read errors on devices
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output
-            except OSError, ose:
+            except subprocess.CalledProcessError as cpe:
+                raise SensorScriptException(cpe)
+            except OSError as ose:
                 # catch os errors, e.g. file-not-found
-                logging.error('oserror: ' + str(ose.strerror))
-                print 'oserror: ' + str(ose.strerror)
+                raise
             else:
                 logging.info('metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output))
                 print 'metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output)
@@ -99,10 +88,10 @@ class Sensor:
         headers = {'Content-Type': 'application/json'}
         try:
             r = requests.post(API + "/" + DB, data=json.dumps(payload), headers=headers)
-        except requests.exceptions.RequestException, e:
+        except requests.exceptions.RequestException as re:
             # catch requests errors
-            logging.error('requests failure: ' + str(e))
-            print 'requests failure: ' + str(e)
+            logging.error('requests failure: ' + str(re))
+            print 'requests failure: ' + str(re)
             set_status_led(LedStatusTypes.request_error.name)
         else:
             logging.info('requests status code: ' + str(r.status_code))
