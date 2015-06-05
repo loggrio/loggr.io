@@ -10,14 +10,15 @@
 angular.module('loggrioApp')
   .controller('TokenCtrl', function ($mdDialog) {
 
-    this.generateToken = function () {
-      /*
-       * add logic
-       */
-      console.log('token generated!');
-    };
+    // TODO: bind to form
+    var payload = {};
 
     this.cancel = function () {
       $mdDialog.cancel();
     };
+
+    this.submit = function () {
+      $mdDialog.hide(payload);
+    };
+
   });

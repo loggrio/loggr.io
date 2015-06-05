@@ -10,16 +10,40 @@
 angular.module('loggrioApp')
   .controller('ToolbarCtrl', function ($mdDialog) {
 
-    this.cancel = function () {
-      $mdDialog.cancel();
-    };
-
-    this.showDialog = function (ev, dialog) {
+    this.aboutDialog = function (ev) {
       $mdDialog.show({
-        controller: 'ToolbarCtrl',
-        controllerAs: 'toolbar',
-        templateUrl: 'views/dialogs/' + dialog + '.html',
+        controller: 'CommonDialogCtrl',
+        controllerAs: 'about',
+        templateUrl: 'views/dialogs/about.html',
         targetEvent: ev
       });
     };
+
+    this.imprintDialog = function (ev) {
+      $mdDialog.show({
+        controller: 'CommonDialogCtrl',
+        controllerAs: 'imprint',
+        templateUrl: 'views/dialogs/imprint.html',
+        targetEvent: ev
+      });
+    };
+
+    this.tokenDialog = function (ev) {
+      $mdDialog.show({
+        controller: 'TokenCtrl',
+        controllerAs: 'token',
+        templateUrl: 'views/dialogs/token.html',
+        targetEvent: ev
+      });
+    };
+
+    this.userControlDialog = function (ev) {
+      $mdDialog.show({
+        controller: 'UserControlCtrl',
+        controllerAs: 'userControl',
+        templateUrl: 'views/dialogs/user-control.html',
+        targetEvent: ev
+      });
+    };
+
   });
