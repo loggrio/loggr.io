@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: ShowfurtherCtrl', function () {
+describe('Controller: LoginCtrl', function () {
 
   // load the controller's module
   beforeEach(module('loggrioApp'));
 
-  var ShowfurtherCtrl,
+  var LoginCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    ShowfurtherCtrl = $controller('ShowfurtherCtrl', {
+    LoginCtrl = $controller('LoginCtrl', {
       $scope: scope
     });
   }));

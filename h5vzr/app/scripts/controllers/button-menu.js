@@ -13,7 +13,7 @@ angular.module('loggrioApp')
     this.showDialog = function (ev) {
       $mdDialog.show({
         controller: 'ConfigureViewCtrl',
-        controllerAs: 'config',
+        controllerAs: 'configureView',
         templateUrl: 'views/dialogs/configure-view.html',
         targetEvent: ev
       });

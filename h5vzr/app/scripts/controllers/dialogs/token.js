@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name loggrioApp.controller:ConfigureViewCtrl
+ * @name loggrioApp.controller:TokenCtrl
  * @description
- * # ConfigureViewCtrl
+ * # TokenCtrl
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('ConfigureViewCtrl', function ($mdDialog) {
+  .controller('TokenCtrl', function ($mdDialog) {
 
     // TODO: bind to form
     var payload = {};

@@ -17,7 +17,7 @@
     <!-- endbuild -->
   </head>
   <body layout="column">
-    <md-toolbar>
+    <md-toolbar ng-controller="ToolbarCtrl as toolbar">
       <div class="md-toolbar-tools">
         <div flex="15"></div>
         <md-button class="md-icon-button" aria-label="Logo">
@@ -25,27 +25,12 @@
         </md-button>
         <div flex></div>
         <p class="md-subhead toolbar-item">Max Mustermann</p>
-        <md-select ng-controller="UserCtrl as user" aria-label="account" ng-model="someModel">
-          <md-select-label>
-            <md-button class="md-icon-button" aria-label="Account">
-              <md-icon md-svg-icon="account-circle" alt="account-circle" class="toolbar-item"></md-icon>
-              <md-tooltip>Licenced to: UserName</md-tooltip>
-            </md-button>
-          </md-select-label>
-          <md-option>Benutzerverwaltung</md-option>
-          <md-option>Token generieren</md-option>
-          <md-option ng-click="user.logOut($event)">Abmelden</md-option>
-        </md-select>
-        <md-select ng-controller="ShowFurtherCtrl as showfurther" aria-label="settings" ng-model="someModel">
-          <md-select-label>
-            <md-button class="md-icon-button" aria-label="More">
-              <md-icon md-svg-icon="more-vert" alt="more-vert" class="toolbar-item"></md-icon>
-              <md-tooltip>Settings</md-tooltip>
-            </md-button>
-          </md-select-label>
-          <md-option ng-click="showfurther.showDialog($event, 'about')">&Uuml;ber loggr.io</md-option>
-          <md-option ng-click="showfurther.showDialog($event, 'imprint')">Impressum</md-option>
-        </md-select>
+        <md-button class="md-icon-button" aria-label="Account">
+          <md-icon md-svg-icon="account-circle" alt="account-circle" class="toolbar-item"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="More">
+          <md-icon md-svg-icon="more-vert" alt="more-vert" class="toolbar-item"></md-icon>
+        </md-button>
         <div flex="15"></div>
       </div>
     </md-toolbar>
@@ -82,15 +67,18 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/services/lb-services.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/services/util.js"></script>
     <script src="scripts/services/notify.js"></script>
-    <script src="scripts/controllers/dialogs/configure-view.js"></script>
-    <script src="scripts/controllers/button-menu.js"></script>
+    <script src="scripts/services/util.js"></script>
     <script src="scripts/directives/flip.js"></script>
     <script src="scripts/directives/flippanel.js"></script>
-    <script src="scripts/controllers/dialogs/showfurther.js"></script>
-    <script src="scripts/controllers/user.js"></script>
+    <script src="scripts/controllers/button-menu.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/toolbar.js"></script>
+    <script src="scripts/controllers/dialogs/common-dialog.js"></script>
+    <script src="scripts/controllers/dialogs/configure-view.js"></script>
+    <script src="scripts/controllers/dialogs/token.js"></script>
+    <script src="scripts/controllers/dialogs/user-control.js"></script>
     <!-- endbuild -->
   </body>
 </html>
