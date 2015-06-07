@@ -86,6 +86,12 @@ int main(void)
 
   analogVal = get_ADC_Result();
 
+  //Most times when analogVal = 0 the brightness sensor isn't connected to the Raspberryx
+  if(analogVal == 0)
+  {
+    return 3;
+  }
+
   if(analogVal <= 210 && dataState == DATA_GOOD)
   {
     illum = 210 - analogVal;

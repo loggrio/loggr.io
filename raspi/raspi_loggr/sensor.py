@@ -18,8 +18,8 @@ API = 'http://0.0.0.0:3000/api'
 
 class Sensor:
     """docstring for Sensor"""
-    last_metering_humidity = 0
-    last_metering_temperature = 0
+    last_metering = 0.0
+    first_metering = True
 
     def __init__(self, sensor_name, location, sensor_type, unit, func=None):
         self.sensor_name = sensor_name
@@ -28,40 +28,53 @@ class Sensor:
         self.unit = unit
         self.func = func
 
-    # TODO: fix compares!
     def __check(self, metering):
-        if self.sensor_type == SensorTypes.temperature.name:
-            if self.last_metering_temperature < metering - 10 or self.last_metering_temperature > metering + 10:
-                return 0
-            elif metering < -270:
-                return 0
-            elif metering > 200:
-                return 0
-            else:
-                self.last_metering = metering
-                return 1
-        if self.sensor_type == SensorTypes.humidity.name:
-            if self.last_meterng_humidity < metering - 10 or self.last_metering_humidity > metering + 10:
-                return 0
-            elif metering < 0:
-                return 0
-            elif metering > 100:
-                return 0
-            else:
-                self.last_metering = metering
-                return 1
-        if self.sensor_type == SensorTypes.brightness.name:
-            if metering > 210:
-                return 0
-            elif metering < 0:
-                return 0
-            else:
-                return 1
-        if self.sensor_type == SensorTypes.volume.name:
-            if metering < 0:
-                return 0
-            else:
-                return 1
+        metering = float(metering)
+        if self.first_metering is True:
+            self.first_metering = False
+            self.last_metering = metering
+            return False
+        else:
+            if self.sensor_type == SensorTypes.temperature.name:
+                if metering < (self.last_metering - 10.0) or metering > (self.last_metering + 10.0):
+                    return False
+                elif metering < -270.0:
+                    return False
+                elif metering > 200.0:
+                    return False
+                else:
+                    self.last_metering = metering
+                    return True
+            if self.sensor_type == SensorTypes.humidity.name:
+                if metering < (self.last_metering - 10.0) or metering > (self.last_metering + 10.0):
+                    return False
+                elif metering < 0.0:
+                    return False
+                elif metering > 100.0:
+                    return False
+                else:
+                    self.last_metering = metering
+                    return True
+            if self.sensor_type == SensorTypes.brightness.name:
+                if metering > 210.0:
+                    return False
+                elif metering < 0.0:
+                    return False
+                else:
+                    return True
+            if self.sensor_type == SensorTypes.volume.name:
+                if metering < 0.0:
+                    return False
+                else:
+                    return True
+            if self.sensor_type == SensorTypes.pressure.name:
+                if metering < (self.last_metering - 1000.0) or metering > (self.last_metering + 1000.0):
+                    return False
+                elif metering < 0.0:
+                    return False
+                else:
+                    self.last_metering = metering
+                    return True
 
     def __meter(self):
         if self.func is not None:
@@ -91,9 +104,13 @@ class Sensor:
                 logging.error('oserror: ' + str(ose.strerror))
                 print 'oserror: ' + str(ose.strerror)
             else:
-                logging.info('metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output))
-                print 'metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output)
-                return subproc_output
+                good_data = self.__check(subproc_output)
+                if good_data is True:
+                    logging.info('metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output))
+                    print 'metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output)
+                    return subproc_output
+                else:
+                    return 'false_data'
 
     def __send(self, payload):
         headers = {'Content-Type': 'application/json'}
@@ -110,19 +127,17 @@ class Sensor:
 
     def meter_and_send(self):
         counter = 0
-        value = self.__meter()
-        # good_data = self.__check(value)
+        value = 'false_data'
 
-        # while good_data == 0 or counter < 5:
-        #     value = self.__meter()
-        #     good_data = self.__check(value)
-        #     counter = counter + 1
+        while value == 'false_data' and counter < 5:
+            value = self.__meter()
+            counter = counter + 1
 
-        # if counter == 5:
-        #     logging.error(self.sensor_type + 'sensor broken')
-        #     print self.sensor_type + 'sensor broken'
-        #     set_status_led(LedStatusTypes.sensor_broken.name)
-        #     return
+        if counter == 5:
+            logging.error(self.sensor_type + 'sensor broken')
+            print self.sensor_type + 'sensor broken'
+            set_status_led(LedStatusTypes.sensor_broken.name)
+            return
 
         payload = {'sensorName': self.sensor_name,
                    'location': self.location,
