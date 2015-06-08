@@ -5,13 +5,13 @@
   padding: 0.2em 0;
 }
 
-.menu-logo {
+.toolbar-logo {
   width: 48px;
   height: 48px;
 }
 
 .toolbar-item {
-  opacity: 0.77;
+  opacity: .77;
 }
 
 .md-select-icon {
