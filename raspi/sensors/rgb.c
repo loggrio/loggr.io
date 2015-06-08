@@ -50,12 +50,12 @@ int main(int argc, const char *argv[])
 {
   if (argc != 2) {
     printf("invalid arguments! Usage: ./rgb.out <error-code>\n");
-    return 1;
+    return 2;
   }
 
   if(wiringPiSetup() == -1) {
     printf("setup wiringPi failed!");
-    return 2;
+    return 1;
   }
 
   ledInit();

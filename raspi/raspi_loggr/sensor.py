@@ -5,8 +5,11 @@ import json
 import subprocess
 import logging
 from datetime import datetime
-from .util import set_status_led
-from .util import LedStatusTypes
+from .util import treat_os_errors
+from .util import treat_led_errors
+from .util import treat_sensor_errors
+from .util import treat_requests_errors
+from .util import treat_sensor_broken_errors
 from .util import SensorTypes
 
 # TODO: CONFIG FILE
@@ -87,22 +90,13 @@ class Sensor:
             try:
                 subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
             except subprocess.CalledProcessError, cpe:
-                if cpe.returncode == 1:
-                    # catch wiringPi errors
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 1: ' + cpe.output
-                elif cpe.returncode == 2:
-                    # catch open device file errors of mounted devices
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 2: ' + cpe.output
-                elif cpe.returncode == 3:
-                    # catch read errors on devices
-                    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output)
-                    print 'called process error: ' + str(cpe.cmd[0]) + ' returned 3: ' + cpe.output
+                # catch and treat wiringPi errors
+                # catch and treat open device file errors of mounted devices
+                # catch and treat read errors on devices
+                log_sensor_errors(cpe)
             except OSError, ose:
-                # catch os errors, e.g. file-not-found
-                logging.error('oserror: ' + str(ose.strerror))
-                print 'oserror: ' + str(ose.strerror)
+                # catch and treat os errors, e.g. file-not-found
+                log_os_errors(ose)
             else:
                 good_data = self.__check(subproc_output)
                 if good_data is True:
@@ -116,11 +110,9 @@ class Sensor:
         headers = {'Content-Type': 'application/json'}
         try:
             r = requests.post(API + "/" + DB, data=json.dumps(payload), headers=headers)
-        except requests.exceptions.RequestException, e:
-            # catch requests errors
-            logging.error('requests failure: ' + str(e))
-            print 'requests failure: ' + str(e)
-            set_status_led(LedStatusTypes.request_error.name)
+        except requests.exceptions.RequestException, re:
+            # catch and treat requests errors
+            treat_requests_errors(re)
         else:
             logging.info('requests status code: ' + str(r.status_code))
             return r.status_code
@@ -134,9 +126,7 @@ class Sensor:
             counter = counter + 1
 
         if counter == 5:
-            logging.error(self.sensor_type + 'sensor broken')
-            print self.sensor_type + 'sensor broken'
-            set_status_led(LedStatusTypes.sensor_broken.name)
+            treat_sensor_broken_errors(self.sensor_type)
             return
 
         payload = {'sensorName': self.sensor_name,
