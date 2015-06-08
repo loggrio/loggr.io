@@ -11,7 +11,7 @@ angular.module('loggrioApp')
   .service('notify', function ($interval, $mdToast) {
 
     var lastTime, nowTime;
-    var delay = 60000;
+    var delay = 120000;
     var toggled = false;
 
     var toastReconnected = function () {
