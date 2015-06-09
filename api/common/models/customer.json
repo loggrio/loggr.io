@@ -1,0 +1,24 @@
+{
+  "name": "Customer",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "sensors": {
+      "type": "hasMany",
+      "model": "Sensor",
+      "foreignKey": "customerId"
+    },
+    "meterings": {
+      "type": "hasMany",
+      "model": "Metering",
+      "foreignKey": "customerId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}
