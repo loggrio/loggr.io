@@ -1,21 +1,50 @@
 <md-dialog aria-label="Ansicht konfigurieren" flex="50">
-  <form layout="column">
-    <div>
-      <md-dialog-content>
-        <md-subheader>Ansicht konfigurieren</md-subheader>
-        <div>
-          <!-- content -->
-        </div>
-      </md-dialog-content>
-    </div>
-    <div flex></div>
-    <div class="md-actions" layout="row">
-      <md-button ng-click="configureView.submit()" class="md-primary">
-        Speichern
-      </md-button>
-      <md-button ng-click="configureView.cancel()" class="md-primary">
-        Abbrechen
-      </md-button>
-    </div>
-  </form>
+  <div>
+    <md-dialog-content>
+      <md-subheader>Ansicht konfigurieren</md-subheader>
+      <!-- content of the dialog -->
+      <div layout="row">
+        <md-card flex>
+          <md-card-content>
+            <md-subheader class="md-primary">Angezeigte Sensoren</md-subheader>
+            <md-list ng-sortable=configureView.inUseConfig>
+              <md-list-item class="md-3-line" ng-repeat="item in configureView.inUse">
+                <div class="md-list-item-text">
+                  <h3>{{item}}</h3>
+                  <h4>Standort: B 0.03</h4>
+                  <p>Aktueller Wert: xx</p>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+              </md-list-item>
+            </md-list>
+          </md-card-content>
+        </md-card>
+        <md-card flex>
+          <md-card-content>
+            <md-subheader class="md-primary">Verfügbare Sensoren</md-subheader>
+            <md-list ng-sortable="configureView.availableConfig">
+              <md-list-item class="md-3-line" ng-repeat="item in configureView.available">
+                <div class="md-list-item-text">
+                  <h3>{{item}}</h3>
+                  <h4>Standort: B 0.03</h4>
+                  <p>Aktueller Wert: xx</p>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+              </md-list-item>
+            </md-list>
+          </md-card-content>
+        </md-card>
+      </div>
+      <!-- end content of the dialog -->
+    </md-dialog-content>
+  </div>
+  <div flex></div>
+  <div class="md-actions" layout="row">
+    <md-button ng-click="configureView.submit()" class="md-primary">
+      Speichern
+    </md-button>
+    <md-button ng-click="configureView.cancel()" class="md-primary">
+      Abbrechen
+    </md-button>
+  </div>
 </md-dialog>

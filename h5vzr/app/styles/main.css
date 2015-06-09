@@ -48,3 +48,7 @@
   -webkit-transform: perspective(800px) rotateY(-180deg);
   transform: perspective(800px) rotateY(-180deg);
 }
+
+.ghost {
+  opacity: 0.2;
+}

@@ -15,7 +15,8 @@ angular
     'ngAria',
     'ngMaterial',
     'highcharts-ng',
-    'lbServices'
+    'lbServices',
+    'ng-sortable'
   ])
   .config(function ($routeProvider, $mdThemingProvider, $mdIconProvider, LoopBackResourceProvider) {
     $routeProvider
