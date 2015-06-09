@@ -14,14 +14,6 @@
   opacity: .77;
 }
 
-.md-select-icon {
-  display: none;
-}
-
-.md-select-label *:first-child {
-  max-width: 100%;
-}
-
 .flip {
   float: left;
   overflow: hidden
