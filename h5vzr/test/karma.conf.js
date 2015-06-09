@@ -33,6 +33,7 @@ module.exports = function(config) {
       'bower_components/highcharts/modules/exporting.js',
       'bower_components/Sortable/index.js',
       'bower_components/ng-sortable/index.js',
+      'bower_components/angular-messages/angular-messages.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
