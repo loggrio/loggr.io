@@ -38,15 +38,6 @@ angular
       .primaryPalette('teal');
 
     $mdIconProvider
-      .icon('account-circle', 'images/svg/ic_account_circle_24px.svg', 24)
-      .icon('options', 'images/svg/ic_menu_24px.svg', 24)
-      .icon('add', 'images/svg/ic_add_24px.svg', 24)
-      .icon('edit', 'images/svg/ic_edit_24px.svg', 24)
-      .icon('tune', 'images/svg/ic_tune_24px.svg', 24)
-      .icon('more-vert', 'images/svg/ic_more_vert_24px.svg', 24)
-      .icon('email', 'images/svg/ic_email_24px.svg', 24)
-      .icon('location', 'images/svg/ic_location_on_24px.svg', 24)
-      .icon('password', 'images/svg/ic_security_24px.svg', 24)
       .icon('loggr-icon', 'images/svg/loggr_icon_white.svg', 48);
 
     // TODO: seperate cfg file
