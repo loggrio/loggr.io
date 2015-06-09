@@ -8,46 +8,9 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('MainCtrl', function ($interval, Metering, notify, util) {
+  .controller('MainCtrl', function ($interval, Metering, notify, util, ChartConfig) {
 
-    this.chartConfig = {
-      options: {
-        lang: {
-          downloadJPEG: 'Graph als JPEG exportieren',
-          downloadPDF: 'Graph als PDF exportieren',
-          downloadPNG: 'Graph als PNG exportieren',
-          downloadSVG: 'Graph als SVG exportieren',
-          loading: 'Daten werden geladen...',
-          months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-          noData: 'Keine Daten zum Anzeigen vorhanden',
-          printChart: 'Graph drucken',
-          shortMonths: ['Jan', 'Feb', 'Mrz', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
-          weekdays: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag']
-        },
-        title: {
-          text: 'Temperatur Wohnzimmer'
-        },
-        chart: {
-          type: 'line'
-        },
-        xAxis: {
-          type: 'datetime'
-        },
-        yAxis: {
-          title: {
-            text: 'Temperatur (°C)'
-          }
-        },
-        tooltip: {
-          valueSuffix: '°C'
-        }
-      },
-      series: [{
-        data: [],
-        color: '#009688',
-        name: 'Temperatur'
-      }]
-    };
+    this.chartConfig = new ChartConfig('Temperatur Wohnzimmer', 'Temperatur (°C)', '°C', 'Temperatur');
 
     this.flipChart = {};
 
