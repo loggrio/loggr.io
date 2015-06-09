@@ -48,7 +48,6 @@ def treat_led_errors(cpe):
         print 'called process error: ' + str(cpe.cmd[0]) + ' returned 2: invalid arguments'
 
 
-
 def treat_requests_errors(re):
     # log requests errors in logfile and console and set status led color to orange
     logging.error('requests failure: ' + str(re))

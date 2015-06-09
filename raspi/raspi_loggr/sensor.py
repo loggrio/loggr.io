@@ -93,10 +93,10 @@ class Sensor:
                 # catch and treat wiringPi errors
                 # catch and treat open device file errors of mounted devices
                 # catch and treat read errors on devices
-                log_sensor_errors(cpe)
+                treat_sensor_errors(cpe)
             except OSError, ose:
                 # catch and treat os errors, e.g. file-not-found
-                log_os_errors(ose)
+                treat_os_errors(ose)
             else:
                 good_data = self.__check(subproc_output)
                 if good_data is True:
