@@ -8,12 +8,13 @@
           <md-card-content>
             <md-subheader class="md-primary">Angezeigte Sensoren</md-subheader>
             <md-list ng-sortable=configureView.inUseConfig>
-              <md-list-item class="md-3-line" ng-repeat="item in configureView.inUse">
-                <div class="md-list-item-text">
-                  <h3>{{item}}</h3>
-                  <h4>Standort: B 0.03</h4>
-                  <p>Aktueller Wert: xx</p>
-                </div>
+              <md-list-item data-id="{{item.id}}" ng-mouseenter="configureView.showDelete=true" ng-mouseleave="configureView.showDelete=false" ng-repeat="item in configureView.sensorsInUse">
+                <md-icon ng-if="item.iconType=='font'">{{item.icon}}</md-icon>
+                <md-icon ng-if="item.iconType=='img'">
+                  <img src="{{item.icon}}" class="sortable-list-icon">
+                </md-icon>
+                <p>{{item.name}}</p>
+                <md-icon class=".ng-hide" ng-show="configureView.showDelete">clear</md-icon>
                 <md-divider ng-if="!$last"></md-divider>
               </md-list-item>
             </md-list>
@@ -23,12 +24,12 @@
           <md-card-content>
             <md-subheader class="md-primary">Verfügbare Sensoren</md-subheader>
             <md-list ng-sortable="configureView.availableConfig">
-              <md-list-item class="md-3-line" ng-repeat="item in configureView.available">
-                <div class="md-list-item-text">
-                  <h3>{{item}}</h3>
-                  <h4>Standort: B 0.03</h4>
-                  <p>Aktueller Wert: xx</p>
-                </div>
+              <md-list-item data-id="{{item.id}}" ng-repeat="item in configureView.sensorsAvailable">
+                <md-icon ng-if="item.iconType=='font'">{{item.icon}}</md-icon>
+                <md-icon ng-if="item.iconType=='img'">
+                  <img src={{item.icon}} class="sortable-list-icon">
+                </md-icon>
+                <p>{{item.name}}</p>
                 <md-divider ng-if="!$last"></md-divider>
               </md-list-item>
             </md-list>
