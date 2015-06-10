@@ -26,7 +26,6 @@ module.exports = function(config) {
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-aria/angular-aria.js',
       'bower_components/angular-material/angular-material.js',
-      'bower_components/angular-mfb/dist/mfb-directive.min.js',
       'bower_components/highcharts-ng/dist/highcharts-ng.js',
       'bower_components/highcharts/highcharts.js',
       'bower_components/highcharts/highcharts-more.js',

@@ -9,7 +9,6 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-    <link rel="stylesheet" href="bower_components/angular-mfb/dist/css/mfb.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -38,12 +37,22 @@
       <div ng-view flex="70"></div>
     </md-content>
 
-    <div ng-controller="ButtonMenuCtrl as menu">
-      <mfb-menu position="br" toggling-method="hover" effect="slidein"
-                label="Optionen" active-icon="menu" resting-icon="menu">
-        <mfb-button icon="edit" label="Ansicht konfigurieren" ng-click="menu.showDialog($event)"></mfb-button>
-        <mfb-button icon="add" label="Graph hinzufügen"></mfb-button>
-      </mfb-menu>
+    <div ng-controller="ButtonMenuCtrl as menu" class="button-menu">
+      <md-fab-speed-dial md-direction="up" class="md-scale">
+        <md-fab-trigger>
+          <md-button aria-label="menu" class="md-fab">
+            <md-icon>menu</md-icon>
+          </md-button>
+        </md-fab-trigger>
+        <md-fab-actions>
+          <md-button aria-label="Ansicht konfigurieren" class="md-fab" ng-click="menu.showDialog($event)">
+            <md-icon>edit</md-icon>
+          </md-button>
+          <md-button aria-label="facebook" class="md-fab">
+            <md-icon>face</md-icon>
+          </md-button>
+        </md-fab-actions>
+      </md-fab-speed-dial>
     </div>
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -55,7 +64,6 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
-    <script src="bower_components/angular-mfb/dist/mfb-directive.min.js"></script>
     <script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
     <script src="bower_components/highcharts/highcharts.js"></script>
     <script src="bower_components/highcharts/highcharts-more.js"></script>
