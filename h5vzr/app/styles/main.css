@@ -16,7 +16,6 @@
 
 .button-menu {
   position: fixed;
-  white-space: nowrap;
   margin: 15px;
   z-index: 99;
   right: 0;
