@@ -37,9 +37,6 @@ angular
     $mdThemingProvider.theme('default')
       .primaryPalette('teal');
 
-    $mdIconProvider
-      .icon('loggr-icon', 'images/svg/loggr_icon_white.svg', 48);
-
     // TODO: seperate cfg file
     LoopBackResourceProvider.setUrlBase('http://localhost:3000/api/');
   });
