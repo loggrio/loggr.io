@@ -54,11 +54,11 @@
             <label>Neues Passwort wiederholen</label>
             <md-icon>lock</md-icon>
             <input id="confirmPass" name="passConfirm" required maxlength="80"
-            passwordsMatch="userForm.newPass" type="password" ng-model="confirmPass">
+            match-to="userForm.newPass" type="password" ng-model="confirmPass">
             <div ng-messages="userForm.passConfirm.$error">
               <div ng-message="required">Pflichtfeld.</div>
               <div ng-message="md-maxlength">Das Passwort darf nicht länger als 80 Zeichen sein.</div>
-              <div ng-message="passwordsMatch">Die Passwörter stimmen nicht überein.</div>
+              <div ng-message="match-to">Die Passwörter stimmen nicht überein.</div>
             </div>
           </md-input-container>
         </div>
