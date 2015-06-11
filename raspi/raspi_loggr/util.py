@@ -3,13 +3,6 @@
 import subprocess
 import logging
 from enum import Enum
-from os import path
-from ConfigParser import ConfigParser
-
-config = ConfigParser()
-
-HOME_DIR = os.getenv("HOME")
-CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
 
 class LedStatusTypes(Enum):
@@ -82,12 +75,3 @@ def set_status_led(status):
     except OSError, ose:
         # catch os errors, e.g. file-not-found
         treat_os_errors(ose)
-
-
-def init_config():
-    if not path.isfile(CONFIG_FILE):
-        config.add_section('AUTH')
-        config.add_section('SENSORS')
-        config.set('AUTH', 'token', '')
-        with open(CONFIG_FILE, 'w') as configfile:
-            config.write(configfile)
