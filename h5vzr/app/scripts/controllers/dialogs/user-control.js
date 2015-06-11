@@ -19,32 +19,36 @@ angular.module('loggrioApp')
   };
 
   this.passChanging = false;
+  this.formInvalid = false;
 
   this.changingPassword = function () {
 
-    var oldPw = this.userData.password;
     var oldPWMatch = false;
     var newPWMatch = false;
 
-    this.passChanging = !this.passChanging;
-    this.userData.password = '';
-    $('#saveButton').prop('disabled', true);
+    if(!this.passChanging){
+      this.passChanging = !this.passChanging;
+      this.formInvalid = !this.formInvalid;
+      this.userData.password = '';
+      $('#saveButton').prop('disabled', true);
+    }
 
     $('#oldPw').on('keyup', function () {
-      if ($('#oldPw').val() === oldPw) {
-        console.log('old pw matches');
-        oldPWMatch = true;
-      }
+      /* waiting for authService
+      if(authService.oldCredCheck(this.userData.password)) {
+      oldPWMatch = true;
+      }*/
     });
 
-    $('#confirmPass').on('keyup', function () {
+
+    $('#confirmPass').on('keyup', function () { // should be moved to directive
       if ($('#confirmPass').val() === $('#newPass').val()) {
         console.log('new pw matches');
         newPWMatch = true;
       }
 
       if (oldPWMatch && newPWMatch) {
-        $('#saveButton').prop('disabled', false);
+        this.formValid = true;
       }
     });
 
