@@ -14,7 +14,7 @@
                   <img src="{{item.icon}}" class="sortable-list-icon">
                 </md-icon>
                 <p>{{item.name}}</p>
-                <md-icon class=".ng-hide" ng-show="configureView.showDelete">clear</md-icon>
+                <md-icon ng-show="configureView.showDelete" ng-click="configureView.deleteItem($index)" class="pointer">clear</md-icon>
                 <md-divider ng-if="!$last"></md-divider>
               </md-list-item>
             </md-list>

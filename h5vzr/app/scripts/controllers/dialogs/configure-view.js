@@ -48,7 +48,11 @@ angular.module('loggrioApp')
         self.sensorsAvailable = viewConfig.sensorsAvailable;
         self.sensorsInUse = viewConfig.sensorsInUse;
       }
-      console.log(self.sensorsInUse);
+    };
+
+    this.deleteItem = function(index){
+      self.sensorsAvailable.push(self.sensorsInUse[index]);
+      self.sensorsInUse.splice(index, 1);
     };
 
     this.inUseConfig = {
