@@ -6,7 +6,14 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // for parsing application/json
 
 app.post('/', function (req, res) {
+  var fs = require('fs');
+  var stream = fs.createWriteStream("config.loggr");
   console.log(req.body);
+
+  stream.once('open', function(fd) {
+  stream.write(JSON.stringify(req.body));
+  stream.end();
+});
   res.json(req.body);
 });
 
