@@ -27,4 +27,4 @@ def init_config():
 
 if __name__ == "__main__":
     init_config()
-    server.run(debug=True)
+    server.run(host='0.0.0.0')
