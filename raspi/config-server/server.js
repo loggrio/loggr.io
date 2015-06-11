@@ -7,13 +7,24 @@ app.use(bodyParser.json()); // for parsing application/json
 
 app.post('/', function (req, res) {
   var fs = require('fs');
-  var stream = fs.createWriteStream("config.loggr");
-  console.log(req.body);
+  var regex = /"token":"\w{5}"/g;
+  var homevzr = process.env.HOME;
+  var stream = fs.createWriteStream(process.env.HOME + '/.config.loggrrc');
+  var tokenString = JSON.stringify(req.body);
 
-  stream.once('open', function(fd) {
-  stream.write(JSON.stringify(req.body));
-  stream.end();
-});
+  console.log(req.body);
+  console.log(JSON.stringify(req.body));
+
+if (tokenString.match(regex)) {
+    console.log('Token matches');
+    stream.once('open', function(fd) {
+    stream.write(JSON.stringify(req.body));
+    stream.end();
+  });
+} else {
+    console.log('It is not a token');
+}
+
   res.json(req.body);
 });
 
