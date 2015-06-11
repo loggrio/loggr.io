@@ -7,7 +7,7 @@
  * # passwordsMatch
  */
 angular.module('loggrioApp')
-  .directive('passwordsMatch', function () {
+  .directive('matchTo', function () {
     return {
       require: 'ngModel',
       scope: {
@@ -15,7 +15,7 @@ angular.module('loggrioApp')
       },
       link: function(scope, element, attributes, ngModel) {
 
-        ngModel.$validators.passwordsMatch = function(modelValue) {
+        ngModel.$validators.matchTo = function(modelValue) {
           return modelValue === scope.otherModelValue;
         };
 
