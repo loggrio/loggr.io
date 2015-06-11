@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 import sys
 
-from raspi_loggr.loggr import main
-from raspi_loggr.emu import main as emu_main
-
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--emu":
+        from raspi_loggr.emu import main as emu_main
         emu_main()
     else:
+        from raspi_loggr.loggr import main
         main()
