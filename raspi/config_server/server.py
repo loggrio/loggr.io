@@ -11,6 +11,7 @@ CONFIG_FILE = HOME_DIR + '/.loggrrc'
 @server.route('/', methods=['POST'])
 def save_token():
     config.read(CONFIG_FILE)
+    # TODO: regex token
     config.set('AUTH', 'token', request.json['token'])
     with open(CONFIG_FILE, 'w') as configfile:
         config.write(configfile)
