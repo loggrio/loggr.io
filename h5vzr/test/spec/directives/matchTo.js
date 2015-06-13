@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: passwordsMatch', function () {
+describe('Directive: matchTo', function () {
 
   // load the directive's module
   beforeEach(module('loggrioApp'));
@@ -13,7 +13,7 @@ describe('Directive: passwordsMatch', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<passwords-match></passwords-match>');
+    element = angular.element('<match-To></match-To>');
     element = $compile(element)(scope);
     expect(element.text()).toBe('this is the passwordsMatch directive');
   }));

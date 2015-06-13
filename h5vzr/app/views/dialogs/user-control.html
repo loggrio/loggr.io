@@ -1,74 +1,66 @@
 <md-dialog aria-label="UserControl" flex="50">
-  <form name="userForm" layout="column" layout-align="center">
-    <div class="userCtrlForm">
-      <md-dialog-content>
-          <h1>Benutzerverwaltung</h1>
-        <div>
-          <md-input-container class="md-icon-float">
-            <label>Name</label>
-            <md-icon>face</md-icon>
-            <input name="name" required md-maxlength="120" ng-model="userControl.userData.name">
-            <div ng-messages="userForm.name.$error">
-              <div ng-message="required">Pflichtfeld.</div>
-              <div ng-message="md-maxlength">Der Name darf nicht länger als 120 Zeichen sein.</div>
-            </div>
-          </md-input-container>
-          <md-input-container class="md-icon-float">
-            <label>Email</label>
-            <md-icon>email</md-icon>
-            <input name="mail" required md-maxlength="120" ng-model="userControl.userData.mail"
-                   type="email" required maxlength="120" >
-            <div ng-messages="userForm.mail.$error">
-              <div ng-message="required">Pflichtfeld.</div>
-              <div ng-message="md-maxlength">Die E-Mail Adresse darf nicht länger als 120 Zeichen sein.</div>
-            </div>
-          </md-input-container>
-          <md-input-container class="md-icon-float">
-            <label>Standord</label>
-            <md-icon>pin_drop</md-icon>
-            <input ng-model="userControl.userData.location" required maxlength="120">
-          </md-input-container>
-          <md-input-container class="md-icon-float">
-            <md-icon ng-hide="userControl.passChanging">lock</md-icon>
-            <md-icon ng-show="userControl.passChanging">lock_open</md-icon>
-            <label ng-hide="userControl.passChanging">Passwort</label>
-            <label ng-show="userControl.passChanging">Altes Passwort</label>
-            <input id="oldPw" type="password" required
-                   name="userData.oldPW" ng-click="userControl.changingPassword(userData.$dirty)"
-                   ng-change="userControl.changingPassword()" ng-model="userControl.userData.password">
-            <div ng-messages="userForm.oldPW.$error">
-              <div ng-message="required">Bitte geben Sie das alte Passwort ein.</div>
-            </div>
-          </md-input-container>
-          <md-input-container class="userCtrlInput" ng-show="userControl.passChanging">
-            <label>Neues Passwort</label>
-            <md-icon>lock_outline</md-icon>
-            <input id="newPass" name="newPass" type="password" required maxlength="80"
-                  ng-model="newPass">
-            <div ng-messages="userForm.newPass.$error">
-              <div ng-message="required">Pflichtfeld.</div>
-              <div ng-message="md-maxlength">Das Passwort darf nicht länger als 80 Zeichen sein.</div>
-            </div>
-          </md-input-container>
-          <md-input-container class="userCtrlInput" ng-show="userControl.passChanging">
-            <label>Neues Passwort wiederholen</label>
-            <md-icon>lock</md-icon>
-            <input id="confirmPass" name="passConfirm" required maxlength="80"
-            match-to="userForm.newPass" type="password" ng-model="confirmPass">
-            <div ng-messages="userForm.passConfirm.$error">
-              <div ng-message="required">Pflichtfeld.</div>
-              <div ng-message="md-maxlength">Das Passwort darf nicht länger als 80 Zeichen sein.</div>
-              <div ng-message="match-to">Die Passwörter stimmen nicht überein.</div>
-            </div>
-          </md-input-container>
+  <form name="userForm" class="userCtrlForm" layout="column" layout-align="center" ng-submit="userControl.submit()">
+    <md-dialog-content>
+      <h2>Benutzerverwaltung</h2>
+      <md-input-container class="md-icon-float">
+        <label>Name</label>
+        <md-icon>face</md-icon>
+        <input name="name" required md-maxlength="120" ng-model="userControl.userData.name">
+        <div ng-messages="userForm.name.$error">
+          <div ng-message="required">Pflichtfeld.</div>
+          <div ng-message="md-maxlength">Der Name darf nicht länger als 120 Zeichen sein.</div>
         </div>
-      </md-dialog-content>
-    </div>
+      </md-input-container>
+      <md-input-container class="md-icon-float">
+        <label>Email</label>
+        <md-icon>email</md-icon>
+        <input name="mail" required md-maxlength="120" ng-model="userControl.userData.mail" type="email">
+        <div ng-messages="userForm.mail.$error">
+          <div ng-message="required">Pflichtfeld.</div>
+          <div ng-message="md-maxlength">Die E-Mail Adresse darf nicht länger als 120 Zeichen sein.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-icon-float">
+        <label ng-hide="userControl.passChanging">Passwort</label>
+        <label ng-show="userControl.passChanging">Altes Passwort</label>
+        <md-icon ng-hide="userControl.passChanging">lock</md-icon>
+        <md-icon ng-show="userControl.passChanging">lock_open</md-icon>
+        <input ng-hide="userControl.passChanging" ng-click="userControl.startChangingPassword()" type="password" ng-model="userControl.userData.password">
+        <input ng-show="userControl.passChanging" name="currentPass" required ng-click="userControl.startChangingPassword()"
+              type="password" ng-change="userControl.checkOldCred()" ng-model="asdf" match-to="userControl.userData.password">
+        <div ng-messages="userForm.currentPass.$error">
+          <div ng-message="required">Bitte geben Sie das alte Passwort ein.</div>
+          <div ng-message="matchTo">Stimmt nicht mit dem alten Passwort überein.</div>
+        </div>
+      </md-input-container>
+      <div ng-show="userControl.passChanging">
+        <md-input-container>
+          <label>Neues Passwort</label>
+          <md-icon>lock_outline</md-icon>
+          <input name="newPass" type="password" required md-maxlength="80" ng-model="userControl.newPass">
+          <div ng-messages="userForm.newPass.$error">
+            <div ng-message="required">Bitte geben Sie das neue Passwort ein.</div>
+            <div ng-message="md-maxlength">Das Passwort darf nicht länger als 80 Zeichen sein.</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label>Neues Passwort wiederholen</label>
+          <md-icon>lock</md-icon>
+          <input name="repeatPass" type="password" required md-maxlength="80" ng-model="userControl.confirmPass"
+                 match-to="userControl.newPass" ng-change="userControl.checkNewCred()">
+          <div ng-messages="userForm.repeatPass.$error">
+            <div ng-message="required">Bitte wiederholen Sie das neue Passwort.</div>
+            <div ng-message="md-maxlength">Das Passwort darf nicht länger als 80 Zeichen sein.</div>
+            <div ng-message="matchTo">Die Passwörter stimmen nicht überein.</div>
+          </div>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
     <div flex></div>
     <div class="md-actions" layout="row">
-      <md-button ng-disabled="userControl.formInvalid" ng-click="userControl.submit()" class="md-primary">
+      <input type="submit" ng-disabled="userControl.formInvalid" class="md-primary">
         Speichern
-      </md-button>
+      </input>
       <md-button ng-click="userControl.cancel()" class="md-primary">
         Abbrechen
       </md-button>

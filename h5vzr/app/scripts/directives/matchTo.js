@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc directive
- * @name loggrioApp.directive:passwordsMatch
+ * @name loggrioApp.directive:matchTo
  * @description
- * # passwordsMatch
+ * # matchTo
  */
 angular.module('loggrioApp')
   .directive('matchTo', function () {
