@@ -8,7 +8,9 @@
     "angular-resource": "^1.4.0",
     "angular-material": "^0.10.0",
     "highcharts-ng": "^0.0.8",
-    "highcharts": "^4.1.5"
+    "highcharts": "^4.1.5",
+    "Sortable": "http://rubaxa.github.io/Sortable/Sortable.js",
+    "ng-sortable": "http://rubaxa.github.io/Sortable/ng-sortable.js"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

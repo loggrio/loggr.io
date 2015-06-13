@@ -48,3 +48,16 @@
   -webkit-transform: perspective(800px) rotateY(-180deg);
   transform: perspective(800px) rotateY(-180deg);
 }
+
+.ghost {
+  opacity: 0.2;
+}
+
+.sortable-list-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.pointer {
+  cursor: pointer;
+}
