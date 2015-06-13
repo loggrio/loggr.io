@@ -10,6 +10,11 @@
 angular.module('loggrioApp')
   .controller('LoginCtrl', function ($location, Customer) {
 
+    if (Customer.isAuthenticated()) {
+      $location.path('/');
+      return;
+    }
+
     this.credentials = {};
 
     var self = this;

@@ -8,7 +8,12 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('MainCtrl', function ($interval, Metering, notify, util, ChartConfig) {
+  .controller('MainCtrl', function ($location, $interval, Customer, Metering, notify, util, ChartConfig) {
+
+    if (!Customer.isAuthenticated()) {
+      $location.path('/login');
+      return;
+    }
 
     this.chartConfig = new ChartConfig('Temperatur Wohnzimmer', 'Temperatur (°C)', '°C', 'Temperatur');
 
