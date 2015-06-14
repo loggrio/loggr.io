@@ -46,9 +46,27 @@
         </md-menu>
         <!-- User Menu: End -->
 
-        <md-button class="md-icon-button toolbar-item" aria-label="More">
-          <md-icon>more_vert</md-icon>
-        </md-button>
+        <!-- More Menu -->
+        <md-menu>
+          <md-button class="md-icon-button toolbar-item" aria-label="More" ng-click="$mdOpenMenu()">
+            <md-icon>more_vert</md-icon>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button ng-click="toolbar.aboutDialog($event)">
+                <md-icon md-menu-align-target>info_outline</md-icon>
+                Über loggr.io
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="toolbar.imprintDialog($event)">
+                <md-icon md-menu-align-target>format_align_left</md-icon>
+                Impressum
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+        <!-- More Menu: End -->
         <div flex="15"></div>
       </div>
     </md-toolbar>
