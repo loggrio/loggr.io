@@ -8,28 +8,25 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('UserControlCtrl', function ($mdDialog) {
+  .controller('UserControlCtrl', function ($http, $mdDialog, Customer) {
 
+    this.customer = {};
+    this.customer = Customer.getCurrent();
 
-    this.userData = {
-      name: 'Hans Dampf',
-      mail: 'Hans@dam.pf',
-      location: 'Daheim',
-      password: 'geheim'
-    };
-
+    console.log(Customer.prototype$__get__accessTokens());
     this.passChanging = false;
     this.formInvalid = false;
+    this.oldPass = 'passwort';
     this.newPass = '';
     this.confirmPass = '';
-    this.oldPWMatch = true;
+    this.oldPWMatch = true; // set to false when authService is ready
     this.newPWMatch = false;
 
     this.startChangingPassword = function () {
       if (!this.passChanging) {
         this.passChanging = !this.passChanging;
         this.formInvalid = !this.formInvalid;
-        this.userData.password = '';
+        this.oldPass = '';
         this.formInvalid = true;
       }
     };
@@ -61,17 +58,15 @@ angular.module('loggrioApp')
     };
 
     this.submit = function () {
-      var url = 'http://localhost:3000/api/Customers/';
-//TODO: get customer ID, authservie...
-      var payload = {
-        "username": this.userData.name,
-        "password": "object", //passwort
-        "email": this.userData.mail
-      };
-      console.log('new userdata saved!');
-      console.log(this.userData);
-
-      $mdDialog.hide(payload);
+      this.customer.$save();
+      $mdDialog.hide();
     };
 
+
+
+    // Auth vars
+    // console.log(Customer.isAuthenticated());
+    // console.log(Customer.getCurrent().username);
+    // console.log(Customer.getCachedCurrent()); // will be null, when  getCurrent() not already called
+    // console.log(Customer.getCurrentId());
   });
