@@ -18,3 +18,21 @@
     </md-card>
   </flip-panel>
 </flip>
+
+<div ng-controller="ButtonMenuCtrl as menu" class="button-menu">
+  <md-fab-speed-dial md-direction="up" class="md-scale">
+    <md-fab-trigger>
+      <md-button aria-label="menu" class="md-fab">
+        <md-icon>menu</md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-fab-actions>
+      <md-button aria-label="Ansicht konfigurieren" class="md-fab" ng-click="menu.showDialog($event)">
+        <md-icon>edit</md-icon>
+      </md-button>
+      <md-button aria-label="facebook" class="md-fab">
+        <md-icon>face</md-icon>
+      </md-button>
+    </md-fab-actions>
+  </md-fab-speed-dial>
+</div>

@@ -8,7 +8,13 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('ToolbarCtrl', function ($mdDialog) {
+  .controller('ToolbarCtrl', function ($location, $mdDialog, Customer) {
+
+    this.logout = function () {
+      Customer.logout(function () {
+        $location.path('/login');
+      });
+    };
 
     this.aboutDialog = function (ev) {
       $mdDialog.show({
