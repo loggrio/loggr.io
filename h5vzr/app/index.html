@@ -23,9 +23,29 @@
         <img src="images/logo.png" alt="Logo" class="toolbar-logo toolbar-item">
         <div flex></div>
         <p class="md-subhead toolbar-item">Max Mustermann</p>
-        <md-button class="md-icon-button toolbar-item" aria-label="Account">
-          <md-icon>account_circle</md-icon>
-        </md-button>
+
+        <!-- User Menu -->
+        <md-menu>
+          <md-button class="md-icon-button toolbar-item" aria-label="Account" ng-click="$mdOpenMenu()">
+            <md-icon md-menu-origin>account_circle</md-icon>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button ng-click="toolbar.userControlDialog($event)">
+                <md-icon md-menu-align-target>person</md-icon>
+                Benutzerdaten
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="toolbar.logout()">
+                <md-icon md-menu-align-target>power_settings_new</md-icon>
+                Ausloggen
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+        <!-- User Menu: End -->
+
         <md-button class="md-icon-button toolbar-item" aria-label="More">
           <md-icon>more_vert</md-icon>
         </md-button>
@@ -36,24 +56,6 @@
     <md-content flex layout-padding layout="row" layout-align="center start">
       <div ng-view flex="70"></div>
     </md-content>
-
-    <div ng-controller="ButtonMenuCtrl as menu" class="button-menu">
-      <md-fab-speed-dial md-direction="up" class="md-scale">
-        <md-fab-trigger>
-          <md-button aria-label="menu" class="md-fab">
-            <md-icon>menu</md-icon>
-          </md-button>
-        </md-fab-trigger>
-        <md-fab-actions>
-          <md-button aria-label="Ansicht konfigurieren" class="md-fab" ng-click="menu.showDialog($event)">
-            <md-icon>edit</md-icon>
-          </md-button>
-          <md-button aria-label="facebook" class="md-fab">
-            <md-icon>face</md-icon>
-          </md-button>
-        </md-fab-actions>
-      </md-fab-speed-dial>
-    </div>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -89,6 +91,7 @@
     <script src="scripts/controllers/dialogs/token.js"></script>
     <script src="scripts/controllers/dialogs/user-control.js"></script>
     <script src="scripts/services/chartconfig.js"></script>
+    <script src="scripts/services/auth.js"></script>
     <!-- endbuild -->
   </body>
 </html>
