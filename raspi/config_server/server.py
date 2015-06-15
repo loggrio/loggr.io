@@ -9,10 +9,12 @@ CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
 
 @server.route('/', methods=['POST'])
-def save_token():
+def save_token_and_userid():
     config.read(CONFIG_FILE)
     # TODO: regex token
+    # TODO: regex userid: 24 char
     config.set('AUTH', 'token', request.json['token'])
+    config.set('AUTH', 'userid', request.json['userid'])
     with open(CONFIG_FILE, 'w') as configfile:
         config.write(configfile)
     return jsonify(status='ok')
@@ -23,6 +25,7 @@ def init_config():
         config.add_section('AUTH')
         config.add_section('SENSORS')
         config.set('AUTH', 'token', '')
+        config.set('AUTH', 'userid', '')
         with open(CONFIG_FILE, 'w') as configfile:
             config.write(configfile)
 
