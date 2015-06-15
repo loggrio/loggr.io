@@ -13,7 +13,6 @@ angular.module('loggrioApp')
     this.customer = {};
     this.customer = Customer.getCurrent();
 
-    console.log(Customer.prototype$__get__accessTokens());
     this.passChanging = false;
     this.formInvalid = false;
     this.oldPass = 'passwort';
@@ -58,6 +57,7 @@ angular.module('loggrioApp')
     };
 
     this.submit = function () {
+      console.log('there->');
       this.customer.$save();
       $mdDialog.hide();
     };
