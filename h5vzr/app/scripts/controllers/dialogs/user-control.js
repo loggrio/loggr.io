@@ -31,6 +31,7 @@ angular.module('loggrioApp')
     };
 
     this.checkOldCred = function () {
+      this.startChangingPassword();
       /* waiting for authService
        if(authService.oldCredCheck(this.userData.password)) {
        this.oldPWMatch = true;
@@ -46,6 +47,8 @@ angular.module('loggrioApp')
       }
 
       if (this.oldPWMatch && this.newPWMatch) {
+        var buffer = this.customer;
+        this.customer = new Customer({id: buffer.id, username: buffer.username, email: buffer.email, password: this.confirmPass});
         this.formInvalid = false;
       } else {
         this.formInvalid = true;
@@ -53,20 +56,13 @@ angular.module('loggrioApp')
     };
 
     this.cancel = function () {
+      this.customer = Customer.getCurrent();
       $mdDialog.cancel();
     };
 
     this.submit = function () {
-      console.log('there->');
-      this.customer.$save();
+      Customer.prototype$updateAttributes({ id: this.customer.id }, this.customer);
       $mdDialog.hide();
     };
 
-
-
-    // Auth vars
-    // console.log(Customer.isAuthenticated());
-    // console.log(Customer.getCurrent().username);
-    // console.log(Customer.getCachedCurrent()); // will be null, when  getCurrent() not already called
-    // console.log(Customer.getCurrentId());
   });
