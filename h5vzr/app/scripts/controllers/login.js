@@ -15,16 +15,21 @@ angular.module('loggrioApp')
       return;
     }
 
-    this.credentials = {};
+    this.loginCredentials = {};
+    this.registerCredentials = {};
 
     var self = this;
 
     this.login = function () {
-      Customer.login(self.credentials, function() {
+      Customer.login(self.loginCredentials, function() {
         var next = $location.nextAfterLogin || '/';
         $location.nextAfterLogin = null;
         $location.path(next);
       });
+    };
+
+    this.register = function () {
+      Customer.create(self.registerCredentials);
     };
 
   });
