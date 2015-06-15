@@ -22,11 +22,12 @@ sh ~/.vim_runtime/install_basic_vimrc.sh
 
 echo "Set up directory structure..."
 cd
-mkdir -p Coding/loggr.io/raspi && mkdir $_/raspi_loggr $_/sensors
+mkdir -p Coding/loggr.io/raspi && mkdir $_/raspi_loggr $_/sensors $_/config_server
 
 echo "Install libraries..."
 sudo pip install --upgrade enum34
 sudo pip install --upgrade requests
+sudo pip install --upgrade flask
 
 echo "Install forever.js via npm..."
 sudo npm install -g forever

@@ -62,6 +62,11 @@ def treat_sensor_broken_errors(sensortype):
     set_status_led(LedStatusTypes.sensor_broken.name)
 
 
+def treat_config_errors():
+    logging.error('No config file found! Please start config server!')
+    print 'No config file found! Please start config server!'
+
+
 def set_status_led(status):
     command = ['sensors/rgb.out', str(status)]
     try:
