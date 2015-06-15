@@ -41,6 +41,7 @@ class Sensor:
         self.func = func
 
     def __get_id(self, sensor_name):
+        # TODO: File available?
         config.read(CONFIG_FILE)
         if config.has_option('AUTH', 'token'):
             token = config.get('AUTH', 'token')
@@ -50,9 +51,10 @@ class Sensor:
         headers = {'Content-Type': 'application/json', 'Authorization': token}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][sensor_name]={sensor_name}
-            # parameter = {filter: {where: {sensor_name: self.sensor_name}}}
-            r = requests.get(API + userid + SENSORS + '?filter=[where][sensor_name]={sensor_name}',
+            # params = {filter: {where: {sensor_name: self.sensor_name}}}
+            r = requests.get(API + str(userid) + SENSORS + '?filter=[where][sensor_name]={sensor_name}',
                              data=json.dumps(payload), headers=headers)
+            print type(r.json())
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors
             treat_requests_errors(re)
@@ -131,6 +133,7 @@ class Sensor:
                     return 'false_data'
 
     def __send(self, payload):
+        # TODO: File available?
         config.read(CONFIG_FILE)
         if config.has_option('AUTH', 'token'):
             token = config.get('AUTH', 'token')
@@ -140,7 +143,7 @@ class Sensor:
         headers = {'Content-Type': 'application/json', 'Authorization': token}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/Meterings?filter=[where][sensorId]={sensorId}
-            r = requests.post(API + userid + METERINGS, data=json.dumps(payload), headers=headers)
+            r = requests.post(API + str(userid) + METERINGS, data=json.dumps(payload), headers=headers)
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors
             treat_requests_errors(re)
