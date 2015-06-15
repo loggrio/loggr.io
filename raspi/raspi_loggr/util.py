@@ -28,8 +28,8 @@ class ValueUnits(Enum):
 
 def treat_sensor_errors(cpe):
     # log sensor errors in logfile and console
-    logging.error('called process error: ' + str(cpe.cmd[0]) + ' returned ' + str(cpe.returncode) + ': ' + cpe.output)
-    print 'called process error: ' + str(cpe.cmd[0]) + ' returned ' + str(cpe.returncode) + ': ' + cpe.output
+    logging.error('called process error: ' + str(cpe.cmd) + ' returned ' + str(cpe.returncode) + ': ' + cpe.output)
+    print 'called process error: ' + str(cpe.cmd) + ' returned ' + str(cpe.returncode) + ': ' + cpe.output
 
 
 def treat_os_errors(ose):
