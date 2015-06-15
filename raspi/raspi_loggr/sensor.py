@@ -5,6 +5,7 @@ import json
 import subprocess
 import logging
 from datetime import datetime
+from ConfigParser import ConfigParser
 from .util import treat_os_errors
 from .util import treat_led_errors
 from .util import treat_sensor_errors
@@ -12,11 +13,18 @@ from .util import treat_requests_errors
 from .util import treat_sensor_broken_errors
 from .util import SensorTypes
 
-# TODO: CONFIG FILE
-DB = 'meterings'
 PATH = 'sensors/'
 SUFFIX = '.out'
-API = 'http://0.0.0.0:3000/api'
+API = 'http://0.0.0.0:3000/api/'
+CUSTOMERS = 'Customers/'
+METERINGS = '/meterings'
+SENSORS = '/sensors'
+
+# TODO: Global!
+config = ConfigParser()
+
+HOME_DIR = path.expanduser("~")
+CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
 
 class Sensor:
@@ -25,11 +33,32 @@ class Sensor:
     first_metering = True
 
     def __init__(self, sensor_name, location, sensor_type, unit, func=None):
+        self.sensor_id = self.__get_id(sensor_name)
         self.sensor_name = sensor_name
         self.location = location
         self.sensor_type = sensor_type
         self.unit = unit
         self.func = func
+
+    def __get_id(self, sensor_name):
+        config.read(CONFIG_FILE)
+        if config.has_option('AUTH', 'token'):
+            token = config.get('AUTH', 'token')
+        if config.has_option('AUTH', 'userid'):
+            userid = config.get('AUTH', 'userid')
+
+        headers = {'Content-Type': 'application/json', 'Authorization': token}
+        try:
+            # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][sensor_name]={sensor_name}
+            # parameter = {filter: {where: {sensor_name: self.sensor_name}}}
+            r = requests.get(API + userid + SENSORS + '?filter=[where][sensor_name]={sensor_name}',
+                             data=json.dumps(payload), headers=headers)
+        except requests.exceptions.RequestException, re:
+            # catch and treat requests errors
+            treat_requests_errors(re)
+        else:
+            # logging.info('requests status code: ' + str(r.status_code))
+            return r.json()['id']
 
     def __check(self, metering):
         metering = float(metering)
@@ -102,9 +131,16 @@ class Sensor:
                     return 'false_data'
 
     def __send(self, payload):
-        headers = {'Content-Type': 'application/json'}
+        config.read(CONFIG_FILE)
+        if config.has_option('AUTH', 'token'):
+            token = config.get('AUTH', 'token')
+        if config.has_option('AUTH', 'userid'):
+            userid = config.get('AUTH', 'userid')
+
+        headers = {'Content-Type': 'application/json', 'Authorization': token}
         try:
-            r = requests.post(API + "/" + DB, data=json.dumps(payload), headers=headers)
+            # http://0.0.0.0:3000/api/Customers/{userid}/Meterings?filter=[where][sensorId]={sensorId}
+            r = requests.post(API + userid + METERINGS, data=json.dumps(payload), headers=headers)
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors
             treat_requests_errors(re)
@@ -124,12 +160,8 @@ class Sensor:
             treat_sensor_broken_errors(self.sensor_type)
             return
 
-        payload = {'sensorName': self.sensor_name,
-                   'location': self.location,
-                   'sensorType': self.sensor_type,
+        payload = {'sensorId': self.sensor_id,
                    'time': str(datetime.now()),
-                   'value': value,
-                   'unit': self.unit,
-                   'userId': '1'}
+                   'value': value}
 
         return self.__send(payload)
