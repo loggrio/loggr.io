@@ -1,5 +1,13 @@
+Login: <br>
 <form ng-submit="login.login()">
-  <input type="text" name="email" required ng-model="login.credentials.email">
-  <input type="password" name="password" ng-model="login.credentials.password">
-  <md-button type="submit">Login</md-button>
+  <input type="text" name="email" required ng-model="login.loginCredentials.email">
+  <input type="password" name="password" ng-model="login.loginCredentials.password">
+  <md-button type="submit" class="md-raised">Login</md-button>
+</form>
+
+Register: <br>
+<form ng-submit="login.register()">
+  <input type="text" required ng-model="login.registerCredentials.email">
+  <input type="password" required ng-model="login.registerCredentials.password">
+  <md-button type="submit" class="md-raised">Register</md-button>
 </form>
