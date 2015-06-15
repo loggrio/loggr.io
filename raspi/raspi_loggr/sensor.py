@@ -76,7 +76,7 @@ class Sensor:
 
     def __meter(self):
         if self.func is not None:
-            value = str(self.func())
+            value = str(self.func() / 100.00)
             logging.info('metering of ' + self.sensor_type + ' sensor: ' + value)
             print 'metering of ' + self.sensor_type + ' sensor: ' + value
             return value
