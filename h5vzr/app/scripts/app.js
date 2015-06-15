@@ -39,7 +39,7 @@ angular
       .primaryPalette('teal');
 
     // TODO: seperate cfg file
-    LoopBackResourceProvider.setUrlBase('http://localhost:3000/api/');
+    LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
 
     $httpProvider.interceptors.push(function($q, $location, LoopBackAuth) {
       return {
