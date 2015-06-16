@@ -8,17 +8,32 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('TokenCtrl', function ($mdDialog) {
+  .controller('TokenCtrl', function ($mdDialog, $http, notify) {
 
-    // TODO: bind to form
-    var payload = {};
+    this.raspiAdress='';
 
     this.cancel = function () {
       $mdDialog.cancel();
     };
 
-    this.submit = function () {
-      $mdDialog.hide(payload);
+    this.startPairing = function () {
+
+      var requestURL = 'http://' + this.raspiAdress + ':5000';
+
+      var payload = {
+        "token": localStorage.getItem('$LoopBack$accessTokenId'),
+        "userid": localStorage.getItem('$LoopBack$currentUserId')
+      };
+
+      $http.post(requestURL, payload).success(function (data) {
+        console.log(data.status);
+        if (data.status === 'ok') {
+          notify.toastPaired();
+        } else {
+          notify.toastPairingfailed();
+        }
+      });
+      $mdDialog.hide();
     };
 
   });

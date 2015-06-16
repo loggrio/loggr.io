@@ -34,15 +34,6 @@ angular.module('loggrioApp')
       });
     };
 
-    this.tokenDialog = function (ev) {
-      $mdDialog.show({
-        controller: 'TokenCtrl',
-        controllerAs: 'token',
-        templateUrl: 'views/dialogs/token.html',
-        targetEvent: ev
-      });
-    };
-
     this.userControlDialog = function (ev) {
       $mdDialog.show({
         controller: 'UserControlCtrl',

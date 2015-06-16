@@ -16,7 +16,8 @@ angular
     'ngMaterial',
     'highcharts-ng',
     'lbServices',
-    'ng-sortable'
+    'ng-sortable',
+    'ngMessages'
   ])
   .config(function ($routeProvider, $httpProvider, $mdThemingProvider, $mdIconProvider, LoopBackResourceProvider) {
 
