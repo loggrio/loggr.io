@@ -5,6 +5,7 @@ import json
 import subprocess
 import logging
 from datetime import datetime
+from os import path
 from ConfigParser import ConfigParser
 from .util import treat_os_errors
 from .util import treat_led_errors
@@ -19,8 +20,6 @@ API = 'http://0.0.0.0:3000/api/'
 CUSTOMERS = 'Customers/'
 METERINGS = '/meterings'
 SENSORS = '/sensors'
-FILTER_SENSOR = 'filter[where][type]'
-FILTER_METERING = 'filter[where][id]'
 
 # TODO: Global!
 config = ConfigParser()
@@ -52,16 +51,15 @@ class Sensor:
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][type]={sensor_type}
-            # params = {filter: {where: {type: self.sensor_typ}}}
-            r = requests.get(API + USER_ID + SENSORS + '?' + FILTER_SENSOR + '=' + sensor_type',
-                             data=json.dumps(payload), headers=headers)
-            print type(r.json())
+            params = {'filter[where][type]': sensor_type}
+            r = requests.get(API + USER_ID + SENSORS, params=params, headers=headers)
+            print r.json()
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors
             treat_requests_errors(re)
         else:
             # logging.info('requests status code: ' + str(r.status_code))
-            return r.json()['id']
+            return r.json()
 
     def __check(self, metering):
         metering = float(metering)
@@ -137,8 +135,8 @@ class Sensor:
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/Meterings?filter[where][id]={self.sensor_id}
-            r = requests.post(API + USER_ID + METERINGS + '?' + FILTER_METERING + '=' + self.sensor_id,
-                              data=json.dumps(payload), headers=headers)
+            params = {'filter[where][id]': self.sensor_id}
+            r = requests.post(API + USER_ID + METERINGS, data=json.dumps(payload), params=params, headers=headers)
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors
             treat_requests_errors(re)

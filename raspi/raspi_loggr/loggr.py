@@ -13,11 +13,10 @@ from .util import ValueUnits
 from .util import treat_config_errors
 from .pressure import pressure
 
-temperature = Sensor('tempSensor1', 'exampleRoom', SensorTypes.temperature.name, ValueUnits.grad_celsius.name)
-brightness = Sensor('brightSensor1', 'exampleRoom', SensorTypes.brightness.name, ValueUnits.lumen.name)
-humidity = Sensor('humidSensor1', 'exampleRoom', SensorTypes.humidity.name, ValueUnits.percent.name)
-pressure = Sensor('pressureSensor1', 'exampleRoom', SensorTypes.pressure.name, ValueUnits.pascal.name,
-                  pressure.read_pressure)
+temperature = Sensor(SensorTypes.temperature.name, 'exampleRoom', ValueUnits.grad_celsius.name)
+brightness = Sensor(SensorTypes.brightness.name, 'exampleRoom', ValueUnits.lumen.name)
+humidity = Sensor(SensorTypes.humidity.name, 'exampleRoom', ValueUnits.percent.name)
+pressure = Sensor(SensorTypes.pressure.name, 'exampleRoom', ValueUnits.pascal.name, pressure.read_pressure)
 
 TIME_BETWEEN_METERINGS = 60
 
