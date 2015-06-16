@@ -21,6 +21,7 @@ module.exports = function(config) {
       // bower:js
       'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
+      'bower_components/angular-messages/angular-messages.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-animate/angular-animate.js',
@@ -32,7 +33,6 @@ module.exports = function(config) {
       'bower_components/highcharts/modules/exporting.js',
       'bower_components/Sortable/index.js',
       'bower_components/ng-sortable/index.js',
-      'bower_components/ng-messages/angular-messages.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

@@ -21,8 +21,8 @@ angular.module('loggrioApp')
       var requestURL = 'http://' + this.raspiAdress + ':5000';
 
       var payload = {
-        "token": localStorage.getItem('$LoopBack$accessTokenId'),
-        "userid": localStorage.getItem('$LoopBack$currentUserId')
+        token: localStorage.getItem('$LoopBack$accessTokenId'),
+        userid: localStorage.getItem('$LoopBack$currentUserId')
       };
 
       $http.post(requestURL, payload).success(function (data) {
