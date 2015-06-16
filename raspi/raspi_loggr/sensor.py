@@ -21,13 +21,12 @@ CUSTOMERS = 'Customers/'
 METERINGS = '/meterings'
 SENSORS = '/sensors'
 
-# TODO: Global!
+# TODO: Global?
 config = ConfigParser()
 
 HOME_DIR = path.expanduser("~")
 CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
-# TODO: File available?
 config.read(CONFIG_FILE)
 if config.has_option('AUTH', 'token'):
     TOKEN = config.get('AUTH', 'token')
@@ -62,7 +61,7 @@ class Sensor:
             # catch and treat requests errors
             treat_requests_errors(re)
         else:
-            # logging.info('requests status code: ' + str(r.status_code))
+            logging.info('requests status code: ' + str(r.status_code))
             return r.json()[0]['id']
 
     def __check(self, metering):
@@ -140,7 +139,8 @@ class Sensor:
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/Meterings?filter[where][id]={self.sensor_id}
             params = {'filter[where][id]': self.sensor_id}
-            r = requests.post(API + USER_ID + METERINGS, data=json.dumps(payload), params=params, headers=headers)
+            r = requests.post(API + CUSTOMERS + USER_ID + METERINGS, data=json.dumps(payload), params=params,
+                              headers=headers)
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors
             treat_requests_errors(re)
