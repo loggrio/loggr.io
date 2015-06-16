@@ -8,7 +8,7 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('UserControlCtrl', function ($http, $mdDialog, Customer) {
+  .controller('UserControlCtrl', function ($mdDialog, Customer) {
 
     this.customer = {};
     this.customer = Customer.getCurrent();
