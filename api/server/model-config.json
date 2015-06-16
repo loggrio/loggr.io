@@ -33,10 +33,10 @@
   },
   "Sensor": {
     "dataSource": "mongodb",
-    "public": true
+    "public": false
   },
   "Metering": {
     "dataSource": "mongodb",
-    "public": true
+    "public": false
   }
 }
