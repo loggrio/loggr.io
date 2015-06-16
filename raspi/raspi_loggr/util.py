@@ -23,7 +23,7 @@ class ValueUnits(Enum):
     grad_fahrenheit = 2
     percent = 3
     lumen = 4
-    pascal = 5
+    hectopascal = 5
 
 
 def treat_sensor_errors(cpe):
