@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify
 from os import path
 import re
 from ConfigParser import ConfigParser
