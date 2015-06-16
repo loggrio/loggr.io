@@ -18,5 +18,6 @@ angular.module('loggrioApp')
     this.chartConfig = [];
     this.chartConfig = chartHandler.chartConfig;
     this.flipChart = chartHandler.flipChart;
+
     chartHandler.goLive();
   });
