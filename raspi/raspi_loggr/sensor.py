@@ -41,25 +41,29 @@ class Sensor:
     first_metering = True
 
     def __init__(self, sensor_type, location, unit, func=None):
-        self.sensor_id = self.__get_id(sensor_type)
+        self.sensor_id = self.__get_id(sensor_type, location, unit)
         self.location = location
         self.sensor_type = sensor_type
         self.unit = unit
         self.func = func
 
-    def __get_id(self, sensor_type):
+    def __get_id(self, sensor_type, location, unit):
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][type]={sensor_type}
             params = {'filter[where][type]': sensor_type}
-            r = requests.get(API + USER_ID + SENSORS, params=params, headers=headers)
-            print r.json()
+            r = requests.get(API + CUSTOMERS + USER_ID + SENSORS, params=params, headers=headers)
+
+            if not len(r.json()):
+                payload = {'type': sensor_type, 'location': location, 'unit': unit}
+                r = requests.post(API + CUSTOMERS + USER_ID + SENSORS, data=json.dumps(payload), headers=headers)
+                return r.json()['id']
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors
             treat_requests_errors(re)
         else:
             # logging.info('requests status code: ' + str(r.status_code))
-            return r.json()
+            return r.json()[0]['id']
 
     def __check(self, metering):
         metering = float(metering)
