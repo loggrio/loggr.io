@@ -64,4 +64,14 @@ angular.module('loggrioApp')
       }, 30000);
     };
 
+    this.toastPaired = function () {
+      $mdToast.show({
+        template: '<md-toast>' +
+                  ' <md-icon style="color: white">settings_ethernet</md-icon>' +
+                  ' <span flex>  Pairing erfolgreich</span>' +
+                  '</md-toast>',
+        position: 'bottom left',
+        hideDelay: 0,
+      });
+    };
   });
