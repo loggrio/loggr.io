@@ -8,7 +8,44 @@
  * Service in the loggrioApp.
  */
 angular.module('loggrioApp')
-  .value('ChartConfig', function (chartTitleText, yAxisText, tooltipSuffixText, seriesName) {
+  .value('ChartConfig', function (sensorType, location) {
+    var chartTitleText = '';
+    var yAxisText = '';
+    var tooltipSuffixText = '';
+    var seriesName = '';
+
+    switch (sensorType) {
+      case 'temperature':
+        chartTitleText = 'Temperatur ' + location;
+        yAxisText = 'Temperatur (°C)';
+        tooltipSuffixText = '°C';
+        seriesName = 'Temperatur';
+        break;
+      case 'pressure':
+        chartTitleText = 'Luftdruck ' + location;
+        yAxisText = 'Luftdruck (hPa)';
+        tooltipSuffixText = 'hPa';
+        seriesName = 'Luftdruck';
+        break;
+
+      case 'brightness':
+        chartTitleText = 'Helligkeit ' + location;
+        yAxisText = 'Helligkeit (lx)';
+        tooltipSuffixText = 'lx';
+        seriesName = 'Helligkeit';
+        break;
+
+      case 'humidity':
+        chartTitleText = 'Luftfeuchtigkeit ' + location;
+        yAxisText = 'Relative Luftfeuchtigkeit (%)';
+        tooltipSuffixText = '%';
+        seriesName = 'Luftfeuchtigkeit';
+        break;
+      default:
+
+    }
+
+
     return {
       options: {
         lang: {

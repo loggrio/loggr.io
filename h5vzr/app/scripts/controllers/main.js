@@ -15,7 +15,7 @@ angular.module('loggrioApp')
       return;
     }
 
-    this.chartConfig = new ChartConfig('Temperatur Wohnzimmer', 'Temperatur (°C)', '°C', 'Temperatur');
+    this.chartConfig = new ChartConfig('temperature', 'Wohnzimmer');
 
     this.flipChart = {};
 
