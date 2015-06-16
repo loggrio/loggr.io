@@ -19,6 +19,8 @@ API = 'http://0.0.0.0:3000/api/'
 CUSTOMERS = 'Customers/'
 METERINGS = '/meterings'
 SENSORS = '/sensors'
+FILTER_SENSOR = 'filter[where][type]'
+FILTER_METERING = 'filter[where][id]'
 
 # TODO: Global!
 config = ConfigParser()
@@ -26,33 +28,32 @@ config = ConfigParser()
 HOME_DIR = path.expanduser("~")
 CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
+# TODO: File available?
+config.read(CONFIG_FILE)
+if config.has_option('AUTH', 'token'):
+    TOKEN = config.get('AUTH', 'token')
+if config.has_option('AUTH', 'userid'):
+    USER_ID = config.get('AUTH', 'userid')
+
 
 class Sensor:
     """docstring for Sensor"""
     last_metering = 0.0
     first_metering = True
 
-    def __init__(self, sensor_name, location, sensor_type, unit, func=None):
-        self.sensor_id = self.__get_id(sensor_name)
-        self.sensor_name = sensor_name
+    def __init__(self, sensor_type, location, unit, func=None):
+        self.sensor_id = self.__get_id(sensor_type)
         self.location = location
         self.sensor_type = sensor_type
         self.unit = unit
         self.func = func
 
-    def __get_id(self, sensor_name):
-        # TODO: File available?
-        config.read(CONFIG_FILE)
-        if config.has_option('AUTH', 'token'):
-            token = config.get('AUTH', 'token')
-        if config.has_option('AUTH', 'userid'):
-            userid = config.get('AUTH', 'userid')
-
-        headers = {'Content-Type': 'application/json', 'Authorization': token}
+    def __get_id(self, sensor_type):
+        headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
         try:
-            # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][sensor_name]={sensor_name}
-            # params = {filter: {where: {sensor_name: self.sensor_name}}}
-            r = requests.get(API + str(userid) + SENSORS + '?filter=[where][sensor_name]={sensor_name}',
+            # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][type]={sensor_type}
+            # params = {filter: {where: {type: self.sensor_typ}}}
+            r = requests.get(API + USER_ID + SENSORS + '?' + FILTER_SENSOR + '=' + sensor_type',
                              data=json.dumps(payload), headers=headers)
             print type(r.json())
         except requests.exceptions.RequestException, re:
@@ -133,17 +134,11 @@ class Sensor:
                     return 'false_data'
 
     def __send(self, payload):
-        # TODO: File available?
-        config.read(CONFIG_FILE)
-        if config.has_option('AUTH', 'token'):
-            token = config.get('AUTH', 'token')
-        if config.has_option('AUTH', 'userid'):
-            userid = config.get('AUTH', 'userid')
-
-        headers = {'Content-Type': 'application/json', 'Authorization': token}
+        headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
         try:
-            # http://0.0.0.0:3000/api/Customers/{userid}/Meterings?filter=[where][sensorId]={sensorId}
-            r = requests.post(API + str(userid) + METERINGS, data=json.dumps(payload), headers=headers)
+            # http://0.0.0.0:3000/api/Customers/{userid}/Meterings?filter[where][id]={self.sensor_id}
+            r = requests.post(API + USER_ID + METERINGS + '?' + FILTER_METERING + '=' + self.sensor_id,
+                              data=json.dumps(payload), headers=headers)
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors
             treat_requests_errors(re)
