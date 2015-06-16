@@ -21,16 +21,19 @@ angular.module('loggrioApp')
       var requestURL = 'http://' + this.raspiAdress + ':5000';
 
       var payload = {
-        token: localStorage.getItem('$LoopBack$accessTokenId'),
-        userid: localStorage.getItem('$LoopBack$currentUserId')
+        "token": localStorage.getItem('$LoopBack$accessTokenId'),
+        "userid": localStorage.getItem('$LoopBack$currentUserId')
       };
 
-      console.log(payload);
-      $http.post(requestURL, payload);
+      $http.post(requestURL, payload).success(function (data) {
+        console.log(data.status);
+        if (data.status === 'ok') {
+          notify.toastPaired();
+        } else {
+          notify.toastPairingfailed();
+        }
+      });
       $mdDialog.hide();
-      // TODO show response toasts
-      // notify.toastPaired();
-
     };
 
   });
