@@ -8,31 +8,37 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('TokenCtrl', function ($mdDialog, $http, notify) {
+  .controller('TokenCtrl', function ($mdDialog, $http, notify, Customer) {
 
     this.raspiAdress='';
+
+    var self = this;
 
     this.cancel = function () {
       $mdDialog.cancel();
     };
 
     this.startPairing = function () {
+      Customer.accessTokens.create(
+        {id: Customer.getCurrentId()},
+        {ttl: 120960}
+      ).$promise.then(function (data) {
 
-      var requestURL = 'http://' + this.raspiAdress + ':5000';
+        var requestURL = 'http://' + self.raspiAdress + ':5000';
+        var payload = {
+          token: data.id,
+          userid: data.userId
+        };
 
-      var payload = {
-        token: localStorage.getItem('$LoopBack$accessTokenId'),
-        userid: localStorage.getItem('$LoopBack$currentUserId')
-      };
-
-      $http.post(requestURL, payload).success(function (data) {
-        console.log(data.status);
-        if (data.status === 'ok') {
-          notify.toastPaired();
-        } else {
-          notify.toastPairingfailed();
-        }
+        $http.post(requestURL, payload).success(function (data) {
+          if (data.status === 'ok') {
+            notify.toastPaired();
+          } else {
+            notify.toastPairingfailed();
+          }
+        });
       });
+
       $mdDialog.hide();
     };
 
