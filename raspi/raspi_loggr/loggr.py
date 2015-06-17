@@ -12,7 +12,8 @@ from .util import set_status_led
 from .util import LedStatusTypes
 from .util import SensorTypes
 from .util import ValueUnits
-from .util import treat_config_errors
+from .util import treat_missing_config_errors
+from .util import treat_pairing_errors
 
 TIME_BETWEEN_METERINGS = 60
 
@@ -24,16 +25,33 @@ def main():
     logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s', filename='loggr.log', level=logging.INFO)
     logging.info('Logging (re)started')
 
+    # Check if config file exists
     if not path.isfile(CONFIG_FILE):
-        treat_config_errors()
+        treat_missing_config_errors()
         return
-
-    sensors = {}
 
     # Create config
     config = ConfigParser()
     # Read config file
     config.read(CONFIG_FILE)
+
+    # Check if config file contains options token and userid
+    if not config.has_option('AUTH', 'token') or not config.has_option('AUTH', 'userid'):
+        treat_missing_config_errors()
+        return
+
+    # Get token and user id from config file
+    token = config.get('AUTH', 'token')
+    userid = config.get('AUTH', 'userid')
+
+    # Check if token and userid is set
+    if not len(token) or not len(userid):
+        treat_pairing_errors()
+        return
+
+    # TODO: Check token and userid by sending a get request whether user exists or smth else
+
+    sensors = {}
 
     # Get list of options from config file (section: SENSORS)
     sensor_configs = config.options('SENSORS')

@@ -62,9 +62,26 @@ def treat_sensor_broken_errors(sensortype):
     set_status_led(LedStatusTypes.sensor_broken.name)
 
 
-def treat_config_errors():
-    logging.error('No config file found! Please start config server!')
-    print 'No config file found! Please start config server!'
+def treat_missing_config_errors():
+    logging.error('No valid config file found! Please start config server!')
+    print 'No valid config file found! Please start config server!'
+
+
+def treat_pairing_errors():
+    logging.error('No Token and/or UserId set in config file. Please pair your Raspberry Pi!')
+    print 'No Token and/or UserId set in config file. Please pair your Raspberry Pi!'
+
+
+# def check_credentials(token, userid):
+#     logging.info('Start credentials check')
+#     headers = {'Content-Type': 'application/json', 'Authorization': token}
+#     try:
+#         r = requests.get(API + CUSTOMERS + str(userid) + '/exists', headers=headers)
+#     except requests.exceptions.RequestException, re:
+#         # catch and treat requests errors
+#         treat_requests_errors(re)
+#     else:
+#         return r.text
 
 
 def set_status_led(status):

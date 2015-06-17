@@ -37,6 +37,7 @@ def save_token_and_userid():
 
 
 def init_config():
+    # If config file not exists create a default one
     if not path.isfile(CONFIG_FILE):
         config.add_section('AUTH')
         config.add_section('SENSORS')
@@ -44,6 +45,23 @@ def init_config():
         config.set('AUTH', 'userid', '')
         with open(CONFIG_FILE, 'w') as configfile:
             config.write(configfile)
+
+    config.read(CONFIG_FILE)
+
+    if not config.has_section('AUTH'):
+        config.add_section('AUTH')
+
+    if not config.has_section('SENSORS'):
+        config.add_section('SENSORS')
+
+    if not config.has_option('AUTH', 'token'):
+        config.set('AUTH', 'token', '')
+
+    if not config.has_option('AUTH', 'userid'):
+        config.set('AUTH', 'userid', '')
+
+    with open(CONFIG_FILE, 'w') as configfile:
+        config.write(configfile)
 
 if __name__ == "__main__":
     init_config()
