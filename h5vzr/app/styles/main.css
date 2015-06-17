@@ -26,10 +26,12 @@
 
 .flip {
   float: left;
-  overflow: hidden
+  overflow: hidden;
+  height: 500px; /* TODO: make generic*/
 }
 
 .flipBasic {
+  height: 500px; /* TODO: make generic*/
   position: absolute;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;

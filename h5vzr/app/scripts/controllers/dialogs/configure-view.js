@@ -8,34 +8,13 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('ConfigureViewCtrl', function ($mdDialog) {
+  .controller('ConfigureViewCtrl', function ($mdDialog, $interval, chartHandler, SortableItem) {
     var self = this;
-
-    this.sensors = [
-      {
-        id: 0,
-        icon: 'images/ic_thermometer_24dp.png',
-        iconType: 'img',
-        name:'Temperatur'
-      },
-      {
-        id: 1,
-        icon: 'invert_colors',
-        iconType: 'font',
-        name: 'Luftfeuchtigkeit'
-      },
-      {
-        id: 2,
-        icon: 'av_timer',
-        iconType: 'font',
-        name:'Luftdruck'
-      },
-      {
-        id: 3,
-        icon: 'wb_sunny',
-        iconType: 'font',
-        name: 'Helligkeit'}
-    ];
+    var sensors = chartHandler.sensors;
+    this.sensors = [];
+    angular.forEach(sensors, function(sensor){
+      self.sensors.push(new SortableItem(sensor));
+    });
 
     this.sensorsInUse = [];
     this.sensorsAvailable = [];
@@ -43,7 +22,7 @@ angular.module('loggrioApp')
     this.initArrays = function(){
       var viewConfig = JSON.parse(localStorage.getItem('viewConfig'));
       if(!viewConfig){
-        self.sensorsAvailable = self.sensors;
+        self.sensorsInUse = self.sensors;
       } else {
         self.sensorsAvailable = viewConfig.sensorsAvailable;
         self.sensorsInUse = viewConfig.sensorsInUse;
@@ -78,6 +57,7 @@ angular.module('loggrioApp')
         sensorsInUse: self.sensorsInUse
       };
       localStorage.setItem('viewConfig', JSON.stringify(viewConfig));
+      chartHandler.goLive();
       $mdDialog.hide();
     };
 
