@@ -39,22 +39,22 @@ class Sensor:
     last_metering = 0.0
     first_metering = True
 
-    def __init__(self, sensor_type, location, unit, func=None):
-        self.sensor_id = self.__get_id(sensor_type, location, unit)
+    def __init__(self, type, location, unit, func=None):
+        self.id = self.__db_sync(type, location, unit)
         self.location = location
-        self.sensor_type = sensor_type
+        self.type = type
         self.unit = unit
         self.func = func
 
-    def __get_id(self, sensor_type, location, unit):
+    def __db_sync(self, type, location, unit):
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
         try:
-            # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][type]={sensor_type}
-            params = {'filter[where][type]': sensor_type}
+            # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][type]={type}
+            params = {'filter[where][type]': type, 'filter[where][location]': location}
             r = requests.get(API + CUSTOMERS + USER_ID + SENSORS, params=params, headers=headers)
 
             if not len(r.json()):
-                payload = {'type': sensor_type, 'location': location, 'unit': unit}
+                payload = {'type': type, 'location': location, 'unit': unit}
                 r = requests.post(API + CUSTOMERS + USER_ID + SENSORS, data=json.dumps(payload), headers=headers)
                 return r.json()['id']
         except requests.exceptions.RequestException, re:
@@ -71,7 +71,7 @@ class Sensor:
             self.last_metering = metering
             return False
         else:
-            if self.sensor_type == SensorTypes.temperature.name:
+            if self.type == SensorTypes.temperature.name:
                 if metering < (self.last_metering - 10.0) or metering > (self.last_metering + 10.0):
                     return False
                 elif metering < -270.0:
@@ -81,7 +81,7 @@ class Sensor:
                 else:
                     self.last_metering = metering
                     return True
-            if self.sensor_type == SensorTypes.humidity.name:
+            if self.type == SensorTypes.humidity.name:
                 if metering < (self.last_metering - 10.0) or metering > (self.last_metering + 10.0):
                     return False
                 elif metering < 0.0:
@@ -91,14 +91,14 @@ class Sensor:
                 else:
                     self.last_metering = metering
                     return True
-            if self.sensor_type == SensorTypes.brightness.name:
+            if self.type == SensorTypes.brightness.name:
                 if metering > 210.0:
                     return False
                 elif metering < 0.0:
                     return False
                 else:
                     return True
-            if self.sensor_type == SensorTypes.pressure.name:
+            if self.type == SensorTypes.pressure.name:
                 if metering < (self.last_metering - 1000.0) or metering > (self.last_metering + 1000.0):
                     return False
                 elif metering < 0.0:
@@ -110,11 +110,11 @@ class Sensor:
     def __meter(self):
         if self.func is not None:
             value = str(self.func() / 100.00)
-            logging.info('metering of ' + self.sensor_type + ' sensor: ' + value)
-            print 'metering of ' + self.sensor_type + ' sensor: ' + value
+            logging.info('metering of ' + self.type + ' sensor: ' + value)
+            print 'metering of ' + self.type + ' sensor: ' + value
             return value
         else:
-            command = PATH + self.sensor_type + SUFFIX
+            command = PATH + self.type + SUFFIX
             try:
                 subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
             except subprocess.CalledProcessError, cpe:
@@ -128,8 +128,8 @@ class Sensor:
             else:
                 good_data = self.__check(subproc_output)
                 if good_data is True:
-                    logging.info('metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output))
-                    print 'metering of ' + self.sensor_type + ' sensor: ' + str(subproc_output)
+                    logging.info('metering of ' + self.type + ' sensor: ' + str(subproc_output))
+                    print 'metering of ' + self.type + ' sensor: ' + str(subproc_output)
                     return subproc_output
                 else:
                     return 'false_data'
@@ -137,8 +137,8 @@ class Sensor:
     def __send(self, payload):
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
         try:
-            # http://0.0.0.0:3000/api/Customers/{userid}/Meterings?filter[where][id]={self.sensor_id}
-            params = {'filter[where][id]': self.sensor_id}
+            # http://0.0.0.0:3000/api/Customers/{userid}/Meterings?filter[where][id]={self.id}
+            params = {'filter[where][id]': self.id}
             r = requests.post(API + CUSTOMERS + USER_ID + METERINGS, data=json.dumps(payload), params=params,
                               headers=headers)
         except requests.exceptions.RequestException, re:
@@ -157,10 +157,10 @@ class Sensor:
             counter = counter + 1
 
         if counter == 5:
-            treat_sensor_broken_errors(self.sensor_type)
+            treat_sensor_broken_errors(self.type)
             return
 
-        payload = {'sensorId': self.sensor_id,
+        payload = {'sensorId': self.id,
                    'time': str(datetime.now()),
                    'value': value}
 
