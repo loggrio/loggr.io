@@ -39,22 +39,22 @@ class Sensor:
     last_metering = 0.0
     first_metering = True
 
-    def __init__(self, type, location, unit, func=None):
-        self.id = self.__db_sync(type, location, unit)
+    def __init__(self, sensor_type, location, unit, func=None):
+        self.id = self.__db_sync(sensor_type, location, unit)
         self.location = location
-        self.type = type
+        self.type = sensor_type
         self.unit = unit
         self.func = func
 
-    def __db_sync(self, type, location, unit):
+    def __db_sync(self, sensor_type, location, unit):
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][type]={type}
-            params = {'filter[where][type]': type, 'filter[where][location]': location}
+            params = {'filter[where][type]': sensor_type, 'filter[where][location]': location}
             r = requests.get(API + CUSTOMERS + USER_ID + SENSORS, params=params, headers=headers)
 
             if not len(r.json()):
-                payload = {'type': type, 'location': location, 'unit': unit}
+                payload = {'type': sensor_type, 'location': location, 'unit': unit}
                 r = requests.post(API + CUSTOMERS + USER_ID + SENSORS, data=json.dumps(payload), headers=headers)
                 return r.json()['id']
         except requests.exceptions.RequestException, re:

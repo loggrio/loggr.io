@@ -17,7 +17,7 @@ IP=$1
 TARGET=pi@$IP:/home/pi/Coding/loggr.io/raspi
 
 RASPI_DIR="../raspi"
-SENSORS="$RASPI_DIR/sensors/*.c $RASPI_DIR/sensors/Makefile"
+SENSORS="$RASPI_DIR/sensors/*.c $RASPI_DIR/sensors/Makefile $RASPI_DIR/sensors/*.py"
 PYTHON_UTILS="$RASPI_DIR/raspi_loggr/*.py"
 CONFIG_SERVER="$RASPI_DIR/config_server/*py"
 GENERAL="$RASPI_DIR/requirements.txt $RASPI_DIR/run.py"
