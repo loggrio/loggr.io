@@ -8,9 +8,10 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('ConfigureViewCtrl', function ($mdDialog, chartHandler, SortableItem) {
+  .controller('ConfigureViewCtrl', function ($mdDialog, $interval, chartHandler, SortableItem) {
     var self = this;
     var sensors = chartHandler.sensors;
+    var sensorsToDelete = [];
     this.sensors = [];
     angular.forEach(sensors, function(sensor){
       console.log(new SortableItem(sensor));
@@ -32,6 +33,7 @@ angular.module('loggrioApp')
 
     this.deleteItem = function(index){
       self.sensorsAvailable.push(self.sensorsInUse[index]);
+      sensorsToDelete.push(self.sensorsInUse[index].id);
       self.sensorsInUse.splice(index, 1);
     };
 
@@ -58,6 +60,9 @@ angular.module('loggrioApp')
         sensorsInUse: self.sensorsInUse
       };
       localStorage.setItem('viewConfig', JSON.stringify(viewConfig));
+      for (var id in sensorsToDelete) {
+        $interval.cancel(chartHandler.promise[id]);
+      }
       chartHandler.goLive();
       $mdDialog.hide();
     };

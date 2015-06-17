@@ -13,6 +13,7 @@ angular.module('loggrioApp')
   this.flipChart = {};
   this.customerId = Customer.getCurrentId();
   this.sensors = [];
+  this.promise = [];
   var self = this;
 
   this.goLive = function(){
@@ -30,7 +31,7 @@ angular.module('loggrioApp')
             var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
             var shift;
 
-            $interval(function () {
+            self.promise[sensor.id] = $interval(function () {
               // shift on more than 5 dots
               shift = chart.series[0].data.length > 5;
               Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}}).$promise.then(function (meterings) {
@@ -50,6 +51,7 @@ angular.module('loggrioApp')
       });
       console.log(self.chartConfig);
       self.sort();
+
     });
   };
 
