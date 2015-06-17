@@ -23,7 +23,7 @@ angular.module('loggrioApp')
     this.sensorIsInUse = function(sensor){
       var ret = false;
       var viewConfig = JSON.parse(localStorage.getItem('viewConfig'));
-      if(viewConfig!==null){
+      if(viewConfig){
         angular.forEach(viewConfig.sensorsInUse, function(sensorInUse){
           if(sensor.id === sensorInUse.id){
             ret = true;
