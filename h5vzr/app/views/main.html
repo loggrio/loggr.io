@@ -1,24 +1,28 @@
-<flip class="flip-panel">
-  <flip-panel>
-    <md-card>
-      <md-card-content layout-align="center start">
-        <!--<h2>Living room temperature</h2>-->
-        <highchart id="chart1" config="main.chartConfig"></highchart>
-      </md-card-content>
-    </md-card>
-  </flip-panel>
-  <flip-panel layout-align="center start">
-    <md-card>
-      <md-card-content>
-        <h2>Übersicht zu {{main.chartConfig.options.title.text}}</h2>
-        <p>Höchsttemperatur: <b>{{main.flipChart.dataMax}}°C</b></p>
-        <p>Tiefsttemperatur: <b>{{main.flipChart.dataMin}}°C</b></p>
-        <p>Durchschnittstemperatur: <b>{{main.flipChart.dataAvg | number: 2}}°C</b></p>
-      </md-card-content>
-    </md-card>
-  </flip-panel>
-</flip>
-
+<div layout="column" ng-repeat="chart in main.chartConfig">
+  <div>
+    <flip class="flip-panel">
+      <flip-panel>
+        <md-card>
+          <md-card-content layout-align="center start">
+            <!--<h2>Living room temperature</h2>-->
+            <highchart id="{{$index}}" config="chart"></highchart>
+          </md-card-content>
+        </md-card>
+      </flip-panel>
+      <flip-panel layout-align="center start">
+        <md-card>
+          <md-card-content>
+            <h2>Übersicht zu {{main.chartConfig.options.title.text}}</h2>
+            <p>Höchsttemperatur: <b>{{main.flipChart.dataMax}}°C</b></p>
+            <p>Tiefsttemperatur: <b>{{main.flipChart.dataMin}}°C</b></p>
+            <p>Durchschnittstemperatur: <b>{{main.flipChart.dataAvg | number: 2}}°C</b></p>
+          </md-card-content>
+        </md-card>
+      </flip-panel>
+    </flip>
+  </div>
+</div>
+</br>
 <div ng-controller="ButtonMenuCtrl as menu" class="button-menu">
   <md-fab-speed-dial md-direction="up" class="md-scale">
     <md-fab-trigger>
