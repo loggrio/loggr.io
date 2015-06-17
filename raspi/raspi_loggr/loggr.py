@@ -40,12 +40,8 @@ def main():
 
     # Iterate through sensor configs from config file
     for sensor in sensor_configs:
-        # Get script name from config file
-        script = config.get('SENSORS', sensor).split(',')[0]
-        # Get location from config file
-        location = config.get('SENSORS', sensor).split(',')[1]
-        # Get unit from config file
-        unit = config.get('SENSORS', sensor).split(',')[2]
+        # Get script name, location and unit from config file
+        script, location, unit = config.get('SENSORS', sensor).split(',')
         # Get script suffix
         script_suffix = script.split('.')[1]
 
