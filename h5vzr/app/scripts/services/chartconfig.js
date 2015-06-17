@@ -18,25 +18,25 @@ angular.module('loggrioApp')
       case 'temperature':
         titleText = 'Temperatur' + ' ' + sensor.location;
         yAxisText = 'Temperatur (°C)';
-        tooltipSuffixText = '°C';
+        tooltipSuffixText = ' °C';
         seriesName = 'Temperatur';
       break;
       case 'pressure':
         titleText = 'Luftdruck' + ' ' + sensor.location;
         yAxisText = 'Luftdruck (hPa)';
-        tooltipSuffixText = 'hPa';
+        tooltipSuffixText = ' hPa';
         seriesName = 'Luftdruck';
       break;
       case 'brightness':
         titleText = 'Helligkeit' + ' ' + sensor.location;
-        yAxisText = 'Helligkeit (lx)';
-        tooltipSuffixText = 'lx';
+        yAxisText = 'Helligkeit (lm)';
+        tooltipSuffixText = ' lm';
         seriesName = 'Helligkeit';
       break;
       case 'humidity':
         titleText = 'Luftfeuchtigkeit' + ' ' + sensor.location;
         yAxisText = 'Relative Luftfeuchtigkeit (%)';
-        tooltipSuffixText = '%';
+        tooltipSuffixText = ' %';
         seriesName = 'Luftfeuchtigkeit';
       break;
       default:
