@@ -21,7 +21,7 @@
     }
   },
   "validations": [],
-   "relations": {
+  "relations": {
     "customer": {
       "type": "belongsTo",
       "model": "Customer",
