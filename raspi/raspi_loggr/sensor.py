@@ -4,6 +4,9 @@ import requests
 import json
 import subprocess
 import logging
+import Queue
+from random import randint
+# nur für test
 from datetime import datetime
 from os import path
 from ConfigParser import ConfigParser
@@ -22,6 +25,9 @@ SENSORS = '/sensors'
 
 # TODO: Global?
 config = ConfigParser()
+
+# PufferQueue wenn Übertragungsabriss, Größe dynamisch
+q = Queue.Queue(0)
 
 HOME_DIR = path.expanduser("~")
 CONFIG_FILE = HOME_DIR + '/.loggrrc'
@@ -164,4 +170,17 @@ class Sensor:
                    'time': str(datetime.now()),
                    'value': value}
 
-        return self.__send(payload)
+        status_code = self.__send(payload)
+
+        # Übertragung fehlgeschlagen, Daten puffern
+        if status_code != 200:
+            q.put(payload)
+
+        # Übertragung erolgreich, falls Daten in der Queue diese übermitteln
+        if status_code == 200:
+            while not q.empty():
+                data_from_queue = q.get()
+                status_code = self.__send(data_from_queue)
+                # wenn bei Resynchronisation Fehler, Daten rückschreiben
+                if status_code != 200:
+                    q.put(data_from_queue)
