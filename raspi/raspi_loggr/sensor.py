@@ -15,7 +15,6 @@ from .util import treat_sensor_broken_errors
 from .util import SensorTypes
 
 PATH = 'sensors/'
-SUFFIX = '.out'
 API = 'http://0.0.0.0:3000/api/'
 CUSTOMERS = 'Customers/'
 METERINGS = '/meterings'
@@ -115,7 +114,7 @@ class Sensor:
             print 'metering of ' + self.type + ' sensor: ' + value
             return value
         else:
-            command = PATH + self.script + SUFFIX
+            command = PATH + self.script
             try:
                 subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
             except subprocess.CalledProcessError, cpe:
