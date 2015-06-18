@@ -32,7 +32,7 @@
       "model": "Metering",
       "foreignKey": "sensorId"
     }
-  }
+  },
   "acls": [
     {
       "accessType": "*",
