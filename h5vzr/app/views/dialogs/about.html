@@ -1,18 +1,35 @@
 <md-dialog aria-label="Über" flex="50">
-  <form layout="column">
-    <div>
-      <md-dialog-content>
-        <md-subheader>Über loggr.io</md-subheader>
-        <div>
-          <!-- content -->
-        </div>
-      </md-dialog-content>
+  <md-dialog-content>
+    <div layout="column" layout-align="center center">
+      <p></p>
+      <img class="about-logo" src="images/logo-teal.png">
+      <p></p>
+      <p class="md-title">
+        <!-- Versionsnummer auslesen? -->
+        Version: 0.9
+      </p>
+      <p class="md-subhead text-align-center">
+        Studienprojekt zu Software-Engineering 2<br>
+        Sommersemester 2015<br>
+        Hochschule Rosenheim<br>
+        Fakultät für Informatik<br><br>
+      </p>
+      <p class="md-title">Team loggr.io:</p>
+      <p class="md-body-2 text-align-center">
+        Marcel Pütz<br>
+        Felix Itzenplitz<br>
+        Jessica Zimpel<br>
+        Marko Grgic<br>
+        Andreas Schnebinger<br>
+      </p>
+      <p class="md-title">Betreuer:</p>
+      <p class="md-body-2">Prof. Dr. Gerd Beneken</p>
     </div>
-    <div flex></div>
-    <div class="md-actions" layout="row">
-      <md-button ng-click="about.hide()" class="md-primary">
-        Schliessen
-      </md-button>
-    </div>
-  </form>
+  </md-dialog-content>
+  <div class="md-actions" layout="row">
+    <span flex></span>
+    <md-button ng-click="about.hide()" class="md-primary">
+      Schliessen
+    </md-button>
+  </div>
 </md-dialog>

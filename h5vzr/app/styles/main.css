@@ -63,3 +63,16 @@
 .pointer {
   cursor: pointer;
 }
+
+.userCtrlForm{
+  width: 60%;
+  margin-left: 20%;
+}
+
+.text-align-center{
+  text-align: center
+}
+
+.about-logo {
+  height: 125px;
+}
