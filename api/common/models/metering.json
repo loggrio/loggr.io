@@ -25,7 +25,7 @@
     },
     "sensor": {
       "type": "belongsTo",
-      "model": "Customer",
+      "model": "Sensor",
       "foreignKey": "sensorId"
     }
   },
