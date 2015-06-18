@@ -99,7 +99,7 @@ class Sensor:
                 else:
                     return True
             if self.type == SensorTypes.pressure.name:
-                if metering < (self.last_metering - 1000.0) or metering > (self.last_metering + 1000.0):
+                if metering < (self.last_metering - 10.0) or metering > (self.last_metering + 10.0):
                     return False
                 elif metering < 0.0:
                     return False

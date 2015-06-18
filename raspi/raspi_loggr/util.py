@@ -18,14 +18,6 @@ class SensorTypes(Enum):
     pressure = 4
 
 
-class ValueUnits(Enum):
-    grad_celsius = 1
-    grad_fahrenheit = 2
-    percent = 3
-    lumen = 4
-    hectopascal = 5
-
-
 def treat_sensor_errors(cpe):
     # log sensor errors in logfile and console
     logging.error('called process error: ' + str(cpe.cmd) + ' returned ' + str(cpe.returncode) + ': ' + cpe.output)

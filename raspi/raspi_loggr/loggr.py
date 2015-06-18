@@ -11,7 +11,6 @@ from ConfigParser import ConfigParser
 from .util import set_status_led
 from .util import LedStatusTypes
 from .util import SensorTypes
-from .util import ValueUnits
 from .util import treat_missing_config_errors
 from .util import treat_pairing_errors
 
