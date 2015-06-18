@@ -69,10 +69,10 @@ def main():
             # Get function reference and import module generically
             func = imp.load_source('meter', p)
             # Create sensor generically and save it into a dictionary
-            sensors[sensor] = Sensor(sensor, location, unit, func.meter)
+            sensors[sensor] = Sensor(sensor, location, unit, func=func.meter)
         else:
             # Create sensor generically and save it into a dictionary
-            sensors[sensor] = Sensor(sensor, location, unit)
+            sensors[sensor] = Sensor(sensor, location, unit, script=script)
 
     while (True):
         # Iterate through sensor config values
