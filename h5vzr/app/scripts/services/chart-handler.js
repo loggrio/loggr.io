@@ -47,6 +47,7 @@ angular.module('loggrioApp')
 
         //get metering to acording sensor
         Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}}).$promise.then(function (meterings) {
+          console.log(sensor.type + ', ' + sensor.id);
           var chart = self.chartConfig[index].getHighcharts();
           var data = util.meteringToChartData(meterings);
 
@@ -59,7 +60,7 @@ angular.module('loggrioApp')
           self.promises[sensor.id] = $interval(function () {
             // shift on more than 5 dots
             shift = chart.series[0].data.length > 5;
-            Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}}).$promise.then(function (meterings) {
+            Customer.meterings({id: self.customerId, filter: {where: {time: {gt: lastTime}, sensorId: sensor.id}}}).$promise.then(function (meterings) {
               if (meterings.length) {
                 lastTime = meterings[meterings.length - 1].time;
 
