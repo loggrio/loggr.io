@@ -44,35 +44,36 @@ angular.module('loggrioApp')
       //go through all sensors in use to generate acording charts
       angular.forEach(self.sensorsInUse, function(sensor, index){
         self.chartConfig[index] = new ChartConfig(sensor);
-
         //get metering to acording sensor
-        Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}}).$promise.then(function (meterings) {
-          console.log(sensor.type + ', ' + sensor.id);
-          var chart = self.chartConfig[index].getHighcharts();
-          var data = util.meteringToChartData(meterings);
+        Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}})
+          .$promise.then(function (meterings) {
 
-          chart.series[0].setData(data, true);
+            var chart = self.chartConfig[index].getHighcharts();
+            var data = util.meteringToChartData(meterings);
 
-          var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
-          var shift;
+            chart.series[0].setData(data, true);
 
-          //live reload
-          self.promises[sensor.id] = $interval(function () {
-            // shift on more than 5 dots
-            shift = chart.series[0].data.length > 5;
-            Customer.meterings({id: self.customerId, filter: {where: {time: {gt: lastTime}, sensorId: sensor.id}}}).$promise.then(function (meterings) {
-              if (meterings.length) {
-                lastTime = meterings[meterings.length - 1].time;
+            var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
+            var shift;
 
-                var data = util.meteringToChartData(meterings);
+            //live reload
+            self.promises[sensor.id] = $interval(function () {
+              // shift on more than 5 dots
+              shift = chart.series[0].data.length > 5;
+              Customer.meterings({id: self.customerId, filter: {where: {time: {gt: lastTime}, sensorId: sensor.id}}})
+                .$promise.then(function (meterings) {
+                  if (meterings.length) {
+                    lastTime = meterings[meterings.length - 1].time;
 
-                angular.forEach(data, function (value) {
-                  chart.series[0].addPoint(value, true, shift);
+                    var data = util.meteringToChartData(meterings);
+
+                    angular.forEach(data, function (value) {
+                      chart.series[0].addPoint(value, true, shift);
+                    });
+                  }
                 });
-              }
-            });
-          }, 10000);
-        });
+            }, 10000);
+          });
       });
     });
   };
