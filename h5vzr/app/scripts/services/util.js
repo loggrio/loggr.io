@@ -21,18 +21,18 @@ angular.module('loggrioApp')
     };
 
     this.sensorIsInUse = function(sensor){
-      var ret = false;
+      var position;
       var viewConfig = JSON.parse(localStorage.getItem('viewConfig'));
       if(viewConfig){
-        angular.forEach(viewConfig.sensorsInUse, function(sensorInUse){
+        angular.forEach(viewConfig.sensorsInUse, function(sensorInUse, index){
           if(sensor.id === sensorInUse.id){
-            ret = true;
+            position = index;
           }
         });
       } else {
-        ret = true;
+        position = -1;
       }
-      return ret;
+      return position;
     };
 
   });

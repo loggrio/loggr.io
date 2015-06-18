@@ -34,15 +34,17 @@ angular.module('loggrioApp')
       //generate list of all available sensors for the sortable list
       angular.forEach(sensors, function(sensor){
         self.sensors.push(sensor);
-        //check if sensor is in use
-        if(util.sensorIsInUse(sensor)){
-          self.sensorsInUse.push(sensor);
+        //check if sensor is in use in put in the right order
+        var position = util.sensorIsInUse(sensor);
+        if(position > -1){
+          self.sensorsInUse[position] = sensor;
         }
       });
 
       //go through all sensors in use to generate acording charts
       angular.forEach(self.sensorsInUse, function(sensor, index){
-        self.chartConfig.push(new ChartConfig(sensor));
+        self.chartConfig[index] = new ChartConfig(sensor);
+
         //get metering to acording sensor
         Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}}).$promise.then(function (meterings) {
           var chart = self.chartConfig[index].getHighcharts();
@@ -71,26 +73,6 @@ angular.module('loggrioApp')
           }, 10000);
         });
       });
-      self.sort();
-
     });
-  };
-
-  this.sort = function(){
-    var viewConfig = JSON.parse(localStorage.getItem('viewConfig'));
-    if(viewConfig!==null){
-      var tmpChartConfig = [];
-      angular.forEach(viewConfig.sensorsInUse, function(sensor){
-        angular.forEach(self.chartConfig, function(chartConfig){
-          if(chartConfig.id === sensor.id){
-            tmpChartConfig.push(chartConfig);
-          }
-        });
-      });
-      self.chartConfig.splice(0,self.chartConfig.length);
-      angular.forEach(tmpChartConfig, function(chartConfig){
-        self.chartConfig.push(chartConfig);
-      });
-    }
   };
 });
