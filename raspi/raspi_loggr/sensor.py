@@ -179,7 +179,7 @@ class Sensor:
 
         status = self.__send(payload)
 
-        # send failed -> put to cache
+        # on failure put to cache and return
         if status != 200:
             self.cache.put(payload)
             return -1 # TODO ERROR CODE ??
