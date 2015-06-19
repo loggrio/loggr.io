@@ -4,7 +4,7 @@ import requests
 import json
 import subprocess
 import logging
-from Queue import Queue
+from collections import deque
 from datetime import datetime
 from os import path
 from ConfigParser import ConfigParser
@@ -45,7 +45,7 @@ class Sensor:
         self.unit = unit
         self.func = func
         self.script = script
-        self.cache = Queue(cache_size)
+        self.cache = deque([], cache_size)
 
     def __db_sync(self, sensor_type, location, unit):
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
@@ -166,22 +166,22 @@ class Sensor:
                    'value': value}
 
         # frist try to empty cache if data in it
-        if not self.cache.empty():
-            while not self.cache.empty():
-                data = self.cache.get()
-                status = self.__send(data)
-                # on failure put back to cache and return
-                if status != 200:
-                    self.cache.put(data_from_queue)
-                    # also add new metering
-                    self.cache.put(payload)
-                    return -1 # TODO ERROR CODE ??
+        while self.cache():
+            data = self.cache.popleft()
+            status = self.__send(data)
+            # on failure put back to cache and return
+            if status != 200:
+                self.cache.appendleft(data)
+                # also add new metering
+                self.cache.append(payload)
+                return -1 # TODO ERROR CODE ??
 
+        # try to send
         status = self.__send(payload)
 
         # on failure put to cache and return
         if status != 200:
-            self.cache.put(payload)
+            self.cache.append(payload)
             return -1 # TODO ERROR CODE ??
         else:
             return status_code
