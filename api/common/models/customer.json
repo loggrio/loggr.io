@@ -21,10 +21,25 @@
   },
   "acls": [
     {
-      "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$owner",
-      "permission": "ALLOW"
+      "permission": "ALLOW",
+      "property": [
+        "__count__sensors",
+        "__create__sensors",
+        "__delete__sensors",
+        "__destroyById__sensors",
+        "__findById__sensors",
+        "__get__sensors",
+        "__updateById__sensors",
+        "__count__meterings",
+        "__create__meterings",
+        "__delete__meterings",
+        "__destroyById__meterings",
+        "__findById__meterings",
+        "__get__meterings",
+        "__updateById__meterings"
+      ]
     }
   ],
   "methods": []
