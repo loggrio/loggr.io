@@ -21,12 +21,27 @@ angular.module('loggrioApp')
     this.ranges = zoom.ranges;
 
     this.selectRange = function(chartIndex, range){
-      zoom.zoomChart(this.chartConfig[chartIndex].getHighcharts(), range);
+      zoom.selectRange(this.chartConfig[chartIndex].getHighcharts(), range);
     };
 
     this.resetZoom = function(chartIndex){
       zoom.resetZoom(this.chartConfig[chartIndex].getHighcharts());
-      console.log('test');
+    };
+
+    this.zoomIn = function(chartIndex){
+      zoom.zoomIn(this.chartConfig[chartIndex].getHighcharts());
+    };
+
+    this.zoomOut = function(chartIndex){
+      zoom.zoomOut(this.chartConfig[chartIndex].getHighcharts());
+    };
+
+    this.navigateLeft = function(chartIndex){
+      zoom.navigateLeft(this.chartConfig[chartIndex].getHighcharts());
+    };
+
+    this.navigateRight = function(chartIndex){
+      zoom.navigateRight(this.chartConfig[chartIndex].getHighcharts());
     };
 
     chartHandler.goLive();

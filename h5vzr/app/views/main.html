@@ -5,10 +5,24 @@
         <md-card>
           <md-card-content class="range-button" layout-align="center start">
             <!--<h2>Living room temperature</h2>-->
-            <md-icon>zoom_in</md-icon>
+            <md-button class="md-icon-button" ng-click="main.zoomIn($index)">
+              <md-icon>zoom_in</md-icon>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="main.zoomOut($index)">
+              <md-icon>zoom_out</md-icon>
+            </md-button>
             <md-button ng-repeat="range in main.ranges" ng-click="main.selectRange($parent.$index, range)">{{range.name}}</md-button>
-            <md-button class="md-icon-button" ng-click="main.resetZoom($index)" aria-label="Reset Zoom">
+            <md-button class="md-icon-button" ng-click="main.resetZoom($index)">
               <md-icon>youtube_searched_for</md-icon>
+              <md-tooltip md-visible="demo.showTooltip">
+                Zoom zurück setzen
+              </md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="main.navigateLeft($index)">
+              <md-icon>chevron_left</md-icon>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="main.navigateRight($index)">
+              <md-icon>chevron_right</md-icon>
             </md-button>
             <highchart id="{{$index}}" config="chart"></highchart>
           </md-card-content>
