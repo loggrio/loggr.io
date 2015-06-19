@@ -10,8 +10,8 @@ HOME_DIR = path.expanduser("~")
 CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
 
-@server.route('/', methods=['POST'])
-@crossdomain(origin='*', methods=['POST'], headers='content-type')
+@server.route('/', methods=['POST', 'OPTIONS'])
+@crossdomain(origin='*', headers='content-type')
 def save_token_and_userid():
     config.read(CONFIG_FILE)
 
