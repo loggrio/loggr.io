@@ -76,3 +76,17 @@
 .about-logo {
   height: 125px;
 }
+
+.range-button .md-button {
+  min-width: 2em;
+  font-weight: 400;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.range-button .md-icon-button {
+  height: 24px;
+  width: 24px;
+  margin-left: 0;
+  margin-right: 0;
+}

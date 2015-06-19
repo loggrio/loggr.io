@@ -1,25 +1,30 @@
 <div layout="column" ng-repeat="chart in main.chartConfig">
   <div>
-    <flip class="flip-panel">
-      <flip-panel>
+<!--     <flip class="flip-panel">
+  <flip-panel> -->
         <md-card>
-          <md-card-content layout-align="center start">
+          <md-card-content class="range-button" layout-align="center start">
             <!--<h2>Living room temperature</h2>-->
+            <md-icon>zoom_in</md-icon>
+            <md-button ng-repeat="range in main.ranges" ng-click="main.selectRange($parent.$index, range)">{{range.name}}</md-button>
+            <md-button class="md-icon-button" ng-click="main.resetZoom($index)" aria-label="Reset Zoom">
+              <md-icon>youtube_searched_for</md-icon>
+            </md-button>
             <highchart id="{{$index}}" config="chart"></highchart>
           </md-card-content>
         </md-card>
-      </flip-panel>
-      <flip-panel layout-align="center start">
-        <md-card>
-          <md-card-content>
-            <h2>Übersicht zu {{main.chartConfig.options.title.text}}</h2>
-            <p>Höchsttemperatur: <b>{{main.flipChart.dataMax}}°C</b></p>
-            <p>Tiefsttemperatur: <b>{{main.flipChart.dataMin}}°C</b></p>
-            <p>Durchschnittstemperatur: <b>{{main.flipChart.dataAvg | number: 2}}°C</b></p>
-          </md-card-content>
-        </md-card>
-      </flip-panel>
-    </flip>
+<!--       </flip-panel>
+<flip-panel layout-align="center start">
+  <md-card>
+    <md-card-content>
+      <h2>Übersicht zu {{main.chartConfig.options.title.text}}</h2>
+      <p>Höchsttemperatur: <b>{{main.flipChart.dataMax}}°C</b></p>
+      <p>Tiefsttemperatur: <b>{{main.flipChart.dataMin}}°C</b></p>
+      <p>Durchschnittstemperatur: <b>{{main.flipChart.dataAvg | number: 2}}°C</b></p>
+    </md-card-content>
+  </md-card>
+</flip-panel>
+    </flip> -->
   </div>
 </div>
 </br>
