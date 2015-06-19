@@ -4,9 +4,7 @@ import requests
 import json
 import subprocess
 import logging
-import Queue
-from random import randint
-# nur für test
+from Queue import Queue
 from datetime import datetime
 from os import path
 from ConfigParser import ConfigParser
@@ -23,11 +21,7 @@ CUSTOMERS = 'Customers/'
 METERINGS = '/meterings'
 SENSORS = '/sensors'
 
-# TODO: Global?
 config = ConfigParser()
-
-# PufferQueue wenn Übertragungsabriss, Größe dynamisch
-q = Queue.Queue(0)
 
 HOME_DIR = path.expanduser("~")
 CONFIG_FILE = HOME_DIR + '/.loggrrc'
@@ -44,13 +38,14 @@ class Sensor:
     last_metering = 0.0
     first_metering = True
 
-    def __init__(self, sensor_type, location, unit, func=None, script=None):
+    def __init__(self, sensor_type, location, unit, func=None, script=None, cache_size=1440):
         self.id = self.__db_sync(sensor_type, location, unit)
         self.location = location
         self.type = sensor_type
         self.unit = unit
         self.func = func
         self.script = script
+        self.cache = Queue(cache_size)
 
     def __db_sync(self, sensor_type, location, unit):
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
@@ -170,17 +165,23 @@ class Sensor:
                    'time': str(datetime.now()),
                    'value': value}
 
-        status_code = self.__send(payload)
+        # frist try to empty cache if data in it
+        if not self.cache.empty():
+            while not self.cache.empty():
+                data = self.cache.get()
+                status = self.__send(data)
+                # on failure put back to cache and return
+                if status != 200:
+                    self.cache.put(data_from_queue)
+                    # also add new metering
+                    self.cache.put(payload)
+                    return -1 # TODO ERROR CODE ??
 
-        # Übertragung fehlgeschlagen, Daten puffern
-        if status_code != 200:
-            q.put(payload)
+        status = self.__send(payload)
 
-        # Übertragung erolgreich, falls Daten in der Queue diese übermitteln
-        if status_code == 200:
-            while not q.empty():
-                data_from_queue = q.get()
-                status_code = self.__send(data_from_queue)
-                # wenn bei Resynchronisation Fehler, Daten rückschreiben
-                if status_code != 200:
-                    q.put(data_from_queue)
+        # send failed -> put to cache
+        if status != 200:
+            self.cache.put(payload)
+            return -1 # TODO ERROR CODE ??
+        else:
+            return status_code
