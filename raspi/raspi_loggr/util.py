@@ -18,14 +18,6 @@ class SensorTypes(Enum):
     pressure = 4
 
 
-class ValueUnits(Enum):
-    grad_celsius = 1
-    grad_fahrenheit = 2
-    percent = 3
-    lumen = 4
-    pascal = 5
-
-
 def treat_sensor_errors(cpe):
     # log sensor errors in logfile and console
     logging.error('called process error: ' + str(cpe.cmd) + ' returned ' + str(cpe.returncode) + ': ' + cpe.output)
@@ -60,6 +52,28 @@ def treat_sensor_broken_errors(sensortype):
     logging.error(str(sensortype) + ' sensor broken')
     print str(sensortype) + ' sensor broken'
     set_status_led(LedStatusTypes.sensor_broken.name)
+
+
+def treat_missing_config_errors():
+    logging.error('No valid config file found! Please start config server!')
+    print 'No valid config file found! Please start config server!'
+
+
+def treat_pairing_errors():
+    logging.error('No Token and/or UserId set in config file. Please pair your Raspberry Pi!')
+    print 'No Token and/or UserId set in config file. Please pair your Raspberry Pi!'
+
+
+# def check_credentials(token, userid):
+#     logging.info('Start credentials check')
+#     headers = {'Content-Type': 'application/json', 'Authorization': token}
+#     try:
+#         r = requests.get(API + CUSTOMERS + str(userid) + '/exists', headers=headers)
+#     except requests.exceptions.RequestException, re:
+#         # catch and treat requests errors
+#         treat_requests_errors(re)
+#     else:
+#         return r.text
 
 
 def set_status_led(status):

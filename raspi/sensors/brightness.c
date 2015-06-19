@@ -74,7 +74,8 @@ int main(void)
   uchar analogVal;
   uchar illum;
 
-  if(wiringPiSetup() == -1){ //when initialize wiring failed,print messageto screen
+  // when initialize wiring failed, print message to screen
+  if(wiringPiSetup() == -1){
     fprintf(stderr, "setup wiringPi failed!");
     return 1;
   }
@@ -86,10 +87,14 @@ int main(void)
 
   analogVal = get_ADC_Result();
 
-  //Most times when analogVal = 0 the brightness sensor isn't connected to the Raspberryx
+  // most times when analogVal = 0 the brightness sensor isn't connected to the Raspberry
   if(analogVal == 0)
   {
-    return 3;
+    analogVal = get_ADC_Result();
+    if(analogVal == 0){
+      fprintf(stderr, "brightness maybe not connected!");
+      return 3;
+    }
   }
 
   if(analogVal <= 210 && dataState == DATA_GOOD)

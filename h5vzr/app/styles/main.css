@@ -26,10 +26,12 @@
 
 .flip {
   float: left;
-  overflow: hidden
+  overflow: hidden;
+  height: 500px; /* TODO: make generic*/
 }
 
 .flipBasic {
+  height: 500px; /* TODO: make generic*/
   position: absolute;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -60,4 +62,17 @@
 
 .pointer {
   cursor: pointer;
+}
+
+.userCtrlForm{
+  width: 60%;
+  margin-left: 20%;
+}
+
+.text-align-center{
+  text-align: center
+}
+
+.about-logo {
+  height: 125px;
 }

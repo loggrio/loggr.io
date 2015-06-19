@@ -64,4 +64,25 @@ angular.module('loggrioApp')
       }, 30000);
     };
 
+    this.toastPaired = function () {
+      $mdToast.show({
+        template: '<md-toast>' +
+                  ' <md-icon style="color: white">done</md-icon>' +
+                  ' <span flex>  Pairing erfolgreich</span>' +
+                  '</md-toast>',
+        position: 'bottom left',
+        hideDelay: 3000,
+      });
+    };
+
+    this.toastPairingfailed = function () {
+      $mdToast.show({
+        template: '<md-toast>' +
+                  ' <md-icon style="color: white">flash_on</md-icon>' +
+                  ' <span flex>  Fehler beim Pairing</span>' +
+                  '</md-toast>',
+        position: 'bottom left',
+        hideDelay: 3000,
+      });
+    };
   });

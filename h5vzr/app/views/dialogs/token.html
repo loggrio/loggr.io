@@ -1,21 +1,36 @@
-<md-dialog aria-label="Token" flex="50">
-  <form layout="column">
-    <div>
-      <md-dialog-content>
-        <md-subheader>Token generieren</md-subheader>
-        <div>
-          <!-- content -->
+<md-dialog aria-label="Token" flex="40">
+  <form name="tokenForm" layout="column" layout-align="center" ng-submit="token.startPairing()">
+    <md-dialog-content layout="row">
+      <div flex="10"></div>
+      <div flex="80">
+        <div layout="column">
+          <md-dialog-content>
+            <md-subheader><md-icon>settings_ethernet</md-icon> Raspberry pairen</md-subheader>
+            <div>
+              <md-input-container class="md-icon-float">
+                <label>Bitte IP-Adresse des Raspberrys eingeben</label>
+                <md-icon>pin_drop</md-icon>
+                <input name="adress" required md-maxlength="15" ng-model="token.raspiAdress"
+                    ng-pattern="/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/">
+                <div ng-messages="tokenForm.adress.$error">
+                  <div ng-message="required">Pflichtfeld.</div>
+                  <div ng-message="md-maxlength">Die IP-Adresse darf nicht länger als 15 Zeichen sein.</div>
+                  <div ng-message="pattern">Keine gültige IP-Adresse.</div>
+                </div>
+              </md-input-container>
+            </div>
+          </md-dialog-content>
         </div>
+        <div flex="10"></div>
       </md-dialog-content>
-    </div>
-    <div flex></div>
-    <div class="md-actions" layout="row">
-      <md-button ng-click="token.submit()" class="md-primary">
-        Generieren
-      </md-button>
-      <md-button ng-click="token.cancel()" class="md-primary">
-        Schliessen
-      </md-button>
-    </div>
-  </form>
-</md-dialog>
+
+      <div class="md-actions" layout="row">
+        <md-button type="submit" class="md-primary">
+          Pairen
+        </md-button>
+        <md-button ng-click="token.cancel()" class="md-primary">
+          Abbrechen
+        </md-button>
+      </div>
+    </form>
+  </md-dialog>
