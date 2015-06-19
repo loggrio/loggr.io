@@ -32,12 +32,14 @@ angular.module('loggrioApp')
     //get all sensors from the current customer
     Customer.sensors({id: self.customerId}).$promise.then(function (sensors) {
       //generate list of all available sensors for the sortable list
-      angular.forEach(sensors, function(sensor){
+      angular.forEach(sensors, function(sensor, index){
         self.sensors.push(sensor);
         //check if sensor is in use in put in the right order
         var position = util.sensorIsInUse(sensor);
         if(position > -1){
           self.sensorsInUse[position] = sensor;
+        } else {
+          self.sensorsInUse[index] = sensor;
         }
       });
 
