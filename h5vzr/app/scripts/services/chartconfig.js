@@ -63,8 +63,8 @@ angular.module('loggrioApp')
           text: titleText
         },
         chart: {
-          type: 'line',
-          zoomType: 'x'
+          zoomType: 'x',
+          type: 'spline'
         },
         xAxis: {
           type: 'datetime'
