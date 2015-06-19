@@ -2,16 +2,17 @@ from flask import Flask, request, jsonify
 from os import path
 import re
 from ConfigParser import ConfigParser
-from cors import crossdomain
+from flask.ext.cors import CORS
 server = Flask(__name__)
 config = ConfigParser()
 
 HOME_DIR = path.expanduser("~")
 CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
+CORS(server, methods=['POST'], allow_headers='Content-Type')
+
 
 @server.route('/', methods=['POST'])
-@crossdomain(origin='*', methods=['POST', 'OPTIONS'], headers='content-type')
 def save_token_and_userid():
     config.read(CONFIG_FILE)
 
