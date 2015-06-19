@@ -73,7 +73,7 @@ def main():
             # Create sensor generically and save it into a dictionary
             sensors[sensor] = Sensor(sensor, location, unit, script=script)
 
-    while (True):
+    while True:
         # Iterate through sensor config values
         for s in sensors.itervalues():
             # Start metering and sending
