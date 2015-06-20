@@ -14,9 +14,6 @@
             <md-button ng-repeat="range in main.ranges" ng-click="main.selectRange($parent.$index, range)">{{range.name}}</md-button>
             <md-button class="md-icon-button" ng-click="main.resetZoom($index)">
               <md-icon>youtube_searched_for</md-icon>
-              <md-tooltip md-visible="demo.showTooltip">
-                Zoom zurück setzen
-              </md-tooltip>
             </md-button>
             <md-button class="md-icon-button" ng-click="main.navigateLeft($index)">
               <md-icon>chevron_left</md-icon>
