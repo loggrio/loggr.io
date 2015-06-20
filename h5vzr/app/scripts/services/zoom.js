@@ -103,16 +103,16 @@ angular.module('loggrioApp')
       this.isZoomed = false;
     };
 
-    this.shift = function(chart){
+    this.shift = function(chart, lastPoint){
       if (!chart) {
         return;
       }
+      console.log(lastPoint);
       var extremes = chart.xAxis[0].getExtremes();
       var max = extremes.max;
       var min = extremes.min;
       var xData = chart.series[0].xData;
-      var lastPoint = xData[xData.length - 1];
-      var beforeLastPoint = xData[xData.length - 1 - 1];
+      var beforeLastPoint = xData[xData.length - 1];
       var diff = lastPoint - beforeLastPoint;
       chart.xAxis[0].setExtremes(min + diff, max + diff, false);
     };
