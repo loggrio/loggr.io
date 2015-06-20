@@ -13,6 +13,7 @@ angular.module('loggrioApp')
     var WEEK = 7 * 24 * 3600 * 1000;
     var DAY = 24 * 3600 * 1000;
     var HOUR = 3600 * 1000;
+    var MINUTE = 60 * 1000;
 
     var SINGLE_STEP_RATIO = 0.25;
 
@@ -36,10 +37,12 @@ angular.module('loggrioApp')
       {
         name: 'S',
         value: HOUR
+      },
+      {
+        name: 'm',
+        value: MINUTE
       }
     ];
-
-    this.isZoomed = false;
 
     this.selectRange = function(chart, range){
       if (!chart) {
@@ -48,7 +51,6 @@ angular.module('loggrioApp')
       var max = chart.series[0].xAxis.dataMax;
       var min = max - range.value;
       chart.xAxis[0].setExtremes(min, max);
-      this.isZoomed = true;
     };
 
     this.zoomIn = function(chart){
@@ -59,7 +61,6 @@ angular.module('loggrioApp')
       var max = extremes.max;
       var min = extremes.min;
       chart.xAxis[0].setExtremes(min + singleStep(min,max), max - singleStep(min,max));
-      this.isZoomed = true;
     };
 
     this.zoomOut = function(chart){
@@ -70,7 +71,6 @@ angular.module('loggrioApp')
       var max = extremes.max;
       var min = extremes.min;
       chart.xAxis[0].setExtremes(min - singleStep(min,max), max + singleStep(min,max));
-      this.isZoomed = true;
     };
 
     this.navigateLeft = function(chart){
@@ -81,7 +81,6 @@ angular.module('loggrioApp')
       var max = extremes.max;
       var min = extremes.min;
       chart.xAxis[0].setExtremes(min - singleStep(min,max), max - singleStep(min,max));
-      this.isZoomed = true;
     };
 
     this.navigateRight = function(chart){
@@ -92,7 +91,6 @@ angular.module('loggrioApp')
       var max = extremes.max;
       var min = extremes.min;
       chart.xAxis[0].setExtremes(min + singleStep(min,max), max + singleStep(min,max));
-      this.isZoomed = true;
     };
 
     this.resetZoom = function (chart) {
@@ -100,7 +98,6 @@ angular.module('loggrioApp')
         return;
       }
       chart.zoomOut();
-      this.isZoomed = false;
     };
 
     this.shift = function(chart, lastPoint){

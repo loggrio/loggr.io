@@ -82,6 +82,7 @@
   font-weight: 400;
   margin-left: 0;
   margin-right: 0;
+  text-transform: none;
 }
 
 .range-button .md-icon-button {
