@@ -14,6 +14,8 @@ from .util import treat_sensor_errors
 from .util import treat_requests_errors
 from .util import treat_sensor_broken_errors
 from .util import SensorTypes
+from .util import log_error
+from .util import log_info
 
 PATH = 'sensors/'
 API = 'http://0.0.0.0:3000/api/'
@@ -111,8 +113,7 @@ class Sensor:
     def __meter(self):
         if self.func is not None:
             value = str(self.func() / 100.00)
-            logging.info('metering of ' + self.type + ' sensor: ' + value)
-            print 'metering of ' + self.type + ' sensor: ' + value
+            log_info('metering of ' + self.type + ' sensor: ' + value)
             return value
         else:
             command = PATH + self.script
@@ -129,8 +130,7 @@ class Sensor:
             else:
                 good_data = self.__check(subproc_output)
                 if good_data is True:
-                    logging.info('metering of ' + self.type + ' sensor: ' + str(subproc_output))
-                    print 'metering of ' + self.type + ' sensor: ' + str(subproc_output)
+                    log_info('metering of ' + self.type + ' sensor: ' + str(subproc_output))
                     return subproc_output
                 else:
                     return 'false_data'
@@ -165,16 +165,22 @@ class Sensor:
                    'time': str(datetime.now()),
                    'value': value}
 
-        # frist try to empty cache if data in it
-        while self.cache():
-            data = self.cache.popleft()
-            status = self.__send(data)
-            # on failure put back to cache and return
-            if status != 200:
-                self.cache.appendleft(data)
-                # also add new metering
-                self.cache.append(payload)
-                return -1 # TODO ERROR CODE ??
+        # first try to empty cache if there is data in it
+        if self.cache:
+            log_info('data in ' + self.type + ' cache, try to empty queue first')
+
+            while self.cache:
+                data = self.cache.popleft()
+                status = self.__send(data)
+                # on failure put back to cache and return
+                if status != 200:
+                    self.cache.appendleft(data)
+                    # also add new metering
+                    self.cache.append(payload)
+                    log_info('requests error: ' + self.type + ' data cached')
+                    return
+
+            log_info(self.type + ' cache emptied')
 
         # try to send
         status = self.__send(payload)
@@ -182,6 +188,7 @@ class Sensor:
         # on failure put to cache and return
         if status != 200:
             self.cache.append(payload)
-            return -1 # TODO ERROR CODE ??
+            log_info('requests error: ' + self.type + ' data cached')
+            return
 
-        return status_code
+        return status
