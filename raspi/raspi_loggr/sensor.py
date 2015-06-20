@@ -40,12 +40,14 @@ class Sensor:
     last_metering = 0.0
     first_metering = True
 
-    def __init__(self, sensor_type, location, unit, func=None, script=None, cache_size=1440):
+    def __init__(self, sensor_type, location, unit, func=None, gen=None, script=None, cache_size=1440):
         self.id = self.__db_sync(sensor_type, location, unit)
         self.location = location
         self.type = sensor_type
         self.unit = unit
         self.func = func
+        if gen:
+            self.gen = gen()
         self.script = script
         self.cache = deque([], cache_size)
 
@@ -113,6 +115,10 @@ class Sensor:
     def __meter(self):
         if self.func is not None:
             value = str(self.func())
+            log_info('metering of ' + self.type + ' sensor: ' + value)
+            return value
+        elif self.gen is not None:
+            value = str(self.gen.next())
             log_info('metering of ' + self.type + ' sensor: ' + value)
             return value
         else:
