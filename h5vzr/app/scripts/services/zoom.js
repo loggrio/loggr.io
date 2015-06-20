@@ -39,14 +39,16 @@ angular.module('loggrioApp')
       }
     ];
 
+    this.isZoomed = false;
+
     this.selectRange = function(chart, range){
       if (!chart) {
         return;
       }
-      var extremes = chart.xAxis[0].getExtremes();
-      var max = extremes.max;
+      var max = chart.series[0].xAxis.dataMax;
       var min = max - range.value;
       chart.xAxis[0].setExtremes(min, max);
+      this.isZoomed = true;
     };
 
     this.zoomIn = function(chart){
@@ -57,6 +59,7 @@ angular.module('loggrioApp')
       var max = extremes.max;
       var min = extremes.min;
       chart.xAxis[0].setExtremes(min + singleStep(min,max), max - singleStep(min,max));
+      this.isZoomed = true;
     };
 
     this.zoomOut = function(chart){
@@ -67,6 +70,7 @@ angular.module('loggrioApp')
       var max = extremes.max;
       var min = extremes.min;
       chart.xAxis[0].setExtremes(min - singleStep(min,max), max + singleStep(min,max));
+      this.isZoomed = true;
     };
 
     this.navigateLeft = function(chart){
@@ -77,6 +81,7 @@ angular.module('loggrioApp')
       var max = extremes.max;
       var min = extremes.min;
       chart.xAxis[0].setExtremes(min - singleStep(min,max), max - singleStep(min,max));
+      this.isZoomed = true;
     };
 
     this.navigateRight = function(chart){
@@ -87,6 +92,7 @@ angular.module('loggrioApp')
       var max = extremes.max;
       var min = extremes.min;
       chart.xAxis[0].setExtremes(min + singleStep(min,max), max + singleStep(min,max));
+      this.isZoomed = true;
     };
 
     this.resetZoom = function (chart) {
@@ -94,5 +100,20 @@ angular.module('loggrioApp')
         return;
       }
       chart.zoomOut();
+      this.isZoomed = false;
+    };
+
+    this.shift = function(chart){
+      if (!chart) {
+        return;
+      }
+      var extremes = chart.xAxis[0].getExtremes();
+      var max = extremes.max;
+      var min = extremes.min;
+      var xData = chart.series[0].xData;
+      var lastPoint = xData[xData.length - 1];
+      var beforeLastPoint = xData[xData.length - 1 - 1];
+      var diff = lastPoint - beforeLastPoint;
+      chart.xAxis[0].setExtremes(min + diff, max + diff, false);
     };
   });
