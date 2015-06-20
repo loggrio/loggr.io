@@ -37,8 +37,6 @@ if config.has_option('AUTH', 'userid'):
 
 class Sensor:
     """docstring for Sensor"""
-    last_metering = 0.0
-    first_metering = True
 
     def __init__(self, sensor_type, location, unit, func=None, script=None, cache_size=1440):
         self.id = self.__db_sync(sensor_type, location, unit)
@@ -48,6 +46,8 @@ class Sensor:
         self.func = func
         self.script = script
         self.cache = deque([], cache_size)
+        self.last_metering = 0.0
+        self.first_metering = True
 
     def __db_sync(self, sensor_type, location, unit):
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
