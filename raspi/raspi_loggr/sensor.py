@@ -44,6 +44,7 @@ class Sensor:
         self.type = sensor_type
         self.unit = unit
         self.func = func
+        self.gen = gen
         if gen:
             self.gen = gen()
         self.script = script
