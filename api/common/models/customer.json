@@ -38,7 +38,8 @@
         "__destroyById__meterings",
         "__findById__meterings",
         "__get__meterings",
-        "__updateById__meterings"
+        "__updateById__meterings",
+        "__create__accessTokens"
       ]
     }
   ],
