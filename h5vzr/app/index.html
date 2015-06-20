@@ -46,9 +46,27 @@
         </md-menu>
         <!-- User Menu: End -->
 
-        <md-button class="md-icon-button toolbar-item" aria-label="More">
-          <md-icon>more_vert</md-icon>
-        </md-button>
+        <!-- More Menu -->
+        <md-menu>
+          <md-button class="md-icon-button toolbar-item" aria-label="More" ng-click="$mdOpenMenu()">
+            <md-icon>more_vert</md-icon>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button ng-click="toolbar.aboutDialog($event)">
+                <md-icon md-menu-align-target>info_outline</md-icon>
+                Über loggr.io
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="toolbar.imprintDialog($event)">
+                <md-icon md-menu-align-target>format_align_left</md-icon>
+                Impressum
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+        <!-- More Menu: End -->
         <div flex="15"></div>
       </div>
     </md-toolbar>
@@ -61,6 +79,7 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -91,6 +110,8 @@
     <script src="scripts/controllers/dialogs/token.js"></script>
     <script src="scripts/controllers/dialogs/user-control.js"></script>
     <script src="scripts/services/chartconfig.js"></script>
+    <script src="scripts/services/chart-handler.js"></script>
+    <script src="scripts/services/sortable-item.js"></script>
     <!-- endbuild -->
   </body>
 </html>

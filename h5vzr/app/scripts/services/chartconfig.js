@@ -8,8 +8,43 @@
  * Service in the loggrioApp.
  */
 angular.module('loggrioApp')
-  .value('ChartConfig', function (chartTitleText, yAxisText, tooltipSuffixText, seriesName) {
+  .value('ChartConfig', function (sensor) {
+    var yAxisText;
+    var tooltipSuffixText;
+    var titleText;
+    var seriesName;
+
+    switch (sensor.type) {
+      case 'temperature':
+        titleText = 'Temperatur' + ' ' + sensor.location;
+        yAxisText = 'Temperatur (°C)';
+        tooltipSuffixText = ' °C';
+        seriesName = 'Temperatur';
+      break;
+      case 'pressure':
+        titleText = 'Luftdruck' + ' ' + sensor.location;
+        yAxisText = 'Luftdruck (hPa)';
+        tooltipSuffixText = ' hPa';
+        seriesName = 'Luftdruck';
+      break;
+      case 'brightness':
+        titleText = 'Helligkeit' + ' ' + sensor.location;
+        yAxisText = 'Helligkeit (lm)';
+        tooltipSuffixText = ' lm';
+        seriesName = 'Helligkeit';
+      break;
+      case 'humidity':
+        titleText = 'Luftfeuchtigkeit' + ' ' + sensor.location;
+        yAxisText = 'Relative Luftfeuchtigkeit (%)';
+        tooltipSuffixText = ' %';
+        seriesName = 'Luftfeuchtigkeit';
+      break;
+      default:
+        console.log('Unbekanner Sensor');
+    }
+
     return {
+      id: sensor.id,
       options: {
         lang: {
           contextButtonTitle: 'Graphenoptionen',
@@ -25,10 +60,11 @@ angular.module('loggrioApp')
           weekdays: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag']
         },
         title: {
-          text: chartTitleText
+          text: titleText
         },
         chart: {
-          type: 'line'
+          zoomType: 'x',
+          type: 'spline'
         },
         xAxis: {
           type: 'datetime'
