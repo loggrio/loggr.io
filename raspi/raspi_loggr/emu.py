@@ -1,9 +1,43 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import time
 from .sensor import Sensor
+from random import randint
 
-emu_sensor = Sensor('emu', 'emu-hausen', 'emu_sensor', 'grad_celsius')
+
+TIME_BETWEEN_METERINGS = 10
+
+
+def meter_temp():
+    value = randint(2000, 2500) / 100.0
+    return value
+
+
+def meter_bright():
+    value = randint(80, 100)
+    return value
+
+
+def meter_humi():
+    value = randint(80, 90)
+    return value
+
+
+def meter_pres():
+    value = randint(900000, 980000) / 1000.0
+    return value
+
+
+temperature = Sensor('temperature', 'Wohnzimmer', 'Celsius', func=meter_temp)
+brightness = Sensor('brightness', 'Wohnzimmer', 'Lumen', func=meter_bright)
+humidity = Sensor('humidity', 'Wohnzimmer', 'Percent', func=meter_humi)
+pressure = Sensor('pressure', 'Wohnzimmer', 'Pascal', func=meter_pres)
 
 
 def main():
-    print emu_sensor.meter_and_send()
+    while True:
+        print temperature.meter_and_send()
+        print brightness.meter_and_send()
+        print humidity.meter_and_send()
+        print pressure.meter_and_send()
+        time.sleep(TIME_BETWEEN_METERINGS)
