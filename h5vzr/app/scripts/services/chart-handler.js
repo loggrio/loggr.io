@@ -8,7 +8,7 @@
 * Service in the loggrioApp.
 */
 angular.module('loggrioApp')
-.service('chartHandler', function ($interval, Customer, Metering, notify, util, ChartConfig) {
+.service('chartHandler', function ($interval, $timeout, Customer, Metering, notify, util, zoom, ChartConfig) {
   this.chartConfig = [];
   this.flipChart = {};
   this.customerId = Customer.getCurrentId();
@@ -45,6 +45,7 @@ angular.module('loggrioApp')
 
       //go through all sensors in use to generate acording charts
       angular.forEach(self.sensorsInUse, function(sensor, index){
+        console.log(sensor.type + ', ' + sensor.id);
         self.chartConfig[index] = new ChartConfig(sensor);
         //get metering to acording sensor
         Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}})
@@ -52,12 +53,10 @@ angular.module('loggrioApp')
 
             var chart = self.chartConfig[index].getHighcharts();
             var data = util.meteringToChartData(meterings);
-
             chart.series[0].setData(data, true);
 
             var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
             var shift;
-
             //live reload
             self.promises[sensor.id] = $interval(function () {
               // shift on more than 5 dots
@@ -70,7 +69,13 @@ angular.module('loggrioApp')
                     var data = util.meteringToChartData(meterings);
 
                     angular.forEach(data, function (value) {
-                      chart.series[0].addPoint(value, true, shift);
+                      if(zoom.isZoomed){
+                        zoom.shift(self.chartConfig[index].getHighcharts(), value[0]);
+                        $timeout(chart.series[0].addPoint(value, true, shift), 1000);
+                      } else {
+                        chart.series[0].addPoint(value, true, shift);
+                      }
+
                     });
                   }
                 });

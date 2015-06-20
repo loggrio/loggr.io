@@ -64,7 +64,13 @@ angular.module('loggrioApp')
         },
         chart: {
           zoomType: 'x',
-          type: 'spline'
+          type: 'spline',
+          resetZoomButton: {
+            theme: {
+              display: 'none'
+            }
+          }
+
         },
         xAxis: {
           type: 'datetime'
