@@ -4,6 +4,10 @@ import re
 import logging
 from ConfigParser import ConfigParser
 from flask.ext.cors import CORS
+from raspi_loggr.util import set_status_led
+from raspi_loggr.util import log_info
+from raspi_loggr.util import log_error
+from raspi_loggr.util import LedStatusTypes
 server = Flask(__name__)
 config = ConfigParser()
 
@@ -21,46 +25,40 @@ def save_token_and_userid():
     regex_token = re.compile(r'^[A-Z,a-z,0-9]{64}$')
 
     if 'token' not in request.json and 'userid' not in request.json:
-        logging.error('missing arguments in post request')
-        print 'missing arguments in post request'
+        log_error('missing arguments in post request')
         return jsonify(error='arguments')
 
     if 'token' in request.json:
         if regex_token.match(request.json['token']) is None:
-            logging.error('wrong format of token string')
-            print 'wrong format of token string'
+            log_error('wrong format of token string')
             return jsonify(error='format')
         config.set('AUTH', 'token', request.json['token'])
-        logging.info('token set in config file')
-        print 'token set in config file'
+        log_info('token set in config file')
 
     if 'userid' in request.json:
         if regex_userid.match(request.json['userid']) is None:
-            logging.error('wrong format of userid string')
-            print 'wrong format of userid string'
+            log_error('wrong format of userid string')
             return jsonify(error='format')
         config.set('AUTH', 'userid', request.json['userid'])
-        logging.info('userid set in config file')
-        print 'userid set in config file'
+        log_info('userid set in config file')
 
     with open(CONFIG_FILE, 'w') as configfile:
         config.write(configfile)
+    set_status_led(LedStatusTypes.pairing_succeeded.name)
     return jsonify(status='ok')
 
 
 def init_config():
     # If config file not exists create a default one
     if not path.isfile(CONFIG_FILE):
-        logging.info('No config file found, create default one')
-        print 'No config file found, craete default one'
+        log_info('No config file found, create default one')
         config.add_section('AUTH')
         config.add_section('SENSORS')
         config.set('AUTH', 'token', '')
         config.set('AUTH', 'userid', '')
         with open(CONFIG_FILE, 'w') as configfile:
             config.write(configfile)
-        logging.info('Created default config file')
-        print 'Created default config file'
+        log_info('Created default config file')
         return
 
     config.read(CONFIG_FILE)
@@ -81,7 +79,10 @@ def init_config():
         config.write(configfile)
 
 
-if __name__ == "__main__":
+def main():
     logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s', filename='server.log', level=logging.INFO)
     init_config()
     server.run(host='0.0.0.0', debug=True)
+
+if __name__ == "__main__":
+    main()
