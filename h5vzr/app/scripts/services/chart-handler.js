@@ -36,9 +36,9 @@ angular.module('loggrioApp')
         self.sensors.push(sensor);
         //check if sensor is in use in put in the right order
         var position = util.sensorIsInUse(sensor);
-        if(position > -1){
+        if(position > -1){ //in sensorInUse list
           self.sensorsInUse[position] = sensor;
-        } else {
+        } else if (position === -2){ //viewConfig non existing
           self.sensorsInUse[index] = sensor;
         }
       });

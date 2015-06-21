@@ -21,7 +21,7 @@ angular.module('loggrioApp')
     };
 
     this.sensorIsInUse = function(sensor){
-      var position;
+      var position = -1; //not in Use
       var viewConfig = JSON.parse(localStorage.getItem('viewConfig'));
       if(viewConfig){
         angular.forEach(viewConfig.sensorsInUse, function(sensorInUse, index){
@@ -29,8 +29,8 @@ angular.module('loggrioApp')
             position = index;
           }
         });
-      } else {
-        position = -1;
+      } else { //viewConfig non existing
+        position = -2;
       }
       return position;
     };

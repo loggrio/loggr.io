@@ -39,7 +39,7 @@ angular.module('loggrioApp')
         value: HOUR
       },
       {
-        name: '5',
+        name: '5m',
         value: LAST_5
       }
     ];
