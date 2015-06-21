@@ -13,7 +13,7 @@ angular.module('loggrioApp')
     var WEEK = 7 * 24 * 3600 * 1000;
     var DAY = 24 * 3600 * 1000;
     var HOUR = 3600 * 1000;
-    var MINUTE = 60 * 1000;
+    var LAST_5 = 5 * 60 * 1000;
 
     var SINGLE_STEP_RATIO = 0.25;
 
@@ -39,8 +39,8 @@ angular.module('loggrioApp')
         value: HOUR
       },
       {
-        name: 'm',
-        value: MINUTE
+        name: '5',
+        value: LAST_5
       }
     ];
 

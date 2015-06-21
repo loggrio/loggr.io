@@ -56,8 +56,11 @@ angular.module('loggrioApp')
             chart.series[0].setData(data, true);
 
             var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
+            var shift;
             //live reload
             self.promises[sensor.id] = $interval(function () {
+              // shift on more than 5 dots
+              shift = chart.series[0].data.length > 5;
               Customer.meterings({id: self.customerId, filter: {where: {time: {gt: lastTime}, sensorId: sensor.id}}})
                 .$promise.then(function (meterings) {
                   if (meterings.length) {
@@ -66,8 +69,12 @@ angular.module('loggrioApp')
                     var data = util.meteringToChartData(meterings);
 
                     angular.forEach(data, function (value) {
+                      if(shift){
                         zoom.shift(self.chartConfig[index].getHighcharts(), value[0]);
+                      }
                         $timeout(chart.series[0].addPoint(value, true, false), 1000);
+
+
                     });
                   }
                 });
