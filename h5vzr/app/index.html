@@ -22,10 +22,10 @@
         <div flex="15"></div>
         <img src="images/logo.png" alt="Logo" class="toolbar-logo toolbar-item">
         <div flex></div>
-        <p class="md-subhead toolbar-item">Max Mustermann</p>
+        <p ng-show="toolbar.isAuthed()" class="md-subhead toolbar-item">{{$root.user.email}}</p>
 
         <!-- User Menu -->
-        <md-menu>
+        <md-menu ng-show="toolbar.isAuthed()">
           <md-button class="md-icon-button toolbar-item" aria-label="Account" ng-click="$mdOpenMenu()">
             <md-icon md-menu-origin>account_circle</md-icon>
           </md-button>

@@ -1,5 +1,26 @@
-<form ng-submit="login.login()">
-  <input type="text" name="email" required ng-model="login.credentials.email">
-  <input type="password" name="password" ng-model="login.credentials.password">
-  <md-button type="submit">Login</md-button>
-</form>
+<div layout="column" flex layout-align="start center">
+  <md-card style="width: 400px;">
+    <md-card-content>
+      <h2 ng-if="!login.registerToggled">Benutzer Login</h2>
+      <h2 ng-if="login.registerToggled">Benutzer Registrieren</h2>
+      <md-input-container>
+        <label>Email</label>
+        <input type="text" required ng-model="login.loginCredentials.email">
+      </md-input-container>
+      <md-input-container>
+        <label>Password</label>
+        <input type="password" ng-model="login.loginCredentials.password">
+      </md-input-container>
+      <md-input-container ng-if="login.registerToggled">
+        <label>Password wiederholen</label>
+        <input type="password" ng-model="login.retypePassword">
+      </md-input-container>
+    </md-card-content>
+    <div class="md-actions" layout="row" layout-align="end center">
+      <md-button ng-if="!login.registerToggled" ng-click="login.registerToggle()">Registrieren</md-button>
+      <md-button ng-if="!login.registerToggled" ng-click="login.login()">Login</md-button>
+      <md-button ng-if="login.registerToggled" ng-click="login.registerToggle()">Abbrechen</md-button>
+      <md-button ng-if="login.registerToggled" ng-click="login.register()">Registrieren</md-button>
+    </div>
+  </md-card>
+</div>
