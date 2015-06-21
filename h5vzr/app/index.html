@@ -49,7 +49,7 @@
         <!-- More Menu -->
         <md-menu>
           <md-button class="md-icon-button toolbar-item" aria-label="More" ng-click="$mdOpenMenu()">
-            <md-icon>more_vert</md-icon>
+            <md-icon md-menu-origin>more_vert</md-icon>
           </md-button>
           <md-menu-content width="4">
             <md-menu-item>
@@ -67,6 +67,7 @@
           </md-menu-content>
         </md-menu>
         <!-- More Menu: End -->
+        
         <div flex="15"></div>
       </div>
     </md-toolbar>
@@ -102,9 +103,9 @@
     <script src="scripts/directives/flip.js"></script>
     <script src="scripts/directives/flippanel.js"></script>
     <script src="scripts/controllers/button-menu.js"></script>
+    <script src="scripts/controllers/toolbar.js"></script>
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/toolbar.js"></script>
     <script src="scripts/controllers/dialogs/common-dialog.js"></script>
     <script src="scripts/controllers/dialogs/configure-view.js"></script>
     <script src="scripts/controllers/dialogs/token.js"></script>
@@ -113,6 +114,7 @@
     <script src="scripts/services/chart-handler.js"></script>
     <script src="scripts/services/sortable-item.js"></script>
     <script src="scripts/services/zoom.js"></script>
+    <script src="scripts/directives/matchTo.js"></script>
     <!-- endbuild -->
   </body>
 </html>

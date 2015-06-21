@@ -14,6 +14,7 @@ angular
     'ngAnimate',
     'ngAria',
     'ngMaterial',
+    'ngMessages',
     'highcharts-ng',
     'lbServices',
     'ng-sortable',
