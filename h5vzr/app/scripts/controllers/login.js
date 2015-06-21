@@ -8,7 +8,7 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('LoginCtrl', function ($rootScope, $location, Customer, chartHandler) {
+  .controller('LoginCtrl', function ($rootScope, $location, Customer) {
 
     if (Customer.isAuthenticated()) {
       $location.path('/');
