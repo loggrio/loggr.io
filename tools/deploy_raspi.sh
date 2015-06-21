@@ -20,7 +20,7 @@ RASPI_DIR="../raspi"
 SENSORS="$RASPI_DIR/sensors/*.c $RASPI_DIR/sensors/Makefile $RASPI_DIR/sensors/*.py"
 PYTHON_UTILS="$RASPI_DIR/raspi_loggr/*.py"
 CONFIG_SERVER="$RASPI_DIR/config_server/*py"
-GENERAL="$RASPI_DIR/requirements.txt $RASPI_DIR/run.py"
+GENERAL="$RASPI_DIR/requirements.txt $RASPI_DIR/run.py $RASPI_DIR/run_config_server.py"
 
 echo "Shell script to copy raspi files to raspberry pi"
 echo "Continue? [y/n]"
