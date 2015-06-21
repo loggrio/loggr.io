@@ -12,7 +12,6 @@ angular.module('loggrioApp')
 
     if (Customer.isAuthenticated()) {
       $location.path('/');
-      return;
     }
 
     this.loginCredentials = {};
