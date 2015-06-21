@@ -8,9 +8,7 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('MainCtrl', function ($rootScope, Customer, chartHandler, zoom) {
-
-    $rootScope.user = Customer.getCurrent();
+  .controller('MainCtrl', function ($rootScope, $location, Customer, chartHandler, zoom) {
 
     this.chartConfig = [];
     this.chartConfig = chartHandler.chartConfig;
@@ -41,5 +39,12 @@ angular.module('loggrioApp')
       zoom.navigateRight(this.chartConfig[chartIndex].getHighcharts());
     };
 
-    chartHandler.goLive();
+    // THIS FIX IS DEDICATED TO MARKO G.
+    if (!Customer.isAuthenticated()) {
+      $location.path('/login');
+    } else {
+      $rootScope.user = Customer.getCurrent();
+      chartHandler.goLive();
+    }
+
   });

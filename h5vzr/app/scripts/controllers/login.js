@@ -8,7 +8,7 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('LoginCtrl', function ($rootScope, $location, Customer) {
+  .controller('LoginCtrl', function ($rootScope, $location, Customer, chartHandler) {
 
     if (Customer.isAuthenticated()) {
       $location.path('/');
@@ -26,7 +26,6 @@ angular.module('loggrioApp')
         $location.nextAfterLogin = null;
         $location.path(next);
         self.loginCredentials = {};
-        $rootScope.user = Customer.getCurrent();
       });
     };
 

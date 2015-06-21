@@ -9,16 +9,17 @@
 */
 angular.module('loggrioApp')
 .service('chartHandler', function ($interval, $timeout, Customer, Metering, notify, util, zoom, ChartConfig) {
+  var self = this;
+
   this.chartConfig = [];
   this.flipChart = {};
-  this.customerId = Customer.getCurrentId();
   this.sensors = [];
   this.sensorsInUse = [];
   this.promises = [];
-  var self = this;
 
   /* deletes items of the arrays and stops all running intervals */
-  this.initialize = function(){
+  this.initialize = function() {
+    self.customerId = Customer.getCurrentId();
     self.chartConfig.splice(0,self.chartConfig.length);
     self.sensors.splice(0,self.sensors.length);
     self.sensorsInUse.splice(0,self.sensorsInUse.length);
@@ -27,7 +28,7 @@ angular.module('loggrioApp')
     }
   };
 
-  this.goLive = function(){
+  this.goLive = function() {
     self.initialize();
     //get all sensors from the current customer
     Customer.sensors({id: self.customerId}).$promise.then(function (sensors) {
@@ -44,7 +45,7 @@ angular.module('loggrioApp')
       });
 
       //go through all sensors in use to generate acording charts
-      angular.forEach(self.sensorsInUse, function(sensor, index){
+      angular.forEach(self.sensorsInUse, function(sensor, index) {
         console.log(sensor.type + ', ' + sensor.id);
         self.chartConfig[index] = new ChartConfig(sensor);
         //get metering to acording sensor
