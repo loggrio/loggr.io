@@ -8,12 +8,7 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('MainCtrl', function ($rootScope, $location, $interval, Customer, chartHandler, zoom) {
-
-    if (!Customer.isAuthenticated()) {
-      $location.path('/login');
-      return;
-    }
+  .controller('MainCtrl', function ($rootScope, Customer, chartHandler, zoom) {
 
     $rootScope.user = Customer.getCurrent();
 
