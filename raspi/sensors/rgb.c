@@ -46,6 +46,10 @@ void flashRed() {
   flashLed(0xff,0x00,0x00);
 }
 
+void flashBlue() {
+  flashLed(0xff,0x00,0xCC);
+}
+
 int main(int argc, const char *argv[])
 {
   if (argc != 2) {
@@ -68,6 +72,9 @@ int main(int argc, const char *argv[])
   }
   else if (strcmp(argv[1], "sensor_broken") == 0) {
     flashRed();
+  }
+  else if (strcmp(argv[1], "pairing_succeeded") == 0) {
+    flashBlue();
   }
 
   return 0;

@@ -9,6 +9,7 @@ class LedStatusTypes(Enum):
     ok = 1  # green
     sensor_broken = 2  # red
     request_error = 3  # orange
+    pairing_succeeded = 4  # blue
 
 
 class SensorTypes(Enum):
