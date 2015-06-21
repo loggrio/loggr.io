@@ -22,10 +22,13 @@
         <div flex="15"></div>
         <img src="images/logo.png" alt="Logo" class="toolbar-logo toolbar-item">
         <div flex></div>
-        <p hide-sm ng-show="toolbar.isAuthed()" class="md-subhead toolbar-item">{{$root.user.username}}</p>
+        <p ng-if="toolbar.isAuthed()" hide-sm class="md-subhead toolbar-item">
+          <span ng-if="!$root.user.username">{{$root.user.email}}</span>
+          <span ng-if="$root.user.username">{{$root.user.username}}</span>
+        </p>
 
         <!-- User Menu -->
-        <md-menu ng-show="toolbar.isAuthed()">
+        <md-menu ng-if="toolbar.isAuthed()">
           <md-button class="md-icon-button toolbar-item" aria-label="Account" ng-click="$mdOpenMenu()">
             <md-icon md-menu-origin>account_circle</md-icon>
           </md-button>
