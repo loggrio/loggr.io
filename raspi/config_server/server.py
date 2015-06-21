@@ -8,13 +8,14 @@ from raspi_loggr.util import set_status_led
 from raspi_loggr.util import log_info
 from raspi_loggr.util import log_error
 from raspi_loggr.util import LedStatusTypes
+
 server = Flask(__name__)
+cors = CORS(server, allow_headers='Content-Type')
+
 config = ConfigParser()
 
 HOME_DIR = path.expanduser("~")
 CONFIG_FILE = HOME_DIR + '/.loggrrc'
-
-CORS(server, methods=['POST'], allow_headers='Content-Type')
 
 
 @server.route('/', methods=['POST'])
