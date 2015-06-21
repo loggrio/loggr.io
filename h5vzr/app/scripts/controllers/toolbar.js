@@ -10,6 +10,10 @@
 angular.module('loggrioApp')
   .controller('ToolbarCtrl', function ($location, $mdDialog, Customer) {
 
+    this.isAuthed =  function () {
+      return Customer.isAuthenticated();
+    };
+
     this.logout = function () {
       Customer.logout(function () {
         $location.path('/login');
