@@ -5,7 +5,7 @@ from .sensor import Sensor
 from random import randint
 
 
-TIME_BETWEEN_METERINGS = 10
+TIME_BETWEEN_METERINGS = 60
 
 
 def meter_temp():
@@ -36,8 +36,8 @@ pressure = Sensor('pressure', 'Wohnzimmer', 'Pascal', func=meter_pres)
 
 def main():
     while True:
-        print temperature.meter_and_send()
-        print brightness.meter_and_send()
-        print humidity.meter_and_send()
-        print pressure.meter_and_send()
+        temperature.meter_and_send()
+        brightness.meter_and_send()
+        humidity.meter_and_send()
+        pressure.meter_and_send()
         time.sleep(TIME_BETWEEN_METERINGS)
