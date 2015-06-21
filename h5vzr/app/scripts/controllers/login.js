@@ -16,7 +16,8 @@ angular.module('loggrioApp')
     }
 
     this.loginCredentials = {};
-    this.registerCredentials = {};
+    this.retypePassword = '';
+    this.registerToggled = false;
 
     var self = this;
 
@@ -25,11 +26,20 @@ angular.module('loggrioApp')
         var next = $location.nextAfterLogin || '/';
         $location.nextAfterLogin = null;
         $location.path(next);
+        self.loginCredentials = {};
       });
     };
 
     this.register = function () {
-      Customer.create(self.registerCredentials);
+      self.registerToggled = true;
+      Customer.create(self.loginCredentials, function () {
+        self.retypePassword = '';
+        self.login();
+      });
+    };
+
+    this.registerToggle = function () {
+      self.registerToggled = !self.registerToggled;
     };
 
   });
