@@ -25,5 +25,16 @@
     "type": "",
     "url": ""
   },
-  "description": "loggrio-api"
+  "description": "loggrio-api",
+  "bundleDependencies": [
+    "compression",
+    "cors",
+    "errorhandler",
+    "loopback",
+    "loopback-boot",
+    "loopback-connector-mongodb",
+    "loopback-datasource-juggler",
+    "loopback-explorer",
+    "serve-favicon"
+  ]
 }
