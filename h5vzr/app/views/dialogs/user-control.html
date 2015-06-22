@@ -8,9 +8,8 @@
           <md-input-container class="md-icon-float">
             <label>Name</label>
             <md-icon>person</md-icon>
-            <input name="name" required md-maxlength="120" ng-model="userControl.customer.username">
+            <input name="name" md-maxlength="120" ng-model="userControl.customer.username">
             <div ng-messages="userForm.name.$error">
-              <div ng-message="required">Pflichtfeld.</div>
               <div ng-message="md-maxlength">Der Name darf nicht länger als 120 Zeichen sein.</div>
             </div>
           </md-input-container>
