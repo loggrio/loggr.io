@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from flask import Flask, request, jsonify
 from os import path
 import re
