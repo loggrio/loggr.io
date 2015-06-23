@@ -30,13 +30,17 @@ angular.module('loggrioApp')
           userid: data.userId
         };
 
-        $http.post(requestURL, payload).success(function (data) {
-          if (data.status === 'ok') {
-            notify.toastPaired();
-          } else {
-            notify.toastPairingfailed();
-          }
-        });
+        $http.post(requestURL, payload)
+          .success(function (data) {
+            if (data.status === 'ok') {
+              notify.toastPaired();
+            } else {
+              notify.toastPairingFailed();
+            }
+          })
+          .error(function () {
+            notify.toastPairingTimeOut();
+          });
       });
 
       $mdDialog.hide();

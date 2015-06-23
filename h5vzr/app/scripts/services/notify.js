@@ -82,11 +82,22 @@ angular.module('loggrioApp')
       });
     };
 
-    this.toastPairingfailed = function () {
+    this.toastPairingFailed = function () {
       $mdToast.show({
         template: '<md-toast>' +
                   ' <md-icon style="color: white">flash_on</md-icon>' +
-                  ' <span flex>  Fehler beim Pairing</span>' +
+                  ' <span flex>  Fehler fehlgeschlagen</span>' +
+                  '</md-toast>',
+        position: 'bottom left',
+        hideDelay: 3000,
+      });
+    };
+
+    this.toastPairingTimeOut = function () {
+      $mdToast.show({
+        template: '<md-toast>' +
+                  ' <md-icon style="color: white">flash_on</md-icon>' +
+                  ' <span flex>  Raspberry nicht verfügbar</span>' +
                   '</md-toast>',
         position: 'bottom left',
         hideDelay: 3000,
