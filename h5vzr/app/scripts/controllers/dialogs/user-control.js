@@ -8,10 +8,9 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('UserControlCtrl', function ($mdDialog, Customer) {
+  .controller('UserControlCtrl', function ($rootScope, $mdDialog, Customer) {
 
-    this.customer = {};
-    this.customer = Customer.getCurrent();
+    this.customer = $rootScope.user;
 
     this.passChanging = false;
     this.formInvalid = false;
@@ -56,7 +55,7 @@ angular.module('loggrioApp')
     };
 
     this.cancel = function () {
-      this.customer = Customer.getCurrent();
+      $rootScope.user = Customer.getCurrent();
       $mdDialog.cancel();
     };
 
