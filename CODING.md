@@ -20,4 +20,4 @@ http://google.github.io/styleguide/javascriptguide.xml
 
 ### HTML5 / CSS
 
-http://primercss.io/guidelines/ or http://google-styleguide.googlecode.com/svn/trunk/htmlcssguide.xml
+http://primercss.io/guidelines/ or http://google.github.io/styleguide/htmlcssguide.xml
