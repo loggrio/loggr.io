@@ -22,6 +22,7 @@ angular.module('loggrioApp')
 
     this.aboutDialog = function (ev) {
       $mdDialog.show({
+        clickOutsideToClose: true,
         controller: 'CommonDialogCtrl',
         controllerAs: 'about',
         templateUrl: 'views/dialogs/about.html',
@@ -31,6 +32,7 @@ angular.module('loggrioApp')
 
     this.imprintDialog = function (ev) {
       $mdDialog.show({
+        clickOutsideToClose: true,
         controller: 'CommonDialogCtrl',
         controllerAs: 'imprint',
         templateUrl: 'views/dialogs/imprint.html',

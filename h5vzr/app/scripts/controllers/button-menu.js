@@ -13,6 +13,7 @@ angular.module('loggrioApp')
 
     this.tokenDialog = function (ev) {
       $mdDialog.show({
+        clickOutsideToClose: true,
         controller: 'TokenCtrl',
         controllerAs: 'token',
         templateUrl: 'views/dialogs/token.html',
@@ -22,6 +23,7 @@ angular.module('loggrioApp')
 
     this.showDialog = function (ev) {
       $mdDialog.show({
+        clickOutsideToClose: true,
         controller: 'ConfigureViewCtrl',
         controllerAs: 'configureView',
         templateUrl: 'views/dialogs/configure-view.html',
