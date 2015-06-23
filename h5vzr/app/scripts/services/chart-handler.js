@@ -11,8 +11,9 @@ angular.module('loggrioApp')
 .service('chartHandler', function ($interval, $timeout, Customer, Metering, notify, util, zoom, ChartConfig) {
   var self = this;
 
+  this.charts = [];
   this.chartConfigs = [];
-  this.flipChart = {};
+  this.averageChartConfigs = [];
   this.sensors = [];
   this.sensorsInUse = [];
   this.promises = [];
@@ -21,7 +22,9 @@ angular.module('loggrioApp')
   this.initialize = function() {
     self.stopReload();
     self.customerId = Customer.getCurrentId();
+    self.charts.splice(0,self.charts.length);
     self.chartConfigs.splice(0,self.chartConfigs.length);
+    self.averageChartConfigs.splice(0,self.averageChartConfigs.length);
     self.sensors.splice(0,self.sensors.length);
     self.sensorsInUse.splice(0,self.sensorsInUse.length);
   };
@@ -50,14 +53,19 @@ angular.module('loggrioApp')
 
       // go through all sensors in use to generate acording charts
       angular.forEach(self.sensorsInUse, function(sensor, index) {
-        self.chartConfig[index] = new ChartConfig(sensor);
+        self.charts[index] = {
+          default: new ChartConfig(sensor),
+          average: new ChartConfig(sensor)
+        };
         // get metering to acording sensor
         Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}})
           .$promise.then(function (meterings) {
-
-            var chart = self.chartConfigs[index].getHighcharts();
+            console.log(self.charts);
+            var chart = self.charts[index].default.getHighcharts();
+            var averageChart = self.charts[index].average.getHighcharts();
             var data = util.meteringToChartData(meterings);
             chart.series[0].setData(data, true);
+            averageChart.series[0].setData(data,true);
 
             var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
             var shift;
