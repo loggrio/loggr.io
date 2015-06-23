@@ -8,7 +8,7 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('CommonDialogCtrl', function ($mdDialog) {
+  .controller('CommonCtrl', function ($mdDialog) {
 
     this.hide = function () {
       $mdDialog.hide();

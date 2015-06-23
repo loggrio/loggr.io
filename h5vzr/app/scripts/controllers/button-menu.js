@@ -16,7 +16,7 @@ angular.module('loggrioApp')
         clickOutsideToClose: true,
         controller: 'PairingCtrl',
         controllerAs: 'pairing',
-        templateUrl: 'views/dialogs/pairing-dialog.html',
+        templateUrl: 'views/dialogs/pairing.html',
         targetEvent: ev
       });
     };
