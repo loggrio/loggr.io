@@ -16,12 +16,8 @@ https://www.python.org/dev/peps/pep-0008/
 
 ### JavaScript
 
-http://www.w3schools.com/js/js_conventions.asp
+http://google.github.io/styleguide/javascriptguide.xml
 
-### HTML5
+### HTML5 / CSS
 
-http://www.w3schools.com/html/html5_syntax.asp
-
-### CSS
-
-https://make.wordpress.org/core/handbook/coding-standards/css/
+http://primercss.io/guidelines/ or http://google-styleguide.googlecode.com/svn/trunk/htmlcssguide.xml
