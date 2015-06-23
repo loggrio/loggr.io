@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc function
- * @name loggrioApp.controller:TokenCtrl
+ * @name loggrioApp.controller:PairingCtrl
  * @description
- * # TokenCtrl
+ * # PairingCtrl
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('TokenCtrl', function ($mdDialog, $http, notify, Customer) {
+  .controller('PairingCtrl', function ($mdDialog, $http, notify, Customer) {
 
-    this.raspiAdress='';
+    this.raspiAddress='';
 
     var self = this;
 
@@ -24,7 +24,7 @@ angular.module('loggrioApp')
         {ttl: 120960}
       ).$promise.then(function (data) {
 
-        var requestURL = 'http://' + self.raspiAdress + ':5000';
+        var requestURL = 'http://' + self.raspiAddress + ':5000';
         var payload = {
           token: data.id,
           userid: data.userId

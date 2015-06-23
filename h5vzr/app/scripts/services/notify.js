@@ -86,7 +86,7 @@ angular.module('loggrioApp')
       $mdToast.show({
         template: '<md-toast>' +
                   ' <md-icon style="color: white">flash_on</md-icon>' +
-                  ' <span flex>  Fehler fehlgeschlagen</span>' +
+                  ' <span flex>  Pairing fehlgeschlagen</span>' +
                   '</md-toast>',
         position: 'bottom left',
         hideDelay: 3000,

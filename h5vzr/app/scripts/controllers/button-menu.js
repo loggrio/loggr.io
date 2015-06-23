@@ -11,12 +11,12 @@ angular.module('loggrioApp')
   .controller('ButtonMenuCtrl', function ($mdDialog) {
 
 
-    this.tokenDialog = function (ev) {
+    this.pairingDialog = function (ev) {
       $mdDialog.show({
         clickOutsideToClose: true,
-        controller: 'TokenCtrl',
-        controllerAs: 'token',
-        templateUrl: 'views/dialogs/token.html',
+        controller: 'PairingCtrl',
+        controllerAs: 'pairing',
+        templateUrl: 'views/dialogs/pairing-dialog.html',
         targetEvent: ev
       });
     };
