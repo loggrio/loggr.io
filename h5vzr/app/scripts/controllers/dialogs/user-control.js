@@ -10,7 +10,7 @@
 angular.module('loggrioApp')
   .controller('UserControlCtrl', function ($rootScope, $mdDialog, Customer) {
 
-    this.customer = $rootScope.user;
+    this.customer = Customer.getCachedCurrent();
 
     this.passChanging = false;
     this.formInvalid = false;
@@ -55,12 +55,13 @@ angular.module('loggrioApp')
     };
 
     this.cancel = function () {
-      $rootScope.user = Customer.getCurrent();
       $mdDialog.cancel();
     };
 
     this.submit = function () {
-      Customer.prototype$updateAttributes({ id: this.customer.id }, this.customer);
+      Customer.prototype$updateAttributes({ id: this.customer.id }, this.customer, function (user) {
+        $rootScope.user = user;
+      });
       $mdDialog.hide();
     };
 
