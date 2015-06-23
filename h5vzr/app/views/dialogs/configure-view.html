@@ -4,7 +4,9 @@
     <div layout="row">
       <md-card flex>
         <md-card-content>
-          <md-subheader class="md-primary">Angezeigte Sensoren</md-subheader>
+          <md-subheader class="md-primary">
+            <md-icon class="subheader-icon">edit</md-icon>&nbsp;Angezeigte Sensoren
+          </md-subheader>
           <md-list ng-sortable=configureView.inUseConfig>
             <md-list-item class="md-2-line" data-id="{{item.id}}" ng-mouseenter="configureView.showDelete=true" ng-mouseleave="configureView.showDelete=false" ng-repeat="item in configureView.sensorsInUse">
               <md-icon ng-if="item.iconType=='font'">{{item.icon}}</md-icon>

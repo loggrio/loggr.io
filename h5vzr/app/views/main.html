@@ -1,4 +1,4 @@
-<div layout="column" ng-repeat="chart in main.chartConfig">
+<div layout="column" ng-repeat="chart in main.chartConfigs">
   <div>
 <!--     <flip class="flip-panel">
   <flip-panel> -->
@@ -29,7 +29,7 @@
 <flip-panel layout-align="center start">
   <md-card>
     <md-card-content>
-      <h2>Übersicht zu {{main.chartConfig.options.title.text}}</h2>
+      <h2>Übersicht zu {{main.chartConfigs.options.title.text}}</h2>
       <p>Höchsttemperatur: <b>{{main.flipChart.dataMax}}°C</b></p>
       <p>Tiefsttemperatur: <b>{{main.flipChart.dataMin}}°C</b></p>
       <p>Durchschnittstemperatur: <b>{{main.flipChart.dataAvg | number: 2}}°C</b></p>

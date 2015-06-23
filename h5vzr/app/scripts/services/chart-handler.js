@@ -11,7 +11,7 @@ angular.module('loggrioApp')
 .service('chartHandler', function ($interval, $timeout, Customer, Metering, notify, util, zoom, ChartConfig) {
   var self = this;
 
-  this.chartConfig = [];
+  this.chartConfigs = [];
   this.flipChart = {};
   this.sensors = [];
   this.sensorsInUse = [];
@@ -21,7 +21,7 @@ angular.module('loggrioApp')
   this.initialize = function() {
     self.stopReload();
     self.customerId = Customer.getCurrentId();
-    self.chartConfig.splice(0,self.chartConfig.length);
+    self.chartConfigs.splice(0,self.chartConfigs.length);
     self.sensors.splice(0,self.sensors.length);
     self.sensorsInUse.splice(0,self.sensorsInUse.length);
   };
@@ -55,7 +55,7 @@ angular.module('loggrioApp')
         Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}})
           .$promise.then(function (meterings) {
 
-            var chart = self.chartConfig[index].getHighcharts();
+            var chart = self.chartConfigs[index].getHighcharts();
             var data = util.meteringToChartData(meterings);
             chart.series[0].setData(data, true);
 
