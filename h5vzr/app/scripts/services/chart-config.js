@@ -40,6 +40,7 @@ angular.module('loggrioApp')
         seriesName = 'Luftfeuchtigkeit';
       break;
       default:
+        // TODO: add default object
         console.log('Unbekanner Sensor');
     }
 

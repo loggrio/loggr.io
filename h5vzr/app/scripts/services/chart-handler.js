@@ -46,7 +46,6 @@ angular.module('loggrioApp')
 
       //go through all sensors in use to generate acording charts
       angular.forEach(self.sensorsInUse, function(sensor, index) {
-        console.log(sensor.type + ', ' + sensor.id);
         self.chartConfig[index] = new ChartConfig(sensor);
         //get metering to acording sensor
         Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}})

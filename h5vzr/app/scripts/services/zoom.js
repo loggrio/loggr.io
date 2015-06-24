@@ -104,7 +104,6 @@ angular.module('loggrioApp')
       if (!chart) {
         return;
       }
-      console.log(lastPoint);
       var extremes = chart.xAxis[0].getExtremes();
       var max = extremes.max;
       var min = extremes.min;
