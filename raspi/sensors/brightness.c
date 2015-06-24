@@ -64,9 +64,8 @@ uchar get_ADC_Result()
   else
   {
     dataState = DATA_NOT_GOOD;
-    return 0;
+    return -1;
   }
-
 }
 
 int main(void)
@@ -88,10 +87,11 @@ int main(void)
   analogVal = get_ADC_Result();
 
   // most times when analogVal = 0 the brightness sensor isn't connected to the Raspberry
-  if(analogVal == 0)
+  if(analogVal == -1)
   {
+    delay(10);
     analogVal = get_ADC_Result();
-    if(analogVal == 0){
+    if(analogVal == -1){
       fprintf(stderr, "brightness maybe not connected!");
       return 3;
     }
