@@ -45,8 +45,6 @@ class Sensor:
         self.unit = unit
         self.func = func
         self.gen = gen
-        if gen:
-            self.gen = gen()
         self.script = script
         self.cache = deque([], cache_size)
         self.last_metering = 0.0
@@ -118,29 +116,32 @@ class Sensor:
             value = str(self.func())
             log_info('metering of ' + self.type + ' sensor: ' + value)
             return value
-        elif self.gen is not None:
+
+        if self.gen is not None:
             value = str(self.gen.next())
             log_info('metering of ' + self.type + ' sensor: ' + value)
             return value
+
+        command = PATH + self.script
+        try:
+            subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError, cpe:
+            # catch and treat wiringPi errors
+            # catch and treat open device file errors of mounted devices
+            # catch and treat read errors on devices
+            treat_sensor_errors(cpe)
+            return None
+        except OSError, ose:
+            # catch and treat os errors, e.g. file-not-found
+            treat_os_errors(ose)
+            return None
         else:
-            command = PATH + self.script
-            try:
-                subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
-            except subprocess.CalledProcessError, cpe:
-                # catch and treat wiringPi errors
-                # catch and treat open device file errors of mounted devices
-                # catch and treat read errors on devices
-                treat_sensor_errors(cpe)
-            except OSError, ose:
-                # catch and treat os errors, e.g. file-not-found
-                treat_os_errors(ose)
-            else:
-                good_data = self.__check(subproc_output)
-                if good_data is True:
-                    log_info('metering of ' + self.type + ' sensor: ' + str(subproc_output))
-                    return subproc_output
-                else:
-                    return 'false_data'
+            # check if data is good
+            if self.__check(subproc_output):
+                log_info('metering of ' + self.type + ' sensor: ' + str(subproc_output))
+                return subproc_output
+
+            return False
 
     def __send(self, payload):
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
@@ -157,16 +158,20 @@ class Sensor:
             return r.status_code
 
     def meter_and_send(self):
-        counter = 0
-        value = 'false_data'
+        value = self.__meter()
 
-        while value == 'false_data' and counter < 5:
-            value = self.__meter()
-            counter = counter + 1
-
-        if counter == 5:
-            treat_sensor_broken_errors(self.type)
+        # return if meter raises an exception
+        if value is None:
             return
+
+        # remeter max 5 times on bad data
+        counter = 1
+        while value is False:
+            value = self.__meter()
+            counter += 1
+            if counter == 5:
+                treat_sensor_broken_errors(self.type)
+                return
 
         payload = {'sensorId': self.id,
                    'time': str(datetime.now()),
