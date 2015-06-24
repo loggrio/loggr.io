@@ -71,11 +71,9 @@ angular.module('loggrioApp')
 
                     angular.forEach(data, function (value) {
                       if(shift){
-                        zoom.shift(self.chartConfig[index].getHighcharts(), value[0]);
+                        zoom.shift(chart, value[0]);
                       }
-                        $timeout(chart.series[0].addPoint(value, true, false), 1000);
-
-
+                      $timeout(chart.series[0].addPoint(value, true, false), 1000);
                     });
                   }
                 });
