@@ -8,7 +8,7 @@
 * Service in the loggrioApp.
 */
 angular.module('loggrioApp')
-.service('chartHandler', function ($interval, $timeout, Customer, Metering, notify, util, zoom, ChartConfig) {
+.service('chartHandler', function ($interval, $timeout, Customer, Metering, notify, util, zoom, chartConfig) {
   var self = this;
 
   this.charts = [];
@@ -54,18 +54,19 @@ angular.module('loggrioApp')
       // go through all sensors in use to generate acording charts
       angular.forEach(self.sensorsInUse, function(sensor, index) {
         self.charts[index] = {
-          default: new ChartConfig(sensor),
-          average: new ChartConfig(sensor)
+          default: chartConfig.getSplineChartConfig(sensor),
+          average: chartConfig.getColumnChartConfig(sensor)
         };
         // get metering to acording sensor
         Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}})
           .$promise.then(function (meterings) {
-            console.log(self.charts);
             var chart = self.charts[index].default.getHighcharts();
             var averageChart = self.charts[index].average.getHighcharts();
-            var data = util.meteringToChartData(meterings);
+            var data = util.meteringToChartData(meterings).default;
+            console.log(data);
+            var averageData = util.meteringToChartData(meterings).averageWeek;
             chart.series[0].setData(data, true);
-            averageChart.series[0].setData(data,true);
+            averageChart.series[0].setData(averageData, true);
 
             var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
             var shift;
@@ -78,8 +79,7 @@ angular.module('loggrioApp')
                   if (meterings.length) {
                     lastTime = meterings[meterings.length - 1].time;
 
-                    var data = util.meteringToChartData(meterings);
-
+                    var data = util.meteringToChartData(meterings).default;
                     angular.forEach(data, function (value) {
                       if(shift){
                         zoom.shift(chart, value[0]);
