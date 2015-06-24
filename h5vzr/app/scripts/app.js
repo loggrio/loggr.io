@@ -11,14 +11,11 @@
 angular
   .module('loggrioApp', [
     'ngRoute',
-    'ngAnimate',
-    'ngAria',
-    'ngMaterial',
     'ngMessages',
-    'highcharts-ng',
     'lbServices',
-    'ng-sortable',
-    'ngMessages'
+    'ngMaterial',
+    'highcharts-ng',
+    'ng-sortable'
   ])
   .config(function ($routeProvider, $httpProvider, $mdThemingProvider, $mdIconProvider, LoopBackResourceProvider) {
 
