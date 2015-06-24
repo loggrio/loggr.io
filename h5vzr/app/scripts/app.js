@@ -17,7 +17,7 @@ angular
     'highcharts-ng',
     'ng-sortable'
   ])
-  .config(function ($routeProvider, $httpProvider, $mdThemingProvider, $mdIconProvider, LoopBackResourceProvider) {
+  .config(function ($routeProvider, $httpProvider, $mdThemingProvider, LoopBackResourceProvider) {
 
     $routeProvider
       .when('/', {
