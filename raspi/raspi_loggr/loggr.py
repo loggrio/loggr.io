@@ -3,18 +3,25 @@
 import time
 import imp
 import logging
+import requests
 from os import path
 from enum import Enum
-
 from .sensor import Sensor
 from ConfigParser import ConfigParser
 from .util import set_status_led
 from .util import LedStatusTypes
 from .util import SensorTypes
+from .util import treat_requests_errors
 from .util import treat_missing_config_errors
 from .util import treat_pairing_errors
+from .util import log_info
 
 TIME_BETWEEN_METERINGS = 60
+TIME_BETWEEN_API_TESTS = 60
+
+API = 'http://0.0.0.0:3000/api/'
+CUSTOMERS = 'Customers/'
+EXISTS = '/exists'
 
 HOME_DIR = path.expanduser("~")
 CONFIG_FILE = HOME_DIR + '/.loggrrc'
@@ -48,7 +55,17 @@ def main():
         treat_pairing_errors()
         return
 
-    # TODO: Check token and userid by sending a get request whether user exists or smth else
+    headers = {'Content-Type': 'application/json', 'Authorization': token}
+    api_offline = True
+    while api_offline:
+        try:
+            requests.get(API + CUSTOMERS + userid + EXISTS, headers=headers)
+            api_offline = False
+        except requests.exceptions.RequestException, re:
+            treat_requests_errors(re)
+            log_info('Api not reachable. Try again in ' + str(TIME_BETWEEN_API_TESTS) + ' seconds.')
+            api_offline = True
+            time.sleep(TIME_BETWEEN_API_TESTS)
 
     sensors = {}
 
