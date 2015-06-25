@@ -74,8 +74,29 @@ def main():
 
     # Iterate through sensor configs from config file
     for sensor in sensor_configs:
-        # Get script name, location and unit from config file
-        script, location, unit = config.get('SENSORS', sensor).split(',')
+        # get script name, location and unit from config file
+        script, location, unit = config.get('SENSORS', sensor).split(',')[:3]
+
+        length = len(config.get('SENSORS', sensor).split(','))
+
+        # get minimum
+        if length > 3:
+            minimum = int(config.get('SENSORS', sensor).split(',')[3])
+        else:
+            minimum = None
+
+        # get maximum
+        if length > 4:
+            maximum = config.get('SENSORS', sensor).split(',')[4]
+        else:
+            maximum = None
+
+        # get deviation
+        if length > 5:
+            deviation = config.get('SENSORS', sensor).split(',')[5]
+        else:
+            deviation = None
+
         # Get script suffix
         script_suffix = script.split('.')[1]
 
@@ -85,10 +106,10 @@ def main():
             # Get function reference and import module generically
             func = imp.load_source('meter', p)
             # Create sensor generically and save it into a dictionary
-            sensors[sensor] = Sensor(sensor, location, unit, func=func.meter)
+            sensors[sensor] = Sensor(sensor, location, unit, minimum, maximum, deviation, func=func.meter)
         else:
             # Create sensor generically and save it into a dictionary
-            sensors[sensor] = Sensor(sensor, location, unit, script=script)
+            sensors[sensor] = Sensor(sensor, location, unit, minimum, maximum, deviation, script=script)
 
     while True:
         # Iterate through sensor config values

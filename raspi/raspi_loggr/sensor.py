@@ -38,7 +38,10 @@ if config.has_option('AUTH', 'userid'):
 class Sensor:
     """docstring for Sensor"""
 
-    def __init__(self, sensor_type, location, unit, func=None, gen=None, script=None, cache_size=1440):
+    def __init__(self, sensor_type, location, unit,
+                 minimum=None, maximum=None, deviation=None,
+                 func=None, gen=None, script=None,
+                 cache_size=1440):
         self.id = self.__db_sync(sensor_type, location, unit)
         self.location = location
         self.type = sensor_type
@@ -47,8 +50,10 @@ class Sensor:
         self.gen = gen
         self.script = script
         self.cache = deque([], cache_size)
-        self.last_metering = 0.0
-        self.first_metering = True
+        self.last_metering = None
+        self.minimum = minimum
+        self.maximum = maximum
+        self.deviation = deviation
 
     def __db_sync(self, sensor_type, location, unit):
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
@@ -70,46 +75,22 @@ class Sensor:
 
     def __check(self, metering):
         metering = float(metering)
-        if self.first_metering is True:
-            self.first_metering = False
-            self.last_metering = metering
+
+        # check deviation
+        if self.deviation and self.last_metering and abs(self.last_metering - metering) > self.deviation:
             return False
-        else:
-            if self.type == SensorTypes.temperature.name:
-                if metering < (self.last_metering - 10.0) or metering > (self.last_metering + 10.0):
-                    return False
-                elif metering < -270.0:
-                    return False
-                elif metering > 200.0:
-                    return False
-                else:
-                    self.last_metering = metering
-                    return True
-            if self.type == SensorTypes.humidity.name:
-                if metering < (self.last_metering - 10.0) or metering > (self.last_metering + 10.0):
-                    return False
-                elif metering < 0.0:
-                    return False
-                elif metering > 100.0:
-                    return False
-                else:
-                    self.last_metering = metering
-                    return True
-            if self.type == SensorTypes.brightness.name:
-                if metering > 210.0:
-                    return False
-                elif metering < 0.0:
-                    return False
-                else:
-                    return True
-            if self.type == SensorTypes.pressure.name:
-                if metering < (self.last_metering - 10.0) or metering > (self.last_metering + 10.0):
-                    return False
-                elif metering < 0.0:
-                    return False
-                else:
-                    self.last_metering = metering
-                    return True
+
+        # check minimum
+        if self.minimum and metering < self.minimum:
+            return False
+
+        # check maximum
+        if self.maximum and metering > self.maximum:
+            return False
+
+        self.last_metering = metering
+
+        return True
 
     def __meter(self):
         if self.func is not None:
