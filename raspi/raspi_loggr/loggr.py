@@ -87,13 +87,13 @@ def main():
 
         # get maximum
         if length > 4:
-            maximum = config.get('SENSORS', sensor).split(',')[4]
+            maximum = int(config.get('SENSORS', sensor).split(',')[4])
         else:
             maximum = None
 
         # get deviation
         if length > 5:
-            deviation = config.get('SENSORS', sensor).split(',')[5]
+            deviation = int(config.get('SENSORS', sensor).split(',')[5])
         else:
             deviation = None
 
