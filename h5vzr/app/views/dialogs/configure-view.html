@@ -1,51 +1,46 @@
 <md-dialog aria-label="Ansicht konfigurieren" flex="50">
-  <div>
-    <md-dialog-content>
-      <md-subheader><md-icon>edit</md-icon>Ansicht konfigurieren</md-subheader>
-      <!-- content of the dialog -->
-      <div layout="row">
-        <md-card flex>
-          <md-card-content>
-            <md-subheader class="md-primary">Angezeigte Sensoren</md-subheader>
-            <md-list ng-sortable=configureView.inUseConfig>
-              <md-list-item class="md-2-line" data-id="{{item.id}}" ng-mouseenter="configureView.showDelete=true" ng-mouseleave="configureView.showDelete=false" ng-repeat="item in configureView.sensorsInUse">
-                <md-icon ng-if="item.iconType=='font'">{{item.icon}}</md-icon>
-                <md-icon ng-if="item.iconType=='img'">
-                  <img src="{{item.icon}}" class="sortable-list-icon">
-                </md-icon>
-                <div class="md-list-item-text">
-                  <h3>{{item.name}}</h3>
-                  <p>{{item.location}}</p>
-                </div>
-                <md-icon ng-show="configureView.showDelete" ng-click="configureView.deleteItem($index)" class="pointer">clear</md-icon>
-                <md-divider ng-if="!$last"></md-divider>
-              </md-list-item>
-            </md-list>
-          </md-card-content>
-        </md-card>
-        <md-card flex>
-          <md-card-content>
-            <md-subheader class="md-primary">Verfügbare Sensoren</md-subheader>
-            <md-list ng-sortable="configureView.availableConfig">
-              <md-list-item class="md-2-line" data-id="{{item.id}}" ng-repeat="item in configureView.sensorsAvailable">
-                <md-icon ng-if="item.iconType=='font'">{{item.icon}}</md-icon>
-                <md-icon ng-if="item.iconType=='img'">
-                  <img src={{item.icon}} class="sortable-list-icon">
-                </md-icon>
-                <div class="md-list-item-text">
-                  <h3>{{item.name}}</h3>
-                  <p>{{item.location}}</p>
-                </div>
-                <md-divider ng-if="!$last"></md-divider>
-              </md-list-item>
-            </md-list>
-          </md-card-content>
-        </md-card>
-      </div>
-      <!-- end content of the dialog -->
-    </md-dialog-content>
-  </div>
-  <div flex></div>
+  <md-dialog-content>
+    <md-subheader><md-icon>edit</md-icon>&nbsp;Ansicht konfigurieren</md-subheader>
+    <div layout="row">
+      <md-card flex>
+        <md-card-content>
+          <md-subheader class="md-primary">Angezeigte Sensoren</md-subheader>
+          <md-list ng-sortable=configureView.inUseConfig>
+            <md-list-item class="md-2-line" data-id="{{item.id}}" ng-mouseenter="configureView.showDelete=true" ng-mouseleave="configureView.showDelete=false" ng-repeat="item in configureView.sensorsInUse">
+              <md-icon ng-if="item.iconType=='font'">{{item.icon}}</md-icon>
+              <md-icon ng-if="item.iconType=='img'">
+                <img src="{{item.icon}}" class="sortable-list-icon">
+              </md-icon>
+              <div class="md-list-item-text">
+                <h3>{{item.name}}</h3>
+                <p>{{item.location}}</p>
+              </div>
+              <md-icon ng-show="configureView.showDelete" ng-click="configureView.deleteItem($index)" class="pointer">clear</md-icon>
+              <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+          </md-list>
+        </md-card-content>
+      </md-card>
+      <md-card flex>
+        <md-card-content>
+          <md-subheader class="md-primary">Verfügbare Sensoren</md-subheader>
+          <md-list ng-sortable="configureView.availableConfig">
+            <md-list-item class="md-2-line" data-id="{{item.id}}" ng-repeat="item in configureView.sensorsAvailable">
+              <md-icon ng-if="item.iconType=='font'">{{item.icon}}</md-icon>
+              <md-icon ng-if="item.iconType=='img'">
+                <img src={{item.icon}} class="sortable-list-icon">
+              </md-icon>
+              <div class="md-list-item-text">
+                <h3>{{item.name}}</h3>
+                <p>{{item.location}}</p>
+              </div>
+              <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+          </md-list>
+        </md-card-content>
+      </md-card>
+    </div>
+  </md-dialog-content>
   <div class="md-actions" layout="row">
     <md-button ng-click="configureView.submit()" class="md-primary">
       Speichern
