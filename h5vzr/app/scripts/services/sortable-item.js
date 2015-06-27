@@ -8,7 +8,8 @@
  * Value in the loggrioApp.
  */
 angular.module('loggrioApp')
-  .value('SortableItem', function(sensor){
+  // TODO: replace with service
+  .value('SortableItem', function(sensor) {
     var item;
     switch (sensor.type) {
       case 'temperature':
