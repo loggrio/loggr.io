@@ -42,11 +42,10 @@ angular.module('loggrioApp')
         data.averageWeek.push([dayIndex, days[dayIndex].value / days[dayIndex].count]);
       }
 
-      console.log(data.averageWeek);
       return data;
     };
 
-    this.sensorIsInUse = function(sensor){
+    this.sensorIsInUse = function(sensor) {
       var position = -1; //not in Use
       var viewConfig = JSON.parse(localStorage.getItem('viewConfig'));
       if(viewConfig){

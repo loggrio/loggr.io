@@ -63,7 +63,6 @@ angular.module('loggrioApp')
             var chart = self.charts[index].default.getHighcharts();
             var averageChart = self.charts[index].average.getHighcharts();
             var data = util.meteringToChartData(meterings).default;
-            console.log(data);
             var averageData = util.meteringToChartData(meterings).averageWeek;
             chart.series[0].setData(data, true);
             averageChart.series[0].setData(averageData, true);

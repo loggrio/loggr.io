@@ -48,6 +48,7 @@ angular.module('loggrioApp')
         };
         break;
       default:
+        // TODO: Default Sensor
         console.log('Unknown Sensor');
     }
     return item;
