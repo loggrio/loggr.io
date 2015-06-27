@@ -74,26 +74,27 @@ def main():
 
     # Iterate through sensor configs from config file
     for sensor in sensor_configs:
+        data = config.get('SENSORS', sensor).split(',')
         # get script name, location and unit from config file
-        script, location, unit = config.get('SENSORS', sensor).split(',')[:3]
+        script, location, unit = data[:3]
 
-        length = len(config.get('SENSORS', sensor).split(','))
+        length = len(data)
 
         # get minimum
         if length > 3:
-            minimum = int(config.get('SENSORS', sensor).split(',')[3])
+            minimum = int(data[3])
         else:
             minimum = None
 
         # get maximum
         if length > 4:
-            maximum = int(config.get('SENSORS', sensor).split(',')[4])
+            maximum = int(data[4])
         else:
             maximum = None
 
         # get deviation
         if length > 5:
-            deviation = int(config.get('SENSORS', sensor).split(',')[5])
+            deviation = int(data[5])
         else:
             deviation = None
 
