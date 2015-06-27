@@ -39,7 +39,7 @@ angular.module('loggrioApp')
       });
 
       for(var dayIndex in days) {
-        data.averageWeek.push(Math.round(([dayIndex, days[dayIndex].value / days[dayIndex].count]) * 100) / 100);
+        data.averageWeek.push([dayIndex, Math.round((days[dayIndex].value / days[dayIndex].count) * 100) / 100]);
       }
 
       return data;
