@@ -23,9 +23,9 @@ angular.module('loggrioApp')
         var date = new Date(metering.time);
         var dayIndex = date.getDay();
         var value = metering.value;
-        //push all data in default dataMax
+        // push all data in default dataMax
         data.default.push([Date.parse(metering.time), value]);
-        //sum values of the same day in the last week
+        // sum values of the same day in the last week
         if(date >= oneWeekAgo){
           if(!days[dayIndex]){
             days[dayIndex] = {
@@ -46,7 +46,7 @@ angular.module('loggrioApp')
     };
 
     this.sensorIsInUse = function(sensor) {
-      var position = -1; //not in Use
+      var position = -1; // not in Use
       var viewConfig = JSON.parse(localStorage.getItem('viewConfig'));
       if(viewConfig){
         angular.forEach(viewConfig.sensorsInUse, function(sensorInUse, index){
@@ -54,7 +54,7 @@ angular.module('loggrioApp')
             position = index;
           }
         });
-      } else { //viewConfig non existing
+      } else { // viewConfig non existing
         position = -2;
       }
       return position;

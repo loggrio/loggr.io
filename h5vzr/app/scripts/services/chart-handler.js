@@ -38,7 +38,7 @@ angular.module('loggrioApp')
   this.goLive = function() {
     self.initialize();
     // get all sensors from the current customer
-    Customer.sensors({id: self.customerId}).$promise.then(function (sensors) {
+    return Customer.sensors({id: self.customerId}).$promise.then(function (sensors) {
       // generate list of all available sensors for the sortable list
       angular.forEach(sensors, function(sensor, index){
         self.sensors.push(sensor);
@@ -55,7 +55,11 @@ angular.module('loggrioApp')
       angular.forEach(self.sensorsInUse, function(sensor, index) {
         self.charts[index] = {
           default: chartConfig.getSplineChartConfig(sensor),
-          average: chartConfig.getColumnChartConfig(sensor)
+          average: chartConfig.getColumnChartConfig(sensor),
+          viewToggled: false,
+          viewToggle: function () {
+            this.viewToggled = !this.viewToggled;
+          }
         };
         // get metering to acording sensor
         Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}})

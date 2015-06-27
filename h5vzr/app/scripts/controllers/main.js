@@ -10,15 +10,13 @@
 angular.module('loggrioApp')
   .controller('MainCtrl', function ($rootScope, $location, Customer, chartHandler, zoom) {
 
+    var self = this;
+
     this.charts = chartHandler.charts;
     this.ranges = zoom.ranges;
 
-    this.changeChartView = function (chartIndex) {
-      if(this.charts[chartIndex].view === 'average'){
-        this.charts[chartIndex].view = 'default';
-      } else {
-        this.charts[chartIndex].view = 'average';
-      }
+    this.toggleChartView = function (chartIndex) {
+      self.charts[chartIndex].viewToggle();
     };
 
     this.selectRange = function(chartIndex, range){
