@@ -13,8 +13,7 @@ angular.module('loggrioApp')
     var tooltipSuffixText;
     var titleText;
     var seriesName;
-    var configStub = {};
-    configStub = {
+    var configStub = {
       id: '',
       options: {
         lang: {

@@ -61,18 +61,26 @@ angular.module('loggrioApp')
               this.viewToggled = !this.viewToggled;
             }
           };
+
           // get metering to acording sensor
           Customer.meterings({id: self.customerId, filter: {where: {sensorId: sensor.id}}})
             .$promise.then(function (meterings) {
+              // get highcharts objects
               var chart = self.charts[index].default.getHighcharts();
               var averageChart = self.charts[index].average.getHighcharts();
-              var data = util.meteringToChartData(meterings).default;
-              var averageData = util.meteringToChartData(meterings).averageWeek;
-              chart.series[0].setData(data, true);
+
+              // transform data
+              var data = util.meteringToChartData(meterings);
+              var defaultData = data.default;
+              var averageData = data.averageWeek;
+
+              // set data
+              chart.series[0].setData(defaultData, true);
               averageChart.series[0].setData(averageData, true);
 
               var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
               var shift;
+
               // live reload
               self.promises[sensor.id] = $interval(function () {
                 // shift on more than 5 dots

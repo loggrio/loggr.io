@@ -15,17 +15,20 @@ angular.module('loggrioApp')
         default: [],
         averageWeek: []
       };
+
       var days = [];
       var oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
       angular.forEach(meterings, function(metering) {
-        var date = new Date(metering.time);
-        var dayIndex = date.getDay();
+        var date = Date.parse(metering.time);
         var value = metering.value;
-        // push all data in default dataMax
-        data.default.push([Date.parse(metering.time), value]);
+
+        // push data to default chart
+        data.default.push([date, value]);
+
         // sum values of the same day in the last week
+        var dayIndex = new Date(date).getDay();
         if(date >= oneWeekAgo){
           if(!days[dayIndex]){
             days[dayIndex] = {
