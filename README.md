@@ -7,7 +7,8 @@ Requirements
 ```json
 {
   "node": ">=0.12",
-  "python": ">=2.6"
+  "python": ">=2.6",
+  "mongodb": ">=2.6"
 }
 ```
 
