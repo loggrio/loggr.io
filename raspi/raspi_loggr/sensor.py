@@ -17,12 +17,6 @@ from .util import SensorTypes
 from .util import log_error
 from .util import log_info
 
-PATH = 'sensors/'
-API = 'http://0.0.0.0:3000/api/'
-CUSTOMERS = 'Customers/'
-METERINGS = '/meterings'
-SENSORS = '/sensors'
-
 config = ConfigParser()
 
 HOME_DIR = path.expanduser("~")
@@ -33,6 +27,16 @@ if config.has_option('AUTH', 'token'):
     TOKEN = config.get('AUTH', 'token')
 if config.has_option('AUTH', 'userid'):
     USER_ID = config.get('AUTH', 'userid')
+if config.has_option('API', 'url'):
+    API = config.get('API', 'url')
+if config.has_option('API', 'customers'):
+    CUSTOMERS = config.get('API', 'customers')
+if config.has_option('API', 'meterings'):
+    METERINGS = config.get('API', 'meterings')
+if config.has_option('API', 'sensors'):
+    SENSORS = config.get('API', 'sensors')
+if config.has_option('API', 'path'):
+    PATH = config.get('API', 'path')
 
 
 class Sensor:
