@@ -28,10 +28,10 @@ def meter_pres():
     return value
 
 
-temperature = Sensor('temperature', 'Wohnzimmer', 'Celsius', func=meter_temp)
-brightness = Sensor('brightness', 'Wohnzimmer', 'Lumen', func=meter_bright)
-humidity = Sensor('humidity', 'Wohnzimmer', 'Percent', func=meter_humi)
-pressure = Sensor('pressure', 'Wohnzimmer', 'Pascal', func=meter_pres)
+temperature = Sensor('temperature', 'Wohnzimmer', 'grad_celsius', func=meter_temp)
+brightness = Sensor('brightness', 'Wohnzimmer', 'lumen', func=meter_bright)
+humidity = Sensor('humidity', 'Wohnzimmer', 'percent', func=meter_humi)
+pressure = Sensor('pressure', 'Wohnzimmer', 'hectopascal', func=meter_pres)
 
 
 def main():
