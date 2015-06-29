@@ -61,5 +61,5 @@ angular.module('loggrioApp')
       }
       return item;
     };
-    
+
   });
