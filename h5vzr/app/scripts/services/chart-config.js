@@ -50,7 +50,7 @@ angular.module('loggrioApp')
       }]
     };
 
-    var setUnit = function (sensorUnit) {
+    function setUnit(sensorUnit) {
       switch (sensorUnit) {
         case 'grad_celsius':
           return '°C';
@@ -63,7 +63,7 @@ angular.module('loggrioApp')
         default:
           return '';
       }
-    };
+    }
 
     var setChartTexts = function (sensor) {
       var unitText = setUnit(sensor.unit);
