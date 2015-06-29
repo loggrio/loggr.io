@@ -90,3 +90,28 @@
   margin-left: 0;
   margin-right: 0;
 }
+
+.ng-hide-remove, .ng-show-remove {
+  -webkit-transition:all linear 1s;
+  -moz-transition:all linear 1s;
+  -o-transition:all linear 1s;
+  transition:all linear 1s;
+
+}
+.ng-hide-add.ng-hide-add-active,
+.ng-hide-remove {
+  opacity:0;
+}
+.ng-hide-add,
+.ng-hide-remove.ng-hide-remove-active {
+  opacity:1;
+}
+
+.ng-show-add.ng-show-add-active,
+.ng-show-remove {
+  opacity:1;
+}
+.ng-show-add,
+.ng-show-remove.ng-show-remove-active {
+  opacity:0;
+}

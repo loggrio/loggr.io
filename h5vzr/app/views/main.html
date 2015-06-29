@@ -1,5 +1,5 @@
 <div layout="column" ng-repeat="chart in main.charts">
-  <md-card ng-show="!chart.viewToggled">
+  <md-card ng-hide="chart.viewToggled">
     <md-card-content class="range-button" layout-align="center start">
       <div layout="row">
         <md-button class="md-icon-button" ng-click="main.zoomIn($index)">
