@@ -9,8 +9,7 @@
  */
 angular.module('loggrioApp')
   .controller('ButtonMenuCtrl', function ($mdDialog) {
-
-
+    
     this.pairingDialog = function (ev) {
       $mdDialog.show({
         clickOutsideToClose: true,

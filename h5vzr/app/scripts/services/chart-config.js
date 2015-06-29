@@ -59,7 +59,7 @@ angular.module('loggrioApp')
     /**
      * Set texts for chart labels
      */
-    var setChartTexts = function (sensor) {
+    function setChartTexts(sensor) {
       var unitText = setUnit(sensor.unit);
 
       switch (sensor.type) {
@@ -93,7 +93,7 @@ angular.module('loggrioApp')
           tooltipSuffixText = '';
           seriesName = '';
       }
-    };
+    }
 
     /**
      * Set charttype to spline and fill config-scaffold with labels
