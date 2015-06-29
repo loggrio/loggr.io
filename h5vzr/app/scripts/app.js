@@ -17,7 +17,7 @@ angular
     'highcharts-ng',
     'ng-sortable'
   ])
-  .config(function ($routeProvider, $httpProvider, $mdThemingProvider, LoopBackResourceProvider) {
+  .config(function ($routeProvider, $httpProvider, $mdIconProvider, $mdThemingProvider, LoopBackResourceProvider) {
 
     Highcharts.setOptions({
       global: {
@@ -52,6 +52,8 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+
+    $mdIconProvider.icon('chart_line', 'icons/ic_chartline.svg', 24);
 
     $mdThemingProvider.theme('default')
       .primaryPalette('teal');

@@ -65,11 +65,10 @@
 }
 
 .fading.ng-hide-remove, .fading.ng-show-remove {
-  -webkit-transition:all linear 1s;
-  -moz-transition:all linear 1s;
-  -o-transition:all linear 1s;
-  transition:all linear 1s;
-
+  -webkit-transition:all linear 0.7s;
+  -moz-transition:all linear 0.7s;
+  -o-transition:all linear 0.7s;
+  transition:all linear 0.7s;
 }
 .fading.ng-hide-add.ng-hide-add-active,
 .fading.ng-hide-remove {

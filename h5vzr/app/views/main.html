@@ -1,6 +1,8 @@
 <div layout="column" ng-repeat="chart in main.charts">
-  <md-card class="fading" ng-hide="chart.viewToggled">
-    <md-card-content class="range-button" layout-align="center start">
+<!--  <md-card class="fading" ng-hide="chart.viewToggled"> -->
+  <md-card>
+    <!-- front side -->
+    <md-card-content ng-hide="chart.viewToggled" class="fading range-button" layout-align="center start">
       <div layout="row">
         <md-button class="md-icon-button" ng-click="main.zoomIn($index)">
           <md-icon>zoom_in</md-icon>
@@ -25,18 +27,18 @@
       </div>
       <highchart id="{{$index}}" config="chart.default"></highchart>
     </md-card-content>
-  </md-card>
-  <md-card class="fading" ng-show="chart.viewToggled">
-    <md-card-content class="range-button" layout-align="center start">
+    <!-- front side end -->
+    <!-- back side -->
+    <md-card-content ng-show="chart.viewToggled" class="fading range-button" layout-align="center start">
       <div layout="row">
-        <md-button ng-repeat="range in main.ranges" ng-click="main.selectRange($parent.$index, range)">{{range.name}}</md-button>
         <div flex></div>
-        <md-button class="md-icon-button" ng-click="main.toggleChartView($index)">
-          <md-icon>equalizer</md-icon>
+        <md-button ng-click="main.toggleChartView($index)" aria-label="Line Chart">
+          <md-icon md-svg-icon="chart_line"/>
         </md-button>
       </div>
       <highchart id="{{$index}}" config="chart.average"></highchart>
     </md-card-content>
+    <!-- back side end -->
   </md-card>
 </div>
 
