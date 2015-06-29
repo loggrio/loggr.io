@@ -54,26 +54,26 @@ angular.module('loggrioApp')
       switch (sensor.type) {
         case 'temperature':
           titleText = 'Temperatur' + ' ' + sensor.location;
-          yAxisText = 'Temperatur (°C)';
+          yAxisText = 'Temperatur (' + sensor.unit + ')';
           tooltipSuffixText = ' °C';
           seriesName = 'Temperatur';
           break;
         case 'pressure':
           titleText = 'Luftdruck' + ' ' + sensor.location;
-          yAxisText = 'Luftdruck (hPa)';
-          tooltipSuffixText = ' hPa';
+          yAxisText = 'Luftdruck (' + sensor.unit + ')';
+          tooltipSuffixText = ' ' + sensor.unit;
           seriesName = 'Luftdruck';
         break;
         case 'brightness':
           titleText = 'Helligkeit' + ' ' + sensor.location;
-          yAxisText = 'Helligkeit (lm)';
-          tooltipSuffixText = ' lm';
+          yAxisText = 'Helligkeit (' + sensor.unit + ')';
+          tooltipSuffixText = ' ' + sensor.unit;
           seriesName = 'Helligkeit';
         break;
         case 'humidity':
           titleText = 'Luftfeuchtigkeit' + ' ' + sensor.location;
-          yAxisText = 'Relative Luftfeuchtigkeit (%)';
-          tooltipSuffixText = ' %';
+          yAxisText = 'Relative Luftfeuchtigkeit (' + sensor.unit + ')';
+          tooltipSuffixText = ' ' + sensor.unit;
           seriesName = 'Luftfeuchtigkeit';
         break;
         default:
