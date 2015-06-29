@@ -28,6 +28,14 @@ CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
 
 def main():
+    """Main method of loggr.io
+
+    1. Start logging
+    2. Check for valid config file
+    3. Check for running API
+    4. Create sensors
+    5. (loop) meter and send
+    """
     logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s', filename='loggr.log', level=logging.INFO)
     logging.info('Logging (re)started')
 

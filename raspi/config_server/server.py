@@ -22,6 +22,13 @@ CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
 @server.route('/', methods=['POST'])
 def save_token_and_userid():
+    """Save token and user id in config file
+
+    Returns:
+        status (str): json status code
+            error='format' or error='arguments" - if an error occured
+            status='ok' - if everything was fine
+    """
     config.read(CONFIG_FILE)
 
     regex_userid = re.compile(r'^[a-z,0-9]{24}$')
@@ -52,6 +59,7 @@ def save_token_and_userid():
 
 
 def init_config():
+    """Read existing config file or create a default one"""
     # If config file not exists create a default one
     if not path.isfile(CONFIG_FILE):
         log_info('No config file found, create default one')
@@ -83,6 +91,11 @@ def init_config():
 
 
 def main():
+    """Main method of config server
+
+    1. Start logging
+    2. Start server
+    """
     logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s', filename='server.log', level=logging.INFO)
     init_config()
     server.run(host='0.0.0.0', debug=True)
