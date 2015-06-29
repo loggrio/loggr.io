@@ -118,9 +118,6 @@ angular.module('loggrioApp')
       chartConfig.options.chart = {
         type: 'column'
       };
-      chartConfig.options.xAxis = {
-        categories: configStub.options.lang.weekdays
-      };
       chartConfig.options.yAxis.title.text = yAxisText;
       chartConfig.options.tooltip.valueSuffix = tooltipSuffixText;
       chartConfig.series[0].name = seriesName + ' im Durchschnitt';

@@ -72,11 +72,13 @@ angular.module('loggrioApp')
               // transform data
               var data = util.meteringToChartData(meterings);
               var defaultData = data.default;
-              var averageData = data.averageWeek;
+              var averageData = data.averageWeek.values;
+              var averageCategories = data.averageWeek.categories;
 
               // set data
               chart.series[0].setData(defaultData, true);
               averageChart.series[0].setData(averageData, true);
+              averageChart.xAxis[0].setCategories(averageCategories, true);
 
               var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
               var shift;

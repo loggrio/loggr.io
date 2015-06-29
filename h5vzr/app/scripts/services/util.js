@@ -10,10 +10,34 @@
 angular.module('loggrioApp')
   .service('util', function () {
 
+    function getWeekDay(weekDay) {
+      switch (weekDay) {
+          case '0':
+            return 'Sonntag';
+          case '1':
+            return 'Montag';
+          case '2':
+            return 'Dienstag';
+          case '3':
+            return 'Mittwoch';
+          case '4':
+            return 'Donnerstag';
+          case '5':
+            return 'Freitag';
+          case '6':
+            return 'Samstag';
+          default:
+            return 'Falscher Tag';
+      }
+    }
+
     this.meteringToChartData = function (meterings) {
       var data = {
         default: [],
-        averageWeek: []
+        averageWeek: {
+          values: [],
+          categories: []
+        }
       };
 
       var days = [];
@@ -42,7 +66,8 @@ angular.module('loggrioApp')
       });
 
       for(var dayIndex in days) {
-        data.averageWeek.push([dayIndex, Math.round((days[dayIndex].value / days[dayIndex].count) * 100) / 100]);
+        data.averageWeek.values.push(Math.round((days[dayIndex].value / days[dayIndex].count) * 100) / 100);
+        data.averageWeek.categories.push(getWeekDay(dayIndex));
       }
 
       return data;
