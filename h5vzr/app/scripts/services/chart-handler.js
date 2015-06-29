@@ -19,10 +19,14 @@ angular.module('loggrioApp')
 
   // deletes items of the arrays and stops all running intervals
   this.initialize = function() {
+    self.stopReload();
     self.customerId = Customer.getCurrentId();
     self.chartConfig.splice(0,self.chartConfig.length);
     self.sensors.splice(0,self.sensors.length);
     self.sensorsInUse.splice(0,self.sensorsInUse.length);
+  };
+
+  this.stopReload = function (){
     for (var id in self.promises) {
       $interval.cancel(self.promises[id]);
     }

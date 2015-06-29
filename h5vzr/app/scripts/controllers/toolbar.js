@@ -8,7 +8,7 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('ToolbarCtrl', function ($location, $mdDialog, Customer) {
+  .controller('ToolbarCtrl', function ($location, $mdDialog, Customer, chartHandler) {
 
     this.isAuthed =  function () {
       return Customer.isAuthenticated();
@@ -16,6 +16,7 @@ angular.module('loggrioApp')
 
     this.logout = function () {
       Customer.logout(function () {
+        chartHandler.stopReload();
         $location.path('/login');
       });
     };
