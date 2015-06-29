@@ -32,7 +32,7 @@
       <div layout="row">
         <div flex></div>
         <md-button ng-click="main.toggleChartView($index)">
-          <md-icon md-svg-icon="chart_line"/>
+          <md-icon md-svg-icon="chart_line" aria-label="chart-line"></md-icon>
         </md-button>
       </div>
       <highchart id="{{$index}}" config="chart.average"></highchart>

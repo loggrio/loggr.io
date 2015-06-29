@@ -18,22 +18,25 @@ angular.module('loggrioApp')
     this.sensorsInUse = [];
     this.promises = [];
 
-  // deletes items of the arrays and stops all running intervals
-  this.initialize = function() {
-    self.stopReload();
-    self.customerId = Customer.getCurrentId();
-    self.charts.splice(0,self.charts.length);
-    self.chartConfigs.splice(0,self.chartConfigs.length);
-    self.averageChartConfigs.splice(0,self.averageChartConfigs.length);
-    self.sensors.splice(0,self.sensors.length);
-    self.sensorsInUse.splice(0,self.sensorsInUse.length);
-  };
+    // disco toast toggled
+    var toggled = false;
 
-  this.stopReload = function (){
-    for (var id in self.promises) {
-      $interval.cancel(self.promises[id]);
-    }
-  };
+    // deletes items of the arrays and stops all running intervals
+    this.initialize = function() {
+      self.stopReload();
+      self.customerId = Customer.getCurrentId();
+      self.charts.splice(0,self.charts.length);
+      self.chartConfigs.splice(0,self.chartConfigs.length);
+      self.averageChartConfigs.splice(0,self.averageChartConfigs.length);
+      self.sensors.splice(0,self.sensors.length);
+      self.sensorsInUse.splice(0,self.sensorsInUse.length);
+    };
+
+    this.stopReload = function (){
+      for (var id in self.promises) {
+        $interval.cancel(self.promises[id]);
+      }
+    };
 
     this.goLive = function() {
       self.initialize();
@@ -89,6 +92,7 @@ angular.module('loggrioApp')
                 shift = chart.series[0].data.length > 5;
                 Customer.meterings({id: self.customerId, filter: {where: {time: {gt: lastTime}, sensorId: sensor.id}}})
                   .$promise.then(function (meterings) {
+
                     if (meterings.length) {
                       lastTime = meterings[meterings.length - 1].time;
 
@@ -100,6 +104,16 @@ angular.module('loggrioApp')
                         $timeout(chart.series[0].addPoint(value, true, false), 1000);
                       });
                     }
+
+                    // check if disconnected
+                    if (!toggled && util.isDisconnected(lastTime)) {
+                      toggled = true;
+                      notify.toastDisconnected();
+                    } else if (toggled && !util.isDisconnected(lastTime)) {
+                      toggled = false;
+                      notify.toastReconnected();
+                    }
+
                   });
               }, 10000);
             });

@@ -88,4 +88,12 @@ angular.module('loggrioApp')
       return position;
     };
 
+    this.isDisconnected = function (lastTime) {
+      // TODO: move to config file
+      var delay = 120000;
+      var nowTime = Date.now();
+
+      return (nowTime - Date.parse(lastTime)) > delay;
+    };
+
   });
