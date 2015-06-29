@@ -18,6 +18,11 @@ angular.module('loggrioApp')
     this.confirmPass = '';
     this.newPWMatch = false;
 
+    /**
+     * Once password changing is initiated, user can only cancel by
+     * clicking on abort an closing the dialog, otherwise fields whould
+     * get hidden again and the password would be set to empty string
+     */
     this.startChangingPassword = function () {
       if (!this.passChanging) {
         this.passChanging = !this.passChanging;
@@ -28,7 +33,6 @@ angular.module('loggrioApp')
     };
 
     this.checkNewCred = function () {
-
       if (this.confirmPass === this.oldPass) {
         this.newPWMatch = true;
       } else {
@@ -44,15 +48,15 @@ angular.module('loggrioApp')
       }
     };
 
-    this.cancel = function () {
-      $mdDialog.cancel();
-    };
-
     this.submit = function () {
       Customer.prototype$updateAttributes({ id: this.customer.id }, this.customer, function (user) {
         $rootScope.user = user;
       });
       $mdDialog.hide();
+    };
+
+    this.cancel = function () {
+      $mdDialog.cancel();
     };
 
   });

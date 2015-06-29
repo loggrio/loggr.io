@@ -13,6 +13,7 @@ angular.module('loggrioApp')
     var tooltipSuffixText;
     var titleText;
     var seriesName;
+    // Initial chartconfig-scaffold, to be filled with chart-options
     var configStub = {
       id: '',
       options: {
@@ -37,6 +38,9 @@ angular.module('loggrioApp')
       }]
     };
 
+    /**
+     * Translate textual sensorunits into numerical ones
+     */
     function setUnit(sensorUnit) {
       switch (sensorUnit) {
         case 'grad_celsius':
@@ -52,6 +56,9 @@ angular.module('loggrioApp')
       }
     }
 
+    /**
+     * Set texts for chart labels
+     */
     var setChartTexts = function (sensor) {
       var unitText = setUnit(sensor.unit);
 
@@ -88,6 +95,9 @@ angular.module('loggrioApp')
       }
     };
 
+    /**
+     * Set charttype to spline and fill config-scaffold with labels
+     */
     this.getSplineChartConfig = function (sensor) {
       setChartTexts(sensor);
 
@@ -113,6 +123,9 @@ angular.module('loggrioApp')
       return chartConfig;
     };
 
+    /**
+     * Set charttype to column and fill config-scaffold with labels
+     */
     this.getColumnChartConfig = function (sensor) {
       setChartTexts(sensor);
 

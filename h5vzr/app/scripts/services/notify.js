@@ -14,31 +14,6 @@ angular.module('loggrioApp')
     var delay = 120000;
     var toggled = false;
 
-    var toastReconnected = function () {
-      $mdToast.show({
-        template: '<md-toast>' +
-                  ' <md-icon style="color:white">check</md-icon>' +
-                  ' <span flex>Verbindung zur Messeinheit wiederhergestellt</span>' +
-                  '</md-toast>',
-        hideDelay: 3000,
-        position: 'bottom left'
-      });
-    };
-
-    var toastDisconnected = function () {
-      $mdToast.show({
-        template: '<md-toast>' +
-                  ' <md-icon style="color:white">flash_on</md-icon>' +
-                  ' <span flex>Verbindung zur Messeinheit unterbrochen</span>' +
-                  '</md-toast>',
-        hideDelay: 0,
-        position: 'bottom left'
-      });
-    };
-    // $mdToast.simple()
-    //   .content('Verbindung zur Messeinheit unterbrochen')
-    //   .position('bottom left')
-    //   .hideDelay(0)
     // invert toggled
     var toggle = function () {
       toggled = !toggled;
@@ -69,6 +44,28 @@ angular.module('loggrioApp')
           toastReconnected();
         }
       }, 30000);
+    };
+
+    var toastReconnected = function () {
+      $mdToast.show({
+        template: '<md-toast>' +
+                  ' <md-icon style="color:white">check</md-icon>' +
+                  ' <span flex>Verbindung zur Messeinheit wiederhergestellt</span>' +
+                  '</md-toast>',
+        hideDelay: 3000,
+        position: 'bottom left'
+      });
+    };
+
+    var toastDisconnected = function () {
+      $mdToast.show({
+        template: '<md-toast>' +
+                  ' <md-icon style="color:white">flash_on</md-icon>' +
+                  ' <span flex>Verbindung zur Messeinheit unterbrochen</span>' +
+                  '</md-toast>',
+        hideDelay: 0,
+        position: 'bottom left'
+      });
     };
 
     this.toastPaired = function () {
