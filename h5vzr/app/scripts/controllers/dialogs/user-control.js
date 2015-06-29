@@ -15,9 +15,7 @@ angular.module('loggrioApp')
     this.passChanging = false;
     this.formInvalid = false;
     this.oldPass = 'passwort';
-    this.newPass = '';
     this.confirmPass = '';
-    this.oldPWMatch = true; // set to false when authService is ready
     this.newPWMatch = false;
 
     this.startChangingPassword = function () {
@@ -29,23 +27,15 @@ angular.module('loggrioApp')
       }
     };
 
-    this.checkOldCred = function () {
-      this.startChangingPassword();
-      /* waiting for authService
-       if(authService.oldCredCheck(this.userData.password)) {
-       this.oldPWMatch = true;
-       }*/
-    };
-
     this.checkNewCred = function () {
 
-      if (this.newPass === this.confirmPass) {
+      if (this.confirmPass === this.oldPass) {
         this.newPWMatch = true;
       } else {
         this.newPWMatch = false;
       }
 
-      if (this.oldPWMatch && this.newPWMatch) {
+      if (this.newPWMatch) {
         var buffer = this.customer;
         this.customer = new Customer({id: buffer.id, username: buffer.username, email: buffer.email, password: this.confirmPass});
         this.formInvalid = false;

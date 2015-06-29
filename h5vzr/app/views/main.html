@@ -1,5 +1,5 @@
 <div layout="column" ng-repeat="chart in main.charts">
-  <md-card ng-hide="chart.viewToggled">
+  <md-card class="fading" ng-hide="chart.viewToggled">
     <md-card-content class="range-button" layout-align="center start">
       <div layout="row">
         <md-button class="md-icon-button" ng-click="main.zoomIn($index)">
@@ -26,7 +26,7 @@
       <highchart id="{{$index}}" config="chart.default"></highchart>
     </md-card-content>
   </md-card>
-  <md-card ng-show="chart.viewToggled">
+  <md-card class="fading" ng-show="chart.viewToggled">
     <md-card-content class="range-button" layout-align="center start">
       <div layout="row">
         <md-button ng-repeat="range in main.ranges" ng-click="main.selectRange($parent.$index, range)">{{range.name}}</md-button>
