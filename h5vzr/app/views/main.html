@@ -1,45 +1,45 @@
-<div layout="column" ng-repeat="chart in main.chartConfig">
-  <div>
-<!--     <flip class="flip-panel">
-  <flip-panel> -->
-        <md-card>
-          <md-card-content class="range-button" layout-align="center start">
-            <!--<h2>Living room temperature</h2>-->
-            <md-button class="md-icon-button" ng-click="main.zoomIn($index)">
-              <md-icon>zoom_in</md-icon>
-            </md-button>
-            <md-button class="md-icon-button" ng-click="main.zoomOut($index)">
-              <md-icon>zoom_out</md-icon>
-            </md-button>
-            <md-button ng-repeat="range in main.ranges" ng-click="main.selectRange($parent.$index, range)">{{range.name}}</md-button>
-            <md-button class="md-icon-button" ng-click="main.resetZoom($index)">
-              <md-icon>youtube_searched_for</md-icon>
-            </md-button>
-            <md-button class="md-icon-button" ng-click="main.navigateLeft($index)">
-              <md-icon>chevron_left</md-icon>
-            </md-button>
-            <md-button class="md-icon-button" ng-click="main.navigateRight($index)">
-              <md-icon>chevron_right</md-icon>
-            </md-button>
-            <highchart id="{{$index}}" config="chart"></highchart>
-          </md-card-content>
-        </md-card>
-      </br>
-<!--       </flip-panel>
-<flip-panel layout-align="center start">
-  <md-card>
-    <md-card-content>
-      <h2>Übersicht zu {{main.chartConfig.options.title.text}}</h2>
-      <p>Höchsttemperatur: <b>{{main.flipChart.dataMax}}°C</b></p>
-      <p>Tiefsttemperatur: <b>{{main.flipChart.dataMin}}°C</b></p>
-      <p>Durchschnittstemperatur: <b>{{main.flipChart.dataAvg | number: 2}}°C</b></p>
+<div layout="column" ng-repeat="chart in main.charts">
+  <md-card ng-hide="chart.viewToggled">
+    <md-card-content class="range-button" layout-align="center start">
+      <div layout="row">
+        <md-button class="md-icon-button" ng-click="main.zoomIn($index)">
+          <md-icon>zoom_in</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="main.zoomOut($index)">
+          <md-icon>zoom_out</md-icon>
+        </md-button>
+        <md-button ng-repeat="range in main.ranges" ng-click="main.selectRange($parent.$index, range)">{{range.name}}</md-button>
+        <md-button class="md-icon-button" ng-click="main.resetZoom($index)">
+          <md-icon>youtube_searched_for</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="main.navigateLeft($index)">
+          <md-icon>chevron_left</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="main.navigateRight($index)">
+          <md-icon>chevron_right</md-icon>
+        </md-button>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="main.toggleChartView($index)">
+          <md-icon>equalizer</md-icon>
+        </md-button>
+      </div>
+      <highchart id="{{$index}}" config="chart.default"></highchart>
     </md-card-content>
   </md-card>
-</flip-panel>
-    </flip> -->
-  </div>
+  <md-card ng-show="chart.viewToggled">
+    <md-card-content class="range-button" layout-align="center start">
+      <div layout="row">
+        <md-button ng-repeat="range in main.ranges" ng-click="main.selectRange($parent.$index, range)">{{range.name}}</md-button>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="main.toggleChartView($index)">
+          <md-icon>equalizer</md-icon>
+        </md-button>
+      </div>
+      <highchart id="{{$index}}" config="chart.average"></highchart>
+    </md-card-content>
+  </md-card>
 </div>
-</br>
+
 <div ng-controller="ButtonMenuCtrl as menu" class="button-menu">
   <md-fab-speed-dial md-direction="up" class="md-scale">
     <md-fab-trigger>

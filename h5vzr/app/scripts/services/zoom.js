@@ -17,9 +17,9 @@ angular.module('loggrioApp')
 
     var SINGLE_STEP_RATIO = 0.25;
 
-    var singleStep = function (min, max) {
+    function singleStep(min, max) {
       return (max - min) * SINGLE_STEP_RATIO;
-    };
+    }
 
     this.ranges = [
       {

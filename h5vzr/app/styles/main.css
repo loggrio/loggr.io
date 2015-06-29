@@ -28,33 +28,6 @@
   bottom: 0;
 }
 
-.flip {
-  float: left;
-  overflow: hidden;
-  height: 500px; /* TODO: make generic*/
-}
-
-.flipBasic {
-  height: 500px; /* TODO: make generic*/
-  position: absolute;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  transition: -webkit-transform .5s;
-  transition: transform .5s;
-  -webkit-transform: perspective(800px) rotateY(0deg);
-  transform: perspective(800px) rotateY(0deg);
-}
-
-.flipHideBack {
-  -webkit-transform: perspective(800px) rotateY(180deg);
-  transform: perspective(800px) rotateY(180deg);
-}
-
-.flipHideFront {
-  -webkit-transform: perspective(800px) rotateY(-180deg);
-  transform: perspective(800px) rotateY(-180deg);
-}
-
 .ghost {
   opacity: 0.2;
 }
@@ -89,4 +62,29 @@
   width: 24px;
   margin-left: 0;
   margin-right: 0;
+}
+
+.ng-hide-remove, .ng-show-remove {
+  -webkit-transition:all linear 1s;
+  -moz-transition:all linear 1s;
+  -o-transition:all linear 1s;
+  transition:all linear 1s;
+
+}
+.ng-hide-add.ng-hide-add-active,
+.ng-hide-remove {
+  opacity:0;
+}
+.ng-hide-add,
+.ng-hide-remove.ng-hide-remove-active {
+  opacity:1;
+}
+
+.ng-show-add.ng-show-add-active,
+.ng-show-remove {
+  opacity:1;
+}
+.ng-show-add,
+.ng-show-remove.ng-show-remove-active {
+  opacity:0;
 }

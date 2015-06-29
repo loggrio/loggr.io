@@ -2,50 +2,19 @@
 
 /**
  * @ngdoc service
- * @name loggrioApp.ChartConfig
+ * @name loggrioApp.chartConfig
  * @description
  * # ChartConfig
  * Service in the loggrioApp.
  */
 angular.module('loggrioApp')
-  .value('ChartConfig', function (sensor) {
+  .service('chartConfig', function () {
     var yAxisText;
     var tooltipSuffixText;
     var titleText;
     var seriesName;
-
-    switch (sensor.type) {
-      case 'temperature':
-        titleText = 'Temperatur' + ' ' + sensor.location;
-        yAxisText = 'Temperatur (°C)';
-        tooltipSuffixText = ' °C';
-        seriesName = 'Temperatur';
-      break;
-      case 'pressure':
-        titleText = 'Luftdruck' + ' ' + sensor.location;
-        yAxisText = 'Luftdruck (hPa)';
-        tooltipSuffixText = ' hPa';
-        seriesName = 'Luftdruck';
-      break;
-      case 'brightness':
-        titleText = 'Helligkeit' + ' ' + sensor.location;
-        yAxisText = 'Helligkeit (lm)';
-        tooltipSuffixText = ' lm';
-        seriesName = 'Helligkeit';
-      break;
-      case 'humidity':
-        titleText = 'Luftfeuchtigkeit' + ' ' + sensor.location;
-        yAxisText = 'Relative Luftfeuchtigkeit (%)';
-        tooltipSuffixText = ' %';
-        seriesName = 'Luftfeuchtigkeit';
-      break;
-      default:
-        // TODO: add default object
-        console.log('Unbekanner Sensor');
-    }
-
-    return {
-      id: sensor.id,
+    var configStub = {
+      id: '',
       options: {
         lang: {
           contextButtonTitle: 'Graphenoptionen',
@@ -61,34 +30,116 @@ angular.module('loggrioApp')
           weekdays: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag']
         },
         title: {
-          text: titleText
+          text: ''
         },
-        chart: {
-          zoomType: 'x',
-          type: 'spline',
-          resetZoomButton: {
-            theme: {
-              display: 'none'
-            }
-          }
-
-        },
-        xAxis: {
-          type: 'datetime'
-        },
+        chart: '',
+        xAxis: '',
         yAxis: {
           title: {
-            text: yAxisText
+            text: ''
           }
         },
         tooltip: {
-          valueSuffix: tooltipSuffixText
+          valueSuffix: ''
         }
       },
       series: [{
         data: [],
         color: '#009688',
-        name: seriesName
+        name: ''
       }]
+    };
+
+    function setUnit(sensorUnit) {
+      switch (sensorUnit) {
+        case 'grad_celsius':
+          return '°C';
+        case 'lumen':
+          return 'lm';
+        case 'percent':
+          return '%';
+        case 'hectopascal':
+          return 'hPa';
+        default:
+          return '';
+      }
+    }
+
+    var setChartTexts = function (sensor) {
+      var unitText = setUnit(sensor.unit);
+
+      switch (sensor.type) {
+        case 'temperature':
+          titleText = 'Temperatur' + ' ' + sensor.location;
+          yAxisText = 'Temperatur (' + unitText + ')';
+          tooltipSuffixText = ' ' + unitText;
+          seriesName = 'Temperatur';
+          break;
+        case 'pressure':
+          titleText = 'Luftdruck' + ' ' + sensor.location;
+          yAxisText = 'Luftdruck (' + unitText + ')';
+          tooltipSuffixText = ' ' + unitText;
+          seriesName = 'Luftdruck';
+        break;
+        case 'brightness':
+          titleText = 'Helligkeit' + ' ' + sensor.location;
+          yAxisText = 'Helligkeit (' + unitText + ')';
+          tooltipSuffixText = ' ' + unitText;
+          seriesName = 'Helligkeit';
+        break;
+        case 'humidity':
+          titleText = 'Luftfeuchtigkeit' + ' ' + sensor.location;
+          yAxisText = 'Relative Luftfeuchtigkeit (' + unitText + ')';
+          tooltipSuffixText = ' ' + unitText;
+          seriesName = 'Luftfeuchtigkeit';
+        break;
+        default:
+          titleText = 'Error: Unknown sensor type';
+          yAxisText = '';
+          tooltipSuffixText = '';
+          seriesName = '';
+      }
+    };
+
+    this.getSplineChartConfig = function (sensor) {
+      setChartTexts(sensor);
+
+      var chartConfig = angular.copy(configStub);
+      chartConfig.id = sensor.id;
+      chartConfig.options.title.text = titleText;
+      chartConfig.options.chart = {
+        zoomType: 'x',
+        type: 'spline',
+        resetZoomButton: {
+          theme: {
+            display: 'none'
+          }
+        }
+      };
+      chartConfig.options.xAxis = {
+        type: 'datetime'
+      };
+      chartConfig.options.yAxis.title.text = yAxisText;
+      chartConfig.options.tooltip.valueSuffix = tooltipSuffixText;
+      chartConfig.series[0].name = seriesName;
+
+      return chartConfig;
+    };
+
+    this.getColumnChartConfig = function (sensor) {
+      setChartTexts(sensor);
+
+      var chartConfig = angular.copy(configStub);
+      chartConfig.id = sensor.id;
+      chartConfig.options.title.text = titleText;
+      chartConfig.options.chart = {
+        type: 'column'
+      };
+      chartConfig.options.yAxis.title.text = yAxisText;
+      chartConfig.options.tooltip.valueSuffix = tooltipSuffixText;
+      chartConfig.series[0].name = seriesName + ' im Durchschnitt';
+
+      return chartConfig;
+
     };
   });

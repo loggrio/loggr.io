@@ -10,33 +10,37 @@
 angular.module('loggrioApp')
   .controller('MainCtrl', function ($rootScope, $location, Customer, chartHandler, zoom) {
 
-    this.chartConfig = [];
-    this.chartConfig = chartHandler.chartConfig;
-    this.flipChart = chartHandler.flipChart;
+    var self = this;
+
+    this.charts = chartHandler.charts;
     this.ranges = zoom.ranges;
 
+    this.toggleChartView = function (chartIndex) {
+      self.charts[chartIndex].viewToggle();
+    };
+
     this.selectRange = function(chartIndex, range){
-      zoom.selectRange(this.chartConfig[chartIndex].getHighcharts(), range);
+      zoom.selectRange(this.charts[chartIndex].default.getHighcharts(), range);
     };
 
     this.resetZoom = function(chartIndex){
-      zoom.resetZoom(this.chartConfig[chartIndex].getHighcharts());
+      zoom.resetZoom(this.charts[chartIndex].default.getHighcharts());
     };
 
     this.zoomIn = function(chartIndex){
-      zoom.zoomIn(this.chartConfig[chartIndex].getHighcharts());
+      zoom.zoomIn(this.charts[chartIndex].default.getHighcharts());
     };
 
     this.zoomOut = function(chartIndex){
-      zoom.zoomOut(this.chartConfig[chartIndex].getHighcharts());
+      zoom.zoomOut(this.charts[chartIndex].default.getHighcharts());
     };
 
     this.navigateLeft = function(chartIndex){
-      zoom.navigateLeft(this.chartConfig[chartIndex].getHighcharts());
+      zoom.navigateLeft(this.charts[chartIndex].default.getHighcharts());
     };
 
     this.navigateRight = function(chartIndex){
-      zoom.navigateRight(this.chartConfig[chartIndex].getHighcharts());
+      zoom.navigateRight(this.charts[chartIndex].default.getHighcharts());
     };
 
     // THIS FIX IS DEDICATED TO MARKO G.
