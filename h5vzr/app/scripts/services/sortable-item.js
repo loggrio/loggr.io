@@ -11,7 +11,6 @@ angular.module('loggrioApp')
   .service('SortableItem', function() {
 
     return function(sensor) {
-      console.log(sensor);
       var item;
       switch (sensor.type) {
         case 'temperature':
@@ -62,4 +61,5 @@ angular.module('loggrioApp')
       }
       return item;
     };
+    
   });
