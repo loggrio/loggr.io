@@ -36,12 +36,26 @@ if config.has_option('AUTH', 'userid'):
 
 
 class Sensor:
-    """docstring for Sensor"""
+    """Sensor class"""
 
     def __init__(self, sensor_type, location, unit,
                  minimum=None, maximum=None, deviation=None,
                  func=None, gen=None, script=None,
                  cache_size=1440):
+        """Constructor of sensor class
+
+        Args:
+            sensor_type (str): type of sensor
+            location (str): location of sensor
+            unit (str): unit of metering (written-out e.g. grad_celsius)
+            minimum (str): minimum value of metering (default = None)
+            maximum (str): maximum value of metering (default = None)
+            deviation (str): allowed deviation of metering (default = None)
+            func (str): name of function used for metering (default = None)
+            gen (str): name of generator used for metering (default = None)
+            script (str): name of script used for metering (default = None)
+            cache_size (int): size of local buffer in byte (default = 1440)
+        """
         self.id = self.__db_sync(sensor_type, location, unit)
         self.location = location
         self.type = sensor_type
@@ -56,6 +70,16 @@ class Sensor:
         self.deviation = deviation
 
     def __db_sync(self, sensor_type, location, unit):
+        """Get existing sensor id from api or create new sensor
+
+        Args:
+            sensor_type (str): type of sensor
+            location (str): location of sensor
+            unit (str): unit of metering (written-out e.g. grad_celsius)
+
+        Returns:
+            sensor id (str): id of current sensor
+        """
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][type]={type}
@@ -74,6 +98,15 @@ class Sensor:
             return r.json()[0]['id']
 
     def __check(self, metering):
+        """Check value of metering for validity
+
+        Args:
+            metering (float): value of metering
+
+        Returns:
+            False - if value is not valid
+            True - if value is valid
+        """
         metering = float(metering)
 
         # check deviation
@@ -93,6 +126,12 @@ class Sensor:
         return True
 
     def __meter(self):
+        """Get metering
+
+        Returns:
+            value (str): value of successful metering - if metering was successful
+            None - if an error occured
+        """
         if self.func is not None:
             value = str(self.func())
             log_info('metering of ' + self.type + ' sensor: ' + value)
@@ -125,6 +164,14 @@ class Sensor:
             return False
 
     def __send(self, payload):
+        """Send metering data to server api
+
+        Args:
+            payload (str): json file of metering data which has to be sensor_type
+
+        Returns:
+            request status code (int): HTTP status code of POST request
+        """
         headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/Meterings?filter[where][id]={self.id}
@@ -139,6 +186,11 @@ class Sensor:
             return r.status_code
 
     def meter_and_send(self):
+        """Call meter and send method
+
+        Returns:
+            status (str): HTTP status code of POST request
+        """
         value = self.__meter()
 
         # return if meter raises an exception
