@@ -6,3 +6,4 @@ pages:
   - 'H5VZR': 'developer-guide/h5vzr.md'
   - 'API': 'developer-guide/api.md'
   - 'raspi': 'developer-guide/raspi.md'
+theme: flatly
