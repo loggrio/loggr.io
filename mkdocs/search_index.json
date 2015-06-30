@@ -17,7 +17,7 @@
         }, 
         {
             "location": "/developer-guide/h5vzr/", 
-            "text": "H5VZR - Frontend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular\n\n\n\n\nInstall npm and bower deps\n\n\n# cd into h5vzr\ncd h5vr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js\n\n\n\n\nUsage\n\n\n# serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test\n\n\n\n\nFurther Help: \nYeoman Guide", 
+            "text": "H5VZR - Frontend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular\n\n\n\n\nInstall npm and bower deps\n\n\n# cd into h5vzr\ncd h5vzr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js\n\n\n\n\nUsage\n\n\n# serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test\n\n\n\n\nFurther Help: \nYeoman Guide", 
             "title": "H5VZR"
         }, 
         {
@@ -32,7 +32,7 @@
         }, 
         {
             "location": "/developer-guide/h5vzr/#set-up-your-environment", 
-            "text": "Install prerequisites  # Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular  Install npm and bower deps  # cd into h5vzr\ncd h5vr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js", 
+            "text": "Install prerequisites  # Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular  Install npm and bower deps  # cd into h5vzr\ncd h5vzr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js", 
             "title": "Set up your environment"
         }, 
         {
