@@ -29,13 +29,18 @@ angular.module('loggrioApp')
         },
         tooltip: {
           valueSuffix: ''
+        },
+        navigation: {
+          buttonOptions: {
+            enabled: false
+          }
         }
       },
       series: [{
         data: [],
         color: '#009688',
         name: ''
-      }]
+      }],
     };
 
     /**

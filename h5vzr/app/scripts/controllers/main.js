@@ -8,7 +8,7 @@
  * Controller of the loggrioApp
  */
 angular.module('loggrioApp')
-  .controller('MainCtrl', function ($rootScope, $location, Customer, chartHandler, zoom) {
+  .controller('MainCtrl', function ($rootScope, $location, Customer, chartHandler, chartMenu, zoom) {
 
     var self = this;
 
@@ -42,6 +42,8 @@ angular.module('loggrioApp')
     this.navigateRight = function (chartIndex) {
       zoom.navigateRight(self.charts[chartIndex].default.getHighcharts());
     };
+
+    this.contextMenu = chartMenu.contextMenu(this.charts);
 
     // THIS FIX IS DEDICATED TO MARKO G.
     if (!Customer.isAuthenticated()) {

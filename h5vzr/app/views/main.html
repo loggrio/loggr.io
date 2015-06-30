@@ -20,6 +20,19 @@
           <md-icon>chevron_right</md-icon>
         </md-button>
         <div flex></div>
+        <md-menu>
+          <md-button aria-label="Contextmenu" ng-click="$mdOpenMenu()">
+            <md-icon md-menu-origin>file_download</md-icon>
+          </md-button>
+          <md-menu-content width="2">
+            <md-menu-item ng-repeat="menuItem in main.contextMenu">
+              <md-button ng-click="menuItem.action($parent.$index)">
+                <md-icon>{{menuItem.icon}}</md-icon>
+                {{menuItem.label}}
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
         <md-button ng-click="main.toggleChartView($index)">
           <md-icon>equalizer</md-icon>
         </md-button>
