@@ -33,7 +33,7 @@ cd api
 npm install
 ```
 
-## Useage
+## Usage
 
 ```bash
 # start mongodb daemon (in separate window/tab)
