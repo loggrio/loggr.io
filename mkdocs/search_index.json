@@ -17,7 +17,7 @@
         }, 
         {
             "location": "/developer-guide/h5vzr/", 
-            "text": "H5VZR - Frontend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular\n\n\n\n\nInstall npm and bower deps\n\n\n# cd into h5vzr\ncd h5vr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js\n\n\n\n\nUseage\n\n\n# serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test\n\n\n\n\nFurther Help: \nYeoman Guide", 
+            "text": "H5VZR - Frontend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular\n\n\n\n\nInstall npm and bower deps\n\n\n# cd into h5vzr\ncd h5vr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js\n\n\n\n\nUsage\n\n\n# serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test\n\n\n\n\nFurther Help: \nYeoman Guide", 
             "title": "H5VZR"
         }, 
         {
@@ -36,13 +36,13 @@
             "title": "Set up your environment"
         }, 
         {
-            "location": "/developer-guide/h5vzr/#useage", 
+            "location": "/developer-guide/h5vzr/#usage", 
             "text": "# serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test  Further Help:  Yeoman Guide", 
-            "title": "Useage"
+            "title": "Usage"
         }, 
         {
             "location": "/developer-guide/api/", 
-            "text": "API - Backend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n,\n  \nmongodb\n: \n=2.6\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\nInstall MongoDB: \nOffical Guide\n\n\n# Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback\nnpm install -g strongloop\n\n\n\n\nInstall npm deps\n\n\n# cd into api\ncd api\n\n# npm deps\nnpm install\n\n\n\n\nUseage\n\n\n# start mongodb daemon (in separate window/tab)\nmongod\n\n# run\nnode .\n\n\n\n\nFurther Help: \nStrongloop Guide", 
+            "text": "API - Backend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n,\n  \nmongodb\n: \n=2.6\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\nInstall MongoDB: \nOffical Guide\n\n\n# Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback\nnpm install -g strongloop\n\n\n\n\nInstall npm deps\n\n\n# cd into api\ncd api\n\n# npm deps\nnpm install\n\n\n\n\nUsage\n\n\n# start mongodb daemon (in separate window/tab)\nmongod\n\n# run\nnode .\n\n\n\n\nFurther Help: \nStrongloop Guide", 
             "title": "API"
         }, 
         {
@@ -61,14 +61,14 @@
             "title": "Set up your environment"
         }, 
         {
-            "location": "/developer-guide/api/#useage", 
+            "location": "/developer-guide/api/#usage", 
             "text": "# start mongodb daemon (in separate window/tab)\nmongod\n\n# run\nnode .  Further Help:  Strongloop Guide", 
-            "title": "Useage"
+            "title": "Usage"
         }, 
         {
             "location": "/developer-guide/raspi/", 
             "text": "RASPI - Metering Unit\n\n\nRequirements\n\n\n{\n  \npython\n: \n=2.7\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt\n\n\n\n\nCompile Sensor scripts\n\n\n# cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake\n\n\n\n\nUsage\n\n\n# run\npython run.py\n\n# run config server\npython run.py --config\n\n# run emu sensor script (for test usages)\npython run.py --emu", 
-            "title": "raspi"
+            "title": "RASPI"
         }, 
         {
             "location": "/developer-guide/raspi/#raspi-metering-unit", 
