@@ -36,7 +36,7 @@ bower install
 lb-ng ../api/server/server.js app/scripts/services/lb-services.js
 ```
 
-## Useage
+## Usage
 
 ```bash
 # serve
