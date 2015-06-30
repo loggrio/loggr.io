@@ -19,28 +19,28 @@ angular.module('loggrioApp')
       self.charts[chartIndex].viewToggle();
     };
 
-    this.selectRange = function(chartIndex, range){
-      zoom.selectRange(this.charts[chartIndex].default.getHighcharts(), range);
+    this.selectRange = function (chartIndex, range) {
+      zoom.selectRange(self.charts[chartIndex].default.getHighcharts(), range);
     };
 
-    this.resetZoom = function(chartIndex){
-      zoom.resetZoom(this.charts[chartIndex].default.getHighcharts());
+    this.resetZoom = function (chartIndex) {
+      zoom.resetZoom(self.charts[chartIndex].default.getHighcharts());
     };
 
-    this.zoomIn = function(chartIndex){
-      zoom.zoomIn(this.charts[chartIndex].default.getHighcharts());
+    this.zoomIn = function (chartIndex) {
+      zoom.zoomIn(self.charts[chartIndex].default.getHighcharts());
     };
 
-    this.zoomOut = function(chartIndex){
-      zoom.zoomOut(this.charts[chartIndex].default.getHighcharts());
+    this.zoomOut = function (chartIndex) {
+      zoom.zoomOut(self.charts[chartIndex].default.getHighcharts());
     };
 
-    this.navigateLeft = function(chartIndex){
-      zoom.navigateLeft(this.charts[chartIndex].default.getHighcharts());
+    this.navigateLeft = function (chartIndex) {
+      zoom.navigateLeft(self.charts[chartIndex].default.getHighcharts());
     };
 
-    this.navigateRight = function(chartIndex){
-      zoom.navigateRight(this.charts[chartIndex].default.getHighcharts());
+    this.navigateRight = function (chartIndex) {
+      zoom.navigateRight(self.charts[chartIndex].default.getHighcharts());
     };
 
     // THIS FIX IS DEDICATED TO MARKO G.
