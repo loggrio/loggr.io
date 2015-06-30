@@ -21,8 +21,9 @@ angular.module('loggrioApp')
         print: {
           label: 'Drucken',
           icon: 'print',
-          action :function (chartIndex) {
-            charts[chartIndex].print();
+          action: function (chartIndex) {
+            var chart = charts[chartIndex].default.getHighcharts();
+            chart.print();
           }
         },
         jpg: {

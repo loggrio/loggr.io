@@ -27,10 +27,10 @@
           <md-button aria-label="Contextmenu" ng-click="$mdOpenMenu()">
             <md-icon md-menu-origin>file_download</md-icon>
           </md-button>
-          <md-menu-content width="2">
+          <md-menu-content>
             <md-menu-item ng-repeat="menuItem in main.contextMenu">
               <md-button ng-click="menuItem.action($parent.$index)">
-                <md-icon>{{menuItem.icon}}</md-icon>
+                <md-icon md-menu-align-target>{{menuItem.icon}}</md-icon>
                 {{menuItem.label}}
               </md-button>
             </md-menu-item>
