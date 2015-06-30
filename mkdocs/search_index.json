@@ -1,0 +1,89 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Welcome to MkDocs\n\n\nFor full documentation visit \nmkdocs.org\n.\n\n\nCommands\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#welcome-to-mkdocs", 
+            "text": "For full documentation visit  mkdocs.org .", 
+            "title": "Welcome to MkDocs"
+        }, 
+        {
+            "location": "/#commands", 
+            "text": "mkdocs new [dir-name]  - Create a new project.  mkdocs serve  - Start the live-reloading docs server.  mkdocs build  - Build the documentation site.  mkdocs help  - Print this help message.", 
+            "title": "Commands"
+        }, 
+        {
+            "location": "/#project-layout", 
+            "text": "mkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
+            "title": "Project layout"
+        }, 
+        {
+            "location": "/user-guide/", 
+            "text": "", 
+            "title": "User Guide"
+        }, 
+        {
+            "location": "/developer-guide/h5vzr/", 
+            "text": "H5VZR - Frontend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular\n\n\n\n\nInstall npm and bower deps\n\n\n# cd into h5vzr\ncd h5vr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js\n\n\n\n\nUseage\n\n\n# serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test\n\n\n\n\nFurther Help: \nYeoman Guide", 
+            "title": "H5VZR"
+        }, 
+        {
+            "location": "/developer-guide/h5vzr/#h5vzr-frontend", 
+            "text": "", 
+            "title": "H5VZR - Frontend"
+        }, 
+        {
+            "location": "/developer-guide/h5vzr/#requirements", 
+            "text": "{\n   node :  =0.12 \n}", 
+            "title": "Requirements"
+        }, 
+        {
+            "location": "/developer-guide/h5vzr/#set-up-your-environment", 
+            "text": "Install prerequisites  # Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular  Install npm and bower deps  # cd into h5vzr\ncd h5vr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js  Useage  # serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test  Further Help:  Yeoman Guide", 
+            "title": "Set up your environment"
+        }, 
+        {
+            "location": "/developer-guide/api/", 
+            "text": "API - Backend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n,\n  \nmongodb\n: \n=2.6\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\nInstall MongoDB: \nOffical Guide\n\n\n# Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback\nnpm install -g strongloop\n\n\n\n\nInstall npm deps\n\n\n# cd into api\ncd api\n\n# npm deps\nnpm install\n\n\n\n\nUseage\n\n\n# start mongodb daemon (in separate window/tab)\nmongod\n\n# run\nnode .\n\n\n\n\nFurther Help: \nStrongloop Guide", 
+            "title": "API"
+        }, 
+        {
+            "location": "/developer-guide/api/#api-backend", 
+            "text": "", 
+            "title": "API - Backend"
+        }, 
+        {
+            "location": "/developer-guide/api/#requirements", 
+            "text": "{\n   node :  =0.12 ,\n   mongodb :  =2.6 \n}", 
+            "title": "Requirements"
+        }, 
+        {
+            "location": "/developer-guide/api/#set-up-your-environment", 
+            "text": "Install prerequisites  Install MongoDB:  Offical Guide  # Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback\nnpm install -g strongloop  Install npm deps  # cd into api\ncd api\n\n# npm deps\nnpm install  Useage  # start mongodb daemon (in separate window/tab)\nmongod\n\n# run\nnode .  Further Help:  Strongloop Guide", 
+            "title": "Set up your environment"
+        }, 
+        {
+            "location": "/developer-guide/raspi/", 
+            "text": "RASPI - Metering Unit\n\n\nRequirements\n\n\n{\n  \npython\n: \n=2.7\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt\n\n\n\n\nCompile sensor scripts:\n\n\n# cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake\n\n\n\n\nUsage\n\n\n# run\npython run.py\n\n# run config server\npython run.py --config\n\n# run emu sensor script (for test usages)\npython run.py --emu", 
+            "title": "raspi"
+        }, 
+        {
+            "location": "/developer-guide/raspi/#raspi-metering-unit", 
+            "text": "", 
+            "title": "RASPI - Metering Unit"
+        }, 
+        {
+            "location": "/developer-guide/raspi/#requirements", 
+            "text": "{\n   python :  =2.7 \n}", 
+            "title": "Requirements"
+        }, 
+        {
+            "location": "/developer-guide/raspi/#set-up-your-environment", 
+            "text": "Install prerequisites  # cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt  Compile sensor scripts:  # cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake  Usage  # run\npython run.py\n\n# run config server\npython run.py --config\n\n# run emu sensor script (for test usages)\npython run.py --emu", 
+            "title": "Set up your environment"
+        }
+    ]
+}
