@@ -40,7 +40,7 @@ angular.module('loggrioApp')
         data: [],
         color: '#009688',
         name: ''
-      }],
+      }]
     };
 
     /**

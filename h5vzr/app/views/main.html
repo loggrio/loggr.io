@@ -3,20 +3,23 @@
     <!-- front side -->
     <md-card-content ng-hide="chart.viewToggled" class="fading range-button" layout-align="center start">
       <div layout="row">
-        <md-button ng-click="main.zoomIn($index)">
+        <md-button ng-click="main.zoomNavigation.zoomIn($index)">
           <md-icon>zoom_in</md-icon>
         </md-button>
-        <md-button ng-click="main.zoomOut($index)">
+        <md-button ng-click="main.zoomNavigation.zoomOut($index)">
           <md-icon>zoom_out</md-icon>
         </md-button>
-        <md-button ng-repeat="range in main.ranges" ng-click="main.selectRange($parent.$index, range)">{{range.name}}</md-button>
-        <md-button ng-click="main.resetZoom($index)">
+        <md-button ng-repeat="range in main.ranges"
+            ng-click="main.zoomNavigation.selectRange($parent.$index, range.value)">
+          {{range.name}}
+        </md-button>
+        <md-button ng-click="main.zoomNavigation.resetZoom($index)">
           <md-icon>youtube_searched_for</md-icon>
         </md-button>
-        <md-button ng-click="main.navigateLeft($index)">
+        <md-button ng-click="main.zoomNavigation.navigateLeft($index)">
           <md-icon>chevron_left</md-icon>
         </md-button>
-        <md-button ng-click="main.navigateRight($index)">
+        <md-button ng-click="main.zoomNavigation.navigateRight($index)">
           <md-icon>chevron_right</md-icon>
         </md-button>
         <div flex></div>
