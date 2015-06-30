@@ -13,8 +13,8 @@
 
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="../../css/highlight.css">
+        <link href="../../css/base.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -32,7 +32,6 @@
 
         <!-- Collapsed navigation -->
         <div class="navbar-header">
-            
             <!-- Expander button -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -40,7 +39,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            
 
             <!-- Main title -->
             <a class="navbar-brand" href="../..">loggr.io</a>
@@ -48,70 +46,56 @@
 
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
             
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                
-                
-                    <li >
-                        <a href="../..">Home</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="../../user-guide/">User Guide</a>
-                    </li>
-                
-                
-                
-                    <li class="dropdown active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Developer Guide <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                        
-                            
-<li >
-    <a href="../h5vzr/">H5VZR</a>
-</li>
-
-                        
-                            
-<li class="active">
-    <a href="./">API</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../raspi/">raspi</a>
-</li>
-
-                        
-                        </ul>
-                    </li>
-                
-                
-                </ul>
             
+                <li >
+                    <a href="../..">Home</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../../user-guide/">User Guide</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Developer Guide <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li >
+                            <a href="../h5vzr/">H5VZR</a>
+                        </li>
+                    
+                        <li class="active">
+                            <a href="./">API</a>
+                        </li>
+                    
+                        <li >
+                            <a href="../raspi/">raspi</a>
+                        </li>
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
 
+            <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
+                <li >
+                    <a rel="next" href="../h5vzr/">
+                        <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
-                
-                    <li >
-                        <a rel="next" href="../h5vzr/">
-                            <i class="fa fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="prev" href="../raspi/">
-                            Next <i class="fa fa-arrow-right"></i>
-                        </a>
-                    </li>
-                
+                <li >
+                    <a rel="prev" href="../raspi/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
                 
             </ul>
         </div>
@@ -119,8 +103,7 @@
 </div>
 
         <div class="container">
-            
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
         <li class="main active"><a href="#api-backend">API - Backend</a></li>
@@ -129,10 +112,12 @@
         
             <li><a href="#set-up-your-environment">Set up your environment</a></li>
         
+            <li><a href="#useage">Useage</a></li>
+        
     
     </ul>
 </div></div>
-                <div class="col-md-9" role="main">
+            <div class="col-md-9" role="main">
 
 <h1 id="api-backend">API - Backend</h1>
 <h2 id="requirements">Requirements</h2>
@@ -160,7 +145,7 @@ cd api
 npm install
 </code></pre>
 
-<h3 id="useage">Useage</h3>
+<h2 id="useage">Useage</h2>
 <pre><code class="bash"># start mongodb daemon (in separate window/tab)
 mongod
 
@@ -169,46 +154,17 @@ node .
 </code></pre>
 
 <p>Further Help: <a href="http://docs.strongloop.com/display/public/LB/LoopBack">Strongloop Guide</a></p></div>
-            
         </div>
 
         <footer class="col-md-12">
             <hr>
             
-            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
         </footer>
 
         <script src="../../js/jquery-1.10.2.min.js"></script>
         <script src="../../js/bootstrap-3.0.3.min.js"></script>
         <script src="../../js/highlight.pack.js"></script>
-        <script>var base_url = '../..';</script>
-        <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
         <script src="../../js/base.js"></script>
-
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            From here you can search these documents. Enter
-                            your search terms below.
-                        </p>
-                        <form role="form">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
-                            </div>
-                        </form>
-                        <div id="mkdocs-search-results"></div>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </body>
 </html>

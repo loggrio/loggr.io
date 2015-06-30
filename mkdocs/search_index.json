@@ -32,8 +32,13 @@
         }, 
         {
             "location": "/developer-guide/h5vzr/#set-up-your-environment", 
-            "text": "Install prerequisites  # Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular  Install npm and bower deps  # cd into h5vzr\ncd h5vr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js  Useage  # serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test  Further Help:  Yeoman Guide", 
+            "text": "Install prerequisites  # Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular  Install npm and bower deps  # cd into h5vzr\ncd h5vr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js", 
             "title": "Set up your environment"
+        }, 
+        {
+            "location": "/developer-guide/h5vzr/#useage", 
+            "text": "# serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test  Further Help:  Yeoman Guide", 
+            "title": "Useage"
         }, 
         {
             "location": "/developer-guide/api/", 
@@ -52,12 +57,17 @@
         }, 
         {
             "location": "/developer-guide/api/#set-up-your-environment", 
-            "text": "Install prerequisites  Install MongoDB:  Offical Guide  # Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback\nnpm install -g strongloop  Install npm deps  # cd into api\ncd api\n\n# npm deps\nnpm install  Useage  # start mongodb daemon (in separate window/tab)\nmongod\n\n# run\nnode .  Further Help:  Strongloop Guide", 
+            "text": "Install prerequisites  Install MongoDB:  Offical Guide  # Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback\nnpm install -g strongloop  Install npm deps  # cd into api\ncd api\n\n# npm deps\nnpm install", 
             "title": "Set up your environment"
         }, 
         {
+            "location": "/developer-guide/api/#useage", 
+            "text": "# start mongodb daemon (in separate window/tab)\nmongod\n\n# run\nnode .  Further Help:  Strongloop Guide", 
+            "title": "Useage"
+        }, 
+        {
             "location": "/developer-guide/raspi/", 
-            "text": "RASPI - Metering Unit\n\n\nRequirements\n\n\n{\n  \npython\n: \n=2.7\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt\n\n\n\n\nCompile sensor scripts:\n\n\n# cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake\n\n\n\n\nUsage\n\n\n# run\npython run.py\n\n# run config server\npython run.py --config\n\n# run emu sensor script (for test usages)\npython run.py --emu", 
+            "text": "RASPI - Metering Unit\n\n\nRequirements\n\n\n{\n  \npython\n: \n=2.7\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt\n\n\n\n\nCompile Sensor scripts\n\n\n# cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake\n\n\n\n\nUsage\n\n\n# run\npython run.py\n\n# run config server\npython run.py --config\n\n# run emu sensor script (for test usages)\npython run.py --emu", 
             "title": "raspi"
         }, 
         {
@@ -72,8 +82,13 @@
         }, 
         {
             "location": "/developer-guide/raspi/#set-up-your-environment", 
-            "text": "Install prerequisites  # cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt  Compile sensor scripts:  # cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake  Usage  # run\npython run.py\n\n# run config server\npython run.py --config\n\n# run emu sensor script (for test usages)\npython run.py --emu", 
+            "text": "Install prerequisites  # cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt  Compile Sensor scripts  # cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake", 
             "title": "Set up your environment"
+        }, 
+        {
+            "location": "/developer-guide/raspi/#usage", 
+            "text": "# run\npython run.py\n\n# run config server\npython run.py --config\n\n# run emu sensor script (for test usages)\npython run.py --emu", 
+            "title": "Usage"
         }
     ]
 }
