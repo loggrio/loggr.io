@@ -13,8 +13,6 @@
 
 ### Install prerequisites
 
-Install MongoDB: [Offical Guide](http://docs.mongodb.org/manual/installation/)
-
 ```bash
 # Update npm if you haven't already
 npm install -g npm
@@ -22,6 +20,8 @@ npm install -g npm
 # Install loopback
 npm install -g strongloop
 ```
+
+Install MongoDB: [Offical Guide](http://docs.mongodb.org/manual/installation/)
 
 ### Install npm deps
 
@@ -36,7 +36,7 @@ npm install
 ## Usage
 
 ```bash
-# start mongodb daemon (in separate window/tab)
+# if not already running start the mongo daemon
 mongod
 
 # run

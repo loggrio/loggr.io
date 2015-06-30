@@ -24,7 +24,7 @@ npm install -g grunt-cli bower yo generator-karma generator-angular
 
 ```bash
 # cd into h5vzr
-cd h5vr
+cd h5vzr
 
 # npm deps
 npm install
