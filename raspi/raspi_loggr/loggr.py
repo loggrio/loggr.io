@@ -63,6 +63,11 @@ def main():
         treat_pairing_errors()
         return
 
+    # Check if api and scripts_path is set
+    if not len(api) or not len(scripts_path):
+        treat_missing_config_errors()
+        return
+
     headers = {'Content-Type': 'application/json', 'Authorization': token}
     api_offline = True
     while api_offline:
