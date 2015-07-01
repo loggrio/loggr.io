@@ -24,19 +24,19 @@ CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
 config.read(CONFIG_FILE)
 if config.has_option('AUTH', 'token'):
-    TOKEN = config.get('AUTH', 'token')
+    token= config.get('AUTH', 'token')
 if config.has_option('AUTH', 'userid'):
-    USER_ID = config.get('AUTH', 'userid')
+    user_id = config.get('AUTH', 'userid')
 if config.has_option('API', 'url'):
-    API = config.get('API', 'url')
+    api = config.get('API', 'url')
 if config.has_option('API', 'customers'):
-    CUSTOMERS = config.get('API', 'customers')
+    customers = config.get('API', 'customers')
 if config.has_option('API', 'meterings'):
-    METERINGS = config.get('API', 'meterings')
+    meterings = config.get('API', 'meterings')
 if config.has_option('API', 'sensors'):
-    SENSORS = config.get('API', 'sensors')
+    sensors = config.get('API', 'sensors')
 if config.has_option('API', 'path'):
-    PATH = config.get('API', 'path')
+    path = config.get('API', 'path')
 
 
 class Sensor:
@@ -84,15 +84,15 @@ class Sensor:
         Returns:
             sensor id (str): id of current sensor
         """
-        headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
+        headers = {'Content-Type': 'application/json', 'Authorization': token}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][type]={type}
             params = {'filter[where][type]': sensor_type, 'filter[where][location]': location}
-            r = requests.get(API + CUSTOMERS + USER_ID + SENSORS, params=params, headers=headers)
+            r = requests.get(api + customers + user_id + sensors, params=params, headers=headers)
 
             if not len(r.json()):
                 payload = {'type': sensor_type, 'location': location, 'unit': unit}
-                r = requests.post(API + CUSTOMERS + USER_ID + SENSORS, data=json.dumps(payload), headers=headers)
+                r = requests.post(api + customers + user_id + sensors, data=json.dumps(payload), headers=headers)
                 return r.json()['id']
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors
@@ -146,7 +146,7 @@ class Sensor:
             log_info('metering of ' + self.type + ' sensor: ' + value)
             return value
 
-        command = PATH + self.script
+        command = path + self.script
         try:
             subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError, cpe:
@@ -176,11 +176,11 @@ class Sensor:
         Returns:
             request status code (int): HTTP status code of POST request
         """
-        headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
+        headers = {'Content-Type': 'application/json', 'Authorization': token}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/Meterings?filter[where][id]={self.id}
             params = {'filter[where][id]': self.id}
-            r = requests.post(API + CUSTOMERS + USER_ID + METERINGS, data=json.dumps(payload), params=params,
+            r = requests.post(api + customers + user_id + meterings, data=json.dumps(payload), params=params,
                               headers=headers)
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors

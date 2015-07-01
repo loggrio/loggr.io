@@ -56,9 +56,9 @@ def main():
     # Get token and user id from config file
     token = config.get('AUTH', 'token')
     userid = config.get('AUTH', 'userid')
-    API = config.get('API', 'url')
-    CUSTOMERS = config.get('API', 'customers')
-    EXISTS = config.get('API', 'exists')
+    api = config.get('API', 'url')
+    customers = config.get('API', 'customers')
+    exists = config.get('API', 'exists')
 
     # Check if token and userid is set
     if not len(token) or not len(userid):
@@ -69,7 +69,7 @@ def main():
     api_offline = True
     while api_offline:
         try:
-            requests.get(API + CUSTOMERS + userid + EXISTS, headers=headers)
+            requests.get(api + customers + userid + exists, headers=headers)
             api_offline = False
         except requests.exceptions.RequestException, re:
             treat_requests_errors(re)
