@@ -45,9 +45,8 @@ def main():
     config.read(CONFIG_FILE)
 
     # Check if config file contains options token and userid
-    if not config.has_option('AUTH', 'token')
-    or not config.has_option('AUTH', 'userid')
-    or not config.has_option('API', 'url'):
+    if not config.has_option('AUTH', 'token') or not config.has_option('AUTH', 'userid') or \
+       not config.has_option('API', 'url') or not config.has_option('COMMON', 'scripts_path'):
         treat_missing_config_errors()
         return
 
@@ -55,6 +54,7 @@ def main():
     token = config.get('AUTH', 'token')
     userid = config.get('AUTH', 'userid')
     api = config.get('API', 'url')
+    scripts_path = config.get('COMMON', 'scripts_path')
 
     CUSTOMERS_URL = api + 'Customers/' + userid
 
@@ -111,7 +111,7 @@ def main():
 
         if script_suffix == 'py':
             # Path to metering script
-            p = 'sensors/' + script
+            p = scripts_path + script
             # Get function reference and import module generically
             func = imp.load_source('meter', p)
             # Create sensor generically and save it into a dictionary

@@ -23,14 +23,11 @@ HOME_DIR = path.expanduser("~")
 CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
 config.read(CONFIG_FILE)
-if config.has_option('AUTH', 'token'):
-    token = config.get('AUTH', 'token')
-if config.has_option('AUTH', 'userid'):
-    user_id = config.get('AUTH', 'userid')
-if config.has_option('API', 'url'):
-    api = config.get('API', 'url')
-if config.has_option('COMMON', 'script_path'):
-    scripts_path = config.get('COMMON', 'scripts_path')
+
+token = config.get('AUTH', 'token')
+user_id = config.get('AUTH', 'userid')
+api = config.get('API', 'url')
+scripts_path = config.get('COMMON', 'scripts_path')
 
 SENSORS_URL = api + 'Customers/' + user_id + '/sensors'
 METERINGS_URL = api + 'Customers/' + user_id + '/meterings'
@@ -108,7 +105,7 @@ class Sensor:
             False - if value is not valid
             True - if value is valid
         """
-        metering = float(value)
+        value = float(value)
 
         # check deviation
         if self.deviation and self.last_value and abs(self.last_value - value) > self.deviation:
