@@ -36,6 +36,7 @@ make
 ```
 
 ## Usage
+
 ```bash
 # run
 python run.py
@@ -45,4 +46,24 @@ python run.py --config
 
 # run emu sensor script (for test usages)
 python run.py --emu
+```
+
+## ~/.loggrrc example
+
+```ini
+[COMMON]
+scripts_path = sensors/
+
+[AUTH]
+token = aGeMPZ94TH7lrHc2skUn3zv6RTXPhPjeUO7Ipw86GC6QjM9mDYfUs1xr4pKXKw0F
+userid = 558855605a227a206cedcf55
+
+[SENSORS]
+temperature = temperature.out,Wohnzimmer,grad_celsius,-270,200,10
+brightness = brightness.out,Wohnzimmer,lumen,0,210
+humidity = humidity.out,Wohnzimmer,percent,0,100,10
+pressure = pressure.py,Wohnzimmer,hectopascal,900,1100,10
+
+[API]
+url = http://loggr.stkn.org/api/
 ```
