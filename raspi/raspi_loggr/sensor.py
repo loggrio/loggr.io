@@ -17,12 +17,6 @@ from .util import SensorTypes
 from .util import log_error
 from .util import log_info
 
-PATH = 'sensors/'
-API = 'http://0.0.0.0:3000/api/'
-CUSTOMERS = 'Customers/'
-METERINGS = '/meterings'
-SENSORS = '/sensors'
-
 config = ConfigParser()
 
 HOME_DIR = path.expanduser("~")
@@ -30,9 +24,16 @@ CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
 config.read(CONFIG_FILE)
 if config.has_option('AUTH', 'token'):
-    TOKEN = config.get('AUTH', 'token')
+    token = config.get('AUTH', 'token')
 if config.has_option('AUTH', 'userid'):
-    USER_ID = config.get('AUTH', 'userid')
+    user_id = config.get('AUTH', 'userid')
+if config.has_option('API', 'url'):
+    api = config.get('API', 'url')
+if config.has_option('COMMON', 'script_path'):
+    scripts_path = config.get('COMMON', 'scripts_path')
+
+SENSORS_URL = api + 'Customers/' + user_id + '/sensors'
+METERINGS_URL = api + 'Customers/' + user_id + '/meterings'
 
 
 class Sensor:
@@ -80,15 +81,15 @@ class Sensor:
         Returns:
             sensor id (str): id of current sensor
         """
-        headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
+        headers = {'Content-Type': 'application/json', 'Authorization': token}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][type]={type}
             params = {'filter[where][type]': sensor_type, 'filter[where][location]': location}
-            r = requests.get(API + CUSTOMERS + USER_ID + SENSORS, params=params, headers=headers)
+            r = requests.get(SENSORS_URL, params=params, headers=headers)
 
-            if not len(r.json()):
+            if not r.json():
                 payload = {'type': sensor_type, 'location': location, 'unit': unit}
-                r = requests.post(API + CUSTOMERS + USER_ID + SENSORS, data=json.dumps(payload), headers=headers)
+                r = requests.post(SENSORS_URL, data=json.dumps(payload), headers=headers)
                 return r.json()['id']
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors
@@ -134,15 +135,21 @@ class Sensor:
         """
         if self.func is not None:
             value = str(self.func())
-            log_info('metering of ' + self.type + ' sensor: ' + value)
-            return value
+            if self.__check(value):
+                log_info('metering of ' + self.type + ' sensor: ' + value)
+                return value
+
+            return False
 
         if self.gen is not None:
             value = str(self.gen.next())
-            log_info('metering of ' + self.type + ' sensor: ' + value)
-            return value
+            if self.__check(value):
+                log_info('metering of ' + self.type + ' sensor: ' + value)
+                return value
 
-        command = PATH + self.script
+            return False
+
+        command = scripts_path + self.script
         try:
             subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError, cpe:
@@ -172,11 +179,11 @@ class Sensor:
         Returns:
             request status code (int): HTTP status code of POST request
         """
-        headers = {'Content-Type': 'application/json', 'Authorization': TOKEN}
+        headers = {'Content-Type': 'application/json', 'Authorization': token}
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/Meterings?filter[where][id]={self.id}
             params = {'filter[where][id]': self.id}
-            r = requests.post(API + CUSTOMERS + USER_ID + METERINGS, data=json.dumps(payload), params=params,
+            r = requests.post(METERINGS_URL, data=json.dumps(payload), params=params,
                               headers=headers)
         except requests.exceptions.RequestException, re:
             # catch and treat requests errors

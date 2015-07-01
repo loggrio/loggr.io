@@ -19,10 +19,6 @@ from .util import log_info
 TIME_BETWEEN_METERINGS = 60
 TIME_BETWEEN_API_TESTS = 60
 
-API = 'http://0.0.0.0:3000/api/'
-CUSTOMERS = 'Customers/'
-EXISTS = '/exists'
-
 HOME_DIR = path.expanduser("~")
 CONFIG_FILE = HOME_DIR + '/.loggrrc'
 
@@ -53,10 +49,16 @@ def main():
     if not config.has_option('AUTH', 'token') or not config.has_option('AUTH', 'userid'):
         treat_missing_config_errors()
         return
+    if not config.has_option('API', 'url'):
+        treat_missing_config_errors()
+        return
 
     # Get token and user id from config file
     token = config.get('AUTH', 'token')
     userid = config.get('AUTH', 'userid')
+    api = config.get('API', 'url')
+
+    CUSTOMERS_URL = api + 'Customers/' + userid
 
     # Check if token and userid is set
     if not len(token) or not len(userid):
@@ -67,7 +69,7 @@ def main():
     api_offline = True
     while api_offline:
         try:
-            requests.get(API + CUSTOMERS + userid + EXISTS, headers=headers)
+            requests.get(CUSTOMERS_URL + '/exists', headers=headers)
             api_offline = False
         except requests.exceptions.RequestException, re:
             treat_requests_errors(re)
