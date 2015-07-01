@@ -68,7 +68,10 @@ angular
             //Now clearing the loopback values from client browser for safe logout...
             LoopBackAuth.clearUser();
             LoopBackAuth.clearStorage();
-            $location.nextAfterLogin = $location.path();
+            // prevent redirect to login on failed login
+            if ($location.path() !== '/login') {
+              $location.nextAfterLogin = $location.path();
+            }
             $location.path('/login');
           }
           return $q.reject(rejection);

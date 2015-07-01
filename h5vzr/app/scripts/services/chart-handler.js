@@ -8,7 +8,7 @@
  * Service in the loggrioApp.
  */
 angular.module('loggrioApp')
-  .service('chartHandler', function ($interval, $timeout, Customer, Metering, notify, util, zoom, chartConfig) {
+  .service('chartHandler', function ($interval, $timeout, Customer, notify, util, zoom, chartConfig) {
     var self = this;
 
     this.charts = [];

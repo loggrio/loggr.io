@@ -25,7 +25,6 @@ angular.module('loggrioApp')
         var next = $location.nextAfterLogin || '/';
         $location.nextAfterLogin = null;
         $location.path(next);
-        self.loginCredentials = {};
       });
     };
 

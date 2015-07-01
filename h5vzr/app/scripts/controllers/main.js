@@ -10,6 +10,14 @@
 angular.module('loggrioApp')
   .controller('MainCtrl', function ($rootScope, $location, Customer, chartHandler, chartMenu, zoom) {
 
+    // THIS FIX IS DEDICATED TO MARKO G.
+    if (!Customer.isAuthenticated()) {
+      $location.path('/login');
+    } else {
+      $rootScope.user = Customer.getCurrent();
+      chartHandler.goLive();
+    }
+
     var self = this;
 
     this.charts = chartHandler.charts;
@@ -21,13 +29,5 @@ angular.module('loggrioApp')
     this.toggleChartView = function (chartIndex) {
       self.charts[chartIndex].viewToggle();
     };
-
-    // THIS FIX IS DEDICATED TO MARKO G.
-    if (!Customer.isAuthenticated()) {
-      $location.path('/login');
-    } else {
-      $rootScope.user = Customer.getCurrent();
-      chartHandler.goLive();
-    }
 
   });
