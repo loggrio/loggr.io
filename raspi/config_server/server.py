@@ -63,16 +63,14 @@ def init_config():
     # If config file not exists create a default one
     if not path.isfile(CONFIG_FILE):
         log_info('No config file found, create default one')
+        config.add_section('COMMON')
         config.add_section('AUTH')
         config.add_section('SENSORS')
         config.add_section('API')
         config.set('AUTH', 'token', '')
         config.set('AUTH', 'userid', '')
         config.set('API', 'url', 'http://loggr.stkn.org/')
-        config.set('API', 'customers', 'Customers/')
-        config.set('API', 'meterings', '/meterings')
-        config.set('API', 'sensors', '/sensors')
-        config.set('API', 'path', 'sensors/')
+        config.set('COMMON', 'scripts_path', 'sensors/')
         with open(CONFIG_FILE, 'w') as configfile:
             config.write(configfile)
         log_info('Created default config file')

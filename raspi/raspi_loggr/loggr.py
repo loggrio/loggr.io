@@ -49,7 +49,7 @@ def main():
     if not config.has_option('AUTH', 'token') or not config.has_option('AUTH', 'userid'):
         treat_missing_config_errors()
         return
-    if not config.has_option('API', 'url') or not config.has_option('API', 'exists'):
+    if not config.has_option('API', 'url'):
         treat_missing_config_errors()
         return
 
@@ -57,8 +57,8 @@ def main():
     token = config.get('AUTH', 'token')
     userid = config.get('AUTH', 'userid')
     api = config.get('API', 'url')
-    customers = config.get('API', 'customers')
-    exists = config.get('API', 'exists')
+
+    CUSTOMERS_URL = api + 'Customers/' + userid
 
     # Check if token and userid is set
     if not len(token) or not len(userid):
@@ -69,7 +69,7 @@ def main():
     api_offline = True
     while api_offline:
         try:
-            requests.get(api + customers + userid + exists, headers=headers)
+            requests.get(CUSTOMERS_URL + '/exists', headers=headers)
             api_offline = False
         except requests.exceptions.RequestException, re:
             treat_requests_errors(re)
