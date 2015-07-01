@@ -12,10 +12,6 @@ typedef unsigned int uint;
 #define     ADC_CS        0
 #define     ADC_CLK       1
 #define     ADC_DIO       2
-#define     DATA_GOOD     1
-#define     DATA_NOT_GOOD 2
-
-int dataState = DATA_NOT_GOOD;
 
 uchar get_ADC_Result()
 {
@@ -56,16 +52,8 @@ uchar get_ADC_Result()
 
   digitalWrite(ADC_CS, 1);
 
-  if(dat1 == dat2)
-  {
-    dataState = DATA_GOOD;
-    return dat1;
-  }
-  else
-  {
-    dataState = DATA_NOT_GOOD;
-    return -1;
-  }
+  // if data good return data, else return 255
+  return(dat1==dat2) ? dat1 : 255;
 }
 
 int main(void)
@@ -81,32 +69,39 @@ int main(void)
 
   pinMode(ADC_CS,  OUTPUT);
   pinMode(ADC_CLK, OUTPUT);
-
   pinMode(ADC_DIO, OUTPUT);
 
   analogVal = get_ADC_Result();
 
-  // most times when analogVal = 0 the brightness sensor isn't connected to the Raspberry
-  if(analogVal == -1)
+  // if brightness sensor isn't connected to the Raspberry Pi analogVal == 0
+  if(analogVal == 0)
   {
     delay(10);
     analogVal = get_ADC_Result();
-    if(analogVal == -1){
-      fprintf(stderr, "brightness maybe not connected!");
+    if(analogVal == 0){
+      fprintf(stderr, "brightness sensor maybe not connected!");
       return 3;
     }
   }
 
-  if(analogVal <= 210 && dataState == DATA_GOOD)
+  // error in get_ADC_Result() (dat1 != dat2)
+  if(analogVal == 255)
   {
+    delay(10);
+    analogVal = get_ADC_Result();
+    if(analogVal == 255) {
+      fprintf(stderr, "dat1 != dat2");
+      return 4;
+    }
+  }
+
+  if(analogVal <= 210) {
     illum = 210 - analogVal;
-    fprintf(stdout, "%d", illum);
   }
-  if (analogVal > 210 && dataState == DATA_GOOD)
-  {
+  else if(analogVal > 210) {
     illum = 0;
-    fprintf(stdout, "%d", illum);
   }
+  fprintf(stdout, "%d", illum);
   fflush(stdout);
 
   return 0;
