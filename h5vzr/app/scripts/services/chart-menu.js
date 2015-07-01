@@ -12,8 +12,10 @@ angular.module('loggrioApp')
 
     function getDateStamp() {
       var date = new Date();
+      var day = date.getDate();
       var month = parseInt(date.getMonth()) + 1; // <- crazy mf!
-      return date.getDate() + '.' + month + '.' + date.getFullYear();
+      var year = date.getFullYear();
+      return day + '.' + month + '.' + year;
     }
 
     this.contextMenu = function (charts) {
