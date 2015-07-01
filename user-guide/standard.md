@@ -5,6 +5,7 @@
 * First connect the Raspberry Pi with an Ethernet cable.
 
 Picture Ethernet connect
+
 * Connect the Raspberry Pi with the included power supply with a power outlet.
 
 Picture Power connect
