@@ -2,27 +2,17 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Welcome to MkDocs\n\n\nFor full documentation visit \nmkdocs.org\n.\n\n\nCommands\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
+            "text": "Welcome to loggr.io", 
             "title": "Home"
         }, 
         {
-            "location": "/#welcome-to-mkdocs", 
-            "text": "For full documentation visit  mkdocs.org .", 
-            "title": "Welcome to MkDocs"
-        }, 
-        {
-            "location": "/#commands", 
-            "text": "mkdocs new [dir-name]  - Create a new project.  mkdocs serve  - Start the live-reloading docs server.  mkdocs build  - Build the documentation site.  mkdocs help  - Print this help message.", 
-            "title": "Commands"
-        }, 
-        {
-            "location": "/#project-layout", 
-            "text": "mkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
-            "title": "Project layout"
+            "location": "/#welcome-to-loggrio", 
+            "text": "", 
+            "title": "Welcome to loggr.io"
         }, 
         {
             "location": "/user-guide/standard/", 
-            "text": "User Guide for loggr.io\n\n\nBuild up your Raspberry Pi\n\n\n\n\nFirst connect the Raspberry Pi with an Ethernet cable.\n\n\n\n\nPicture Ethernet connect\n* Connect the Raspberry Pi with the included power supply with a power outlet.\n\n\nPicture Power connect\n\n\nNow the Raspberry starts automatically.\n\n\nPair your Raspberry\n\n\n\n\nBrowse to http://loggr.stkn.org/#/login.\n\n\nIf you don't have an account already, make a new one, else login to your account.\n\n\nClick on the pairing-button and insert the IP from the Raspberry Pi. You can check the IP from the Raspberry Pi in your router menu. For example the Raspberry Pi has the IP 192.168.178.35.\n\n\n\n\n\n\n\n\nClick on \"PAIREN\".\n\n\n\n\nNow the Raspberry Pi is configurated and paired with your User Account.\n\n\nUse loggr.io\n\n\nDecide which graphs you want to see\n\n\nClick on \"Ansicht konfigurieren\" and order the graphs per drag and drop. In the left list are the shown graphs and in the right list are the graphs which are available.\n\n\n\nInsight the meterings\n\n\nThe meterings are shown in the standard view. The picture shows the standard view.\n\n\n\nShow the average\n\n\nIf you want to see the average of the meterings you can click on the average-button in the right upper corner in the graph. The graph turns in a new graph. For getting the standard view back click on the standard-view-button in the right upper corner.", 
+            "text": "User Guide for loggr.io\n\n\nBuild up your Raspberry Pi\n\n\n\n\nFirst connect the Raspberry Pi with an Ethernet cable.\n\n\n\n\nPicture Ethernet connect\n* Connect the Raspberry Pi with the included power supply with a power outlet.\n\n\nPicture Power connect\n\n\nNow the Raspberry starts automatically.\n\n\nPair your Raspberry\n\n\n\n\nBrowse to http://loggr.stkn.org/.\n\n\nIf you don't have an account already, make a new one, else login to your account.\n\n\nClick on the pairing-button and insert the IP from the Raspberry Pi. You can check the IP from the Raspberry Pi in your router menu. For example the Raspberry Pi has the IP 192.168.178.35.\n\n\n\n\n\n\n\n\nClick on \"PAIREN\".\n\n\n\n\nNow the Raspberry Pi is configurated and paired with your User Account.\n\n\nUse loggr.io\n\n\nDecide which graphs you want to see\n\n\nClick on \"Ansicht konfigurieren\" and order the graphs per drag and drop. In the left list are the shown graphs and in the right list are the graphs which are available.\n\n\n\nInsight the meterings\n\n\nThe meterings are shown in the standard view. The picture shows the standard view.\n\n\n\nShow the average\n\n\nIf you want to see the average of the meterings you can click on the average-button in the right upper corner in the graph. The graph turns in a new graph. For getting the standard view back click on the standard-view-button in the right upper corner.", 
             "title": "Standard"
         }, 
         {
@@ -37,7 +27,7 @@
         }, 
         {
             "location": "/user-guide/standard/#pair-your-raspberry", 
-            "text": "Browse to http://loggr.stkn.org/#/login.  If you don't have an account already, make a new one, else login to your account.  Click on the pairing-button and insert the IP from the Raspberry Pi. You can check the IP from the Raspberry Pi in your router menu. For example the Raspberry Pi has the IP 192.168.178.35.     Click on \"PAIREN\".   Now the Raspberry Pi is configurated and paired with your User Account.", 
+            "text": "Browse to http://loggr.stkn.org/.  If you don't have an account already, make a new one, else login to your account.  Click on the pairing-button and insert the IP from the Raspberry Pi. You can check the IP from the Raspberry Pi in your router menu. For example the Raspberry Pi has the IP 192.168.178.35.     Click on \"PAIREN\".   Now the Raspberry Pi is configurated and paired with your User Account.", 
             "title": "Pair your Raspberry"
         }, 
         {
@@ -72,18 +62,78 @@
         }, 
         {
             "location": "/developer-guide/h5vzr/", 
-            "text": "", 
+            "text": "H5VZR - Frontend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular\n\n\n\n\nInstall npm and bower deps\n\n\n# cd into h5vzr\ncd h5vzr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js\n\n\n\n\nUsage\n\n\n# serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test\n\n\n\n\nFurther Help: \nYeoman Guide", 
             "title": "H5VZR"
         }, 
         {
-            "location": "/developer-guide/api/", 
+            "location": "/developer-guide/h5vzr/#h5vzr-frontend", 
             "text": "", 
+            "title": "H5VZR - Frontend"
+        }, 
+        {
+            "location": "/developer-guide/h5vzr/#requirements", 
+            "text": "{\n   node :  =0.12 \n}", 
+            "title": "Requirements"
+        }, 
+        {
+            "location": "/developer-guide/h5vzr/#set-up-your-environment", 
+            "text": "Install prerequisites  # Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular  Install npm and bower deps  # cd into h5vzr\ncd h5vzr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js", 
+            "title": "Set up your environment"
+        }, 
+        {
+            "location": "/developer-guide/h5vzr/#usage", 
+            "text": "# serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test  Further Help:  Yeoman Guide", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/developer-guide/api/", 
+            "text": "API - Backend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n,\n  \nmongodb\n: \n=2.6\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback\nnpm install -g strongloop\n\n\n\n\nInstall MongoDB: \nOffical Guide\n\n\nInstall npm deps\n\n\n# cd into api\ncd api\n\n# npm deps\nnpm install\n\n\n\n\nUsage\n\n\n# if not already running start the mongo daemon\nmongod\n\n# run\nnode .\n\n\n\n\nFurther Help: \nStrongloop Guide", 
             "title": "API"
         }, 
         {
-            "location": "/developer-guide/raspi/", 
+            "location": "/developer-guide/api/#api-backend", 
             "text": "", 
-            "title": "raspi"
+            "title": "API - Backend"
+        }, 
+        {
+            "location": "/developer-guide/api/#requirements", 
+            "text": "{\n   node :  =0.12 ,\n   mongodb :  =2.6 \n}", 
+            "title": "Requirements"
+        }, 
+        {
+            "location": "/developer-guide/api/#set-up-your-environment", 
+            "text": "Install prerequisites  # Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback\nnpm install -g strongloop  Install MongoDB:  Offical Guide  Install npm deps  # cd into api\ncd api\n\n# npm deps\nnpm install", 
+            "title": "Set up your environment"
+        }, 
+        {
+            "location": "/developer-guide/api/#usage", 
+            "text": "# if not already running start the mongo daemon\nmongod\n\n# run\nnode .  Further Help:  Strongloop Guide", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/developer-guide/raspi/", 
+            "text": "RASPI - Metering Unit\n\n\nRequirements\n\n\n{\n  \npython\n: \n=2.7\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt\n\n\n\n\nCompile Sensor scripts\n\n\n# cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake\n\n\n\n\nUsage\n\n\n# run\npython run.py\n\n# run config server\npython run.py --config\n\n# run emu sensor script (for test usages)\npython run.py --emu", 
+            "title": "RASPI"
+        }, 
+        {
+            "location": "/developer-guide/raspi/#raspi-metering-unit", 
+            "text": "", 
+            "title": "RASPI - Metering Unit"
+        }, 
+        {
+            "location": "/developer-guide/raspi/#requirements", 
+            "text": "{\n   python :  =2.7 \n}", 
+            "title": "Requirements"
+        }, 
+        {
+            "location": "/developer-guide/raspi/#set-up-your-environment", 
+            "text": "Install prerequisites  # cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt  Compile Sensor scripts  # cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake", 
+            "title": "Set up your environment"
+        }, 
+        {
+            "location": "/developer-guide/raspi/#usage", 
+            "text": "# run\npython run.py\n\n# run config server\npython run.py --config\n\n# run emu sensor script (for test usages)\npython run.py --emu", 
+            "title": "Usage"
         }
     ]
 }

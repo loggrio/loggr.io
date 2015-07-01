@@ -98,7 +98,7 @@
                         
                             
 <li >
-    <a href="../raspi/">raspi</a>
+    <a href="../raspi/">RASPI</a>
 </li>
 
                         
@@ -138,11 +138,61 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
+        <li class="main active"><a href="#h5vzr-frontend">H5VZR - Frontend</a></li>
+        
+            <li><a href="#requirements">Requirements</a></li>
+        
+            <li><a href="#set-up-your-environment">Set up your environment</a></li>
+        
+            <li><a href="#usage">Usage</a></li>
+        
+    
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-</div>
+<h1 id="h5vzr-frontend">H5VZR - Frontend</h1>
+<h2 id="requirements">Requirements</h2>
+<pre><code class="json">{
+  &quot;node&quot;: &quot;&gt;=0.12&quot;
+}
+</code></pre>
+
+<h2 id="set-up-your-environment">Set up your environment</h2>
+<h3 id="install-prerequisites">Install prerequisites</h3>
+<pre><code class="bash"># Update npm
+npm install -g npm
+
+# Install yo
+npm install -g grunt-cli bower yo generator-karma generator-angular
+</code></pre>
+
+<h3 id="install-npm-and-bower-deps">Install npm and bower deps</h3>
+<pre><code class="bash"># cd into h5vzr
+cd h5vzr
+
+# npm deps
+npm install
+
+# bower deps
+bower install
+
+# loopback services (requires api prerequisites)
+lb-ng ../api/server/server.js app/scripts/services/lb-services.js
+</code></pre>
+
+<h2 id="usage">Usage</h2>
+<pre><code class="bash"># serve
+grunt serve
+
+# build
+grunt build
+
+# test
+npm test
+</code></pre>
+
+<p>Further Help: <a href="https://github.com/yeoman/generator-angular#usage">Yeoman Guide</a></p></div>
             
         </div>
 
