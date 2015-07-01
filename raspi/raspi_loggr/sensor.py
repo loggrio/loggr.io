@@ -65,7 +65,7 @@ class Sensor:
         self.gen = gen
         self.script = script
         self.cache = deque([], cache_size)
-        self.last_metering = None
+        self.last_value = None
         self.minimum = minimum
         self.maximum = maximum
         self.deviation = deviation
@@ -98,7 +98,7 @@ class Sensor:
             logging.info('requests status code: ' + str(r.status_code))
             return r.json()[0]['id']
 
-    def __check(self, metering):
+    def __check(self, value):
         """Check value of metering for validity
 
         Args:
@@ -108,21 +108,21 @@ class Sensor:
             False - if value is not valid
             True - if value is valid
         """
-        metering = float(metering)
+        metering = float(value)
 
         # check deviation
-        if self.deviation and self.last_metering and abs(self.last_metering - metering) > self.deviation:
+        if self.deviation and self.last_value and abs(self.last_value - value) > self.deviation:
             return False
 
         # check minimum
-        if self.minimum and metering < self.minimum:
+        if self.minimum and value < self.minimum:
             return False
 
         # check maximum
-        if self.maximum and metering > self.maximum:
+        if self.maximum and value > self.maximum:
             return False
 
-        self.last_metering = metering
+        self.last_value = value
 
         return True
 
