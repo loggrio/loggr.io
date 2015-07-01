@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
-	<title>RASPI - loggr.io</title>
+	<title>raspi - loggr.io</title>
 
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -59,8 +59,23 @@
                 
                 
                 
-                    <li >
-                        <a href="../../user-guide/">User Guide</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../../user-guide/standard/">Standard</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../../user-guide/pro/">Pro</a>
+</li>
+
+                        
+                        </ul>
                     </li>
                 
                 
@@ -83,7 +98,7 @@
                         
                             
 <li class="active">
-    <a href="./">RASPI</a>
+    <a href="./">raspi</a>
 </li>
 
                         
@@ -123,58 +138,11 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#raspi-metering-unit">RASPI - Metering Unit</a></li>
-        
-            <li><a href="#requirements">Requirements</a></li>
-        
-            <li><a href="#set-up-your-environment">Set up your environment</a></li>
-        
-            <li><a href="#usage">Usage</a></li>
-        
-    
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="raspi-metering-unit">RASPI - Metering Unit</h1>
-<h2 id="requirements">Requirements</h2>
-<pre><code class="json">{
-  &quot;python&quot;: &quot;&gt;=2.7&quot;
-}
-</code></pre>
-
-<h2 id="set-up-your-environment">Set up your environment</h2>
-<h3 id="install-prerequisites">Install prerequisites</h3>
-<pre><code class="bash"># cd into raspi
-cd raspi
-
-# optionally use a virtualenv
-pip install --upgrade virtualenv
-virtualenv .env
-source .env/bin/activate
-
-# python deps
-pip install --upgrade -r requirements.txt
-</code></pre>
-
-<h3 id="compile-sensor-scripts">Compile Sensor scripts</h3>
-<pre><code class="bash"># cd into raspi/sensors
-cd sensors
-
-# compile scripts in raspi/sensors
-make
-</code></pre>
-
-<h2 id="usage">Usage</h2>
-<pre><code class="bash"># run
-python run.py
-
-# run config server
-python run.py --config
-
-# run emu sensor script (for test usages)
-python run.py --emu
-</code></pre></div>
+</div>
             
         </div>
 

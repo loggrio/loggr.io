@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../../img/favicon.ico">
 
-	<title>H5VZR - loggr.io</title>
+	<title>Pro - loggr.io</title>
 
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -59,19 +59,19 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../../user-guide/standard/">Standard</a>
+    <a href="../standard/">Standard</a>
 </li>
 
                         
                             
-<li >
-    <a href="../../user-guide/pro/">Pro</a>
+<li class="active">
+    <a href="./">Pro</a>
 </li>
 
                         
@@ -80,25 +80,25 @@
                 
                 
                 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Developer Guide <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
-<li class="active">
-    <a href="./">H5VZR</a>
+<li >
+    <a href="../../developer-guide/h5vzr/">H5VZR</a>
 </li>
 
                         
                             
 <li >
-    <a href="../api/">API</a>
+    <a href="../../developer-guide/api/">API</a>
 </li>
 
                         
                             
 <li >
-    <a href="../raspi/">raspi</a>
+    <a href="../../developer-guide/raspi/">raspi</a>
 </li>
 
                         
@@ -117,12 +117,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../../user-guide/pro/">
+                        <a rel="next" href="../standard/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../api/">
+                        <a rel="prev" href="../../developer-guide/h5vzr/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -138,11 +138,48 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
+        <li class="main active"><a href="#user-guide-pro-for-loggrio">User Guide Pro for loggr.io</a></li>
+        
+            <li><a href="#customers">Customers</a></li>
+        
+            <li><a href="#sensors">Sensors</a></li>
+        
+            <li><a href="#meterings">Meterings</a></li>
+        
+    
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-</div>
+<h1 id="user-guide-pro-for-loggrio">User Guide Pro for loggr.io</h1>
+<p>If you want to set up your own Raspberry Pi you will need the API interface.</p>
+<p>The header of all requests is:
+<p><em>Content-Type: application/json, Authorization: token</em> </p></p>
+<h2 id="customers">Customers</h2>
+<ul>
+<li>URL: http://loggr.stkn.org/api/Customers</li>
+<li>Model: Customer {realm (string, optional), username (string, optional), credentials (object, optional), challenges (object, optional), email (string),
+emailVerified (boolean, optional), verificationToken (string, optional), status (string, optional), created (string, optional), lastUpdated (string, optional), id (objectid, optional)}</li>
+<li><strong>POST</strong> a Customer</li>
+<li><strong>GET</strong> a Customer</li>
+<li><strong>PUT</strong> a Customer</li>
+</ul>
+<h2 id="sensors">Sensors</h2>
+<ul>
+<li>URL: http://loggr.stkn.org/api/Customers/{id}/sensors</li>
+<li>Model: Sensor {type (string), location (string), unit (string), id (objectid, optional), customerId (objectid, optional)}</li>
+<li><strong>POST</strong> your sensors</li>
+<li><strong>GET</strong> your sensors</li>
+<li><strong>DELETE</strong> your sensors. Only User id required.</li>
+</ul>
+<h2 id="meterings">Meterings</h2>
+<ul>
+<li>URL: http://loggr.stkn.org/api//Customers/{id}/meterings</li>
+<li>Metering {value (number), time (string), id (objectid, optional), customerId (objectid, optional), sensorId (objectid, optional)}</li>
+<li><strong>POST</strong> your meterings</li>
+<li><strong>GET</strong> your meterings</li>
+<li><strong>DELETE</strong> your meterings. Only User id required.</li>
+</ul></div>
             
         </div>
 

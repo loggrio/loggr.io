@@ -4,36 +4,44 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2015-06-30</lastmod>
+     <lastmod>2015-07-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
+        
     <url>
-     <loc>None/user-guide/</loc>
-     <lastmod>2015-06-30</lastmod>
+     <loc>None/user-guide/standard/</loc>
+     <lastmod>2015-07-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
+        
+    <url>
+     <loc>None/user-guide/pro/</loc>
+     <lastmod>2015-07-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
     
         
     <url>
      <loc>None/developer-guide/h5vzr/</loc>
-     <lastmod>2015-06-30</lastmod>
+     <lastmod>2015-07-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/developer-guide/api/</loc>
-     <lastmod>2015-06-30</lastmod>
+     <lastmod>2015-07-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/developer-guide/raspi/</loc>
-     <lastmod>2015-06-30</lastmod>
+     <lastmod>2015-07-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
