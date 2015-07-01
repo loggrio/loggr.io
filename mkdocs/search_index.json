@@ -13,7 +13,7 @@
         {
             "location": "/user-guide/standard/", 
             "text": "User Guide for loggr.io\n\n\nBuild up your Raspberry Pi\n\n\n\n\nFirst connect the Raspberry Pi with an Ethernet cable.\n\n\n\n\nPicture Ethernet connect\n\n\n\n\nConnect the Raspberry Pi with the included power supply with a power outlet.\n\n\n\n\nPicture Power connect\n\n\nNow the Raspberry starts automatically.\n\n\nPair your Raspberry\n\n\n\n\nBrowse to http://loggr.stkn.org/.\n\n\nIf you don't have an account already, make a new one, else login to your account.\n\n\nClick on the pairing-button and insert the IP from the Raspberry Pi. You can check the IP from the Raspberry Pi in your router menu. For example the Raspberry Pi has the IP 192.168.178.35.\n\n\n\n\n\n\n\n\nClick on \"PAIREN\".\n\n\n\n\nNow the Raspberry Pi is configurated and paired with your User Account.\n\n\nUse loggr.io\n\n\nDecide which graphs you want to see\n\n\nClick on \"Ansicht konfigurieren\" and order the graphs per drag and drop. In the left list are the shown graphs and in the right list are the graphs which are available.\n\n\n\nInsight the meterings\n\n\nThe meterings are shown in the standard view. The picture shows the standard view.\n\n\n\nShow the average\n\n\nIf you want to see the average of the meterings you can click on the average-button in the right upper corner in the graph. The graph turns in a new graph. For getting the standard view back click on the standard-view-button in the right upper corner.", 
-            "title": "Standard"
+            "title": "Standard Guide"
         }, 
         {
             "location": "/user-guide/standard/#user-guide-for-loggrio", 
@@ -38,7 +38,7 @@
         {
             "location": "/user-guide/pro/", 
             "text": "User Guide Pro for loggr.io\n\n\nIf you want to set up your own Raspberry Pi you will need the API interface.\n\n\nThe header of all requests is:\n\nContent-Type: application/json, Authorization: token\n \n\n\nCustomers\n\n\n\n\nURL: http://loggr.stkn.org/api/Customers\n\n\nModel: Customer {realm (string, optional), username (string, optional), credentials (object, optional), challenges (object, optional), email (string),\nemailVerified (boolean, optional), verificationToken (string, optional), status (string, optional), created (string, optional), lastUpdated (string, optional), id (objectid, optional)}\n\n\nPOST\n a Customer\n\n\nGET\n a Customer\n\n\nPUT\n a Customer\n\n\n\n\nSensors\n\n\n\n\nURL: http://loggr.stkn.org/api/Customers/{id}/sensors\n\n\nModel: Sensor {type (string), location (string), unit (string), id (objectid, optional), customerId (objectid, optional)}\n\n\nPOST\n your sensors\n\n\nGET\n your sensors\n\n\nDELETE\n your sensors. Only User id required.\n\n\n\n\nMeterings\n\n\n\n\nURL: http://loggr.stkn.org/api//Customers/{id}/meterings\n\n\nMetering {value (number), time (string), id (objectid, optional), customerId (objectid, optional), sensorId (objectid, optional)}\n\n\nPOST\n your meterings\n\n\nGET\n your meterings\n\n\nDELETE\n your meterings. Only User id required.", 
-            "title": "Pro"
+            "title": "Pro Guide"
         }, 
         {
             "location": "/user-guide/pro/#user-guide-pro-for-loggrio", 
