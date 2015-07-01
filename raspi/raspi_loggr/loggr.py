@@ -16,6 +16,8 @@ from .util import treat_missing_config_errors
 from .util import treat_pairing_errors
 from .util import log_info
 
+config = ConfigParser()
+
 TIME_BETWEEN_METERINGS = 60
 TIME_BETWEEN_API_TESTS = 60
 
@@ -40,16 +42,12 @@ def main():
         treat_missing_config_errors()
         return
 
-    # Create config
-    config = ConfigParser()
-    # Read config file
     config.read(CONFIG_FILE)
 
     # Check if config file contains options token and userid
-    if not config.has_option('AUTH', 'token') or not config.has_option('AUTH', 'userid'):
-        treat_missing_config_errors()
-        return
-    if not config.has_option('API', 'url'):
+    if not config.has_option('AUTH', 'token')
+    or not config.has_option('AUTH', 'userid')
+    or not config.has_option('API', 'url'):
         treat_missing_config_errors()
         return
 
