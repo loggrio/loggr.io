@@ -69,7 +69,7 @@ def init_config():
         config.add_section('API')
         config.set('AUTH', 'token', '')
         config.set('AUTH', 'userid', '')
-        config.set('API', 'url', 'http://loggr.stkn.org/')
+        config.set('API', 'url', 'http://loggr.stkn.org/api/')
         config.set('COMMON', 'scripts_path', 'sensors/')
         with open(CONFIG_FILE, 'w') as configfile:
             config.write(configfile)

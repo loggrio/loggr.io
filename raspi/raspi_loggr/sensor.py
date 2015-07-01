@@ -85,9 +85,9 @@ class Sensor:
         try:
             # http://0.0.0.0:3000/api/Customers/{userid}/sensors?filter=[where][type]={type}
             params = {'filter[where][type]': sensor_type, 'filter[where][location]': location}
-            r = requests.get(api + customers + user_id + sensors, params=params, headers=headers)
+            r = requests.get(SENSORS_URL, params=params, headers=headers)
 
-            if not len(r.json()):
+            if not r.json():
                 payload = {'type': sensor_type, 'location': location, 'unit': unit}
                 r = requests.post(SENSORS_URL, data=json.dumps(payload), headers=headers)
                 return r.json()['id']
@@ -135,7 +135,6 @@ class Sensor:
         """
         if self.func is not None:
             value = str(self.func())
-            log_info('metering of ' + self.type + ' sensor: ' + value)
             if self.__check(value):
                 log_info('metering of ' + self.type + ' sensor: ' + value)
                 return value
