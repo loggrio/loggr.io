@@ -15,12 +15,14 @@
           <label>Passwort wiederholen</label>
           <input type="password" ng-model="login.retypePassword">
         </md-input-container>
-        <md-subheader ng-show="login.loginError" class="md-warn">
-          <b>Error</b> - Falsche Username oder Passwort?!
-        </md-subheader>
-        <md-subheader ng-show="login.registerError" class="md-warn">
-          <b>Error</b> - User existiert bereits!
-        </md-subheader>
+        <div ng-messages="login.errors" role="errors">
+          <div ng-message="loginFailed" style="color: red;">
+            <b>Error</b> - Falsche Username oder Passwort?!
+          </div>
+          <div ng-message="registerFailed" style="color: red;">
+            <b>Error</b> - User existiert bereits!
+          </div>
+        </div>
       </md-card-content>
       <div class="md-actions" layout="row" layout-align="end center">
         <md-button ng-if="!login.registerToggled" ng-click="login.registerToggle()">Registrieren</md-button>

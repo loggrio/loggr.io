@@ -20,8 +20,7 @@ angular.module('loggrioApp')
     this.retypePassword = '';
     this.registerToggled = false;
 
-    this.loginError = false;
-    this.registerError = false;
+    this.errors = {};
 
     this.login = function () {
       Customer.login(self.loginCredentials, function() {
@@ -29,7 +28,7 @@ angular.module('loggrioApp')
         $location.nextAfterLogin = null;
         $location.path(next);
       }, function () {
-        self.loginError = true;
+        self.errors.loginFailed = true;
       });
     };
 
@@ -39,11 +38,12 @@ angular.module('loggrioApp')
         self.retypePassword = '';
         self.login();
       }, function () {
-        self.registerError = true;
+        self.errors.loginFailed = true;
       });
     };
 
     this.registerToggle = function () {
+      self.errors = {};
       self.registerToggled = !self.registerToggled;
     };
 
