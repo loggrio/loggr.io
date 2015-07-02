@@ -8,13 +8,15 @@
  * Service in the loggrioApp.
  */
 angular.module('loggrioApp')
-  .service('notify', function ($interval, $mdToast) {
+  .service('notify', function ($mdToast) {
 
-    this.toggled = false;
+
     var self = this;
 
+    var toggled = false;
+
     function restoreToast() {
-      if (self.toggled) {
+      if (toggled) {
         self.toastDisconnected();
       }
     }
@@ -28,7 +30,7 @@ angular.module('loggrioApp')
         hideDelay: 3000,
         position: 'bottom left'
       });
-      self.toggled = false;
+      toggled = false;
     };
 
     this.toastDisconnected = function () {
@@ -40,7 +42,7 @@ angular.module('loggrioApp')
         hideDelay: 0,
         position: 'bottom left'
       });
-      self.toggled = true;
+      toggled = true;
     };
 
     this.toastPaired = function () {
@@ -51,7 +53,7 @@ angular.module('loggrioApp')
                   '</md-toast>',
         position: 'bottom left',
         hideDelay: 3000,
-      }).then(function () {
+      }).finally(function () {
         restoreToast();
       });
     };
@@ -64,7 +66,7 @@ angular.module('loggrioApp')
                   '</md-toast>',
         position: 'bottom left',
         hideDelay: 3000,
-      }).then(function () {
+      }).finally(function () {
         restoreToast();
       });
     };
@@ -77,7 +79,7 @@ angular.module('loggrioApp')
                   '</md-toast>',
         position: 'bottom left',
         hideDelay: 3000,
-      }).then(function () {
+      }).finally(function () {
         restoreToast();
       });
     };
