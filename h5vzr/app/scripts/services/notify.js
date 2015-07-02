@@ -10,6 +10,9 @@
 angular.module('loggrioApp')
   .service('notify', function ($interval, $mdToast) {
 
+    this.toggled = false;
+    var self = this;
+
     this.toastReconnected = function () {
       $mdToast.show({
         template: '<md-toast>' +
@@ -19,6 +22,7 @@ angular.module('loggrioApp')
         hideDelay: 3000,
         position: 'bottom left'
       });
+      self.toggled = false;
     };
 
     this.toastDisconnected = function () {
@@ -30,6 +34,7 @@ angular.module('loggrioApp')
         hideDelay: 0,
         position: 'bottom left'
       });
+      self.toggled = true;
     };
 
     this.toastPaired = function () {
@@ -41,6 +46,12 @@ angular.module('loggrioApp')
         position: 'bottom left',
         hideDelay: 3000,
       });
+
+      setTimeout(function () {
+        if (self.toggled) {
+          self.toastDisconnected();
+        }
+      }, 3000);
     };
 
     this.toastPairingFailed = function () {
@@ -52,6 +63,12 @@ angular.module('loggrioApp')
         position: 'bottom left',
         hideDelay: 3000,
       });
+
+      setTimeout(function () {
+        if (self.toggled) {
+          self.toastDisconnected();
+        }
+      }, 3000);
     };
 
     this.toastPairingTimeOut = function () {
@@ -63,6 +80,12 @@ angular.module('loggrioApp')
         position: 'bottom left',
         hideDelay: 3000,
       });
+
+      setTimeout(function () {
+        if (self.toggled) {
+          self.toastDisconnected();
+        }
+      }, 3000);
     };
 
   });
