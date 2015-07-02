@@ -14,17 +14,22 @@ angular.module('loggrioApp')
       $location.path('/');
     }
 
+    var self = this;
+
     this.loginCredentials = {};
     this.retypePassword = '';
     this.registerToggled = false;
 
-    var self = this;
+    this.loginError = false;
+    this.registerError = false;
 
     this.login = function () {
       Customer.login(self.loginCredentials, function() {
         var next = $location.nextAfterLogin || '/';
         $location.nextAfterLogin = null;
         $location.path(next);
+      }, function () {
+        self.loginError = true;
       });
     };
 
@@ -33,6 +38,8 @@ angular.module('loggrioApp')
       Customer.create(self.loginCredentials, function () {
         self.retypePassword = '';
         self.login();
+      }, function () {
+        self.registerError = true;
       });
     };
 
