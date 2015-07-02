@@ -14,11 +14,9 @@ angular.module('loggrioApp')
     var self = this;
 
     function restoreToast() {
-      setTimeout(function () {
-        if (self.toggled) {
-          self.toastDisconnected();
-        }
-      }, 3000);
+      if (self.toggled) {
+        self.toastDisconnected();
+      }
     }
 
     this.toastReconnected = function () {
@@ -53,8 +51,9 @@ angular.module('loggrioApp')
                   '</md-toast>',
         position: 'bottom left',
         hideDelay: 3000,
+      }).then(function () {
+        restoreToast();
       });
-      restoreToast();
     };
 
     this.toastPairingFailed = function () {
@@ -65,8 +64,9 @@ angular.module('loggrioApp')
                   '</md-toast>',
         position: 'bottom left',
         hideDelay: 3000,
+      }).then(function () {
+        restoreToast();
       });
-      restoreToast();
     };
 
     this.toastPairingTimeOut = function () {
@@ -77,8 +77,9 @@ angular.module('loggrioApp')
                   '</md-toast>',
         position: 'bottom left',
         hideDelay: 3000,
+      }).then(function () {
+        restoreToast();
       });
-      restoreToast();
     };
 
   });
