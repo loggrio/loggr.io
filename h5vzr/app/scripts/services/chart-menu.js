@@ -35,7 +35,7 @@ angular.module('loggrioApp')
             var chart = charts[chartIndex].default.getHighcharts();
             var filename = chart.options.title.text + '_' + getDateStamp();
             chart.exportChart({
-              type: 'image/jpg',
+              type: 'image/jpeg',
               filename: filename
             });
           }
