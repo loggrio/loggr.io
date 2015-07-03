@@ -10,12 +10,11 @@
 angular.module('loggrioApp')
   .service('notify', function ($mdToast) {
 
-
     var self = this;
 
     var toggled = false;
 
-    function restoreToast() {
+    function restoreDiconnectToast() {
       if (toggled) {
         self.toastDisconnected();
       }
@@ -54,7 +53,7 @@ angular.module('loggrioApp')
         position: 'bottom left',
         hideDelay: 3000,
       }).finally(function () {
-        restoreToast();
+        restoreDiconnectToast();
       });
     };
 
@@ -67,7 +66,7 @@ angular.module('loggrioApp')
         position: 'bottom left',
         hideDelay: 3000,
       }).finally(function () {
-        restoreToast();
+        restoreDiconnectToast();
       });
     };
 
@@ -80,7 +79,7 @@ angular.module('loggrioApp')
         position: 'bottom left',
         hideDelay: 3000,
       }).finally(function () {
-        restoreToast();
+        restoreDiconnectToast();
       });
     };
 

@@ -8,7 +8,8 @@
  * Service in the loggrioApp.
  */
 angular.module('loggrioApp')
-  .service('chartHandler', function ($interval, $timeout, Customer, notify, util, zoom, chartConfig) {
+  .service('chartHandler', function ($interval, $timeout, Customer, notify, util, zoom, chartConfig, POLLING_INTERVAL) {
+
     var self = this;
 
     this.charts = [];
@@ -18,7 +19,7 @@ angular.module('loggrioApp')
     this.sensorsInUse = [];
     this.promises = [];
 
-    // disco toast toggled
+    // disconnectToast toggled
     var toggled = false;
 
     // deletes items of the arrays and stops all running intervals
@@ -115,9 +116,10 @@ angular.module('loggrioApp')
                     }
 
                   });
-              }, 10000);
+              }, POLLING_INTERVAL);
             });
         });
       });
     };
+
   });

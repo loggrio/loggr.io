@@ -17,26 +17,7 @@ angular
     'highcharts-ng',
     'ng-sortable'
   ])
-  .config(function ($routeProvider, $httpProvider, $mdIconProvider, $mdThemingProvider, LoopBackResourceProvider) {
-
-    Highcharts.setOptions({
-      global: {
-        timezoneOffset: new Date().getTimezoneOffset()
-      },
-      lang: {
-        contextButtonTitle: 'Graphenoptionen',
-        downloadJPEG: 'Graph als JPEG exportieren',
-        downloadPDF: 'Graph als PDF exportieren',
-        downloadPNG: 'Graph als PNG exportieren',
-        downloadSVG: 'Graph als SVG exportieren',
-        loading: 'Daten werden geladen...',
-        months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-        noData: 'Keine Daten zum Anzeigen vorhanden',
-        printChart: 'Graph drucken',
-        shortMonths: ['Jan', 'Feb', 'Mrz', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
-        weekdays: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag']
-      }
-    });
+  .config(function ($routeProvider, $httpProvider, $mdIconProvider, $mdThemingProvider, LoopBackResourceProvider, API) {
 
     $routeProvider
       .when('/', {
@@ -58,8 +39,7 @@ angular
     $mdThemingProvider.theme('default')
       .primaryPalette('teal');
 
-    // TODO: seperate cfg file
-    LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
+    LoopBackResourceProvider.setUrlBase(API);
 
     $httpProvider.interceptors.push(function($q, $location, LoopBackAuth) {
       return {
@@ -77,6 +57,25 @@ angular
           return $q.reject(rejection);
         }
       };
+    });
+
+    Highcharts.setOptions({
+      global: {
+        timezoneOffset: new Date().getTimezoneOffset()
+      },
+      lang: {
+        contextButtonTitle: 'Graphenoptionen',
+        downloadJPEG: 'Graph als JPEG exportieren',
+        downloadPDF: 'Graph als PDF exportieren',
+        downloadPNG: 'Graph als PNG exportieren',
+        downloadSVG: 'Graph als SVG exportieren',
+        loading: 'Daten werden geladen...',
+        months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+        noData: 'Keine Daten zum Anzeigen vorhanden',
+        printChart: 'Graph drucken',
+        shortMonths: ['Jan', 'Feb', 'Mrz', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+        weekdays: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag']
+      }
     });
 
   });
