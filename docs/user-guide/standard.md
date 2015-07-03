@@ -38,4 +38,10 @@ The meterings are shown in the standard view. The picture shows the standard vie
 
 ### Show the average
 
-If you want to see the average of the meterings you can click on the average-button in the right upper corner in the graph. The graph turns in a new graph. For getting the standard view back click on the standard-view-button in the right upper corner.
+If you want to see the average of the meterings you can click on the average-button in the right upper corner in the graph. The graph turns in a new graph.
+
+![ip](../images/average_button.png)
+
+For getting the standard view back click on the standard-view-button in the right upper corner.
+
+picture standard-view-button
