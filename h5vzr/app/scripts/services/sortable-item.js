@@ -16,7 +16,7 @@ angular.module('loggrioApp')
         case 'temperature':
           item = {
             id: sensor.id,
-            icon: 'icons/ic_thermometer_24dp.png',
+            icon: 'images/icons/ic_thermometer_24dp.png',
             iconType: 'img',
             name: 'Temperatur',
             location: sensor.location

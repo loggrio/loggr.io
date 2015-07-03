@@ -34,7 +34,7 @@ angular
         redirectTo: '/'
       });
 
-    $mdIconProvider.icon('chart_line', 'icons/ic_chartline.svg', 24);
+    $mdIconProvider.icon('chart_line', 'images/icons/ic_chartline.svg', 24);
 
     $mdThemingProvider.theme('default')
       .primaryPalette('teal');
