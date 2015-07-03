@@ -17,7 +17,7 @@ angular.module('loggrioApp')
       // Get new accesstoken from api, already bound to current customer
       Customer.accessTokens.create(
         {id: Customer.getCurrentId()},
-        {ttl: 120960}
+        {ttl: 31536000}
       ).$promise.then(function (data) {
         var requestURL = 'http://' + self.raspiAddress + ':5000';
         var payload = {
