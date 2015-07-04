@@ -47,3 +47,21 @@ If you want to see the average values of meterings you can click on the average 
 For getting the standard view back click on the standard-view-button in the right upper corner.
 
 ![ip](../images/standard_view_button.png)
+
+### Print your graphs
+For printing your graphs, click on the download button in the right upper corner of the graph card.
+![ip](../images/download_button.png)
+By clicking a new menu drops down. You can choose between "Drucken" and export in several formats.
+
+### Change your password
+In the user menu you can see your account details, change your Name, email or your password. To get there, click on the user-symbol.
+![ip](../images/user-symbol.png)
+And then click on "Benutzerdaten" to get to the user menu.
+![ip](../images/user-menu.png)
+For example to change your name click on your name and write your new name in there. Afterwards click on "Speichern" to save your changes.
+
+### Logout
+Click also on the user menu button and then click on "Logout". Your Raspberry will meter for you while you are logged out.
+
+### Impressum and About
+The Impressum and About are in the right upper corner. Just click ont the "..." to get them.
