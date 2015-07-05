@@ -84,10 +84,11 @@ angular.module('loggrioApp')
               averageChart.series[0].setData(averageData, true);
               averageChart.xAxis[0].setCategories(averageCategories, true);
 
-              var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
-              var shift;
+              self.charts[index].default.loading = false;
 
               // live reload
+              var lastTime = meterings.length ? meterings[meterings.length - 1].time : 0;
+              var shift;
               self.promises[sensor.id] = $interval(function () {
                 // shift on more than 5 dots
                 shift = chart.series[0].data.length > 5;
