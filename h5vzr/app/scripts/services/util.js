@@ -35,6 +35,16 @@ angular.module('loggrioApp')
       return Math.round(value * 100) / 100;
     }
 
+    this.setAverageExtremes = function (chart) {
+      var dataMin = chart.series[0].dataMin;
+      var dataMax = chart.series[0].dataMax;
+      var extremes = {
+        min: dataMin - 0.1 * dataMax,
+        max: dataMax + 0.01 * dataMax
+      };
+      chart.yAxis[0].setExtremes(extremes.min, extremes.max, true);
+    };
+
     this.meteringToChartData = function (meterings) {
       var data = {
         default: [],

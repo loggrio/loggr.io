@@ -83,6 +83,7 @@ angular.module('loggrioApp')
               chart.series[0].setData(defaultData, true);
               averageChart.series[0].setData(averageData, true);
               averageChart.xAxis[0].setCategories(averageCategories, true);
+              util.setAverageExtremes(averageChart);
 
               self.charts[index].default.loading = false;
 
