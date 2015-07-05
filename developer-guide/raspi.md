@@ -25,6 +25,11 @@ source .env/bin/activate
 pip install --upgrade -r requirements.txt
 ```
 
+For the included c-scripts and python-scripts you will need these additional Libraries:
+
+* WiringPi [Offical Guide](http://wiringpi.com/download-and-install/)
+* RPi.GPIO [PyPi](https://pypi.python.org/pypi/RPi.GPIO)
+
 ### Compile Sensor scripts
 
 ```bash
