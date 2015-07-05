@@ -101,7 +101,7 @@ angular.module('loggrioApp')
 
                       var data = util.meteringToChartData(meterings).default;
                       angular.forEach(data, function (value) {
-                        if(shift){
+                        if (shift) {
                           zoom.shift(chart, value[0]);
                         }
                         $timeout(chart.series[0].addPoint(value, true, false), 1000);
