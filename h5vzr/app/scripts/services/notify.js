@@ -52,9 +52,7 @@ angular.module('loggrioApp')
                   '</md-toast>',
         position: 'bottom left',
         hideDelay: 3000,
-      }).finally(function () {
-        restoreDiconnectToast();
-      });
+      }).finally(restoreDiconnectToast);
     };
 
     this.toastPairingFailed = function () {
@@ -65,9 +63,7 @@ angular.module('loggrioApp')
                   '</md-toast>',
         position: 'bottom left',
         hideDelay: 3000,
-      }).finally(function () {
-        restoreDiconnectToast();
-      });
+      }).finally(restoreDiconnectToast);
     };
 
     this.toastPairingTimeOut = function () {
@@ -78,9 +74,7 @@ angular.module('loggrioApp')
                   '</md-toast>',
         position: 'bottom left',
         hideDelay: 3000,
-      }).finally(function () {
-        restoreDiconnectToast();
-      });
+      }).finally(restoreDiconnectToast);
     };
 
   });
