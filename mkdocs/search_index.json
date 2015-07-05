@@ -117,7 +117,7 @@
         }, 
         {
             "location": "/developer-guide/raspi/", 
-            "text": "RASPI - Metering Unit\n\n\nRequirements\n\n\n{\n  \npython\n: \n=2.7\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt\n\n\n\n\nCompile Sensor scripts\n\n\n# cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake\n\n\n\n\nUsage\n\n\n# run\npython run.py\n\n# run config server\npython run.py --config\n\n# run emu sensor script (for test usages)\npython run.py --emu\n\n\n\n\n~/.loggrrc example\n\n\n[COMMON]\nscripts_path = sensors/\n\n[AUTH]\ntoken = aGeMPZ94TH7lrHc2skUn3zv6RTXPhPjeUO7Ipw86GC6QjM9mDYfUs1xr4pKXKw0F\nuserid = 558855605a227a206cedcf55\n\n[SENSORS]\ntemperature = temperature.out,Wohnzimmer,grad_celsius,-270,200,10\nbrightness = brightness.out,Wohnzimmer,lumen,0,210\nhumidity = humidity.out,Wohnzimmer,percent,0,100,10\npressure = pressure.py,Wohnzimmer,hectopascal,900,1100,10\n\n[API]\nurl = http://loggr.stkn.org/api/", 
+            "text": "RASPI - Metering Unit\n\n\nRequirements\n\n\n{\n  \npython\n: \n=2.7\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt\n\n\n\n\nFor the included c-scripts and python-scripts you will need this additional Libraries:\n\n\n\n\nWiringPi \nOffical Guide\n\n\nRPi.GPIO \nPyPi\n\n\n\n\nCompile Sensor scripts\n\n\n# cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake\n\n\n\n\nUsage\n\n\n# run\npython run.py\n\n# run config server\npython run.py --config\n\n# run emu sensor script (for test usages)\npython run.py --emu\n\n\n\n\n~/.loggrrc example\n\n\n[COMMON]\nscripts_path = sensors/\n\n[AUTH]\ntoken = aGeMPZ94TH7lrHc2skUn3zv6RTXPhPjeUO7Ipw86GC6QjM9mDYfUs1xr4pKXKw0F\nuserid = 558855605a227a206cedcf55\n\n[SENSORS]\ntemperature = temperature.out,Wohnzimmer,grad_celsius,-270,200,10\nbrightness = brightness.out,Wohnzimmer,lumen,0,210\nhumidity = humidity.out,Wohnzimmer,percent,0,100,10\npressure = pressure.py,Wohnzimmer,hectopascal,900,1100,10\n\n[API]\nurl = http://loggr.stkn.org/api/", 
             "title": "RASPI"
         }, 
         {
@@ -132,7 +132,7 @@
         }, 
         {
             "location": "/developer-guide/raspi/#set-up-your-environment", 
-            "text": "Install prerequisites  # cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt  Compile Sensor scripts  # cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake", 
+            "text": "Install prerequisites  # cd into raspi\ncd raspi\n\n# optionally use a virtualenv\npip install --upgrade virtualenv\nvirtualenv .env\nsource .env/bin/activate\n\n# python deps\npip install --upgrade -r requirements.txt  For the included c-scripts and python-scripts you will need this additional Libraries:   WiringPi  Offical Guide  RPi.GPIO  PyPi   Compile Sensor scripts  # cd into raspi/sensors\ncd sensors\n\n# compile scripts in raspi/sensors\nmake", 
             "title": "Set up your environment"
         }, 
         {
