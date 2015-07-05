@@ -17,7 +17,7 @@ If you have already paired your Raspberry Pi with your user account the metering
 
 * Browse to http://loggr.stkn.org/.
 * If you don't have an existing account, please create a new one ("Registrieren"). Otherwise login to your account with your credentials.
-* Click on the pairing button and insert the IP from the Raspberry Pi. You can check the IP from the Raspberry Pi in your router menu. For example the Raspberry Pi uses IP 192.168.178.35 in a local area network (LAN).
+* Click on the pairing button and insert the IP of the Raspberry Pi. You can find out the IP of the Raspberry Pi from your router dhcp menu. For example the Raspberry Pi uses IP 192.168.178.35 in a local area network (LAN).
 
 ![ip](../images/ip.png)
 
