@@ -59,7 +59,7 @@ angular.module('loggrioApp')
       oneWeekAgo = oneWeekAgo.getTime();
       var counter = 0;
 
-      angular.forEach(meterings, function(metering) {
+      angular.forEach(meterings, function (metering) {
         var date = Date.parse(metering.time);
         var value = metering.value;
 
@@ -88,7 +88,7 @@ angular.module('loggrioApp')
       return data;
     };
 
-    this.sensorIsInUse = function(sensor) {
+    this.sensorIsInUse = function (sensor) {
       var position = -1; // not in Use
       var viewConfig = JSON.parse(localStorage.getItem('viewConfig'));
       if(viewConfig){
