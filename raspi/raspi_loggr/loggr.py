@@ -74,7 +74,7 @@ def main():
         try:
             requests.get(CUSTOMERS_URL + '/exists', headers=headers)
             api_offline = False
-        except requests.exceptions.RequestException, re:
+        except requests.exceptions.RequestException as re:
             treat_requests_errors(re)
             log_info('Api not reachable. Try again in ' + str(TIME_BETWEEN_API_TESTS) + ' seconds.')
             api_offline = True

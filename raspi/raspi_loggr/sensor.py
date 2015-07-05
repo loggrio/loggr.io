@@ -88,7 +88,7 @@ class Sensor:
                 payload = {'type': sensor_type, 'location': location, 'unit': unit}
                 r = requests.post(SENSORS_URL, data=json.dumps(payload), headers=headers)
                 return r.json()['id']
-        except requests.exceptions.RequestException, re:
+        except requests.exceptions.RequestException as re:
             # catch and treat requests errors
             treat_requests_errors(re)
         else:
@@ -149,13 +149,13 @@ class Sensor:
         command = scripts_path + self.script
         try:
             subproc_output = subprocess.check_output(command, stderr=subprocess.STDOUT)
-        except subprocess.CalledProcessError, cpe:
+        except subprocess.CalledProcessError as cpe:
             # catch and treat wiringPi errors
             # catch and treat open device file errors of mounted devices
             # catch and treat read errors on devices
             treat_sensor_errors(cpe)
             return None
-        except OSError, ose:
+        except OSError as ose:
             # catch and treat os errors, e.g. file-not-found
             treat_os_errors(ose)
             return None
@@ -182,7 +182,11 @@ class Sensor:
             params = {'filter[where][id]': self.id}
             r = requests.post(METERINGS_URL, data=json.dumps(payload), params=params,
                               headers=headers)
-        except requests.exceptions.RequestException, re:
+        except requests.exceptions.HTTPError as he:
+            # catch http errors
+            treat_requests_errors(he)
+            return r.status_code
+        except requests.exceptions.RequestException as re:
             # catch and treat requests errors
             treat_requests_errors(re)
         else:
@@ -222,7 +226,7 @@ class Sensor:
                 data = self.cache.popleft()
                 status = self.__send(data)
                 # on failure put back to cache and return
-                if status != 200:
+                if status != 200 and status != 422:
                     self.cache.appendleft(data)
                     # also add new metering
                     self.cache.append(payload)
@@ -235,7 +239,7 @@ class Sensor:
         status = self.__send(payload)
 
         # on failure put to cache and return
-        if status != 200:
+        if status != 200 and status != 422:
             self.cache.append(payload)
             log_info('requests error: ' + self.type + ' data cached')
             return
