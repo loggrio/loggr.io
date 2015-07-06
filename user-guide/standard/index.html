@@ -142,7 +142,7 @@
         
             <li><a href="#build-up-your-raspberry-pi">Build up your Raspberry Pi</a></li>
         
-            <li><a href="#pair-your-raspberry">Pair your Raspberry</a></li>
+            <li><a href="#pair-your-raspberry-pi">Pair your Raspberry Pi</a></li>
         
             <li><a href="#use-loggrio">Use loggr.io</a></li>
         
@@ -154,37 +154,53 @@
 <h1 id="user-guide-for-loggrio">User Guide for loggr.io</h1>
 <h2 id="build-up-your-raspberry-pi">Build up your Raspberry Pi</h2>
 <ul>
-<li>First connect the Raspberry Pi with an Ethernet cable.</li>
+<li>At first connect the Raspberry Pi with an ethernet cable to get access to the LAN or the internet. The network adapter of your Raspberry Pi is already pre-configured and you don't have to do anything special.</li>
 </ul>
 <p>Picture Ethernet connect</p>
 <ul>
-<li>Connect the Raspberry Pi with the included power supply with a power outlet.</li>
+<li>Connect the Raspberry Pi with the included power supply to a power outlet.</li>
 </ul>
-<p>Picture Power connect</p>
-<p>Now the Raspberry starts automatically.</p>
-<h2 id="pair-your-raspberry">Pair your Raspberry</h2>
+<p><img alt="power_lan" src="../../images/power_lan.png" /></p>
+<p>Now the Raspberry Pi boots up automatically.
+If you have already paired your Raspberry Pi with your user account the metering unit starts its work (meter and send) immediately after booting.</p>
+<h2 id="pair-your-raspberry-pi">Pair your Raspberry Pi</h2>
 <ul>
 <li>Browse to http://loggr.stkn.org/.</li>
-<li>If you don't have an account already, make a new one, else login to your account.</li>
-<li>Click on the pairing-button and insert the IP from the Raspberry Pi. You can check the IP from the Raspberry Pi in your router menu. For example the Raspberry Pi has the IP 192.168.178.35.</li>
+<li>If you don't have an existing account, please create a new one ("Registrieren"). Otherwise login to your account with your credentials.</li>
+<li>Click on the pairing button and insert the IP of the Raspberry Pi. You can find out the IP of the Raspberry Pi from your router dhcp menu. For example the Raspberry Pi uses IP 192.168.178.35 in a local area network (LAN).</li>
 </ul>
 <p><img alt="ip" src="../../images/ip.png" /></p>
 <ul>
 <li>Click on "PAIREN".</li>
 </ul>
-<p>Now the Raspberry Pi is configurated and paired with your User Account.</p>
+<p>Now the Raspberry Pi is configured and paired with your user account.</p>
 <h2 id="use-loggrio">Use loggr.io</h2>
-<h3 id="decide-which-graphs-you-want-to-see">Decide which graphs you want to see</h3>
-<p>Click on "Ansicht konfigurieren" and order the graphs per drag and drop. In the left list are the shown graphs and in the right list are the graphs which are available.
-<img alt="lists" src="../../images/lists2.png" /></p>
-<h3 id="insight-the-meterings">Insight the meterings</h3>
-<p>The meterings are shown in the standard view. The picture shows the standard view.
+<h3 id="change-graphs-visibility-and-order">Change graphs visibility and order</h3>
+<p>Click on "Ansicht konfigurieren". In the left list there are the shown graphs. This list should be empty on first start. On the right side you can find available sensors which can be shown as graphs in the app. Now you can drag and drop sensors from the right to the left. Sensors which are listed on the left list will be shown after clicking on "Speichern". To remove sensors from the "Angezeigte Sensoren" list just have to click on the "X" symbol which appears when hovering over a sensor.
+<img alt="lists" src="../../images/lists.png" /></p>
+<h3 id="view-meterings">View meterings</h3>
+<p>The meterings are shown in the standard view as line graphs.
+You can zoom in and out, left and right. You can also view the meterings of the last 5 minutes (5m), last hour (S), week (W), month (M).
 <img alt="graphs" src="../../images/graphs.png" /></p>
-<h3 id="show-the-average">Show the average</h3>
-<p>If you want to see the average of the meterings you can click on the average-button in the right upper corner in the graph. The graph turns in a new graph.</p>
-<p><img alt="ip" src="../../images/average_button.png" /></p>
+<h3 id="show-average-values">Show average values</h3>
+<p>If you want to see the average values of meterings you can click on the average button in the right upper corner of the graph card. The graph morphs in a new graph which shows the daily average values of the current sensor.</p>
+<p><img alt="av_button" src="../../images/average_button.png" /></p>
 <p>For getting the standard view back click on the standard-view-button in the right upper corner.</p>
-<p>picture standard-view-button</p></div>
+<p><img alt="std_view_button" src="../../images/standard_view_button.png" /></p>
+<h3 id="print-your-graphs">Print your graphs</h3>
+<p>For printing your graphs, click on the download button in the right upper corner of the graph card.
+<img alt="dl_button" src="../../images/download_button.png" />
+By clicking a new menu drops down. You can choose between "Drucken" and export in several formats.</p>
+<h3 id="change-your-password">Change your password</h3>
+<p>In the user menu you can see your account details, change your Name, email or your password. To get there, click on the user-symbol.
+<img alt="user_cp" src="../../images/user-symbol.png" />
+And then click on "Benutzerdaten" to get to the user menu.
+<img alt="user_menu" src="../../images/user-menu.png" />
+For example to change your name click on your name and write your new name in there. Afterwards click on "Speichern" to save your changes.</p>
+<h3 id="logout">Logout</h3>
+<p>Click also on the user menu button and then click on "Logout". Your Raspberry will meter for you while you are logged out.</p>
+<h3 id="impressum-and-about">Impressum and About</h3>
+<p>The Impressum and About are in the right upper corner. Just click ont the "..." to get them.</p></div>
             
         </div>
 
