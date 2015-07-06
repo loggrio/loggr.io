@@ -4,11 +4,9 @@
 
 * First connect the Raspberry Pi with an Ethernet cable.
 
-Picture Ethernet connect
-
 * Connect the Raspberry Pi with the included power supply with a power outlet.
 
-Picture Power connect
+![ip](../images/power_lan.png)
 
 Now the Raspberry starts automatically.
 
@@ -44,4 +42,4 @@ If you want to see the average of the meterings you can click on the average-but
 
 For getting the standard view back click on the standard-view-button in the right upper corner.
 
-picture standard-view-button
+![ip](../images/standard_view_button.png)
