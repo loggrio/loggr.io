@@ -112,10 +112,10 @@ def set_status_led(status):
         subproc = subprocess.check_call(command,
                                         stdout=subprocess.PIPE,
                                         stderr=subprocess.PIPE)
-    except subprocess.CalledProcessError, cpe:
+    except subprocess.CalledProcessError as cpe:
         # catch invalid arguments errors
         # catch wiringPi errors
         treat_led_errors(cpe)
-    except OSError, ose:
+    except OSError as ose:
         # catch os errors, e.g. file-not-found
         treat_os_errors(ose)
