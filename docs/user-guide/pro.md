@@ -1,6 +1,6 @@
-# User Guide Pro for loggr.io
+# User Pro Guide
 
-If you want to set up your own Raspberry Pi you will need the API interface.
+If you want to set up your own Raspberry Pi you will need the API reference.
 
 The header of all requests is:
 <p>_Content-Type: application/json, Authorization: token_ </p>
