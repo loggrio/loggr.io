@@ -6,7 +6,11 @@ Site: [loggr.io](http://loggr.stkn.org/)
 
 ## Overview
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quos itaque rerum fugiat veritatis vel quae eius harum, ullam, animi saepe, eos inventore quisquam obcaecati dolore modi nisi excepturi, quod culpa! Perspiciatis eaque officiis cum itaque aut aperiam quam, consectetur incidunt. Doloribus soluta numquam, illo maxime, expedita enim debitis quia.
+**loggr.io is made up of the following three components**
+
+* H5VZR (AngularJS)
+* API (LoopBack)
+* RASPI (Python)
 
 **loggr.io is currently still in development.**
 
