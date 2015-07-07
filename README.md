@@ -1,5 +1,7 @@
 # loggr.io
 
+[![Join the chat at https://gitter.im/loggrio/loggr.io](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/loggrio/loggr.io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Smart Home Tracking
 
 Site: [loggr.io](http://loggr.stkn.org/)
