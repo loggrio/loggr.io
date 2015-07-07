@@ -2,6 +2,8 @@
 
 Smart Home Tracking
 
+Site: [loggr.io](http://loggr.stkn.org/)
+
 ## Overview
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quos itaque rerum fugiat veritatis vel quae eius harum, ullam, animi saepe, eos inventore quisquam obcaecati dolore modi nisi excepturi, quod culpa! Perspiciatis eaque officiis cum itaque aut aperiam quam, consectetur incidunt. Doloribus soluta numquam, illo maxime, expedita enim debitis quia.
@@ -12,4 +14,4 @@ We're progressing quickly, but the documentation still needs filling in, and the
 
 ## Online Documentation
 
-[Link](http://cebor.github.io/loggr.io/)
+[Link](//loggrio.github.io/loggr.io/)
