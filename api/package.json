@@ -1,6 +1,6 @@
 {
   "name": "loggrio-api",
-  "version": "0.1.0-beta",
+  "version": "0.1.0",
   "main": "server/server.js",
   "scripts": {
     "pretest": "jshint ."
