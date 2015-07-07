@@ -18,7 +18,10 @@
                 <h3>{{item.name}}</h3>
                 <p>{{item.location}}</p>
               </div>
-              <md-icon ng-show="configureView.showDelete" ng-click="configureView.deleteItem($index)" class="pointer">clear</md-icon>
+              <md-button ng-show="configureView.showDelete" ng-click="configureView.deleteItem($index)"
+                  class="md-icon-button">
+                <md-icon>clear</md-icon>
+              </md-button>
               <md-divider ng-if="!$last"></md-divider>
             </md-list-item>
           </md-list>

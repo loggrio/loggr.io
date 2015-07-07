@@ -21,6 +21,7 @@
   line-height: 1;
   text-transform: none;
   letter-spacing: normal;
+  word-wrap: normal;
 
   /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
