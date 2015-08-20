@@ -92,7 +92,7 @@
         }, 
         {
             "location": "/developer-guide/api/", 
-            "text": "API - Backend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n,\n  \nmongodb\n: \n=2.6\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback\nnpm install -g strongloop\n\n\n\n\nInstall MongoDB: \nOffical Guide\n\n\nInstall npm deps\n\n\n# cd into api\ncd api\n\n# npm deps\nnpm install\n\n\n\n\nUsage\n\n\n# if not already running start the mongo daemon\nmongod\n\n# run\nnode .\n\n\n\n\nFurther Help: \nStrongloop Guide", 
+            "text": "API - Backend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n,\n  \nmongodb\n: \n=2.6\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback (optional: only needed for deploying, remote-control, acl and scaffolding)\nnpm install -g strongloop\n\n# Alternatively install the yeoman generator for scaffolding only\nnpm install -g generator-loopback\n\n\n\n\nInstall MongoDB: \nOffical Guide\n\n\nInstall npm deps\n\n\n# cd into api\ncd api\n\n# npm deps\nnpm install\n\n\n\n\nUsage\n\n\n# if not already running start the mongo daemon\nmongod\n\n# run\nnode .\n\n\n\n\nFurther Help: \nStrongloop Guide", 
             "title": "API"
         }, 
         {
@@ -107,7 +107,7 @@
         }, 
         {
             "location": "/developer-guide/api/#set-up-your-environment", 
-            "text": "Install prerequisites  # Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback\nnpm install -g strongloop  Install MongoDB:  Offical Guide  Install npm deps  # cd into api\ncd api\n\n# npm deps\nnpm install", 
+            "text": "Install prerequisites  # Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback (optional: only needed for deploying, remote-control, acl and scaffolding)\nnpm install -g strongloop\n\n# Alternatively install the yeoman generator for scaffolding only\nnpm install -g generator-loopback  Install MongoDB:  Offical Guide  Install npm deps  # cd into api\ncd api\n\n# npm deps\nnpm install", 
             "title": "Set up your environment"
         }, 
         {
