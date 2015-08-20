@@ -17,8 +17,11 @@
 # Update npm if you haven't already
 npm install -g npm
 
-# Install loopback
+# Install loopback (optional: only needed for deploying, remote-control, acl and scaffolding)
 npm install -g strongloop
+
+# Alternatively install the yeoman generator for scaffolding only
+npm install -g generator-loopback
 ```
 
 Install MongoDB: [Offical Guide](http://docs.mongodb.org/manual/installation/)
