@@ -1,0 +1,12 @@
+site_name: loggr.io
+repo_url: https://github.com/loggrio/loggr.io
+pages:
+- Home: 'index.md'
+- User Guide:
+  - 'Standard Guide': 'user-guide/standard.md'
+  - 'Pro Guide': 'user-guide/pro.md'
+- Developer Guide:
+  - 'H5VZR': 'developer-guide/h5vzr.md'
+  - 'API': 'developer-guide/api.md'
+  - 'RASPI': 'developer-guide/raspi.md'
+theme: mkdocs
