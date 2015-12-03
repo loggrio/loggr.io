@@ -4,7 +4,7 @@
 
 ```json
 {
-  "node": ">=0.12"
+  "node": ">=4.2"
 }
 ```
 
@@ -24,16 +24,13 @@ npm install -g grunt-cli bower yo generator-karma generator-angular
 
 ```bash
 # cd into h5vzr
-cd h5vzr
+cd loggr-h5vzr
 
 # npm deps
 npm install
 
 # bower deps
 bower install
-
-# loopback services (requires api prerequisites)
-lb-ng ../api/server/server.js app/scripts/services/lb-services.js
 ```
 
 ## Usage

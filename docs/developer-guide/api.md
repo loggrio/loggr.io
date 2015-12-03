@@ -4,7 +4,7 @@
 
 ```json
 {
-  "node": ">=0.12",
+  "node": ">=4.2",
   "mongodb": ">=2.6"
 }
 ```
@@ -34,7 +34,11 @@ cd api
 
 # npm deps
 npm install
+
+# angular api services
+lb-ng server/server.js ../loggr-h5vzr/app/scripts/services/lb-services.js
 ```
+
 
 ## Usage
 
