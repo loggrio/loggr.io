@@ -67,7 +67,7 @@
         }, 
         {
             "location": "/developer-guide/h5vzr/", 
-            "text": "H5VZR - Frontend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular\n\n\n\n\nInstall npm and bower deps\n\n\n# cd into h5vzr\ncd h5vzr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js\n\n\n\n\nUsage\n\n\n# serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test\n\n\n\n\nFurther Help: \nYeoman Guide", 
+            "text": "H5VZR - Frontend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=4.2\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular\n\n\n\n\nInstall npm and bower deps\n\n\n# cd into h5vzr\ncd loggr-h5vzr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n\n\n\nUsage\n\n\n# serve\ngrunt serve\n\n# build\ngrunt build\n\n# test\nnpm test\n\n\n\n\nFurther Help: \nYeoman Guide", 
             "title": "H5VZR"
         }, 
         {
@@ -77,12 +77,12 @@
         }, 
         {
             "location": "/developer-guide/h5vzr/#requirements", 
-            "text": "{\n   node :  =0.12 \n}", 
+            "text": "{\n   node :  =4.2 \n}", 
             "title": "Requirements"
         }, 
         {
             "location": "/developer-guide/h5vzr/#set-up-your-environment", 
-            "text": "Install prerequisites  # Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular  Install npm and bower deps  # cd into h5vzr\ncd h5vzr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install\n\n# loopback services (requires api prerequisites)\nlb-ng ../api/server/server.js app/scripts/services/lb-services.js", 
+            "text": "Install prerequisites  # Update npm\nnpm install -g npm\n\n# Install yo\nnpm install -g grunt-cli bower yo generator-karma generator-angular  Install npm and bower deps  # cd into h5vzr\ncd loggr-h5vzr\n\n# npm deps\nnpm install\n\n# bower deps\nbower install", 
             "title": "Set up your environment"
         }, 
         {
@@ -92,7 +92,7 @@
         }, 
         {
             "location": "/developer-guide/api/", 
-            "text": "API - Backend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=0.12\n,\n  \nmongodb\n: \n=2.6\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback (optional: only needed for deploying, remote-control, acl and scaffolding)\nnpm install -g strongloop\n\n# Alternatively install the yeoman generator for scaffolding only\nnpm install -g generator-loopback\n\n\n\n\nInstall MongoDB: \nOffical Guide\n\n\nInstall npm deps\n\n\n# cd into api\ncd api\n\n# npm deps\nnpm install\n\n\n\n\nUsage\n\n\n# if not already running start the mongo daemon\nmongod\n\n# run\nnode .\n\n\n\n\nFurther Help: \nStrongloop Guide", 
+            "text": "API - Backend\n\n\nRequirements\n\n\n{\n  \nnode\n: \n=4.2\n,\n  \nmongodb\n: \n=2.6\n\n}\n\n\n\n\nSet up your environment\n\n\nInstall prerequisites\n\n\n# Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback (optional: only needed for deploying, remote-control, acl and scaffolding)\nnpm install -g strongloop\n\n# Alternatively install the yeoman generator for scaffolding only\nnpm install -g generator-loopback\n\n\n\n\nInstall MongoDB: \nOffical Guide\n\n\nInstall npm deps\n\n\n# cd into api\ncd api\n\n# npm deps\nnpm install\n\n# angular api services\nlb-ng server/server.js ../loggr-h5vzr/app/scripts/services/lb-services.js\n\n\n\n\nUsage\n\n\n# if not already running start the mongo daemon\nmongod\n\n# run\nnode .\n\n\n\n\nFurther Help: \nStrongloop Guide", 
             "title": "API"
         }, 
         {
@@ -102,12 +102,12 @@
         }, 
         {
             "location": "/developer-guide/api/#requirements", 
-            "text": "{\n   node :  =0.12 ,\n   mongodb :  =2.6 \n}", 
+            "text": "{\n   node :  =4.2 ,\n   mongodb :  =2.6 \n}", 
             "title": "Requirements"
         }, 
         {
             "location": "/developer-guide/api/#set-up-your-environment", 
-            "text": "Install prerequisites  # Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback (optional: only needed for deploying, remote-control, acl and scaffolding)\nnpm install -g strongloop\n\n# Alternatively install the yeoman generator for scaffolding only\nnpm install -g generator-loopback  Install MongoDB:  Offical Guide  Install npm deps  # cd into api\ncd api\n\n# npm deps\nnpm install", 
+            "text": "Install prerequisites  # Update npm if you haven't already\nnpm install -g npm\n\n# Install loopback (optional: only needed for deploying, remote-control, acl and scaffolding)\nnpm install -g strongloop\n\n# Alternatively install the yeoman generator for scaffolding only\nnpm install -g generator-loopback  Install MongoDB:  Offical Guide  Install npm deps  # cd into api\ncd api\n\n# npm deps\nnpm install\n\n# angular api services\nlb-ng server/server.js ../loggr-h5vzr/app/scripts/services/lb-services.js", 
             "title": "Set up your environment"
         }, 
         {
